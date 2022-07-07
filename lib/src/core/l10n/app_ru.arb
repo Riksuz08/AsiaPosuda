@@ -1,0 +1,17 @@
+{
+  "home": "Home",
+  "basket": "Basket",
+  "favourite": "Favourite",
+  "profile": "Profile",
+  "settings": "Settings",
+  "search": "Search",
+  "new1": "New",
+  "sum": "sum",
+  "change_profile": "Change profile",
+  "version": "Version",
+  "language": "Language",
+  "contacts": "Contacts",
+  "categories": "Categories",
+  "discounts": "Discounts",
+  "empty_page":"Empty Page"
+}

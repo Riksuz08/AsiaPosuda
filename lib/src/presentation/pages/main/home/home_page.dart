@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_styles.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            pinned: true,
+            elevation: 0,
+            expandedHeight: kToolbarHeight * 2,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('SliverAppBar', style: AppStyles.appBarTitle),
+            ),
+          ),
+          SliverPadding(
+            padding:
+            MediaQuery.of(context).removePadding(removeTop: true).padding,
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                  final title = "Title $index";
+                  return ListTile(
+                    onTap: () {},
+                    title: Text(title),
+                  );
+                },
+                childCount: 20,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
