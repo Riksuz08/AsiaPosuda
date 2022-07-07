@@ -27,7 +27,7 @@ dependencies:
   # keyboard dismiss
   keyboard_dismisser: ^3.0.0
   # freezed
-  freezed_annotation: ^2.0.3
+  freezed_annotation: any
   # get it singleton
   get_it: ^7.2.0
   # bloc state manager
@@ -41,7 +41,7 @@ dev_dependencies:
   hive_generator: ^1.1.3
   flutter_lints: ^2.0.1
   bloc_test: ^9.0.3
-#  freezed: ^2.0.3
+  freezed: ^1.1.1
 
 flutter:
 
