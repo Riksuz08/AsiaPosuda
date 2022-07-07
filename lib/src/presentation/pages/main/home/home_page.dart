@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_styles.dart';
+import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,12 +10,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+           SliverAppBar(
             pinned: true,
             elevation: 0,
             expandedHeight: kToolbarHeight * 2,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('SliverAppBar', style: AppStyles.appBarTitle),
+              title: Text(AppTranslations.of(context).home, style: AppStyles.appBarTitle),
             ),
           ),
           SliverPadding(

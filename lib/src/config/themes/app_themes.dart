@@ -33,7 +33,7 @@ class AppThemes {
       },
     ),
     navigationBarTheme: NavigationBarThemeData(
-      elevation: 1,
+      elevation: 0,
       backgroundColor: AppColors.white,
       height: kToolbarHeight,
       iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
@@ -50,7 +50,7 @@ class AppThemes {
       ),
     ),
     appBarTheme: const AppBarTheme(
-      elevation: 1,
+      elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.transparent,
@@ -108,7 +108,7 @@ class AppThemes {
       },
     ),
     appBarTheme: const AppBarTheme(
-      elevation: 1,
+      elevation: 0,
       centerTitle: true,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

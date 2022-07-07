@@ -12,7 +12,7 @@ import 'config/routes/app_pages.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_themes.dart';
 import 'core/utils/constants.dart';
-import 'data/gallery_options.dart';
+import 'gallery_options.dart';
 import 'presentation/bloc/main/main_bloc.dart';
 
 class MainApp extends StatelessWidget {
