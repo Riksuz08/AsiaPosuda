@@ -24,6 +24,9 @@ class AppThemes {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.white,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      elevation: 2,
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
@@ -109,11 +112,13 @@ class AppThemes {
     canvasColor: Colors.transparent,
     brightness: Brightness.dark,
     primaryColor: AppColors.blue,
+    cardColor: AppColors.cardBackgroundDark,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: AppColors.backgroundDark,
     backgroundColor: AppColors.backgroundDark,
     bottomSheetTheme: const BottomSheetThemeData(
       elevation: 0,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.cardBackgroundDark,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
@@ -132,6 +137,12 @@ class AppThemes {
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         border: Border.all(color: AppColors.blue, width: 2.0),
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.cardBackgroundDark,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      elevation: 2,
     ),
     colorScheme: const ColorScheme(
       primary: AppColors.blue,
@@ -169,10 +180,8 @@ class AppThemes {
         color: Colors.white, //change your color here
       ),
       titleTextStyle: AppStyles.appBarDarkTitle,
-      backgroundColor: AppColors.oxford,
+      backgroundColor: AppColors.cardBackgroundDark,
     ),
-    cardColor: AppColors.cardBackgroundDark,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         color: AppColors.white,

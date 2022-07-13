@@ -34,14 +34,11 @@ class MainPage extends StatelessWidget {
                   .read<MainBloc>()
                   .add(MainEventChanged(BottomMenu.values[i]));
             },
-            type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,
             unselectedFontSize: 14,
             selectedFontSize: 14,
             unselectedItemColor: AppColors.greyBD,
             selectedItemColor: AppColors.blue,
-            elevation: 2,
-            iconSize: 24,
             currentIndex: state.bottomMenu.index,
             items: [
               _buildMenuItem(

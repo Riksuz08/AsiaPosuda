@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
         child: ClipRRect(
           borderRadius: AppUtils.kBorderRadius16,
           child: Material(
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).cardColor,
             shape: const RoundedRectangleBorder(
               borderRadius: AppUtils.kBorderRadius16,
             ),
@@ -48,6 +48,7 @@ class SettingsPage extends StatelessWidget {
                   },
                   title: Text(AppTranslations.of(context).language),
                 ),
+                AppUtils.kDivider,
                 ListTile(
                   onTap: () {
                     customBottomSheet(
