@@ -14,7 +14,10 @@ class AppConstants {
       GlobalKey<ScaffoldMessengerState>(
     debugLabel: "Sample App",
   );
+
+  static GlobalKey<FormState> bottomNavigatorKey = GlobalKey<FormState>();
 }
+
 // height of the 'Gallery' header
 const double galleryHeaderHeight = 64;
 

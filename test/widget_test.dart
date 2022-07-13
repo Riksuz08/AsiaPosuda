@@ -8,10 +8,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:sample_bloc_mobile/main.dart';
 import 'package:sample_bloc_mobile/src/app.dart';
+import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
 
 void main() {
+  testWidgets("Flutter Widget Test", (WidgetTester tester) async {
+    await tester.pumpWidget(const MainApp());
+    var button = find.byKey(AppConstants.bottomNavigatorKey);
+    expect(button, findsOneWidget);
+    debugPrint('Reverse Text');
+    await tester.tap(button);
+    await tester.pump();
+    expect(find.text("sveD rettulF"), findsNothing);
+    debugPrint('sveD rettulF');
+  });
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MainApp());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
+import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     await Future.delayed(
-      const Duration(milliseconds: 1500),
+      const Duration(milliseconds: splashPageAnimationDurationInMilliseconds),
       () {
         Navigator.pushReplacementNamed(context, AppRoutes.main);
       },
@@ -22,6 +23,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

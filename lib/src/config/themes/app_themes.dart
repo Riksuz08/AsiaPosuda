@@ -25,6 +25,13 @@ class AppThemes {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.white,
     ),
+    tabBarTheme: const TabBarTheme(
+      labelColor: AppColors.black,
+      unselectedLabelColor: AppColors.grey,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.blue, width: 3.0),
+      ),
+    ),
     colorScheme: const ColorScheme(
       primary: AppColors.blue,
       secondary: AppColors.white,
@@ -112,6 +119,18 @@ class AppThemes {
           topLeft: Radius.circular(24),
           topRight: Radius.circular(24),
         ),
+      ),
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: AppColors.white,
+      unselectedLabelColor: AppColors.greyBD,
+      // indicator: UnderlineTabIndicator(
+      //   borderSide: BorderSide(color: AppColors.blue, width: 3.0),
+      // ),
+      indicator: BoxDecoration(
+        color: AppColors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        border: Border.all(color: AppColors.blue, width: 2.0),
       ),
     ),
     colorScheme: const ColorScheme(
