@@ -21,5 +21,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
 enum BottomMenu {
   home,
+  search,
+  bookmark,
   profile,
 }

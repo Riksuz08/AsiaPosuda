@@ -13,6 +13,12 @@ class AppStyles {
     fontSize: 20,
     fontWeight: FontWeight.w600,
   );
+  static const appBarDarkTitle = TextStyle(
+    fontFamily: "SFPro",
+    color: AppColors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+  );
 
   static const borderRadiusMain = BorderRadius.all(Radius.circular(15));
 }

@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
   final double width;
   final double textSize;
   final double height;
+  final double radius;
   final BorderSide side;
 
   const CustomButton({
@@ -25,6 +26,7 @@ class CustomButton extends StatelessWidget {
     this.height = 48,
     this.padding = EdgeInsets.zero,
     this.side = BorderSide.none,
+    this.radius = 12,
   }) : super(key: key);
 
   @override
@@ -47,8 +49,8 @@ class CustomButton extends StatelessWidget {
           TextStyle(fontSize: textSize, color: fontColor),
         ),
         shape: MaterialStateProperty.all(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
           ),
         ),
         padding: MaterialStateProperty.all(padding),

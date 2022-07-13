@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModelBinding(
       initialModel: GalleryOptions(
-        themeMode: ThemeMode.system,
+        themeMode: LocalSource.instance.getThemeMode(),
         textScaleFactor: systemTextScaleFactorOption,
         customTextDirection: CustomTextDirection.localeBased,
         locale: Locale(LocalSource.instance.getLocale()),

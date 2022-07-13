@@ -7,12 +7,24 @@ class AppThemes {
   AppThemes._();
 
   static final ThemeData light = ThemeData(
-    canvasColor: Colors.transparent,
     primaryColor: AppColors.blue,
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: AppColors.backgroundLight,
     backgroundColor: AppColors.backgroundLight,
     cardColor: AppColors.cardBackgroundLight,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
+
+    bottomSheetTheme: const BottomSheetThemeData(
+      elevation: 0,
+      backgroundColor: AppColors.backgroundLight,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.white,
+    ),
     colorScheme: const ColorScheme(
       primary: AppColors.blue,
       secondary: AppColors.white,
@@ -32,23 +44,23 @@ class AppThemes {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       },
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      elevation: 0,
-      backgroundColor: AppColors.white,
-      height: kToolbarHeight,
-      iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-        (Set<MaterialState> states) {
-          return const IconThemeData(
-            color: Colors.black,
-          );
-        },
-      ),
-      labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-        (Set<MaterialState> states) {
-          return AppStyles.appBarTitle;
-        },
-      ),
-    ),
+    // navigationBarTheme: NavigationBarThemeData(
+    //   elevation: 0,
+    //   backgroundColor: AppColors.white,
+    //   height: kToolbarHeight,
+    //   iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+    //     (Set<MaterialState> states) {
+    //       return const IconThemeData(
+    //         color: Colors.black,
+    //       );
+    //     },
+    //   ),
+    //   labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+    //     (Set<MaterialState> states) {
+    //       return AppStyles.appBarTitle;
+    //     },
+    //   ),
+    // ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -64,7 +76,8 @@ class AppThemes {
         color: Colors.black,
       ),
       titleTextStyle: AppStyles.appBarTitle,
-      color: AppColors.white,
+      toolbarTextStyle: AppStyles.appBarTitle,
+      backgroundColor: AppColors.white,
       toolbarHeight: kToolbarHeight,
     ),
     textTheme: const TextTheme(
@@ -78,6 +91,9 @@ class AppThemes {
         fontWeight: FontWeight.w500,
         fontSize: 17,
       ),
+      headline6: TextStyle(
+        color: AppColors.black,
+      ),
     ),
     fontFamily: 'SFPro',
   );
@@ -86,8 +102,18 @@ class AppThemes {
     canvasColor: Colors.transparent,
     brightness: Brightness.dark,
     primaryColor: AppColors.blue,
-    scaffoldBackgroundColor: AppColors.background,
-    backgroundColor: AppColors.background,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
+    backgroundColor: AppColors.backgroundDark,
+    bottomSheetTheme: const BottomSheetThemeData(
+      elevation: 0,
+      backgroundColor: AppColors.backgroundDark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+    ),
     colorScheme: const ColorScheme(
       primary: AppColors.blue,
       secondary: AppColors.white,
@@ -112,14 +138,19 @@ class AppThemes {
       centerTitle: true,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: AppColors.primary,
+
+        /// android
+        statusBarIconBrightness: Brightness.light,
+
+        /// ios
+        statusBarBrightness: Brightness.dark,
       ),
       iconTheme: IconThemeData(
-        color: Colors.black, //change your color here
+        color: Colors.white, //change your color here
       ),
-      backgroundColor: AppColors.background,
+      titleTextStyle: AppStyles.appBarDarkTitle,
+      backgroundColor: AppColors.oxford,
     ),
     cardColor: AppColors.cardBackgroundDark,
     visualDensity: VisualDensity.adaptivePlatformDensity,

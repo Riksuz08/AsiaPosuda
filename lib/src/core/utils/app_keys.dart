@@ -7,8 +7,8 @@ class AppKeys {
   static const String currentTransactionKey = "current_transaction";
   static const String accessToken = "access_token";
   static const String refreshToken = "refresh_token";
-  static const String themeKey = "current_theme";
-  static const String languageCode = 'languageCode';
+  static const String languageCode = 'language_code';
+  static const String themeMode = 'theme_mode';
   static const String favouriteDb = "favourite_db";
   static const String userId = "user_id";
   static const String imageUrl = "image_url";

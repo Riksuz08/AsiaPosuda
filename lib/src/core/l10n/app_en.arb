@@ -1,17 +1,14 @@
 {
   "home": "Home",
-  "basket": "Basket",
-  "favourite": "Favourite",
+  "search":"Search",
+  "bookmark":"Bookmark",
   "profile": "Profile",
   "settings": "Settings",
-  "search": "Search",
-  "new1": "New",
-  "sum": "sum",
-  "change_profile": "Change profile",
-  "version": "Version",
-  "language": "Language",
-  "contacts": "Contacts",
-  "categories": "Categories",
-  "discounts": "Discounts",
-  "empty_page":"Empty Page"
+  "sum":"sum",
+  "cancel":"Cancel",
+  "language":"Language",
+  "theme":"Theme",
+  "system":"System",
+  "light":"Light",
+  "dark":"Dark"
 }

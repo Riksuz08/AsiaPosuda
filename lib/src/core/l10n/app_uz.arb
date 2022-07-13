@@ -1,17 +1,14 @@
 {
   "home": "Asosiy",
-  "basket": "Savatcha",
-  "favourite": "Favourite",
+  "search":"Izlash",
+  "bookmark":"Xatsho'p",
   "profile": "Profil",
   "settings": "Sozlamalar",
-  "search": "Search",
-  "new1": "New",
-  "sum": "sum",
-  "change_profile": "Change profile",
-  "version": "Version",
-  "language": "Language",
-  "contacts": "Contacts",
-  "categories": "Categories",
-  "discounts": "Discounts",
-  "empty_page":"Empty Page"
+  "sum":"so'm",
+  "cancel":"Bekor qilish",
+  "language":"Til",
+  "theme":"Mavzu",
+  "system":"Tizim",
+  "light":"Yorug'lik",
+  "dark":"Qorong'i"
 }

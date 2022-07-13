@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/bookmark/bookmark_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/home_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/profile_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/search/search_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +19,12 @@ class MainPage extends StatelessWidget {
         return Scaffold(
           body: IndexedStack(
             index: state.bottomMenu.index,
-            children: const [HomePage(), ProfilePage()],
+            children: const [
+              HomePage(),
+              SearchPage(),
+              BookmarkPage(),
+              ProfilePage()
+            ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (i) {
@@ -26,9 +34,8 @@ class MainPage extends StatelessWidget {
             },
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,
-            backgroundColor: AppColors.white,
-            unselectedFontSize: 12,
-            selectedFontSize: 12,
+            unselectedFontSize: 14,
+            selectedFontSize: 14,
             unselectedItemColor: AppColors.greyBD,
             selectedItemColor: AppColors.blue,
             elevation: 2,
@@ -36,11 +43,19 @@ class MainPage extends StatelessWidget {
             currentIndex: state.bottomMenu.index,
             items: [
               _buildMenuItem(
-                icon: Icons.home,
+                icon: AppIcons.home,
                 text: AppTranslations.of(context).home,
               ),
               _buildMenuItem(
-                icon: Icons.person,
+                icon: AppIcons.search,
+                text: AppTranslations.of(context).search,
+              ),
+              _buildMenuItem(
+                icon: AppIcons.bookmark,
+                text: AppTranslations.of(context).bookmark,
+              ),
+              _buildMenuItem(
+                icon: AppIcons.profile,
                 text: AppTranslations.of(context).profile,
               ),
             ],
@@ -56,11 +71,11 @@ class MainPage extends StatelessWidget {
   }) {
     return BottomNavigationBarItem(
       icon: Padding(
-        padding: const EdgeInsets.only(bottom: 2, top: 4),
+        padding: const EdgeInsets.only(bottom: 5, top: 4),
         child: Icon(icon),
       ),
       activeIcon: Padding(
-        padding: const EdgeInsets.only(bottom: 2, top: 4),
+        padding: const EdgeInsets.only(bottom: 5, top: 4),
         child: Icon(icon),
       ),
       label: text,

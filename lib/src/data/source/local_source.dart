@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:sample_bloc_mobile/src/core/utils/app_keys.dart';
 import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
@@ -84,18 +85,6 @@ class LocalSource {
     return _box?.get(AppKeys.accessToken, defaultValue: "") ?? '';
   }
 
-  Future<void> setTheme(String theme) async {
-    await _box?.put(AppKeys.themeKey, theme);
-  }
-
-  String getTheme() {
-    return _box?.get(
-          AppKeys.themeKey,
-          defaultValue: BaseFunctions.getDefaultTheme(),
-        ) ??
-        BaseFunctions.getDefaultTheme();
-  }
-
   Future<void> setLocale(String lang) async {
     await _box?.put(AppKeys.languageCode, lang);
   }
@@ -106,6 +95,26 @@ class LocalSource {
           defaultValue: BaseFunctions.getDefaultLocale(),
         ) ??
         BaseFunctions.getDefaultLocale();
+  }
+
+  Future<void> setThemeMode(ThemeMode mode) async {
+    await _box?.put(AppKeys.themeMode, mode.name);
+  }
+
+  ThemeMode getThemeMode() {
+    if (_box == null) {
+      return ThemeMode.system;
+    }
+    switch (_box!.get(AppKeys.themeMode, defaultValue: ThemeMode.system.name)) {
+      case "system":
+        return ThemeMode.system;
+      case "light":
+        return ThemeMode.light;
+      case "dark":
+        return ThemeMode.dark;
+      default:
+        return ThemeMode.system;
+    }
   }
 
   Future<void> clear() async {
