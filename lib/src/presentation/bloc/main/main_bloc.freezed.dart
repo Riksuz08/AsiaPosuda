@@ -12,21 +12,7 @@ part of 'main_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$MainStateTearOff {
-  const _$MainStateTearOff();
-
-  _MainState call({required BottomMenu bottomMenu}) {
-    return _MainState(
-      bottomMenu: bottomMenu,
-    );
-  }
-}
-
-/// @nodoc
-const $MainState = _$MainStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$MainState {
@@ -66,28 +52,29 @@ class _$MainStateCopyWithImpl<$Res> implements $MainStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MainStateCopyWith<$Res> implements $MainStateCopyWith<$Res> {
-  factory _$MainStateCopyWith(
-          _MainState value, $Res Function(_MainState) then) =
-      __$MainStateCopyWithImpl<$Res>;
+abstract class _$$_MainStateCopyWith<$Res> implements $MainStateCopyWith<$Res> {
+  factory _$$_MainStateCopyWith(
+          _$_MainState value, $Res Function(_$_MainState) then) =
+      __$$_MainStateCopyWithImpl<$Res>;
   @override
   $Res call({BottomMenu bottomMenu});
 }
 
 /// @nodoc
-class __$MainStateCopyWithImpl<$Res> extends _$MainStateCopyWithImpl<$Res>
-    implements _$MainStateCopyWith<$Res> {
-  __$MainStateCopyWithImpl(_MainState _value, $Res Function(_MainState) _then)
-      : super(_value, (v) => _then(v as _MainState));
+class __$$_MainStateCopyWithImpl<$Res> extends _$MainStateCopyWithImpl<$Res>
+    implements _$$_MainStateCopyWith<$Res> {
+  __$$_MainStateCopyWithImpl(
+      _$_MainState _value, $Res Function(_$_MainState) _then)
+      : super(_value, (v) => _then(v as _$_MainState));
 
   @override
-  _MainState get _value => super._value as _MainState;
+  _$_MainState get _value => super._value as _$_MainState;
 
   @override
   $Res call({
     Object? bottomMenu = freezed,
   }) {
-    return _then(_MainState(
+    return _then(_$_MainState(
       bottomMenu: bottomMenu == freezed
           ? _value.bottomMenu
           : bottomMenu // ignore: cast_nullable_to_non_nullable
@@ -113,7 +100,7 @@ class _$_MainState implements _MainState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MainState &&
+            other is _$_MainState &&
             const DeepCollectionEquality()
                 .equals(other.bottomMenu, bottomMenu));
   }
@@ -124,39 +111,25 @@ class _$_MainState implements _MainState {
 
   @JsonKey(ignore: true)
   @override
-  _$MainStateCopyWith<_MainState> get copyWith =>
-      __$MainStateCopyWithImpl<_MainState>(this, _$identity);
+  _$$_MainStateCopyWith<_$_MainState> get copyWith =>
+      __$$_MainStateCopyWithImpl<_$_MainState>(this, _$identity);
 }
 
 abstract class _MainState implements MainState {
-  const factory _MainState({required BottomMenu bottomMenu}) = _$_MainState;
+  const factory _MainState({required final BottomMenu bottomMenu}) =
+      _$_MainState;
 
   @override
   BottomMenu get bottomMenu;
   @override
   @JsonKey(ignore: true)
-  _$MainStateCopyWith<_MainState> get copyWith =>
+  _$$_MainStateCopyWith<_$_MainState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$MainEventTearOff {
-  const _$MainEventTearOff();
-
-  MainEventChanged onChanged(BottomMenu menu) {
-    return MainEventChanged(
-      menu,
-    );
-  }
-}
-
-/// @nodoc
-const $MainEvent = _$MainEventTearOff();
-
-/// @nodoc
 mixin _$MainEvent {
   BottomMenu get menu => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(BottomMenu menu) onChanged,
@@ -224,30 +197,31 @@ class _$MainEventCopyWithImpl<$Res> implements $MainEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $MainEventChangedCopyWith<$Res>
+abstract class _$$MainEventChangedCopyWith<$Res>
     implements $MainEventCopyWith<$Res> {
-  factory $MainEventChangedCopyWith(
-          MainEventChanged value, $Res Function(MainEventChanged) then) =
-      _$MainEventChangedCopyWithImpl<$Res>;
+  factory _$$MainEventChangedCopyWith(
+          _$MainEventChanged value, $Res Function(_$MainEventChanged) then) =
+      __$$MainEventChangedCopyWithImpl<$Res>;
   @override
   $Res call({BottomMenu menu});
 }
 
 /// @nodoc
-class _$MainEventChangedCopyWithImpl<$Res> extends _$MainEventCopyWithImpl<$Res>
-    implements $MainEventChangedCopyWith<$Res> {
-  _$MainEventChangedCopyWithImpl(
-      MainEventChanged _value, $Res Function(MainEventChanged) _then)
-      : super(_value, (v) => _then(v as MainEventChanged));
+class __$$MainEventChangedCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res>
+    implements _$$MainEventChangedCopyWith<$Res> {
+  __$$MainEventChangedCopyWithImpl(
+      _$MainEventChanged _value, $Res Function(_$MainEventChanged) _then)
+      : super(_value, (v) => _then(v as _$MainEventChanged));
 
   @override
-  MainEventChanged get _value => super._value as MainEventChanged;
+  _$MainEventChanged get _value => super._value as _$MainEventChanged;
 
   @override
   $Res call({
     Object? menu = freezed,
   }) {
-    return _then(MainEventChanged(
+    return _then(_$MainEventChanged(
       menu == freezed
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
@@ -273,7 +247,7 @@ class _$MainEventChanged implements MainEventChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is MainEventChanged &&
+            other is _$MainEventChanged &&
             const DeepCollectionEquality().equals(other.menu, menu));
   }
 
@@ -283,8 +257,8 @@ class _$MainEventChanged implements MainEventChanged {
 
   @JsonKey(ignore: true)
   @override
-  $MainEventChangedCopyWith<MainEventChanged> get copyWith =>
-      _$MainEventChangedCopyWithImpl<MainEventChanged>(this, _$identity);
+  _$$MainEventChangedCopyWith<_$MainEventChanged> get copyWith =>
+      __$$MainEventChangedCopyWithImpl<_$MainEventChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -344,12 +318,12 @@ class _$MainEventChanged implements MainEventChanged {
 }
 
 abstract class MainEventChanged implements MainEvent {
-  const factory MainEventChanged(BottomMenu menu) = _$MainEventChanged;
+  const factory MainEventChanged(final BottomMenu menu) = _$MainEventChanged;
 
   @override
   BottomMenu get menu;
   @override
   @JsonKey(ignore: true)
-  $MainEventChangedCopyWith<MainEventChanged> get copyWith =>
+  _$$MainEventChangedCopyWith<_$MainEventChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }

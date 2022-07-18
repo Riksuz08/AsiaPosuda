@@ -74,6 +74,34 @@ class BaseFunctions {
     return brightness.name;
   }
 
+  static String dateFormatter(String? value) {
+    if (value == null) {
+      return "";
+    } else if (value.isEmpty) {
+      return "";
+    } else {
+      final date = DateTime.parse(value).toLocal();
+      return DateFormat('yyyy-MM-dd HH:mm').format(date);
+    }
+  }
+
+  static String timeZone() {
+    var date = DateTime.now().toIso8601String().split(".")[0];
+    if (DateTime.now().timeZoneOffset.isNegative) {
+      date += "-";
+    } else {
+      date += "+";
+    }
+    final timeZoneSplit = DateTime.now().timeZoneOffset.toString().split(":");
+
+    var hour = int.parse(timeZoneSplit[0]);
+    if (hour < 10) {
+      date += "0${timeZoneSplit[0]}";
+    }
+    date += ":${timeZoneSplit[1]}";
+    return date;
+  }
+
   // static Future<void> refreshToken() async {
   //   var request = RefreshTokenRequest(
   //     refreshToken: LocalSource.instance.getRefreshToken(),
