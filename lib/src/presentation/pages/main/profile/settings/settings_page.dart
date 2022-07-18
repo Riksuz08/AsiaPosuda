@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
-import 'package:sample_bloc_mobile/src/gallery_options.dart';
+import 'package:sample_bloc_mobile/src/app_options.dart';
 import 'package:sample_bloc_mobile/src/presentation/widgets/bottom_sheet/custom_bottom_sheet.dart';
 
 import 'widgets/language_bottom_widget.dart';
@@ -13,7 +13,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = GalleryOptions.of(context);
+    final options = AppOptions.of(context);
 
     return Scaffold(
       appBar: AppBar(title: Text(AppTranslations.of(context).settings)),
@@ -36,7 +36,7 @@ class SettingsPage extends StatelessWidget {
                       context: context,
                       child: LanguageBottomWidget(
                         onChanged: (lang) async {
-                          GalleryOptions.update(
+                          AppOptions.update(
                             context,
                             options.copyWith(locale: Locale(lang)),
                           );
@@ -55,7 +55,7 @@ class SettingsPage extends StatelessWidget {
                       context: context,
                       child: ThemeBottomWidget(
                         onChanged: (mode) async {
-                          GalleryOptions.update(
+                          AppOptions.update(
                             context,
                             options.copyWith(themeMode: mode),
                           );

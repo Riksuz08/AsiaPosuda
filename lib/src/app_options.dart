@@ -35,8 +35,8 @@ set deviceLocale(Locale? locale) {
   _deviceLocale ??= locale;
 }
 
-class GalleryOptions {
-  const GalleryOptions({
+class AppOptions {
+  const AppOptions({
     required this.themeMode,
     required double? textScaleFactor,
     required this.customTextDirection,
@@ -111,7 +111,7 @@ class GalleryOptions {
     return overlayStyle;
   }
 
-  GalleryOptions copyWith({
+  AppOptions copyWith({
     ThemeMode? themeMode,
     double? textScaleFactor,
     CustomTextDirection? customTextDirection,
@@ -120,7 +120,7 @@ class GalleryOptions {
     TargetPlatform? platform,
     bool? isTestMode,
   }) {
-    return GalleryOptions(
+    return AppOptions(
       themeMode: themeMode ?? this.themeMode,
       textScaleFactor: textScaleFactor ?? _textScaleFactor,
       customTextDirection: customTextDirection ?? this.customTextDirection,
@@ -133,7 +133,7 @@ class GalleryOptions {
 
   @override
   bool operator ==(Object other) =>
-      other is GalleryOptions &&
+      other is AppOptions &&
       themeMode == other.themeMode &&
       _textScaleFactor == other._textScaleFactor &&
       customTextDirection == other.customTextDirection &&
@@ -153,13 +153,13 @@ class GalleryOptions {
         isTestMode,
       );
 
-  static GalleryOptions of(BuildContext context) {
+  static AppOptions of(BuildContext context) {
     final scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     return scope.modelBindingState.currentModel;
   }
 
-  static void update(BuildContext context, GalleryOptions newModel) {
+  static void update(BuildContext context, AppOptions newModel) {
     final scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     scope.modelBindingState.updateModel(newModel);
@@ -177,7 +177,7 @@ class ApplyTextOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = GalleryOptions.of(context);
+    final options = AppOptions.of(context);
     final textDirection = options.resolvedTextDirection();
     final textScaleFactor = options.textScaleFactor(context);
 
@@ -218,7 +218,7 @@ class ModelBinding extends StatefulWidget {
     required this.child,
   });
 
-  final GalleryOptions initialModel;
+  final AppOptions initialModel;
   final Widget child;
 
   @override
@@ -226,7 +226,7 @@ class ModelBinding extends StatefulWidget {
 }
 
 class _ModelBindingState extends State<ModelBinding> {
-  late GalleryOptions currentModel;
+  late AppOptions currentModel;
   Timer? _timeDilationTimer;
 
   @override
@@ -242,7 +242,7 @@ class _ModelBindingState extends State<ModelBinding> {
     super.dispose();
   }
 
-  void handleTimeDilation(GalleryOptions newModel) {
+  void handleTimeDilation(AppOptions newModel) {
     if (currentModel.timeDilation != newModel.timeDilation) {
       _timeDilationTimer?.cancel();
       _timeDilationTimer = null;
@@ -259,7 +259,7 @@ class _ModelBindingState extends State<ModelBinding> {
     }
   }
 
-  void updateModel(GalleryOptions newModel) {
+  void updateModel(AppOptions newModel) {
     if (newModel != currentModel) {
       handleTimeDilation(newModel);
       setState(() {

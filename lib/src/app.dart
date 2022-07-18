@@ -12,7 +12,7 @@ import 'config/routes/app_pages.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_themes.dart';
 import 'core/utils/constants.dart';
-import 'gallery_options.dart';
+import 'app_options.dart';
 import 'presentation/bloc/main/main_bloc.dart';
 
 class MainApp extends StatelessWidget {
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModelBinding(
-      initialModel: GalleryOptions(
+      initialModel: AppOptions(
         themeMode: LocalSource.instance.getThemeMode(),
         textScaleFactor: systemTextScaleFactorOption,
         customTextDirection: CustomTextDirection.localeBased,
@@ -33,7 +33,7 @@ class MainApp extends StatelessWidget {
       child: KeyboardDismisser(
         child: Builder(
           builder: (ctx) {
-            final options = GalleryOptions.of(ctx);
+            final options = AppOptions.of(ctx);
             return MultiBlocProvider(
               providers: [
                 BlocProvider<MainBloc>(create: (_) => MainBloc()),
