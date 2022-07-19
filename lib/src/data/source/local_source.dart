@@ -55,6 +55,10 @@ class LocalSource {
     return _box?.get(AppKeys.currentShopId, defaultValue: "") ?? '';
   }
 
+  String getAccessToken() {
+    return _box?.get(AppKeys.accessToken, defaultValue: "") ?? '';
+  }
+
   String getCurrentShopName() {
     return _box?.get(AppKeys.currentShopName, defaultValue: "") ?? '';
   }

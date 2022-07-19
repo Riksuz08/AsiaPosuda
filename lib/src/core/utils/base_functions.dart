@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
-import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
 
 class BaseFunctions {
   BaseFunctions._();
@@ -22,7 +20,7 @@ class BaseFunctions {
     number = number.abs();
     String result = "0";
     result = NumberFormat().format(number).split(",").join(" ");
-    return "\$${isNegative ? "-$result" : result} ${AppTranslations.of(AppConstants.navigatorKey.currentContext!).sum}";
+    return "${isNegative ? "-$result" : result} \$";
   }
 
   static String formatter(double currentBalance) {

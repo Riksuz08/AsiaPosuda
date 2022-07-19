@@ -23,7 +23,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   # internet check
-  connectivity_plus: ^2.3.5
+  connectivity_plus: ^2.3.6
   # keyboard dismiss
   keyboard_dismisser: ^3.0.0
   # freezed
@@ -32,6 +32,17 @@ dependencies:
   get_it: ^7.2.0
   # bloc state manager
   flutter_bloc: ^8.0.1
+  # rest api
+  http: any
+  # interceptor
+  dio: ^4.0.6
+  dio_retry_plus: ^1.0.2
+  # retrofit
+  retrofit: any
+  # alice = chuck
+  chuck_interceptor: ^1.0.1
+  # translator
+  translator: ^0.1.7
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +53,8 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   bloc_test: ^9.0.3
   freezed: ^2.1.0+1
+  http_mock_adapter: ^0.3.3
+  mockito: ^5.2.0
 
 flutter:
 
