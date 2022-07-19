@@ -65,8 +65,10 @@ class AuthRepository extends BaseRepository {
     return ResponseHandler()..data = response;
   }
 
-  Future<ResponseHandler<BaseResponse>> fetchRegister(
-      {required String shipperId, required RegisterRequest request}) async {
+  Future<ResponseHandler<BaseResponse>> fetchRegister({
+    required String shipperId,
+    required RegisterRequest request,
+  }) async {
     BaseResponse response;
     try {
       response = await _apiClient.register(shipperId, request);
