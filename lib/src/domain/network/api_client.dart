@@ -63,6 +63,15 @@ abstract class ApiClient {
           request: true,
         ),
       );
+    } else {
+      dio.interceptors.add(
+        LogInterceptor(
+          responseBody: false,
+          request: false,
+          error: false,
+          requestHeader: false,
+        ),
+      );
     }
     return dio;
   }
