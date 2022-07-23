@@ -26,10 +26,9 @@ class HomePage extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  final title = "Title $index";
                   return ListTile(
                     onTap: () {},
-                    title: Text(title),
+                    title: Text("Title $index"),
                   );
                 },
                 childCount: 20,

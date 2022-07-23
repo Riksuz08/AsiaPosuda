@@ -15,11 +15,3 @@ void main() async {
 
   runApp(const MainApp());
 }
-
-
-// flutter pub run flutter_launcher_icons:main
-// flutter run -d windows --no-sound-null-safety
-// flutter build apk --release --no-sound-null-safety
-// flutter build apk --split-per-abi --no-sound-null-safety
-// flutter build appbundle --release --no-sound-null-safety
-// flutter pub run build_runner watch --delete-conflicting-outputs
