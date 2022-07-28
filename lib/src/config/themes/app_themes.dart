@@ -7,11 +7,13 @@ class AppThemes {
   AppThemes._();
 
   static final ThemeData light = ThemeData(
-    primaryColor: AppColors.blue,
+    /// use material 3
+    useMaterial3: true,
+    brightness:  Brightness.light,
+    colorSchemeSeed: AppColors.blue,
     scaffoldBackgroundColor: AppColors.backgroundLight,
     backgroundColor: AppColors.backgroundLight,
     cardColor: AppColors.cardBackgroundLight,
-
     bottomSheetTheme: const BottomSheetThemeData(
       elevation: 0,
       backgroundColor: AppColors.backgroundLight,
@@ -34,19 +36,6 @@ class AppThemes {
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(color: AppColors.blue, width: 3.0),
       ),
-    ),
-    colorScheme: const ColorScheme(
-      primary: AppColors.blue,
-      secondary: AppColors.white,
-      surface: Colors.transparent,
-      background: AppColors.backgroundLight,
-      error: AppColors.red,
-      onPrimary: AppColors.blue,
-      onSecondary: AppColors.blue,
-      onSurface: AppColors.blue,
-      onBackground: AppColors.cardBackgroundLight,
-      onError: AppColors.blue,
-      brightness: Brightness.light,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
@@ -109,9 +98,11 @@ class AppThemes {
   );
 
   static final ThemeData dark = ThemeData(
+    /// use material 3
+    useMaterial3: true,
+    brightness:  Brightness.dark,
+    colorSchemeSeed: AppColors.blue,
     canvasColor: Colors.transparent,
-    brightness: Brightness.dark,
-    primaryColor: AppColors.blue,
     cardColor: AppColors.cardBackgroundDark,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: AppColors.backgroundDark,
@@ -143,19 +134,6 @@ class AppThemes {
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: true,
       elevation: 2,
-    ),
-    colorScheme: const ColorScheme(
-      primary: AppColors.blue,
-      secondary: AppColors.white,
-      surface: Colors.transparent,
-      background: AppColors.backgroundDark,
-      error: AppColors.red,
-      onPrimary: AppColors.blue,
-      onSecondary: AppColors.blue,
-      onSurface: AppColors.blue,
-      onBackground: AppColors.cardBackgroundDark,
-      onError: AppColors.blue,
-      brightness: Brightness.dark,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {

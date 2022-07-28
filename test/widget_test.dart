@@ -7,11 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:sample_bloc_mobile/src/app.dart';
 import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
-import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
 void main() {
   testWidgets("Flutter Widget Test", (WidgetTester tester) async {
