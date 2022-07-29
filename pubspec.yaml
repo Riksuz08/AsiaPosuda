@@ -33,14 +33,14 @@ dependencies:
   # bloc state manager
   flutter_bloc: ^8.0.1
   # rest api
-  http: any
+  http: ^0.13.4
   # interceptor
   dio: ^4.0.6
   dio_retry_plus: ^1.0.2
   # retrofit
   retrofit: any
   # alice = chuck
-  chuck_interceptor: ^1.0.1
+  chuck_interceptor: ^1.0.2
   # translator
   translator: ^0.1.7
 
@@ -54,12 +54,13 @@ dev_dependencies:
   bloc_test: ^9.0.3
   freezed: ^2.1.0+1
   http_mock_adapter: ^0.3.3
-  mockito: ^5.2.0
+  mockito: ^5.3.0
 
 flutter:
-
   generate: true
+
   uses-material-design: true
+
   fonts:
     - family: AppIcons
       fonts:

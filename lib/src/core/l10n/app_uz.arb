@@ -10,5 +10,6 @@
   "theme":"Mavzu",
   "system":"Tizim",
   "light":"Yorug'lik",
-  "dark":"Qorong'i"
+  "dark":"Qorong'i",
+  "appTitle":"Sample App"
 }

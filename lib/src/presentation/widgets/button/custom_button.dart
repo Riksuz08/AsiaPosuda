@@ -35,9 +35,6 @@ class CustomButton extends StatelessWidget {
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith(
           (states) {
-            if (states.contains(MaterialState.pressed)) {
-              return backgroundColor.withOpacity(0.7);
-            }
             if (states.contains(MaterialState.disabled)) {
               return disabledColor;
             }
@@ -45,7 +42,7 @@ class CustomButton extends StatelessWidget {
           },
         ),
         elevation: MaterialStateProperty.all<double>(0),
-        textStyle: MaterialStateProperty.all(
+        textStyle: MaterialStateProperty.all<TextStyle>(
           TextStyle(fontSize: textSize, color: fontColor),
         ),
         shape: MaterialStateProperty.all(

@@ -140,7 +140,7 @@ packages:
       name: chuck_interceptor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   clock:
     dependency: transitive
     description:
@@ -517,7 +517,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.0"
+    version: "5.3.0"
   mocktail:
     dependency: transitive
     description:

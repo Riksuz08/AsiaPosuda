@@ -20,5 +20,12 @@ class AppStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static const buttonStyle = TextStyle(
+    fontFamily: "SFPro",
+    color: AppColors.white,
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
+  );
+
   static const borderRadiusMain = BorderRadius.all(Radius.circular(15));
 }

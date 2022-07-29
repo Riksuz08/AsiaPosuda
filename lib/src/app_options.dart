@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
@@ -27,7 +28,7 @@ const List<String> rtlLanguages = <String>[
 // Fake locale to represent the system Locale option.
 const systemLocaleOption = Locale('system');
 
-Locale? _deviceLocale;
+Locale? _deviceLocale = Locale(Platform.localeName);
 
 Locale? get deviceLocale => _deviceLocale;
 

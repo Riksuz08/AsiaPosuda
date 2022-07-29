@@ -9,11 +9,32 @@ class AppThemes {
   static final ThemeData light = ThemeData(
     /// use material 3
     useMaterial3: true,
-    brightness:  Brightness.light,
+    brightness: Brightness.light,
     colorSchemeSeed: AppColors.blue,
     scaffoldBackgroundColor: AppColors.backgroundLight,
     backgroundColor: AppColors.backgroundLight,
     cardColor: AppColors.cardBackgroundLight,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (states) {
+            if (states.contains(MaterialState.disabled)) {
+              return AppColors.grey6F;
+            }
+            return AppColors.blue;
+          },
+        ),
+        textStyle: MaterialStateProperty.all(AppStyles.buttonStyle),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+        ),
+        fixedSize: MaterialStateProperty.all(const Size(double.infinity, 48)),
+      ),
+    ),
+    inputDecorationTheme: const InputDecorationTheme(),
     bottomSheetTheme: const BottomSheetThemeData(
       elevation: 0,
       backgroundColor: AppColors.backgroundLight,
@@ -43,23 +64,23 @@ class AppThemes {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       },
     ),
-    // navigationBarTheme: NavigationBarThemeData(
-    //   elevation: 0,
-    //   backgroundColor: AppColors.white,
-    //   height: kToolbarHeight,
-    //   iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-    //     (Set<MaterialState> states) {
-    //       return const IconThemeData(
-    //         color: Colors.black,
-    //       );
-    //     },
-    //   ),
-    //   labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-    //     (Set<MaterialState> states) {
-    //       return AppStyles.appBarTitle;
-    //     },
-    //   ),
-    // ),
+    navigationBarTheme: NavigationBarThemeData(
+      elevation: 0,
+      backgroundColor: AppColors.white,
+      height: kToolbarHeight,
+      iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+        (Set<MaterialState> states) {
+          return const IconThemeData(
+            color: Colors.black,
+          );
+        },
+      ),
+      labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+        (Set<MaterialState> states) {
+          return AppStyles.appBarTitle;
+        },
+      ),
+    ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -100,7 +121,7 @@ class AppThemes {
   static final ThemeData dark = ThemeData(
     /// use material 3
     useMaterial3: true,
-    brightness:  Brightness.dark,
+    brightness: Brightness.dark,
     colorSchemeSeed: AppColors.blue,
     canvasColor: Colors.transparent,
     cardColor: AppColors.cardBackgroundDark,

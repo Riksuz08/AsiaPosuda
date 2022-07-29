@@ -1,22 +1,24 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
+import 'data/source/local_source.dart';
 import 'config/routes/app_pages.dart';
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_themes.dart';
+import 'core/l10n/translations.dart';
 import 'core/utils/constants.dart';
 import 'app_options.dart';
 import 'presentation/bloc/main/main_bloc.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({Key? key}) : super(key: key);
+  const MainApp({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,8 @@ class MainApp extends StatelessWidget {
                 BlocProvider<MainBloc>(create: (_) => MainBloc()),
               ],
               child: MaterialApp(
-                title: "Sample App",
+                onGenerateTitle: (context) =>
+                    AppTranslations.of(context).appTitle,
                 scrollBehavior:
                     const MaterialScrollBehavior().copyWith(scrollbars: false),
                 debugShowCheckedModeBanner: false,
@@ -53,18 +56,8 @@ class MainApp extends StatelessWidget {
 
                 /// lang
                 locale: options.locale,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  DefaultCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                  Locale('ru', 'RU'),
-                  Locale('uz', 'UZ'),
-                  Locale('en', 'US'),
-                ],
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
 
                 /// pages
                 routes: AppPages.routes,

@@ -10,5 +10,6 @@
   "theme":"Тема",
   "system":"Система",
   "light":"Светлый",
-  "dark":"Темный"
+  "dark":"Темный",
+  "appTitle":"Sample App"
 }

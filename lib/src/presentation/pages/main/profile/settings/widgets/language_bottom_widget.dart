@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/app_options.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/presentation/widgets/bottom_sheet/custom_modal_bottom_widget.dart';
 
@@ -22,19 +23,31 @@ class LanguageBottomWidget extends StatelessWidget {
           onTap: () {
             onChanged("ru");
           },
-          title: Text("RU"),
+          title: const Text("RU"),
+          trailing: Visibility(
+            visible: AppOptions.of(context).locale?.languageCode == 'ru',
+            child: const Icon(Icons.check),
+          ),
         ),
         ListTile(
           onTap: () {
             onChanged("uz");
           },
-          title: Text("UZ"),
+          title: const Text("UZ"),
+          trailing: Visibility(
+            visible: AppOptions.of(context).locale?.languageCode == 'uz',
+            child: const Icon(Icons.check),
+          ),
         ),
         ListTile(
           onTap: () {
             onChanged("en");
           },
-          title: Text("EN"),
+          title: const Text("EN"),
+          trailing: Visibility(
+            visible: AppOptions.of(context).locale?.languageCode == 'en',
+            child: const Icon(Icons.check),
+          ),
         ),
       ],
     );

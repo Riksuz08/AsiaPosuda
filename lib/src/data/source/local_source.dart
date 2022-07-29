@@ -12,10 +12,13 @@ class LocalSource {
 
   static LocalSource get instance => _localSource ?? LocalSource._();
 
-  static Future<void> getInstance() async {
+  static Future<LocalSource> getInstance() async {
     if (_box == null) {
       _localSource ??= LocalSource._();
       _box = await Hive.openBox(AppKeys.localSource);
+      return _localSource!;
+    } else {
+      return _localSource ??= LocalSource._();
     }
   }
 
