@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_styles.dart';
 
-class AppThemes {
+abstract class AppThemes {
   AppThemes._();
 
   static final ThemeData light = ThemeData(

@@ -12,7 +12,6 @@ Future<T?> customBottomSheet<T>({
   return await showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-
     builder: (ctx) {
       return child;
     },
