@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: CustomButton(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.settings);
+                Navigator.pushNamed(context, "AppRoutes.settings");
               },
               text: AppTranslations.of(context).settings,
             ),

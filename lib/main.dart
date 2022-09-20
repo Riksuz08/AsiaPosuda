@@ -66,8 +66,9 @@ class MainApp extends StatelessWidget {
                 /// title
                 onGenerateTitle: (context) =>
                     AppTranslations.of(context).appTitle,
-                scrollBehavior:
-                    const MaterialScrollBehavior().copyWith(scrollbars: false),
+                scrollBehavior: const MaterialScrollBehavior().copyWith(
+                  scrollbars: false,
+                ),
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppConstants.navigatorKey,
                 scaffoldMessengerKey: AppConstants.scaffoldMessengerKey,
@@ -85,6 +86,7 @@ class MainApp extends StatelessWidget {
                 /// pages
                 routes: AppPages.routes,
                 initialRoute: AppRoutes.initial,
+                onUnknownRoute: AppPages.onUnknownRoute,
               );
             },
           ),
