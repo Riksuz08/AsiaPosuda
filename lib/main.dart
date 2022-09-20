@@ -9,7 +9,7 @@ import 'src/app_options.dart';
 import 'src/config/routes/app_pages.dart';
 import 'src/config/routes/app_routes.dart';
 import 'src/config/themes/app_themes.dart';
-import 'src/core/di/di_injection.dart';
+import 'src/core/di/injection.dart' as di;
 import 'src/core/l10n/translations.dart';
 import 'src/core/utils/constants.dart';
 import 'src/data/source/local_source.dart';
@@ -31,7 +31,7 @@ void main() async {
   }
 
   /// di
-  registerSingletons();
+  di.registerSingletons();
 
   /// run app
   runApp(const MainApp());
@@ -56,7 +56,7 @@ class MainApp extends StatelessWidget {
       ),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<MainBloc>(create: (_) => inject()),
+          BlocProvider<MainBloc>(create: (_) => di.getIt<MainBloc>()),
         ],
         child: KeyboardDismisser(
           child: Builder(
