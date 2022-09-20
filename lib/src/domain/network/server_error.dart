@@ -22,7 +22,24 @@ class ServerError implements Exception {
 
   _handleError(dynamic error) {
     _errorCode = error.response?.statusCode ?? 500;
-
+    if (_errorCode == 500) {
+      return _errorMessage = "Server error";
+    }
+    if (_errorCode == 502) {
+      return _errorMessage = "Server down";
+    }
+    if (_errorCode == 404) {
+      return _errorMessage = "Not Found";
+    }
+    if (_errorCode == 413) {
+      return _errorMessage = "Request Entity Too Large";
+    }
+    if (_errorCode == 401) {
+      return _errorMessage = "Token expired";
+    }
+    if (_errorCode == 403) {
+      return _errorMessage = "Token expired";
+    }
     switch (error.type) {
       case DioErrorType.connectTimeout:
         _errorMessage = "Connection timeout";

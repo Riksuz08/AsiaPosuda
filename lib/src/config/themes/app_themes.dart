@@ -49,6 +49,10 @@ abstract class AppThemes {
       backgroundColor: AppColors.white,
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: true,
+      selectedLabelStyle: TextStyle(fontSize: 14),
+      unselectedLabelStyle: TextStyle(fontSize: 14),
+      unselectedItemColor: AppColors.greyBD,
+      selectedItemColor: AppColors.blue,
       elevation: 2,
     ),
     tabBarTheme: const TabBarTheme(
@@ -83,6 +87,7 @@ abstract class AppThemes {
     ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
+      scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.transparent,
@@ -98,6 +103,7 @@ abstract class AppThemes {
       titleTextStyle: AppStyles.appBarTitle,
       toolbarTextStyle: AppStyles.appBarTitle,
       backgroundColor: AppColors.white,
+      surfaceTintColor: AppColors.white,
       toolbarHeight: kToolbarHeight,
     ),
     textTheme: const TextTheme(

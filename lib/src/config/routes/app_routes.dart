@@ -1,4 +1,4 @@
-abstract class AppRoutes {
+class AppRoutes {
   AppRoutes._();
 
   static const initial = '/';

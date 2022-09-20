@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
+import 'package:sample_bloc_mobile/src/core/di/di_injection.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
@@ -30,15 +30,8 @@ class MainPage extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             key: AppConstants.bottomNavigatorKey,
             onTap: (i) {
-              context
-                  .read<MainBloc>()
-                  .add(MainEventChanged(BottomMenu.values[i]));
+              mainBloc.add(MainEventChanged(BottomMenu.values[i]));
             },
-            showSelectedLabels: true,
-            unselectedFontSize: 14,
-            selectedFontSize: 14,
-            unselectedItemColor: AppColors.greyBD,
-            selectedItemColor: AppColors.blue,
             currentIndex: state.bottomMenu.index,
             items: [
               _buildMenuItem(

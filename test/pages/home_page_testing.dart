@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sample_bloc_mobile/src/app.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/main/home/home_page.dart';
+import 'package:sample_bloc_mobile/main.dart';
 
 void main() {
   group(

@@ -6,4 +6,7 @@ class AppTranslations {
 
   static AppLocalizations of(BuildContext context) =>
       AppLocalizations.of(context)!;
+
+  static get localizationsDelegates => AppLocalizations.localizationsDelegates;
+  static get supportedLocales => AppLocalizations.supportedLocales;
 }
