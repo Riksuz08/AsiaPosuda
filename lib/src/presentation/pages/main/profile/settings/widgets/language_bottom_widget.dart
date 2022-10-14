@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
-import 'package:sample_bloc_mobile/src/presentation/widgets/bottom_sheet/custom_modal_bottom_widget.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_modal_bottom_widget.dart';
 
 class LanguageBottomWidget extends StatelessWidget {
   final Function(String) onChanged;

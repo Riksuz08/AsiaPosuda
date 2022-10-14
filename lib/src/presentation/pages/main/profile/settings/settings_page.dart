@@ -3,7 +3,7 @@ import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
-import 'package:sample_bloc_mobile/src/presentation/widgets/bottom_sheet/custom_bottom_sheet.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_bottom_sheet.dart';
 
 import 'widgets/language_bottom_widget.dart';
 import 'widgets/theme_bottom_widget.dart';

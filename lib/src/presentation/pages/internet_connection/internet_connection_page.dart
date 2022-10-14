@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
-import 'package:sample_bloc_mobile/src/presentation/widgets/button/custom_button.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/button/custom_button.dart';
 
 class InternetConnectionPage extends StatefulWidget {
   const InternetConnectionPage({Key? key}) : super(key: key);
