@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_styles.dart';
 
-abstract class AppThemes {
+class AppThemes {
   AppThemes._();
 
   static final ThemeData light = ThemeData(
@@ -12,7 +12,6 @@ abstract class AppThemes {
     brightness: Brightness.light,
     colorSchemeSeed: AppColors.blue,
     scaffoldBackgroundColor: AppColors.backgroundLight,
-    backgroundColor: AppColors.backgroundLight,
     cardColor: AppColors.cardBackgroundLight,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -107,21 +106,20 @@ abstract class AppThemes {
       toolbarHeight: kToolbarHeight,
     ),
     textTheme: const TextTheme(
-      bodyText1: TextStyle(
+      bodyMedium: TextStyle(
         color: AppColors.black,
         fontWeight: FontWeight.w500,
         fontSize: 17,
       ),
-      bodyText2: TextStyle(
+      bodySmall: TextStyle(
         color: AppColors.black,
         fontWeight: FontWeight.w500,
         fontSize: 17,
       ),
-      headline6: TextStyle(
+      bodyLarge: TextStyle(
         color: AppColors.black,
       ),
     ),
-    fontFamily: 'SFPro',
   );
 
   static final ThemeData dark = ThemeData(
@@ -133,7 +131,6 @@ abstract class AppThemes {
     cardColor: AppColors.cardBackgroundDark,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: AppColors.backgroundDark,
-    backgroundColor: AppColors.backgroundDark,
     bottomSheetTheme: const BottomSheetThemeData(
       elevation: 0,
       backgroundColor: AppColors.cardBackgroundDark,
@@ -188,17 +185,16 @@ abstract class AppThemes {
       backgroundColor: AppColors.cardBackgroundDark,
     ),
     textTheme: const TextTheme(
-      bodyText1: TextStyle(
+      bodySmall: TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w500,
         fontSize: 17,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: AppColors.white,
         fontWeight: FontWeight.w500,
         fontSize: 17,
       ),
     ),
-    fontFamily: 'SFPro',
   );
 }

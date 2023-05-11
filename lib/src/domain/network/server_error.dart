@@ -16,9 +16,9 @@ class ServerError implements Exception {
     _errorCode = code;
   }
 
-  int? getErrorCode() => _errorCode;
+  int get errorCode => _errorCode ?? 0;
 
-  String getErrorMessage() => _errorMessage;
+  String get errorMessage => _errorMessage;
 
   _handleError(dynamic error) {
     _errorCode = error.response?.statusCode ?? 500;
@@ -41,7 +41,7 @@ class ServerError implements Exception {
       return _errorMessage = "Token expired";
     }
     switch (error.type) {
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         _errorMessage = "Connection timeout";
         break;
       case DioErrorType.sendTimeout:
@@ -50,7 +50,7 @@ class ServerError implements Exception {
       case DioErrorType.receiveTimeout:
         _errorMessage = "Connection timeout";
         break;
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         {
           if (error.response?.data['Error'] is Map<String, dynamic>) {
             _errorMessage = error.response!.data['Error']['message'].toString();
@@ -62,7 +62,7 @@ class ServerError implements Exception {
       case DioErrorType.cancel:
         _errorMessage = "Canceled";
         break;
-      case DioErrorType.other:
+      case DioErrorType.unknown:
         _errorMessage = "Something wrong";
         break;
     }

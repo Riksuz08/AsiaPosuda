@@ -31,7 +31,18 @@ abstract class ApiClient {
   );
 
   static get getDio {
-    Dio dio = Dio(BaseOptions(followRedirects: false));
+    Dio dio = Dio(
+      BaseOptions(
+        followRedirects: false,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        sendTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+      ),
+    );
 
     /// Tries the last error request again.
     dio.interceptors.add(
@@ -87,10 +98,8 @@ abstract class ApiClient {
     _apiClient = null;
   }
 
-  factory ApiClient(Dio dio, String baseUrl) {
-    dio.options = BaseOptions(receiveTimeout: 30000, connectTimeout: 30000);
-    return _ApiClient(dio, baseUrl: baseUrl);
-  }
+  factory ApiClient(Dio dio, String baseUrl) =>
+      _ApiClient(dio, baseUrl: baseUrl);
 
   /// Check customer exits
   @POST('v1/customers/phone')

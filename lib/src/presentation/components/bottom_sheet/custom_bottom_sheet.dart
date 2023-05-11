@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
 import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 
 Future<T?> customBottomSheet<T>({
@@ -23,7 +22,6 @@ Future<T?> cupertinoSheet<T>({
   required Widget title,
   required List<Widget> children,
 }) async {
-  final size = MediaQuery.of(context).size;
   if (Platform.isIOS) {
     return await showCupertinoModalPopup(
       context: context,

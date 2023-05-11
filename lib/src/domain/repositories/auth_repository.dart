@@ -144,61 +144,70 @@ class AuthRepository extends BaseRepository {
         await fetchCheckCustomerExits(shipperId: shipperId, request: request);
     if (response.data != null) {
       return response.data;
-    } else if (response.getException()?.getErrorMessage() != "Canceled") {
+    } else if (response.getException()?.errorMessage != "Canceled") {
       return await getErrorMessage(
-          response.getException()?.getErrorMessage() ?? "");
-    }
-  }
-
-  Future<dynamic> login(
-      {required String shipperId, required LoginRequest request}) async {
-    final response = await fetchLogin(shipperId: shipperId, request: request);
-    if (response.data != null) {
-      return response.data;
-    } else if (response.getException()?.getErrorMessage() != "Canceled") {
-      return await getErrorMessage(
-          response.getException()?.getErrorMessage() ?? "");
-    }
-  }
-
-  Future<dynamic> register(
-      {required String shipperId, required RegisterRequest request}) async {
-    final response =
-        await fetchRegister(shipperId: shipperId, request: request);
-    if (response.data != null) {
-      return response.data;
-    } else if (response.getException()?.getErrorMessage() != "Canceled") {
-      return await getErrorMessage(
-          response.getException()?.getErrorMessage() ?? "");
-    }
-  }
-
-  Future<dynamic> confirmRegister(
-      {required String shipperId,
-      required String platform,
-      required ConfirmRegisterRequest request}) async {
-    final response = await fetchConfirmRegister(
-        shipperId: shipperId, platform: platform, request: request);
-    if (response.data != null) {
-      return response.data;
-    } else if (response.getException()?.getErrorMessage() != "Canceled") {
-      return await getErrorMessage(
-        response.getException()?.getErrorMessage() ?? "",
+        response.getException()?.errorMessage ?? "",
       );
     }
   }
 
-  Future<dynamic> confirmLogin(
-      {required String shipperId,
-      required String platform,
-      required ConfirmLoginRequest request}) async {
+  Future<dynamic> login({
+    required String shipperId,
+    required LoginRequest request,
+  }) async {
+    final response = await fetchLogin(shipperId: shipperId, request: request);
+    if (response.data != null) {
+      return response.data;
+    } else if (response.getException()?.errorMessage != "Canceled") {
+      return await getErrorMessage(
+        response.getException()?.errorMessage ?? "",
+      );
+    }
+  }
+
+  Future<dynamic> register({
+    required String shipperId,
+    required RegisterRequest request,
+  }) async {
+    final response =
+        await fetchRegister(shipperId: shipperId, request: request);
+    if (response.data != null) {
+      return response.data;
+    } else if (response.getException()?.errorMessage != "Canceled") {
+      return await getErrorMessage(
+        response.getException()?.errorMessage ?? "",
+      );
+    }
+  }
+
+  Future<dynamic> confirmRegister({
+    required String shipperId,
+    required String platform,
+    required ConfirmRegisterRequest request,
+  }) async {
+    final response = await fetchConfirmRegister(
+        shipperId: shipperId, platform: platform, request: request);
+    if (response.data != null) {
+      return response.data;
+    } else if (response.getException()?.errorMessage != "Canceled") {
+      return await getErrorMessage(
+        response.getException()?.errorMessage ?? "",
+      );
+    }
+  }
+
+  Future<dynamic> confirmLogin({
+    required String shipperId,
+    required String platform,
+    required ConfirmLoginRequest request,
+  }) async {
     final response = await fetchConfirmLogin(
         shipperId: shipperId, platform: platform, request: request);
     if (response.data != null) {
       return response.data;
-    } else if (response.getException()?.getErrorMessage() != "Canceled") {
+    } else if (response.getException()?.errorMessage != "Canceled") {
       return await getErrorMessage(
-        response.getException()?.getErrorMessage() ?? "",
+        response.getException()?.errorMessage ?? "",
       );
     }
   }

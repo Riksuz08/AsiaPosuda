@@ -32,11 +32,4 @@ class AppUtils {
   static const kBorderRadius8 = BorderRadius.all(Radius.circular(8));
   static const kBorderRadius12 = BorderRadius.all(Radius.circular(12));
   static const kBorderRadius16 = BorderRadius.all(Radius.circular(16));
-  static Size? _currentSize;
-
-  static setCurrentSize(Size u) {
-    _currentSize = u;
-  }
-
-  static Size get currentSize => _currentSize ?? const Size(375, 812);
 }

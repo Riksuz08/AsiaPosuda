@@ -1,9 +1,9 @@
 class AppRoutes {
   AppRoutes._();
 
-  static const initial = '/';
-  static const main = '/main';
-  static const internetConnection = '/internet_connection';
-  static const settings = '/settings';
-  static const auth = '/auth';
+  static const String initial = '/';
+  static const String main = '/main';
+  static const String internetConnection = '/internet_connection';
+  static const String settings = '/settings';
+  static const String auth = '/auth';
 }

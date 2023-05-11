@@ -61,14 +61,11 @@ class MainApp extends StatelessWidget {
         child: KeyboardDismisser(
           child: Builder(
             builder: (ctx) {
-              final options = AppOptions.of(ctx);
+              final AppOptions options = AppOptions.of(ctx);
               return MaterialApp(
                 /// title
                 onGenerateTitle: (context) =>
                     AppTranslations.of(context).appTitle,
-                scrollBehavior: const MaterialScrollBehavior().copyWith(
-                  scrollbars: false,
-                ),
                 debugShowCheckedModeBanner: false,
                 navigatorKey: AppConstants.navigatorKey,
                 scaffoldMessengerKey: AppConstants.scaffoldMessengerKey,
