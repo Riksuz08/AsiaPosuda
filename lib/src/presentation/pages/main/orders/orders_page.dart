@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class OrdersPage extends StatelessWidget {
+  const OrdersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class HomePage extends StatelessWidget {
             expandedHeight: kToolbarHeight * 2,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                AppTranslations.of(context).home,
+                "AppTranslations.of(context).home",
                 style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             ),

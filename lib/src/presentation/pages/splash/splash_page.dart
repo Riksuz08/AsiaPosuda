@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
-import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
+import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

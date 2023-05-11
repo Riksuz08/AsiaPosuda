@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_modal_bottom_widget.dart';
 
 class LanguageBottomWidget extends StatelessWidget {
@@ -16,7 +15,7 @@ class LanguageBottomWidget extends StatelessWidget {
     return CustomModalBottomWidget(
       title: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Text(AppTranslations.of(context).language),
+        child: Text("AppTranslations.of(context).language"),
       ),
       minChildren: [
         ListTile(

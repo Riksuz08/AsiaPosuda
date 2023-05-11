@@ -26,6 +26,8 @@ class AppUtils {
   static const kPaddingHorizontal16 = EdgeInsets.symmetric(horizontal: 16);
   static const kPaddingHor32Ver20 =
       EdgeInsets.symmetric(horizontal: 32, vertical: 20);
+  static const kPaddingBottom2 = EdgeInsets.fromLTRB(0, 0, 0, 2);
+
 
   /// border radius
   static const kBorderRadius2 = BorderRadius.all(Radius.circular(2));

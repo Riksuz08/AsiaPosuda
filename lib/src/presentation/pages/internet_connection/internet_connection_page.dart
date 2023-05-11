@@ -75,7 +75,7 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
           ],
         ),
         bottomNavigationBar: SafeArea(
-          minimum: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          minimum: const EdgeInsets.all(16),
           child: CustomButton(
             text: 'Попробовать снова',
             height: 50,

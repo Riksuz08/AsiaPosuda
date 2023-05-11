@@ -5,8 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sample_bloc_mobile/src/config/routes/app_pages.dart';
 import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
-import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
+import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_custome_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_customer_request.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/confirm_login_request.dart';
@@ -21,13 +22,13 @@ import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl: AppConstants.baseUrl)
+@RestApi(baseUrl: Constants.baseUrl)
 abstract class ApiClient {
   static Chuck alice = Chuck(
     showNotification: true,
     showInspectorOnShake: false,
     darkTheme: false,
-    navigatorKey: AppConstants.navigatorKey,
+    navigatorKey: navigatorKey,
   );
 
   static get getDio {
@@ -50,7 +51,7 @@ abstract class ApiClient {
         dio: dio,
         retries: 1,
         toNoInternetPageNavigator: () async => await Navigator.pushNamed(
-          AppConstants.navigatorKey.currentContext!,
+          navigatorKey.currentContext!,
           AppRoutes.internetConnection,
         ),
         accessTokenGetter: () => LocalSource.instance.getAccessToken(),
@@ -58,7 +59,7 @@ abstract class ApiClient {
           await LocalSource.getInstance();
           await LocalSource.instance.clear();
           await Navigator.pushNamedAndRemoveUntil(
-            AppConstants.navigatorKey.currentContext!,
+            navigatorKey.currentContext!,
             AppRoutes.initial,
             (Route<dynamic> route) => false,
           );
@@ -89,7 +90,7 @@ abstract class ApiClient {
 
   static ApiClient? _apiClient;
 
-  static ApiClient getInstance({String baseUrl = AppConstants.baseUrl}) {
+  static ApiClient getInstance({String baseUrl = Constants.baseUrl}) {
     _apiClient ??= ApiClient(getDio, baseUrl);
     return _apiClient!;
   }

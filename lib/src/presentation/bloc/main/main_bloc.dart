@@ -8,7 +8,7 @@ part 'main_event.dart';
 part 'main_bloc.freezed.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  MainBloc() : super(const MainState(bottomMenu: BottomMenu.home)) {
+  MainBloc() : super(const MainState(bottomMenu: BottomMenu.search)) {
     on<MainEvent>(
       (event, emit) async {
         if (event is MainEventChanged) {
@@ -20,8 +20,8 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 }
 
 enum BottomMenu {
-  home,
   search,
-  bookmark,
+  orders,
+  favorites,
   profile,
 }

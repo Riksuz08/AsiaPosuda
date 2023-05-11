@@ -55,9 +55,12 @@ dev_dependencies:
   mockito: ^5.4.0
 
 flutter:
-  generate: true
 
   uses-material-design: true
+
+  assets:
+      - assets/locale/
+      - assets/fonts/
 
   fonts:
     - family: AppIcons

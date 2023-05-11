@@ -140,8 +140,10 @@ class AuthRepository extends BaseRepository {
     required String shipperId,
     required CheckCustomerRequest request,
   }) async {
-    final response =
-        await fetchCheckCustomerExits(shipperId: shipperId, request: request);
+    final response = await fetchCheckCustomerExits(
+      shipperId: shipperId,
+      request: request,
+    );
     if (response.data != null) {
       return response.data;
     } else if (response.getException()?.errorMessage != "Canceled") {

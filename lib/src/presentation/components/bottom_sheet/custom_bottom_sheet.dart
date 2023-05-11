@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 
 Future<T?> customBottomSheet<T>({
   required BuildContext context,
@@ -36,7 +35,7 @@ Future<T?> cupertinoSheet<T>({
             ),
           ),
           cancelButton: CupertinoActionSheetAction(
-            child: Text(AppTranslations.of(context).cancel),
+            child: Text("AppTranslations.of(context).cancel"),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
             },

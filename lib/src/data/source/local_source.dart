@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:sample_bloc_mobile/src/core/utils/app_keys.dart';
+import 'package:sample_bloc_mobile/src/core/constans/app_keys.dart';
 import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
 
 class LocalSource {

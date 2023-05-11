@@ -1,0 +1,66 @@
+import 'package:intl/intl.dart';
+
+extension ParseString on DateTime {
+  String get formatDate => DateFormat("dd.MM.yyyy").format(this);
+
+  String get formatDateTime =>
+      DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(this);
+}
+
+extension ParseExtension on String {
+  String Function() get date => () {
+        if (isEmpty) return '';
+        int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+        DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
+        return DateFormat("dd.MM.yyyy").format(
+          date.add(Duration(hours: duration)),
+        );
+      };
+
+  String Function() get dateTime => () {
+        if (isEmpty) return '';
+        int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+        DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
+        return DateFormat("dd.MM.yyyy HH:mm").format(
+          date.add(Duration(hours: duration)),
+        );
+      };
+
+  String dateTime1() {
+    if (isEmpty) return '';
+    int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
+    return DateFormat("dd.MM.yyyy").format(
+      date.add(Duration(hours: duration)),
+    );
+  }
+
+  String dateTime2() {
+    if (isEmpty) return '';
+    int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    DateTime date = DateFormat("MM.dd.yyyy").parse(this);
+    return DateFormat("yyyy-MM-dd").format(
+      date.add(Duration(hours: duration)),
+    );
+  }
+
+  String time1() {
+    if (isEmpty) return '';
+    int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    DateTime date = DateFormat("HH:mm").parse(this);
+    return DateFormat("HH:mm").format(
+      date.add(Duration(hours: duration)),
+    );
+  }
+
+  String time() {
+    if (isEmpty) return '';
+    int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
+    return DateFormat("HH:mm").format(
+      date.add(Duration(hours: duration)),
+    );
+  }
+
+  String get htmlToText => Bidi.stripHtmlIfNeeded(this);
+}

@@ -10,8 +10,8 @@ import 'src/config/routes/app_pages.dart';
 import 'src/config/routes/app_routes.dart';
 import 'src/config/themes/app_themes.dart';
 import 'src/core/di/injection.dart' as di;
-import 'src/core/l10n/translations.dart';
-import 'src/core/utils/constants.dart';
+import 'src/core/l10n/app_localization.dart';
+import 'src/core/constans/constants.dart';
 import 'src/data/source/local_source.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
 import 'src/presentation/bloc/simple_bloc_observer.dart';
@@ -64,11 +64,9 @@ class MainApp extends StatelessWidget {
               final AppOptions options = AppOptions.of(ctx);
               return MaterialApp(
                 /// title
-                onGenerateTitle: (context) =>
-                    AppTranslations.of(context).appTitle,
                 debugShowCheckedModeBanner: false,
-                navigatorKey: AppConstants.navigatorKey,
-                scaffoldMessengerKey: AppConstants.scaffoldMessengerKey,
+                navigatorKey: navigatorKey,
+                scaffoldMessengerKey: scaffoldMessengerKey,
 
                 /// theme style
                 theme: AppThemes.light,
@@ -77,8 +75,8 @@ class MainApp extends StatelessWidget {
 
                 /// lang
                 locale: options.locale,
-                localizationsDelegates: AppTranslations.localizationsDelegates,
-                supportedLocales: AppTranslations.supportedLocales,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
 
                 /// pages
                 routes: AppPages.routes,

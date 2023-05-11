@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/button/custom_button.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,7 +9,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppTranslations.of(context).profile),
+        title: Text("AppTranslations.of(context).profile"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,7 +21,7 @@ class ProfilePage extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.settings);
               },
-              text: AppTranslations.of(context).settings,
+              text: "AppTranslations.of(context).settings",
             ),
           ),
         ],

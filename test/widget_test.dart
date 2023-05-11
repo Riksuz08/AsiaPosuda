@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sample_bloc_mobile/main.dart';
 
-import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
+import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 
 void main() {
   testWidgets("Flutter Widget Test", (WidgetTester tester) async {
     await tester.pumpWidget(const MainApp());
-    var button = find.byKey(AppConstants.bottomNavigatorKey);
+    var button = find.byKey(Constants.bottomNavigatorKey);
     expect(button, findsOneWidget);
     debugPrint('Reverse Text');
     await tester.tap(button);

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/di/injection.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
-import 'package:sample_bloc_mobile/src/core/utils/constants.dart';
+import 'package:sample_bloc_mobile/src/core/extension/build_context_extension.dart';
+import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/main/bookmark/bookmark_page.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/main/home/home_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/profile_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/search/search_page.dart';
+
+import 'favorites/bookmark_page.dart';
+import 'orders/orders_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,39 +18,45 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
-      builder: (context, state) {
+      buildWhen: (previous, current) =>
+          previous.bottomMenu != current.bottomMenu,
+      builder: (_, state) {
         return Scaffold(
           body: IndexedStack(
             index: state.bottomMenu.index,
             children: const [
-              HomePage(),
               SearchPage(),
-              BookmarkPage(),
+              OrdersPage(),
+              FavoritesPage(),
               ProfilePage()
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            key: AppConstants.bottomNavigatorKey,
+            key: Constants.bottomNavigatorKey,
             onTap: (i) {
               mainBloc.add(MainEventChanged(BottomMenu.values[i]));
             },
             currentIndex: state.bottomMenu.index,
             items: [
-              _buildMenuItem(
-                icon: AppIcons.home,
-                text: AppTranslations.of(context).home,
-              ),
-              _buildMenuItem(
+              _navigationBarItem(
+                label: context.translate("search"),
                 icon: AppIcons.search,
-                text: AppTranslations.of(context).search,
+                activeIcon: AppIcons.search,
               ),
-              _buildMenuItem(
-                icon: AppIcons.bookmark,
-                text: AppTranslations.of(context).bookmark,
+              _navigationBarItem(
+                label: context.translate("orders"),
+                icon: AppIcons.history,
+                activeIcon: AppIcons.history,
               ),
-              _buildMenuItem(
+              _navigationBarItem(
+                label: context.translate("favorites"),
+                icon: AppIcons.favorite,
+                activeIcon: AppIcons.favorite_1,
+              ),
+              _navigationBarItem(
+                label: context.translate("profile"),
                 icon: AppIcons.profile,
-                text: AppTranslations.of(context).profile,
+                activeIcon: AppIcons.active_profile,
               ),
             ],
           ),
@@ -57,20 +65,22 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem _buildMenuItem({
+
+  BottomNavigationBarItem _navigationBarItem({
+    required String label,
     required IconData icon,
-    required String text,
-  }) {
-    return BottomNavigationBarItem(
-      icon: Padding(
-        padding: const EdgeInsets.only(bottom: 5, top: 4),
-        child: Icon(icon),
-      ),
-      activeIcon: Padding(
-        padding: const EdgeInsets.only(bottom: 5, top: 4),
-        child: Icon(icon),
-      ),
-      label: text,
-    );
-  }
+    required IconData activeIcon,
+  }) =>
+      BottomNavigationBarItem(
+        icon: Padding(
+          padding: AppUtils.kPaddingBottom2,
+          child: Icon(icon),
+        ),
+        activeIcon: Padding(
+          padding: AppUtils.kPaddingBottom2,
+          child: Icon(activeIcon),
+        ),
+        label: label,
+        tooltip: label,
+      );
 }

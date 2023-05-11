@@ -7,6 +7,14 @@ import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/settings/
 import 'package:sample_bloc_mobile/src/presentation/pages/splash/splash_page.dart';
 import 'app_routes.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: "Sample App",
+);
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>(
+  debugLabel: "Sample App",
+);
+
 class AppPages {
   AppPages._();
 

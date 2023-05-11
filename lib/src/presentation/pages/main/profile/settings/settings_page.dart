@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/translations.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_bottom_sheet.dart';
@@ -16,7 +15,7 @@ class SettingsPage extends StatelessWidget {
     final options = AppOptions.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppTranslations.of(context).settings)),
+      appBar: AppBar(title: Text("AppTranslations.of(context).settings")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ClipRRect(
@@ -46,7 +45,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     );
                   },
-                  title: Text(AppTranslations.of(context).language),
+                  title: Text("AppTranslations.of(context).language"),
                 ),
                 AppUtils.kDivider,
                 ListTile(
@@ -65,7 +64,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     );
                   },
-                  title: Text(AppTranslations.of(context).theme),
+                  title: Text("AppTranslations.of(context).theme"),
                 ),
               ],
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AppConstants {
-  AppConstants._();
+
+class Constants {
+  Constants._();
 
   static const platformId = '7d4a4c38-dd84-4902-b744-0488b80a4c01';
   static const clientTypeId = '5a3818a9-90f0-44e9-a053-3be0ba1e2c10';
@@ -11,13 +12,7 @@ class AppConstants {
   static const shipperId = 'd4b1658f-3271-4973-8591-98a82939a664';
   static const baseUrl = 'https://test.customer.api.delever.uz/';
 
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(
-    debugLabel: "Sample App",
-  );
-  static GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>(
-    debugLabel: "Sample App",
-  );
+
 
   static GlobalKey<FormState> bottomNavigatorKey = GlobalKey<FormState>();
 }
