@@ -5,8 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sample_bloc_mobile/src/config/routes/app_pages.dart';
-import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_custome_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_customer_request.dart';
@@ -28,7 +27,7 @@ abstract class ApiClient {
     showNotification: true,
     showInspectorOnShake: false,
     darkTheme: false,
-    navigatorKey: navigatorKey,
+    navigatorKey: rootNavigatorKey,
   );
 
   static get getDio {
@@ -51,16 +50,16 @@ abstract class ApiClient {
         dio: dio,
         retries: 1,
         toNoInternetPageNavigator: () async => await Navigator.pushNamed(
-          navigatorKey.currentContext!,
-          AppRoutes.internetConnection,
+          rootNavigatorKey.currentContext!,
+          Routes.internetConnection,
         ),
         accessTokenGetter: () => LocalSource.instance.getAccessToken(),
         refreshTokenFunction: () async {
           await LocalSource.getInstance();
           await LocalSource.instance.clear();
           await Navigator.pushNamedAndRemoveUntil(
-            navigatorKey.currentContext!,
-            AppRoutes.initial,
+            rootNavigatorKey.currentContext!,
+            Routes.initial,
             (Route<dynamic> route) => false,
           );
         },

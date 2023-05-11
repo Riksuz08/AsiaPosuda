@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'extension.dart';
 
 extension ColorJson on String {
   Color? get color => isNotEmpty

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/button/custom_button.dart';
 
 class InternetConnectionPage extends StatefulWidget {
   const InternetConnectionPage({Key? key}) : super(key: key);
@@ -43,7 +41,7 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: Colors.white,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -58,7 +56,7 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
             const Text(
               'Нет доступа к интернету',
               style: TextStyle(
-                color: AppColors.black,
+                color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
@@ -76,10 +74,9 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
         ),
         bottomNavigationBar: SafeArea(
           minimum: const EdgeInsets.all(16),
-          child: CustomButton(
-            text: 'Попробовать снова',
-            height: 50,
-            onTap: () async {
+          child: ElevatedButton(
+            child: const Text('Попробовать снова'),
+            onPressed: () async {
               setState(() {
                 isLoading = true;
               });

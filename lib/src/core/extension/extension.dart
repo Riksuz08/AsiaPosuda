@@ -1,9 +1,14 @@
-extension SliverCountExtension on int {
-  int get doubleTheListCount => (this * 2) - 1;
+import 'dart:io';
 
-  int get exactIndex => (this ~/ 2);
+import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_text_styles.dart';
+import 'package:sample_bloc_mobile/src/config/themes/theme_colors.dart';
+import 'package:sample_bloc_mobile/src/core/l10n/app_localization.dart';
+import 'package:intl/intl.dart';
 
-  int get lastIndex => (this * 2) - 2;
-
-  int toRound(int i) => this % i == 0 ? (this ~/ i) : (this ~/ i + 1);
-}
+part 'build_context_extension.dart';
+part 'color_extension.dart';
+part 'date_parse_extension.dart';
+part 'size_extension.dart';
+part 'sliver_count_extension.dart';
+part 'money_format_extension.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:sample_bloc_mobile/src/config/routes/app_pages.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -17,5 +17,5 @@ T inject<T extends Object>() {
 }
 
 T cubit<T extends Object>() {
-  return navigatorKey.currentContext!.read<T>();
+  return rootNavigatorKey.currentContext!.read<T>();
 }

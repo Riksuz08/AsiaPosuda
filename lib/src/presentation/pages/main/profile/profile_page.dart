@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/button/custom_button.dart';
+import 'package:gap/gap.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
+import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+
+import 'widgets/profile_item_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -8,20 +13,108 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("AppTranslations.of(context).profile"),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomButton(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.settings);
-              },
-              text: "AppTranslations.of(context).settings",
+      appBar: AppBar(title: Text(context.translate("profile"))),
+      body: CustomScrollView(
+        slivers: [
+          const SliverGap(16),
+          SliverPadding(
+            padding: AppUtils.kPaddingHorizontal16,
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.address_book,
+                      size: 20,
+                    ),
+                    text: context.translate("notebook"),
+                    isTop: true,
+                    onTap: () {
+                      // Navigator.pushNamed(context, Routes.notes);
+                    },
+                  ),
+                  const Divider(height: 1.0),
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.wallet,
+                      size: 20,
+                    ),
+                    text: context.translate("my_cards"),
+                    isBottom: true,
+                    onTap: () {
+                      // Navigator.pushNamed(context, Routes.myCards);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SliverGap(12),
+          SliverPadding(
+            padding: AppUtils.kPaddingHorizontal16,
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.info,
+                      size: 20,
+                    ),
+                    text: context.translate("about_us"),
+                    isTop: true,
+                    onTap: () {},
+                  ),
+                  const Divider(height: 1.0),
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.favorite_list,
+                      size: 20,
+                    ),
+                    text: context.translate("blog"),
+                    onTap: () {},
+                  ),
+                  const Divider(height: 1.0),
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.agreement,
+                      size: 20,
+                    ),
+                    text: context.translate("cooperation"),
+                    onTap: () {},
+                  ),
+                  const Divider(height: 1.0),
+                  ProfileItemWidget(
+                    icon: Icon(
+                      Icons.settings,
+                      size: 20,
+                    ),
+                    text: context.translate("settings"),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.settings,
+                      );
+                    },
+                  ),
+                  const Divider(height: 1.0),
+                  ProfileItemWidget(
+                    icon: Icon(
+                      AppIcons.logout,
+                      size: 20,
+                    ),
+                    isBottom: true,
+                    text: context.translate("logout"),
+                    onTap: () {
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return const LogOutDialog();
+                      //   },
+                      // );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

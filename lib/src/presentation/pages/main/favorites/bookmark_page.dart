@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AppTranslations.of(context).bookmark"),
+        title: Text(context.translate("favorites")),
       ),
     );
   }

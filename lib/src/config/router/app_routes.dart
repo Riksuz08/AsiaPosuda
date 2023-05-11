@@ -5,31 +5,34 @@ import 'package:sample_bloc_mobile/src/presentation/pages/internet_connection/in
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/settings/settings_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/splash/splash_page.dart';
-import 'app_routes.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(
-  debugLabel: "Sample App",
-);
+part 'name_routes.dart';
+
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-    GlobalKey<ScaffoldMessengerState>(
-  debugLabel: "Sample App",
-);
+    GlobalKey<ScaffoldMessengerState>();
 
-class AppPages {
-  AppPages._();
+class AppRoutes {
+  AppRoutes._();
 
-  static Map<String, WidgetBuilder> get routes => {
-        AppRoutes.initial: (_) => const SplashPage(),
-        AppRoutes.main: (_) => const MainPage(),
-        AppRoutes.internetConnection: (_) => const InternetConnectionPage(),
-        AppRoutes.settings: (_) => const SettingsPage(),
-      };
-
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     if (kDebugMode) {
-      print("Navigate to: $settings");
+      print("route : ${settings.name}");
     }
-    return null;
+    switch (settings.name) {
+      case Routes.initial:
+        return MaterialPageRoute(builder: (_) => const SplashPage());
+      case Routes.main:
+        return MaterialPageRoute(builder: (_) => const MainPage());
+      case Routes.settings:
+        return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case Routes.internetConnection:
+        return MaterialPageRoute(
+          builder: (_) => const InternetConnectionPage(),
+        );
+      default:
+        return MaterialPageRoute(builder: (_) => ErrorPage(settings: settings));
+    }
   }
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {

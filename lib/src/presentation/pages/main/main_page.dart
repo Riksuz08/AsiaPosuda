@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/di/injection.dart';
-import 'package:sample_bloc_mobile/src/core/extension/build_context_extension.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/profile_page.dart';

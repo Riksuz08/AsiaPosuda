@@ -1,6 +1,5 @@
-import 'dart:io';
 
-import 'package:flutter/material.dart';
+part of 'extension.dart';
 
 extension SizeExtension on BuildContext {
   bool get isMobile =>

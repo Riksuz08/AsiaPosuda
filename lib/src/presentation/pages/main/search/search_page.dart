@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_colors.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -9,8 +9,7 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
-    with TickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   late TabController controller;
 
   @override
@@ -23,7 +22,7 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AppTranslations.of(context).search"),
+        title: Text(context.translate("search")),
         bottom: TabBar(
           controller: controller,
           padding: AppUtils.kPaddingAll6,
@@ -36,8 +35,8 @@ class _SearchPageState extends State<SearchPage>
       body: TabBarView(
         controller: controller,
         children: const [
-          Material(color: AppColors.backgroundDark),
-          Material(color: AppColors.backgroundLight),
+          SizedBox(),
+          SizedBox(),
         ],
       ),
     );

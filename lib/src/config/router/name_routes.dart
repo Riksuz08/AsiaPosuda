@@ -1,5 +1,6 @@
-class AppRoutes {
-  AppRoutes._();
+part of 'app_routes.dart';
+class Routes {
+  Routes._();
 
   static const String initial = '/';
   static const String main = '/main';

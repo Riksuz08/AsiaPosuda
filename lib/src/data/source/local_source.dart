@@ -108,21 +108,22 @@ class LocalSource {
     await _box?.put(AppKeys.themeMode, mode.name);
   }
 
-  ThemeMode getThemeMode() {
-    if (_box == null) {
-      return ThemeMode.system;
-    }
-    switch (_box!.get(AppKeys.themeMode, defaultValue: ThemeMode.system.name)) {
-      case "system":
-        return ThemeMode.system;
-      case "light":
-        return ThemeMode.light;
-      case "dark":
-        return ThemeMode.dark;
-      default:
-        return ThemeMode.system;
-    }
-  }
+  ThemeMode Function() get themeMode => () {
+        if (_box == null) {
+          return ThemeMode.system;
+        }
+        switch (
+            _box!.get(AppKeys.themeMode, defaultValue: ThemeMode.system.name)) {
+          case "system":
+            return ThemeMode.system;
+          case "light":
+            return ThemeMode.light;
+          case "dark":
+            return ThemeMode.dark;
+          default:
+            return ThemeMode.system;
+        }
+      };
 
   Future<void> clear() async {
     await _box?.clear();

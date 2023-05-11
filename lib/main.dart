@@ -6,8 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import 'src/app_options.dart';
-import 'src/config/routes/app_pages.dart';
-import 'src/config/routes/app_routes.dart';
+import 'src/config/router/app_routes.dart';
 import 'src/config/themes/app_themes.dart';
 import 'src/core/di/injection.dart' as di;
 import 'src/core/l10n/app_localization.dart';
@@ -46,7 +45,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModelBinding(
       initialModel: AppOptions(
-        themeMode: LocalSource.instance.getThemeMode(),
+        themeMode: LocalSource.instance.themeMode(),
         textScaleFactor: systemTextScaleFactorOption,
         customTextDirection: CustomTextDirection.localeBased,
         locale: Locale(LocalSource.instance.getLocale()),
@@ -65,12 +64,12 @@ class MainApp extends StatelessWidget {
               return MaterialApp(
                 /// title
                 debugShowCheckedModeBanner: false,
-                navigatorKey: navigatorKey,
+                navigatorKey: rootNavigatorKey,
                 scaffoldMessengerKey: scaffoldMessengerKey,
 
                 /// theme style
-                theme: AppThemes.light,
-                darkTheme: AppThemes.dark,
+                theme: lightTheme,
+                darkTheme: darkTheme,
                 themeMode: options.themeMode,
 
                 /// lang
@@ -79,9 +78,9 @@ class MainApp extends StatelessWidget {
                 supportedLocales: AppLocalizations.supportedLocales,
 
                 /// pages
-                routes: AppPages.routes,
-                initialRoute: AppRoutes.initial,
-                onUnknownRoute: AppPages.onUnknownRoute,
+                initialRoute: Routes.initial,
+                onGenerateRoute: AppRoutes.onGenerateRoute,
+                onUnknownRoute: AppRoutes.onUnknownRoute,
               );
             },
           ),

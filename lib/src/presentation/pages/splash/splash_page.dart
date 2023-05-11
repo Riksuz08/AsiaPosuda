@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/routes/app_routes.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(
       const Duration(milliseconds: splashPageAnimationDurationInMilliseconds),
       () {
-        Navigator.pushReplacementNamed(context, AppRoutes.main);
+        Navigator.pushReplacementNamed(context, Routes.main);
       },
     );
   }

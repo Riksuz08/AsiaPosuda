@@ -1,7 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/core/l10n/app_localization.dart';
-
+part of 'extension.dart';
 extension BuildContextExt on BuildContext {
   String translate(String key) => AppLocalizations.of(this).translate(key);
 
@@ -11,7 +9,7 @@ extension BuildContextExt on BuildContext {
 
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
 
-  // ThemeColors get color => Theme.of(this).extension<ThemeColors>()!;
-//
-// AppTextStyles get  textStyle => Theme.of(this).extension<AppTextStyles>()!;
+  ThemeColors get color => Theme.of(this).extension<ThemeColors>()!;
+
+  AppTextStyles get textStyle => Theme.of(this).extension<AppTextStyles>()!;
 }

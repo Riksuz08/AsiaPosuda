@@ -32,6 +32,7 @@ class AppUtils {
   /// border radius
   static const kBorderRadius2 = BorderRadius.all(Radius.circular(2));
   static const kBorderRadius8 = BorderRadius.all(Radius.circular(8));
+  static const kBorderRadius10 = BorderRadius.all(Radius.circular(10));
   static const kBorderRadius12 = BorderRadius.all(Radius.circular(12));
   static const kBorderRadius16 = BorderRadius.all(Radius.circular(16));
 }

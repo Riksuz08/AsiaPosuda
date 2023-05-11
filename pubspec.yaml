@@ -41,6 +41,8 @@ dependencies:
   chuck_interceptor: ^1.1.4
   # translator
   translator: ^0.1.7
+  # box
+  gap: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -59,8 +61,8 @@ flutter:
   uses-material-design: true
 
   assets:
-      - assets/locale/
-      - assets/fonts/
+    - assets/locale/
+    - assets/fonts/
 
   fonts:
     - family: AppIcons

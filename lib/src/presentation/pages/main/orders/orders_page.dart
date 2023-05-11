@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class OrdersPage extends StatelessWidget {
   const OrdersPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class OrdersPage extends StatelessWidget {
             expandedHeight: kToolbarHeight * 2,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                "AppTranslations.of(context).home",
+                context.translate("orders"),
                 style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             ),
