@@ -31,21 +31,43 @@ final ThemeData lightTheme = appTheme.copyWith(
     AppTextStyles.light,
     ThemeColors.light,
   ],
+  colorScheme: ColorScheme.light(
+    primary: ThemeColors.light.primary,
+    secondary: ThemeColors.light.secondary,
+    error: Colors.red,
+    onPrimary: ThemeColors.light.primary,
+    onSecondary: ThemeColors.light.secondary,
+    onError: Colors.redAccent,
+    surface: Colors.transparent,
+    onSurface: Colors.transparent,
+    surfaceVariant: Colors.transparent,
+    background: ThemeColors.light.scaffoldBackground,
+    onBackground: ThemeColors.light.scaffoldBackground,
+  ),
+  primaryColor: ThemeColors.light.primary,
+  scaffoldBackgroundColor: ThemeColors.light.scaffoldBackground,
+  cardColor: Colors.white,
+  canvasColor: Colors.white,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.resolveWith(
+        (states) {
+          return Colors.white;
+        },
+      ),
       backgroundColor: MaterialStateProperty.resolveWith(
         (states) {
           if (states.contains(MaterialState.disabled)) {
             return Colors.grey;
           }
-          return Colors.blue;
+          return ThemeColors.light.primary;
         },
       ),
       textStyle: MaterialStatePropertyAll(AppTextStyles.light.buttonStyle),
-      elevation: const MaterialStatePropertyAll<double>(0),
+      elevation: const MaterialStatePropertyAll(0),
       shape: const MaterialStatePropertyAll(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
       fixedSize: const MaterialStatePropertyAll(Size(double.infinity, 48)),
@@ -65,24 +87,29 @@ final ThemeData lightTheme = appTheme.copyWith(
     backgroundColor: Colors.white,
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: true,
-    selectedLabelStyle: TextStyle(fontSize: 14),
-    unselectedLabelStyle: TextStyle(fontSize: 14),
-    unselectedItemColor: Colors.grey,
-    selectedItemColor: Colors.blue,
+    selectedLabelStyle: TextStyle(fontSize: 12),
+    unselectedLabelStyle: TextStyle(fontSize: 12),
+    unselectedItemColor: Color(0xffA0A9B6),
+    selectedItemColor: Color(0xff0FB8D3),
     elevation: 2,
   ),
   tabBarTheme: const TabBarTheme(
-    labelColor: Colors.black,
-    unselectedLabelColor: Colors.grey,
-    indicator: UnderlineTabIndicator(
-      borderSide: BorderSide(color: Colors.blue, width: 3.0),
+    labelColor: Color(0xff111126),
+    unselectedLabelColor: Color(0xff111126),
+    dividerColor: Colors.transparent,
+    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+    labelStyle: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
     ),
-  ),
-  pageTransitionsTheme: const PageTransitionsTheme(
-    builders: {
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    },
+    unselectedLabelStyle: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
+    indicator: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
   ),
   navigationBarTheme: NavigationBarThemeData(
     elevation: 0,
@@ -103,7 +130,7 @@ final ThemeData lightTheme = appTheme.copyWith(
   ),
   appBarTheme: AppBarTheme(
     elevation: 0,
-    scrolledUnderElevation: 0,
+    scrolledUnderElevation: 1,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,
@@ -114,12 +141,28 @@ final ThemeData lightTheme = appTheme.copyWith(
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
     iconTheme: const IconThemeData(color: Colors.black),
+    shadowColor: Colors.black45,
     titleTextStyle: AppTextStyles.light.appBarTitle,
     toolbarTextStyle: AppTextStyles.light.appBarTitle,
     backgroundColor: Colors.white,
     surfaceTintColor: Colors.white,
   ),
   textTheme: const TextTheme(
+    titleLarge: TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 17,
+    ),
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 17,
+    ),
+    titleSmall: TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 17,
+    ),
     bodyMedium: TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w500,
@@ -131,6 +174,15 @@ final ThemeData lightTheme = appTheme.copyWith(
       fontSize: 17,
     ),
     bodyLarge: TextStyle(
+      color: Colors.black,
+    ),
+    displayLarge: TextStyle(
+      color: Colors.black,
+    ),
+    displayMedium: TextStyle(
+      color: Colors.black,
+    ),
+    displaySmall: TextStyle(
       color: Colors.black,
     ),
   ),

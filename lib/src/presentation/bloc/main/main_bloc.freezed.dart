@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'main_bloc.dart';
 
@@ -26,28 +26,32 @@ mixin _$MainState {
 /// @nodoc
 abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
-      _$MainStateCopyWithImpl<$Res>;
+      _$MainStateCopyWithImpl<$Res, MainState>;
+  @useResult
   $Res call({BottomMenu bottomMenu});
 }
 
 /// @nodoc
-class _$MainStateCopyWithImpl<$Res> implements $MainStateCopyWith<$Res> {
+class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
+    implements $MainStateCopyWith<$Res> {
   _$MainStateCopyWithImpl(this._value, this._then);
 
-  final MainState _value;
   // ignore: unused_field
-  final $Res Function(MainState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bottomMenu = freezed,
+    Object? bottomMenu = null,
   }) {
     return _then(_value.copyWith(
-      bottomMenu: bottomMenu == freezed
+      bottomMenu: null == bottomMenu
           ? _value.bottomMenu
           : bottomMenu // ignore: cast_nullable_to_non_nullable
               as BottomMenu,
-    ));
+    ) as $Val);
   }
 }
 
@@ -57,25 +61,25 @@ abstract class _$$_MainStateCopyWith<$Res> implements $MainStateCopyWith<$Res> {
           _$_MainState value, $Res Function(_$_MainState) then) =
       __$$_MainStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({BottomMenu bottomMenu});
 }
 
 /// @nodoc
-class __$$_MainStateCopyWithImpl<$Res> extends _$MainStateCopyWithImpl<$Res>
+class __$$_MainStateCopyWithImpl<$Res>
+    extends _$MainStateCopyWithImpl<$Res, _$_MainState>
     implements _$$_MainStateCopyWith<$Res> {
   __$$_MainStateCopyWithImpl(
       _$_MainState _value, $Res Function(_$_MainState) _then)
-      : super(_value, (v) => _then(v as _$_MainState));
+      : super(_value, _then);
 
-  @override
-  _$_MainState get _value => super._value as _$_MainState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bottomMenu = freezed,
+    Object? bottomMenu = null,
   }) {
     return _then(_$_MainState(
-      bottomMenu: bottomMenu == freezed
+      bottomMenu: null == bottomMenu
           ? _value.bottomMenu
           : bottomMenu // ignore: cast_nullable_to_non_nullable
               as BottomMenu,
@@ -101,16 +105,16 @@ class _$_MainState implements _MainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MainState &&
-            const DeepCollectionEquality()
-                .equals(other.bottomMenu, bottomMenu));
+            (identical(other.bottomMenu, bottomMenu) ||
+                other.bottomMenu == bottomMenu));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bottomMenu));
+  int get hashCode => Object.hash(runtimeType, bottomMenu);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MainStateCopyWith<_$_MainState> get copyWith =>
       __$$_MainStateCopyWithImpl<_$_MainState>(this, _$identity);
 }
@@ -137,7 +141,7 @@ mixin _$MainEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BottomMenu menu)? onChanged,
+    TResult? Function(BottomMenu menu)? onChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -153,7 +157,7 @@ mixin _$MainEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventChanged value)? onChanged,
+    TResult? Function(MainEventChanged value)? onChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -171,28 +175,32 @@ mixin _$MainEvent {
 /// @nodoc
 abstract class $MainEventCopyWith<$Res> {
   factory $MainEventCopyWith(MainEvent value, $Res Function(MainEvent) then) =
-      _$MainEventCopyWithImpl<$Res>;
+      _$MainEventCopyWithImpl<$Res, MainEvent>;
+  @useResult
   $Res call({BottomMenu menu});
 }
 
 /// @nodoc
-class _$MainEventCopyWithImpl<$Res> implements $MainEventCopyWith<$Res> {
+class _$MainEventCopyWithImpl<$Res, $Val extends MainEvent>
+    implements $MainEventCopyWith<$Res> {
   _$MainEventCopyWithImpl(this._value, this._then);
 
-  final MainEvent _value;
   // ignore: unused_field
-  final $Res Function(MainEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? menu = freezed,
+    Object? menu = null,
   }) {
     return _then(_value.copyWith(
-      menu: menu == freezed
+      menu: null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as BottomMenu,
-    ));
+    ) as $Val);
   }
 }
 
@@ -203,26 +211,25 @@ abstract class _$$MainEventChangedCopyWith<$Res>
           _$MainEventChanged value, $Res Function(_$MainEventChanged) then) =
       __$$MainEventChangedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({BottomMenu menu});
 }
 
 /// @nodoc
 class __$$MainEventChangedCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventChanged>
     implements _$$MainEventChangedCopyWith<$Res> {
   __$$MainEventChangedCopyWithImpl(
       _$MainEventChanged _value, $Res Function(_$MainEventChanged) _then)
-      : super(_value, (v) => _then(v as _$MainEventChanged));
+      : super(_value, _then);
 
-  @override
-  _$MainEventChanged get _value => super._value as _$MainEventChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? menu = freezed,
+    Object? menu = null,
   }) {
     return _then(_$MainEventChanged(
-      menu == freezed
+      null == menu
           ? _value.menu
           : menu // ignore: cast_nullable_to_non_nullable
               as BottomMenu,
@@ -248,15 +255,15 @@ class _$MainEventChanged implements MainEventChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainEventChanged &&
-            const DeepCollectionEquality().equals(other.menu, menu));
+            (identical(other.menu, menu) || other.menu == menu));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(menu));
+  int get hashCode => Object.hash(runtimeType, menu);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$MainEventChangedCopyWith<_$MainEventChanged> get copyWith =>
       __$$MainEventChangedCopyWithImpl<_$MainEventChanged>(this, _$identity);
 
@@ -271,7 +278,7 @@ class _$MainEventChanged implements MainEventChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BottomMenu menu)? onChanged,
+    TResult? Function(BottomMenu menu)? onChanged,
   }) {
     return onChanged?.call(menu);
   }
@@ -299,7 +306,7 @@ class _$MainEventChanged implements MainEventChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventChanged value)? onChanged,
+    TResult? Function(MainEventChanged value)? onChanged,
   }) {
     return onChanged?.call(this);
   }

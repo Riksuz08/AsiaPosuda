@@ -21,11 +21,15 @@ dependencies:
   intl: ^0.17.0
   # hive no sql database
   hive: ^2.2.3
-  hive_flutter: ^1.1.0
+  # equatable
+  equatable: ^2.0.5
   # internet check
   connectivity_plus: ^4.0.0
+  internet_connection_checker: ^1.0.0+1
   # keyboard dismiss
   keyboard_dismisser: ^3.0.0
+  # cached image
+  cached_network_image: ^3.2.3
   # freezed
   freezed_annotation: ^2.2.0
   # get it singleton
@@ -43,18 +47,29 @@ dependencies:
   translator: ^0.1.7
   # box
   gap: ^3.0.0
+  # repository generator
+  analyzer: ^5.12.0
+  repo_annotation: ^0.0.1
+  # path
+  path_provider: ^2.0.15
+  # native splash
+  flutter_native_splash: ^2.2.19
+  # pinput:
+  pinput: ^2.2.31
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   retrofit_generator: ^6.0.0+3
-  http_mock_adapter: ^0.4.4
   hive_generator: ^2.0.0
+  repo_generator:
+    git:
+      url: https://github.com/SunnatilloShavkatov/repo_generator.git
+      ref: main
   flutter_lints: ^2.0.1
-  build_runner: ^2.3.0
+  build_runner: ^2.3.3
   bloc_test: ^9.1.1
   freezed: ^2.3.3
-  mockito: ^5.4.0
 
 flutter:
 

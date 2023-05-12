@@ -17,7 +17,9 @@ import 'package:sample_bloc_mobile/src/domain/network/server_error.dart';
 import 'base_repository.dart';
 
 class AuthRepository extends BaseRepository {
-  final ApiClient _apiClient = ApiClient.getInstance();
+  final ApiClient _apiClient;
+
+  const AuthRepository(this._apiClient);
 
   Future<ResponseHandler<CheckCustomerResponse>> fetchCheckCustomerExits({
     required String shipperId,
@@ -213,4 +215,7 @@ class AuthRepository extends BaseRepository {
       );
     }
   }
+
+  @override
+  List<Object?> get props => [];
 }

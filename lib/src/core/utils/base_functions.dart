@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:intl/intl.dart';
 
 class BaseFunctions {
   BaseFunctions._();

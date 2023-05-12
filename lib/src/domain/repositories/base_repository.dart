@@ -1,10 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:translator/translator.dart';
-import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
-abstract class BaseRepository {
-  final translator = GoogleTranslator();
+abstract class BaseRepository extends Equatable {
+  const BaseRepository();
 
   Future<String> getErrorMessage(String message) async {
+    final GoogleTranslator translator = GoogleTranslator();
+
     String errorMessage = '';
     switch (message) {
       case "Connection timeout":
@@ -20,7 +22,7 @@ abstract class BaseRepository {
               .translate(
                 message,
                 from: 'en',
-                to: LocalSource.instance.getLocale(),
+                to: "ru",
               )
               .then((value) => errorMessage = value.text);
         } catch (e) {
@@ -29,4 +31,7 @@ abstract class BaseRepository {
     }
     return errorMessage;
   }
+
+  @override
+  List<Object?> get props => [];
 }

@@ -1,39 +1,37 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import 'src/app_options.dart';
 import 'src/config/router/app_routes.dart';
 import 'src/config/themes/app_themes.dart';
-import 'src/core/di/injection.dart' as di;
+import 'src/injector_container.dart';
 import 'src/core/l10n/app_localization.dart';
 import 'src/core/constans/constants.dart';
-import 'src/data/source/local_source.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
 import 'src/presentation/bloc/simple_bloc_observer.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  /// initial
-  await Hive.initFlutter();
-
-  /// local source
-  await LocalSource.getInstance();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // await NotificationService.initialize();
 
   /// bloc logger
   if (kDebugMode) {
     Bloc.observer = SimpleBlocObserver();
   }
+  await init();
 
-  /// di
-  di.registerSingletons();
-
-  /// run app
+  /// global CERTIFICATE_VERIFY_FAILEd_KEY
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MainApp());
+  FlutterNativeSplash.remove();
 }
 
 class MainApp extends StatelessWidget {
@@ -45,17 +43,17 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModelBinding(
       initialModel: AppOptions(
-        themeMode: LocalSource.instance.themeMode(),
+        themeMode: localSource.themeMode(),
         textScaleFactor: systemTextScaleFactorOption,
         customTextDirection: CustomTextDirection.localeBased,
-        locale: Locale(LocalSource.instance.getLocale()),
+        locale: Locale(localSource.locale),
         timeDilation: timeDilation,
         platform: defaultTargetPlatform,
         isTestMode: true,
       ),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<MainBloc>(create: (_) => di.getIt<MainBloc>()),
+          BlocProvider<MainBloc>(create: (_) => sl<MainBloc>()),
         ],
         child: KeyboardDismisser(
           child: Builder(
@@ -87,6 +85,15 @@ class MainApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 

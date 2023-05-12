@@ -1,11 +1,6 @@
-import 'package:chuck_interceptor/chuck.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_retry_plus/dio_retry_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_custome_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/check_customer_request.dart';
@@ -17,87 +12,11 @@ import 'package:sample_bloc_mobile/src/data/models/banners_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/base_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/customer.dart';
 import 'package:sample_bloc_mobile/src/data/models/update_version_response.dart';
-import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
 part 'api_client.g.dart';
 
 @RestApi(baseUrl: Constants.baseUrl)
 abstract class ApiClient {
-  static Chuck alice = Chuck(
-    showNotification: true,
-    showInspectorOnShake: false,
-    darkTheme: false,
-    navigatorKey: rootNavigatorKey,
-  );
-
-  static get getDio {
-    Dio dio = Dio(
-      BaseOptions(
-        followRedirects: false,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        sendTimeout: const Duration(seconds: 30),
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
-      ),
-    );
-
-    /// Tries the last error request again.
-    dio.interceptors.add(
-      RetryInterceptor(
-        dio: dio,
-        retries: 1,
-        toNoInternetPageNavigator: () async => await Navigator.pushNamed(
-          rootNavigatorKey.currentContext!,
-          Routes.internetConnection,
-        ),
-        accessTokenGetter: () => LocalSource.instance.getAccessToken(),
-        refreshTokenFunction: () async {
-          await LocalSource.getInstance();
-          await LocalSource.instance.clear();
-          await Navigator.pushNamedAndRemoveUntil(
-            rootNavigatorKey.currentContext!,
-            Routes.initial,
-            (Route<dynamic> route) => false,
-          );
-        },
-      ),
-    );
-    if (kDebugMode) {
-      dio.interceptors.add(alice.getDioInterceptor());
-      dio.interceptors.add(
-        LogInterceptor(
-          responseBody: true,
-          requestBody: true,
-          request: true,
-        ),
-      );
-    } else {
-      dio.interceptors.add(
-        LogInterceptor(
-          responseBody: false,
-          request: false,
-          error: false,
-          requestHeader: false,
-        ),
-      );
-    }
-    return dio;
-  }
-
-  static ApiClient? _apiClient;
-
-  static ApiClient getInstance({String baseUrl = Constants.baseUrl}) {
-    _apiClient ??= ApiClient(getDio, baseUrl);
-    return _apiClient!;
-  }
-
-  static close() {
-    _apiClient = null;
-  }
-
   factory ApiClient(Dio dio, String baseUrl) =>
       _ApiClient(dio, baseUrl: baseUrl);
 

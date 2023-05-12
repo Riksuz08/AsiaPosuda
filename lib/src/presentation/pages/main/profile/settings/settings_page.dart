@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_bottom_sheet.dart';
@@ -40,7 +41,7 @@ class SettingsPage extends StatelessWidget {
                             options.copyWith(locale: Locale(lang)),
                           );
                           Navigator.pop(context);
-                          await LocalSource.instance.setLocale(lang);
+                          await sl<LocalSource>().setLocale(lang);
                         },
                       ),
                     );
@@ -59,7 +60,7 @@ class SettingsPage extends StatelessWidget {
                             options.copyWith(themeMode: mode),
                           );
                           Navigator.pop(context);
-                          await LocalSource.instance.setThemeMode(mode);
+                          await sl<LocalSource>().setThemeMode(mode);
                         },
                       ),
                     );
