@@ -1,4 +1,4 @@
-part of 'main_bloc.dart';
+part of '../main/main_bloc.dart';
 
 /// Стейты блока с логикой энтрипоинта приложения
 @freezed

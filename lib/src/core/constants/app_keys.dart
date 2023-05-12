@@ -19,5 +19,5 @@ class AppKeys {
   static const String companyId = "company_id";
   static const String currentShopId = "current_shop_id";
   static const String currentShopName= "current_shop_name";
-  static const String localSource= "local_source";
+  static const String hasProfile= "hasProfile";
 }

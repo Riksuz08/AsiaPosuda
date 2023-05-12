@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_retry_plus/dio_retry_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -12,10 +11,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/domain/network/api_client.dart';
+import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart';
 
-import 'core/constans/constants.dart';
+import 'core/constants/constants.dart';
+import 'presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> _box;
@@ -36,6 +38,8 @@ Future<void> init() async {
           'Accept': 'application/json',
           "Authorization": "API-KEY",
           "X-API-KEY": "P-qapkgqLxf6v25bwhNzgcIDHwjhFd4mzM",
+          "Resource-Id": Constants.resourceId,
+          "Environment-Id": Constants.environmentId,
         },
       )
       ..interceptors.addAll(
@@ -47,26 +51,29 @@ Future<void> init() async {
             responseBody: kDebugMode,
           ),
           if (kDebugMode) chuck.getDioInterceptor(),
-          RetryInterceptor(
-            dio: sl(),
-            retries: 1,
-            toNoInternetPageNavigator: () async => await Navigator.pushNamed(
-              rootNavigatorKey.currentContext!,
-              Routes.internetConnection,
-            ),
-            accessTokenGetter: () => sl<LocalSource>().getAccessToken(),
-            refreshTokenFunction: () async {
-              await sl<LocalSource>().clear();
-              Navigator.pushNamedAndRemoveUntil(
-                rootNavigatorKey.currentContext!,
-                Routes.initial,
-                (Route<dynamic> route) => false,
-              );
-            },
-          ),
         ],
       ),
   );
+  sl<Dio>().interceptors.add(
+        RetryInterceptor(
+          dio: sl<Dio>(),
+          retries: 1,
+          toNoInternetPageNavigator: () async => await Navigator.pushNamed(
+            rootNavigatorKey.currentContext!,
+            Routes.internetConnection,
+          ),
+          accessTokenGetter: () => sl<LocalSource>().getAccessToken(),
+          refreshTokenFunction: () async {
+            await sl<LocalSource>().clear();
+            Navigator.pushNamedAndRemoveUntil(
+              rootNavigatorKey.currentContext!,
+              Routes.initial,
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
+      );
+
   sl.registerLazySingleton(() => ApiClient(sl(), Constants.baseUrl));
   sl.registerLazySingleton(() => InternetConnectionChecker());
   //Core
@@ -78,26 +85,25 @@ Future<void> init() async {
 
   /// main
   sl.registerLazySingleton(() => MainBloc());
+
+  /// auth
+  authFeature();
+}
+
+void authFeature() {
+  late final ApiClient authClient = ApiClient(sl(), Constants.authUrl);
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
+  sl.registerFactory<ConfirmCodeBloc>(() => ConfirmCodeBloc(sl()));
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(
+      apiClient: authClient,
+    ),
+  );
 }
 
 Future<void> initHive() async {
-  const boxName = 'ets_international_mobile_box';
+  const boxName = 'bloc_mobile_box';
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   _box = await Hive.openBox<dynamic>(boxName);
-}
-
-/// Create singletons (blocs and repositories) that can be shared across the app.
-void registerSingletons() {
-  sl.registerLazySingleton<MainBloc>(() => MainBloc());
-}
-
-MainBloc get mainBloc => sl.get<MainBloc>();
-
-T inject<T extends Object>() {
-  return sl.get<T>();
-}
-
-T cubit<T extends Object>() {
-  return rootNavigatorKey.currentContext!.read<T>();
 }

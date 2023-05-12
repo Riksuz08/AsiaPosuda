@@ -1,12 +1,8 @@
-import 'package:equatable/equatable.dart';
 import 'package:translator/translator.dart';
 
-abstract class BaseRepository extends Equatable {
-  const BaseRepository();
-
+mixin BaseRepository {
   Future<String> getErrorMessage(String message) async {
     final GoogleTranslator translator = GoogleTranslator();
-
     String errorMessage = '';
     switch (message) {
       case "Connection timeout":

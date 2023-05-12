@@ -20,10 +20,26 @@ class MaskedTextInputFormatter extends TextInputFormatter {
         if (text.length < mask.length && mask[text.length - 1] == separator) {
           return TextEditingValue(
             text:
-                '${oldValue.text}$separator${text.substring(text.length - 1)}',
+            '${oldValue.text}$separator${text.substring(text.length - 1)}',
             selection: TextSelection.collapsed(
               offset: newValue.selection.end + 1,
             ),
+          );
+        }
+        if (text.length == mask.replaceAll(separator, "").length &&
+            oldValue.text.isEmpty) {
+          String newText = '';
+          int t = 0;
+          for (int i = 0; i < text.length; i++) {
+            if (mask[i + t] == separator) {
+              newText += separator;
+              t++;
+            }
+            newText += text[i];
+          }
+          return TextEditingValue(
+            text: newText,
+            selection: TextSelection.collapsed(offset: newText.length),
           );
         }
       } else {

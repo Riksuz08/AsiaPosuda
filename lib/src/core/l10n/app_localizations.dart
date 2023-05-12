@@ -5,12 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-extension Translator on String {
-  String get tr {
-    return AppLocalizations.instance.translate(this);
-  }
-}
-
 class AppLocalizations {
   AppLocalizations._();
 

@@ -9,6 +9,8 @@ class AppUtils {
   static const kGap4 = Gap(4);
   static const kGap6 = Gap(6);
   static const kGap8 = Gap(8);
+  static const kGap24 = Gap(24);
+  static const kGap40 = Gap(40);
 
   /// box
   static const kBox = SizedBox.shrink();

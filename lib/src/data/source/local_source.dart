@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:sample_bloc_mobile/src/core/constans/app_keys.dart';
+import 'package:sample_bloc_mobile/src/core/constants/app_keys.dart';
 import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
 
 class LocalSource {
   final Box<dynamic> box;
 
   LocalSource(this.box);
+
+  void setHasProfile(bool hasProfile) {
+    box.put(AppKeys.hasProfile, hasProfile);
+  }
+
+  bool get hasProfile => box.get(AppKeys.hasProfile, defaultValue: false);
 
   Future<void> setUser({
     required String lastName,
@@ -21,19 +27,17 @@ class LocalSource {
     required String userId,
     required String imageUrl,
   }) async {
-    if (box != null) {
-      await box.put(AppKeys.lastName, lastName);
-      await box.put(AppKeys.firstName, firstName);
-      await box.put(AppKeys.companyName, companyName);
-      await box.put(AppKeys.subDomain, subDomain);
-      await box.put(AppKeys.accessToken, token);
-      await box.put(AppKeys.refreshToken, refreshToken);
-      await box.put(AppKeys.companyId, companyId);
-      await box.put(AppKeys.currentShopId, currentShopId);
-      await box.put(AppKeys.currentShopName, currentShopName);
-      await box.put(AppKeys.userId, userId);
-      await box.put(AppKeys.imageUrl, imageUrl);
-    }
+    await box.put(AppKeys.lastName, lastName);
+    await box.put(AppKeys.firstName, firstName);
+    await box.put(AppKeys.companyName, companyName);
+    await box.put(AppKeys.subDomain, subDomain);
+    await box.put(AppKeys.accessToken, token);
+    await box.put(AppKeys.refreshToken, refreshToken);
+    await box.put(AppKeys.companyId, companyId);
+    await box.put(AppKeys.currentShopId, currentShopId);
+    await box.put(AppKeys.currentShopName, currentShopName);
+    await box.put(AppKeys.userId, userId);
+    await box.put(AppKeys.imageUrl, imageUrl);
   }
 
   String getCompanyId() {

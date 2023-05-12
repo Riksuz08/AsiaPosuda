@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/auth/auth_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/auth/confirm/confirm_code_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/error/error_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/internet_connection/internet_connection_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
@@ -48,6 +52,20 @@ class AppRoutes {
       case Routes.internetConnection:
         return MaterialPageRoute(
           builder: (_) => const InternetConnectionPage(),
+        );
+      case Routes.auth:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<AuthBloc>(),
+            child: const AuthPage(),
+          ),
+        );
+      case Routes.confirmCode:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<ConfirmCodeBloc>(),
+            child: const ConfirmCodePage(),
+          ),
         );
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage(settings: settings));

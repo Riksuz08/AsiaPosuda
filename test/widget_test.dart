@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sample_bloc_mobile/main.dart';
 
-import 'package:sample_bloc_mobile/src/core/constans/constants.dart';
+import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 
 void main() {
   testWidgets("Flutter Widget Test", (WidgetTester tester) async {

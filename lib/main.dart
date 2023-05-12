@@ -11,8 +11,8 @@ import 'src/app_options.dart';
 import 'src/config/router/app_routes.dart';
 import 'src/config/themes/app_themes.dart';
 import 'src/injector_container.dart';
-import 'src/core/l10n/app_localization.dart';
-import 'src/core/constans/constants.dart';
+import 'src/core/l10n/app_localizations.dart';
+import 'src/core/constants/constants.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
 import 'src/presentation/bloc/simple_bloc_observer.dart';
 

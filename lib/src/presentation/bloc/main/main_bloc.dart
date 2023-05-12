@@ -9,13 +9,11 @@ part 'main_bloc.freezed.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(const MainState(bottomMenu: BottomMenu.search)) {
-    on<MainEvent>(
-      (event, emit) async {
-        if (event is MainEventChanged) {
-          emit(state.copyWith(bottomMenu: event.menu));
-        }
-      },
-    );
+    on<MainEventChanged>(_onChangeMenu);
+  }
+
+  void _onChangeMenu(MainEventChanged event, Emitter<MainState> emit) {
+    emit(state.copyWith(bottomMenu: event.menu));
   }
 }
 

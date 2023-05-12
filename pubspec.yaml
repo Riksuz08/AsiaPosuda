@@ -23,6 +23,9 @@ dependencies:
   hive: ^2.2.3
   # equatable
   equatable: ^2.0.5
+  # forms
+  formz: ^0.6.0
+  dartz: ^0.10.1
   # internet check
   connectivity_plus: ^4.0.0
   internet_connection_checker: ^1.0.0+1
