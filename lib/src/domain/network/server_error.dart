@@ -18,27 +18,33 @@ class ServerError implements Exception {
 
   int get errorCode => _errorCode ?? 0;
 
-  String get errorMessage => _errorMessage;
+  String get message => _errorMessage;
 
-  _handleError(dynamic error) {
+  void _handleError(DioError error) {
     _errorCode = error.response?.statusCode ?? 500;
     if (_errorCode == 500) {
-      return _errorMessage = "Server error";
+      _errorMessage = "Server error";
+      return;
     }
     if (_errorCode == 502) {
-      return _errorMessage = "Server down";
+      _errorMessage = "Server down";
+      return;
     }
     if (_errorCode == 404) {
-      return _errorMessage = "Not Found";
+      _errorMessage = "Not Found";
+      return;
     }
     if (_errorCode == 413) {
-      return _errorMessage = "Request Entity Too Large";
+      _errorMessage = "Request Entity Too Large";
+      return;
     }
     if (_errorCode == 401) {
-      return _errorMessage = "Token expired";
+      _errorMessage = "Token expired";
+      return;
     }
     if (_errorCode == 403) {
-      return _errorMessage = "Token expired";
+      _errorMessage = "Token expired";
+      return;
     }
     switch (error.type) {
       case DioErrorType.connectionTimeout:
@@ -65,7 +71,13 @@ class ServerError implements Exception {
       case DioErrorType.unknown:
         _errorMessage = "Something wrong";
         break;
+      case DioErrorType.badCertificate:
+        _errorMessage = "Bad certificate";
+        break;
+      case DioErrorType.connectionError:
+        _errorMessage = "Connection error";
+        break;
     }
-    return _errorMessage;
+    return;
   }
 }

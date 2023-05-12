@@ -14,7 +14,7 @@ import 'src/injector_container.dart';
 import 'src/core/l10n/app_localizations.dart';
 import 'src/core/constants/constants.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
-import 'src/presentation/bloc/simple_bloc_observer.dart';
+import 'src/presentation/bloc/log_bloc_observer.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +24,7 @@ void main() async {
 
   /// bloc logger
   if (kDebugMode) {
-    Bloc.observer = SimpleBlocObserver();
+    Bloc.observer = LogBlocObserver();
   }
   await init();
 

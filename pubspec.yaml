@@ -46,8 +46,6 @@ dependencies:
   retrofit: ^4.0.1
   # alice = chuck
   chuck_interceptor: ^1.1.4
-  # translator
-  translator: ^0.1.7
   # box
   gap: ^3.0.0
   # repository generator

@@ -61,10 +61,13 @@ class AppRoutes {
           ),
         );
       case Routes.confirmCode:
+        final AuthSuccessState state = settings.arguments as AuthSuccessState;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => sl<ConfirmCodeBloc>(),
-            child: const ConfirmCodePage(),
+            child: ConfirmCodePage(
+              state: state,
+            ),
           ),
         );
       default:

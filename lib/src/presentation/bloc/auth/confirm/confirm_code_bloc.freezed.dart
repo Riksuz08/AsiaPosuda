@@ -19,9 +19,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -30,8 +28,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -40,8 +37,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -135,9 +131,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -149,8 +143,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -162,8 +155,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -225,8 +217,6 @@ abstract class _$$ConfirmCodeSuccessStateCopyWith<$Res> {
   factory _$$ConfirmCodeSuccessStateCopyWith(_$ConfirmCodeSuccessState value,
           $Res Function(_$ConfirmCodeSuccessState) then) =
       __$$ConfirmCodeSuccessStateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String smsId, String phone, Map<dynamic, dynamic> data});
 }
 
 /// @nodoc
@@ -236,116 +226,64 @@ class __$$ConfirmCodeSuccessStateCopyWithImpl<$Res>
   __$$ConfirmCodeSuccessStateCopyWithImpl(_$ConfirmCodeSuccessState _value,
       $Res Function(_$ConfirmCodeSuccessState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? smsId = null,
-    Object? phone = null,
-    Object? data = null,
-  }) {
-    return _then(_$ConfirmCodeSuccessState(
-      null == smsId
-          ? _value.smsId
-          : smsId // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$ConfirmCodeSuccessState implements ConfirmCodeSuccessState {
-  const _$ConfirmCodeSuccessState(
-      this.smsId, this.phone, final Map<dynamic, dynamic> data)
-      : _data = data;
-
-  @override
-  final String smsId;
-  @override
-  final String phone;
-  final Map<dynamic, dynamic> _data;
-  @override
-  Map<dynamic, dynamic> get data {
-    if (_data is EqualUnmodifiableMapView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_data);
-  }
+  const _$ConfirmCodeSuccessState();
 
   @override
   String toString() {
-    return 'ConfirmCodeState.success(smsId: $smsId, phone: $phone, data: $data)';
+    return 'ConfirmCodeState.success()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConfirmCodeSuccessState &&
-            (identical(other.smsId, smsId) || other.smsId == smsId) &&
-            (identical(other.phone, phone) || other.phone == phone) &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            other is _$ConfirmCodeSuccessState);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, smsId, phone, const DeepCollectionEquality().hash(_data));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConfirmCodeSuccessStateCopyWith<_$ConfirmCodeSuccessState> get copyWith =>
-      __$$ConfirmCodeSuccessStateCopyWithImpl<_$ConfirmCodeSuccessState>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
   }) {
-    return success(smsId, this.phone, data);
+    return success();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
   }) {
-    return success?.call(smsId, this.phone, data);
+    return success?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(smsId, this.phone, data);
+      return success();
     }
     return orElse();
   }
@@ -392,15 +330,7 @@ class _$ConfirmCodeSuccessState implements ConfirmCodeSuccessState {
 }
 
 abstract class ConfirmCodeSuccessState implements ConfirmCodeState {
-  const factory ConfirmCodeSuccessState(final String smsId, final String phone,
-      final Map<dynamic, dynamic> data) = _$ConfirmCodeSuccessState;
-
-  String get smsId;
-  String get phone;
-  Map<dynamic, dynamic> get data;
-  @JsonKey(ignore: true)
-  _$$ConfirmCodeSuccessStateCopyWith<_$ConfirmCodeSuccessState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory ConfirmCodeSuccessState() = _$ConfirmCodeSuccessState;
 }
 
 /// @nodoc
@@ -443,9 +373,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -457,8 +385,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -470,8 +397,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -594,9 +520,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -608,8 +532,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -621,8 +544,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -724,9 +646,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
-        success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -738,8 +658,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult? Function()? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -751,8 +670,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
-        success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -815,21 +733,25 @@ mixin _$ConfirmCodeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String value) phoneChanged,
-    required TResult Function(String phone) checkMessage,
+    required TResult Function(
+            String otp, String smsId, Map<dynamic, dynamic> data)
+        checkMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String value)? phoneChanged,
-    TResult? Function(String phone)? checkMessage,
+    TResult? Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String value)? phoneChanged,
-    TResult Function(String phone)? checkMessage,
+    TResult Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -916,7 +838,9 @@ class _$ConfirmCodeEventInitial implements ConfirmCodeEventInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String value) phoneChanged,
-    required TResult Function(String phone) checkMessage,
+    required TResult Function(
+            String otp, String smsId, Map<dynamic, dynamic> data)
+        checkMessage,
   }) {
     return initial();
   }
@@ -926,7 +850,8 @@ class _$ConfirmCodeEventInitial implements ConfirmCodeEventInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String value)? phoneChanged,
-    TResult? Function(String phone)? checkMessage,
+    TResult? Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
   }) {
     return initial?.call();
   }
@@ -936,7 +861,8 @@ class _$ConfirmCodeEventInitial implements ConfirmCodeEventInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String value)? phoneChanged,
-    TResult Function(String phone)? checkMessage,
+    TResult Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1053,7 +979,9 @@ class _$ConfirmCodePhoneChangeEvent implements ConfirmCodePhoneChangeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String value) phoneChanged,
-    required TResult Function(String phone) checkMessage,
+    required TResult Function(
+            String otp, String smsId, Map<dynamic, dynamic> data)
+        checkMessage,
   }) {
     return phoneChanged(value);
   }
@@ -1063,7 +991,8 @@ class _$ConfirmCodePhoneChangeEvent implements ConfirmCodePhoneChangeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String value)? phoneChanged,
-    TResult? Function(String phone)? checkMessage,
+    TResult? Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
   }) {
     return phoneChanged?.call(value);
   }
@@ -1073,7 +1002,8 @@ class _$ConfirmCodePhoneChangeEvent implements ConfirmCodePhoneChangeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String value)? phoneChanged,
-    TResult Function(String phone)? checkMessage,
+    TResult Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
     required TResult orElse(),
   }) {
     if (phoneChanged != null) {
@@ -1134,7 +1064,7 @@ abstract class _$$ConfirmCodeCheckMessageEventCopyWith<$Res> {
           $Res Function(_$ConfirmCodeCheckMessageEvent) then) =
       __$$ConfirmCodeCheckMessageEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({String phone});
+  $Res call({String otp, String smsId, Map<dynamic, dynamic> data});
 }
 
 /// @nodoc
@@ -1149,13 +1079,23 @@ class __$$ConfirmCodeCheckMessageEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phone = null,
+    Object? otp = null,
+    Object? smsId = null,
+    Object? data = null,
   }) {
     return _then(_$ConfirmCodeCheckMessageEvent(
-      null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      otp: null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
               as String,
+      smsId: null == smsId
+          ? _value.smsId
+          : smsId // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
     ));
   }
 }
@@ -1163,14 +1103,27 @@ class __$$ConfirmCodeCheckMessageEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
-  const _$ConfirmCodeCheckMessageEvent(this.phone);
+  const _$ConfirmCodeCheckMessageEvent(
+      {required this.otp,
+      required this.smsId,
+      required final Map<dynamic, dynamic> data})
+      : _data = data;
 
   @override
-  final String phone;
+  final String otp;
+  @override
+  final String smsId;
+  final Map<dynamic, dynamic> _data;
+  @override
+  Map<dynamic, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
 
   @override
   String toString() {
-    return 'ConfirmCodeEvent.checkMessage(phone: $phone)';
+    return 'ConfirmCodeEvent.checkMessage(otp: $otp, smsId: $smsId, data: $data)';
   }
 
   @override
@@ -1178,11 +1131,14 @@ class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConfirmCodeCheckMessageEvent &&
-            (identical(other.phone, phone) || other.phone == phone));
+            (identical(other.otp, otp) || other.otp == otp) &&
+            (identical(other.smsId, smsId) || other.smsId == smsId) &&
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, phone);
+  int get hashCode => Object.hash(
+      runtimeType, otp, smsId, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -1196,9 +1152,11 @@ class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String value) phoneChanged,
-    required TResult Function(String phone) checkMessage,
+    required TResult Function(
+            String otp, String smsId, Map<dynamic, dynamic> data)
+        checkMessage,
   }) {
-    return checkMessage(phone);
+    return checkMessage(otp, smsId, data);
   }
 
   @override
@@ -1206,9 +1164,10 @@ class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String value)? phoneChanged,
-    TResult? Function(String phone)? checkMessage,
+    TResult? Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
   }) {
-    return checkMessage?.call(phone);
+    return checkMessage?.call(otp, smsId, data);
   }
 
   @override
@@ -1216,11 +1175,12 @@ class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String value)? phoneChanged,
-    TResult Function(String phone)? checkMessage,
+    TResult Function(String otp, String smsId, Map<dynamic, dynamic> data)?
+        checkMessage,
     required TResult orElse(),
   }) {
     if (checkMessage != null) {
-      return checkMessage(phone);
+      return checkMessage(otp, smsId, data);
     }
     return orElse();
   }
@@ -1261,10 +1221,15 @@ class _$ConfirmCodeCheckMessageEvent implements ConfirmCodeCheckMessageEvent {
 }
 
 abstract class ConfirmCodeCheckMessageEvent implements ConfirmCodeEvent {
-  const factory ConfirmCodeCheckMessageEvent(final String phone) =
+  const factory ConfirmCodeCheckMessageEvent(
+          {required final String otp,
+          required final String smsId,
+          required final Map<dynamic, dynamic> data}) =
       _$ConfirmCodeCheckMessageEvent;
 
-  String get phone;
+  String get otp;
+  String get smsId;
+  Map<dynamic, dynamic> get data;
   @JsonKey(ignore: true)
   _$$ConfirmCodeCheckMessageEventCopyWith<_$ConfirmCodeCheckMessageEvent>
       get copyWith => throw _privateConstructorUsedError;

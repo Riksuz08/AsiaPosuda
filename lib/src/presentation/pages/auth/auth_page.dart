@@ -31,7 +31,7 @@ class _AuthPageState extends State<AuthPage> {
         if (state is AuthSuccessState) {
           Navigator.of(context).pushNamed(
             Routes.confirmCode,
-            arguments: controller.text,
+            arguments: state,
           );
         }
       },
