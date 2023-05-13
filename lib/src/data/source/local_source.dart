@@ -15,86 +15,43 @@ class LocalSource {
   bool get hasProfile => box.get(AppKeys.hasProfile, defaultValue: false);
 
   Future<void> setUser({
-    required String lastName,
-    required String firstName,
-    required String companyName,
-    required String subDomain,
-    required String token,
+    required String name,
+    required String accessToken,
     required String refreshToken,
-    required String companyId,
-    required String currentShopId,
-    required String currentShopName,
     required String userId,
     required String imageUrl,
+    required String phone,
+    required String email,
+    required String login,
   }) async {
-    await box.put(AppKeys.lastName, lastName);
-    await box.put(AppKeys.firstName, firstName);
-    await box.put(AppKeys.companyName, companyName);
-    await box.put(AppKeys.subDomain, subDomain);
-    await box.put(AppKeys.accessToken, token);
+    await box.put(AppKeys.hasProfile, true);
+    await box.put(AppKeys.phone, phone);
+    await box.put(AppKeys.login, login);
+    await box.put(AppKeys.email, email);
+    await box.put(AppKeys.fullName, name);
+    await box.put(AppKeys.accessToken, accessToken);
     await box.put(AppKeys.refreshToken, refreshToken);
-    await box.put(AppKeys.companyId, companyId);
-    await box.put(AppKeys.currentShopId, currentShopId);
-    await box.put(AppKeys.currentShopName, currentShopName);
     await box.put(AppKeys.userId, userId);
     await box.put(AppKeys.imageUrl, imageUrl);
   }
 
-  String getCompanyId() {
-    return box.get(AppKeys.companyId, defaultValue: "") ?? '';
-  }
+  String get accessToken => box.get(AppKeys.accessToken, defaultValue: "");
 
-  String getCurrentShopId() {
-    return box.get(AppKeys.currentShopId, defaultValue: "") ?? '';
-  }
+  String get fullName => box.get(AppKeys.fullName, defaultValue: "");
 
-  String getAccessToken() {
-    return box.get(AppKeys.accessToken, defaultValue: "") ?? '';
-  }
+  String get userId => box.get(AppKeys.userId, defaultValue: "");
 
-  String getCurrentShopName() {
-    return box.get(AppKeys.currentShopName, defaultValue: "") ?? '';
-  }
+  String get locale => box.get(
+        AppKeys.languageCode,
+        defaultValue: BaseFunctions.getDefaultLocale(),
+      );
 
-  Future<void> setCurrentShopId(String value) async {
-    await box.put(AppKeys.currentShopId, value);
-  }
-
-  String getSubDomain() {
-    return box.get(AppKeys.subDomain, defaultValue: "") ?? '';
-  }
-
-  String getCompanyName() {
-    return box.get(AppKeys.companyName, defaultValue: "") ?? '';
-  }
-
-  String getFullName() {
-    return (box.get(AppKeys.firstName, defaultValue: "") ?? '') +
-        ' ' +
-        (box.get(AppKeys.lastName, defaultValue: "") ?? '');
-  }
-
-  String getUserId() {
-    return box.get(AppKeys.userId, defaultValue: "") ?? '';
-  }
-
-  String getToken() {
-    return box.get(AppKeys.accessToken, defaultValue: "") ?? '';
+  Future<void> setThemeMode(ThemeMode mode) async {
+    await box.put(AppKeys.themeMode, mode.name);
   }
 
   Future<void> setLocale(String lang) async {
     await box.put(AppKeys.languageCode, lang);
-  }
-
-  String get locale =>
-      box.get(
-        AppKeys.languageCode,
-        defaultValue: BaseFunctions.getDefaultLocale(),
-      ) ??
-      BaseFunctions.getDefaultLocale();
-
-  Future<void> setThemeMode(ThemeMode mode) async {
-    await box.put(AppKeys.themeMode, mode.name);
   }
 
   ThemeMode Function() get themeMode => () {
@@ -112,5 +69,16 @@ class LocalSource {
 
   Future<void> clear() async {
     await box.clear();
+  }
+
+  Future<void> userClear() async {
+    await box.delete(AppKeys.hasProfile);
+    await box.delete(AppKeys.phone);
+    await box.delete(AppKeys.email);
+    await box.delete(AppKeys.fullName);
+    await box.delete(AppKeys.accessToken);
+    await box.delete(AppKeys.refreshToken);
+    await box.delete(AppKeys.userId);
+    await box.delete(AppKeys.imageUrl);
   }
 }

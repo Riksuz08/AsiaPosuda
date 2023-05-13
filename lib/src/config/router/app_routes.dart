@@ -1,4 +1,3 @@
-import 'package:chuck_interceptor/chuck.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,12 +22,12 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
 
 final localSource = sl<LocalSource>();
 
-Chuck chuck = Chuck(
-  showNotification: true,
-  showInspectorOnShake: false,
-  darkTheme: false,
-  navigatorKey: rootNavigatorKey,
-);
+// Chuck chuck = Chuck(
+//   showNotification: true,
+//   showInspectorOnShake: false,
+//   darkTheme: false,
+//   navigatorKey: rootNavigatorKey,
+// );
 
 class AppRoutes {
   AppRoutes._();

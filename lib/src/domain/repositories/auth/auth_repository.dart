@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:sample_bloc_mobile/src/core/platform/network_info.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_request.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/verify_request.dart';

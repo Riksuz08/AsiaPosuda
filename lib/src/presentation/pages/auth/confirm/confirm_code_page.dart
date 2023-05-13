@@ -36,13 +36,15 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
     );
     focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      color: Colors.white,
       border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(10),
     );
 
     submittedPinTheme = defaultPinTheme.copyWith(
@@ -67,6 +69,8 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
         appBar: AppBar(title: const Text("Confirm code")),
         body: Center(
           child: Pinput(
+            length: 6,
+            autofocus: true,
             controller: controller,
             defaultPinTheme: defaultPinTheme,
             focusedPinTheme: focusedPinTheme,

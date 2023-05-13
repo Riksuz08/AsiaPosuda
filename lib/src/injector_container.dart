@@ -17,6 +17,7 @@ import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart';
 
 import 'core/constants/constants.dart';
+import 'core/platform/network_info.dart';
 import 'presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 
 final sl = GetIt.instance;
@@ -34,8 +35,6 @@ Future<void> init() async {
         receiveTimeout: const Duration(seconds: 30),
         connectTimeout: const Duration(seconds: 30),
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
           "Authorization": "API-KEY",
           "X-API-KEY": "P-qapkgqLxf6v25bwhNzgcIDHwjhFd4mzM",
           "Resource-Id": Constants.resourceId,
@@ -50,7 +49,7 @@ Future<void> init() async {
             requestBody: kDebugMode,
             responseBody: kDebugMode,
           ),
-          if (kDebugMode) chuck.getDioInterceptor(),
+          // if (kDebugMode) chuck.getDioInterceptor(),
         ],
       ),
   );
@@ -62,9 +61,9 @@ Future<void> init() async {
             rootNavigatorKey.currentContext!,
             Routes.internetConnection,
           ),
-          accessTokenGetter: () => sl<LocalSource>().getAccessToken(),
+          accessTokenGetter: () => localSource.accessToken,
           refreshTokenFunction: () async {
-            await sl<LocalSource>().clear();
+            await localSource.userClear();
             Navigator.pushNamedAndRemoveUntil(
               rootNavigatorKey.currentContext!,
               Routes.initial,
@@ -74,20 +73,23 @@ Future<void> init() async {
         ),
       );
 
-  sl.registerLazySingleton(() => ApiClient(sl(), Constants.baseUrl));
   sl.registerLazySingleton(() => InternetConnectionChecker());
-  //Core
-  // sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerSingleton<LocalSource>(LocalSource(_box));
 
+  /// main
+  mainFuture();
+
+  /// auth
+  authFeature();
+}
+
+void mainFuture() {
   /// splash
   sl.registerFactory(() => SplashBloc());
 
   /// main
   sl.registerLazySingleton(() => MainBloc());
-
-  /// auth
-  authFeature();
 }
 
 void authFeature() {
@@ -97,6 +99,7 @@ void authFeature() {
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
       apiClient: authClient,
+      networkInfo: sl(),
     ),
   );
 }

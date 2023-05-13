@@ -12,12 +12,9 @@ class AppKeys {
   static const String favouriteDb = "favourite_db";
   static const String userId = "user_id";
   static const String imageUrl = "image_url";
-  static const String lastName = "last_name";
-  static const String firstName = "first_name";
-  static const String companyName = "company_name";
-  static const String subDomain = "sub_domain";
-  static const String companyId = "company_id";
-  static const String currentShopId = "current_shop_id";
-  static const String currentShopName= "current_shop_name";
-  static const String hasProfile= "hasProfile";
+  static const String fullName = "full_name";
+  static const String hasProfile = "hasProfile";
+  static const String phone = "phone";
+  static const String login = "login";
+  static const String email = "email";
 }

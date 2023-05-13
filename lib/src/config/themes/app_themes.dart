@@ -46,8 +46,16 @@ final ThemeData lightTheme = appTheme.copyWith(
   ),
   primaryColor: ThemeColors.light.primary,
   scaffoldBackgroundColor: ThemeColors.light.scaffoldBackground,
+  dialogBackgroundColor: Colors.white,
   cardColor: Colors.white,
   canvasColor: Colors.white,
+  dialogTheme: const DialogTheme(
+    backgroundColor: Colors.white,
+    surfaceTintColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(

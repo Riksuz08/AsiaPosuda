@@ -5,6 +5,7 @@ import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
+import 'widgets/logout_dialog.dart';
 import 'widgets/profile_item_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -105,12 +106,12 @@ class ProfilePage extends StatelessWidget {
                     isBottom: true,
                     text: context.translate("logout"),
                     onTap: () {
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) {
-                      //     return const LogOutDialog();
-                      //   },
-                      // );
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return const LogOutDialog();
+                        },
+                      );
                     },
                   ),
                 ],
