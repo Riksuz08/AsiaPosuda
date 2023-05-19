@@ -75,6 +75,7 @@ class _AuthPageState extends State<AuthPage> {
                     child: TextField(
                       autofocus: true,
                       controller: controller,
+                      style: Theme.of(context).textTheme.titleMedium,
                       inputFormatters: [
                         MaskedTextInputFormatter(
                           mask: "## ### ## ##",
@@ -85,8 +86,9 @@ class _AuthPageState extends State<AuthPage> {
                           replacementString: ' ',
                         ),
                       ],
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         prefixText: "+998 ",
+                        prefixStyle: Theme.of(context).textTheme.titleMedium,
                       ),
                       onChanged: (value) {
                         context.read<AuthBloc>().add(

@@ -12,6 +12,8 @@ final appTheme = ThemeData(
     builders: {
       TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
     },
   ),
   splashFactory:
@@ -150,7 +152,11 @@ final ThemeData lightTheme = appTheme.copyWith(
     ),
     iconTheme: const IconThemeData(color: Colors.black),
     shadowColor: Colors.black45,
-    titleTextStyle: AppTextStyles.light.appBarTitle,
+    titleTextStyle: const TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w600,
+      fontSize: 17,
+    ),
     toolbarTextStyle: AppTextStyles.light.appBarTitle,
     backgroundColor: Colors.white,
     surfaceTintColor: Colors.white,
@@ -158,37 +164,44 @@ final ThemeData lightTheme = appTheme.copyWith(
   textTheme: const TextTheme(
     titleLarge: TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w500,
-      fontSize: 17,
+      fontWeight: FontWeight.w400,
+      fontSize: 34,
     ),
+    /// text field title style
     titleMedium: TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       fontSize: 17,
     ),
     titleSmall: TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       fontSize: 17,
     ),
+    /// list tile title style
+    bodyLarge: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+    /// list tile subtitle style
     bodyMedium: TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       fontSize: 17,
     ),
     bodySmall: TextStyle(
       color: Colors.black,
-      fontWeight: FontWeight.w500,
-      fontSize: 17,
-    ),
-    bodyLarge: TextStyle(
-      color: Colors.black,
+      fontWeight: FontWeight.w600,
+      fontSize: 15,
     ),
     displayLarge: TextStyle(
       color: Colors.black,
     ),
     displayMedium: TextStyle(
       color: Colors.black,
+      fontWeight: FontWeight.w600,
+      fontSize: 17,
     ),
     displaySmall: TextStyle(
       color: Colors.black,
@@ -212,9 +225,6 @@ final ThemeData darkTheme = appTheme.copyWith(
   ),
   tabBarTheme: TabBarTheme(
     labelColor: Colors.white,
-    // indicator: UnderlineTabIndicator(
-    //   borderSide: BorderSide(color: AppColors.blue, width: 3.0),
-    // ),
     indicator: BoxDecoration(
       color: Colors.transparent,
       borderRadius: const BorderRadius.all(Radius.circular(24)),
