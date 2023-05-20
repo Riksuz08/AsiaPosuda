@@ -102,7 +102,7 @@ class AppOptions {
         brightness = Brightness.dark;
         break;
       default:
-        brightness = WidgetsBinding.instance.window.platformBrightness;
+        brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
     }
 
     final overlayStyle = brightness == Brightness.dark

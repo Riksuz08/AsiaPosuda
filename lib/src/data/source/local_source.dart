@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:sample_bloc_mobile/src/core/constants/app_keys.dart';
 import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
 
-class LocalSource {
+final class LocalSource {
   final Box<dynamic> box;
 
   LocalSource(this.box);

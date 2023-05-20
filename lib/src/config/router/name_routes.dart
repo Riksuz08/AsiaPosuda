@@ -1,6 +1,6 @@
 part of 'app_routes.dart';
 
-class Routes {
+final class Routes {
   Routes._();
 
   static const String initial = '/';

@@ -29,7 +29,7 @@ final localSource = sl<LocalSource>();
 //   navigatorKey: rootNavigatorKey,
 // );
 
-class AppRoutes {
+final class AppRoutes {
   AppRoutes._();
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

@@ -5,7 +5,10 @@ version: 1.0.0+1
 
 analyzer:
   enable-experiment:
-    - non-nullable
+    - records
+    - patterns
+    - sealed-class
+    - class-modifiers
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
