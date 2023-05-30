@@ -26,20 +26,20 @@ class SearchWidget extends StatelessWidget {
                       children: [
                         SearchItem(
                           isTop: true,
-                          title: "Откуда",
-                          subTitle: "Москва (DME)",
+                          title: 'Откуда',
+                          subTitle: 'Москва (DME)',
                           onTap: () async {},
                         ),
                         const Divider(height: 1),
                         SearchItem(
-                          title: "Куда",
-                          subTitle: "Ташкент (TAS) ",
+                          title: 'Куда',
+                          subTitle: 'Ташкент (TAS) ',
                           onTap: () {},
                         ),
                         const Divider(height: 1),
                         SearchItem(
-                          title: "Туда",
-                          subTitle: "8 апр.2023",
+                          title: 'Туда',
+                          subTitle: '8 апр.2023',
                           icon: Icon(
                             Icons.calendar_today,
                             color: context.color.primary,
@@ -48,9 +48,9 @@ class SearchWidget extends StatelessWidget {
                         ),
                         const Divider(height: 1),
                         SearchItem(
-                          title: "Пассажир",
-                          subTitle: "2 гостей",
-                          icon: Icon(
+                          title: 'Пассажир',
+                          subTitle: '2 гостей',
+                          icon: const Icon(
                             Icons.keyboard_arrow_down_sharp,
                           ),
                           onTap: () {},
@@ -60,7 +60,7 @@ class SearchWidget extends StatelessWidget {
                           shape: AppUtils.kShapeRoundedBottom12,
                           title: ElevatedButton(
                             onPressed: () async {},
-                            child: const Text("Найти"),
+                            child: const Text('Найти'),
                           ),
                         ),
                       ],

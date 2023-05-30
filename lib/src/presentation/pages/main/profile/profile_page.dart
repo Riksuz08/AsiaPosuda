@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.translate("profile"))),
+      appBar: AppBar(title: Text(context.translate('profile'))),
       body: CustomScrollView(
         slivers: [
           const SliverGap(16),
@@ -24,23 +24,23 @@ class ProfilePage extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.address_book,
                       size: 20,
                     ),
-                    text: context.translate("notebook"),
+                    text: context.translate('notebook'),
                     isTop: true,
                     onTap: () {
                       // Navigator.pushNamed(context, Routes.notes);
                     },
                   ),
-                  const Divider(height: 1.0),
+                  const Divider(height: 1),
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.wallet,
                       size: 20,
                     ),
-                    text: context.translate("my_cards"),
+                    text: context.translate('my_cards'),
                     isBottom: true,
                     onTap: () {
                       // Navigator.pushNamed(context, Routes.myCards);
@@ -57,39 +57,39 @@ class ProfilePage extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.info,
                       size: 20,
                     ),
-                    text: context.translate("about_us"),
+                    text: context.translate('about_us'),
                     isTop: true,
                     onTap: () {},
                   ),
-                  const Divider(height: 1.0),
+                  const Divider(height: 1),
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.favorite_list,
                       size: 20,
                     ),
-                    text: context.translate("blog"),
+                    text: context.translate('blog'),
                     onTap: () {},
                   ),
-                  const Divider(height: 1.0),
+                  const Divider(height: 1),
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.agreement,
                       size: 20,
                     ),
-                    text: context.translate("cooperation"),
+                    text: context.translate('cooperation'),
                     onTap: () {},
                   ),
-                  const Divider(height: 1.0),
+                  const Divider(height: 1),
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.settings,
                       size: 20,
                     ),
-                    text: context.translate("settings"),
+                    text: context.translate('settings'),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -97,14 +97,14 @@ class ProfilePage extends StatelessWidget {
                       );
                     },
                   ),
-                  const Divider(height: 1.0),
+                  const Divider(height: 1),
                   ProfileItemWidget(
-                    icon: Icon(
+                    icon: const Icon(
                       AppIcons.logout,
                       size: 20,
                     ),
                     isBottom: true,
-                    text: context.translate("logout"),
+                    text: context.translate('logout'),
                     onTap: () {
                       showDialog(
                         context: context,

@@ -13,8 +13,8 @@ class LanguageBottomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomModalBottomWidget(
-      title: Padding(
-        padding: const EdgeInsets.all(12.0),
+      title: const Padding(
+        padding: EdgeInsets.all(12.0),
         child: Text("AppTranslations.of(context).language"),
       ),
       minChildren: [

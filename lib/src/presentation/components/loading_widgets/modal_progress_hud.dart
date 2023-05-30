@@ -2,8 +2,6 @@ library modal_progress_hud;
 
 import 'package:flutter/material.dart';
 
-import 'custom_circular_progress_indicator.dart';
-
 ///
 /// Wrap around any widget that makes an async call to show a modal progress
 /// indicator while the async call is in progress.
@@ -25,7 +23,7 @@ import 'custom_circular_progress_indicator.dart';
 /// HUD=Heads Up Display
 ///
 class ModalProgressHUD extends StatelessWidget {
-  final bool? inAsyncCall;
+  final bool inAsyncCall;
   final double opacity;
   final Color color;
   final Widget progressIndicator;
@@ -35,38 +33,28 @@ class ModalProgressHUD extends StatelessWidget {
 
   const ModalProgressHUD({
     Key? key,
-    this.inAsyncCall,
+    this.inAsyncCall = false,
     this.opacity = 0.3,
     this.color = Colors.transparent,
-    this.progressIndicator = const CustomCircularProgressIndicator(),
+    this.progressIndicator = const CircularProgressIndicator.adaptive(),
     this.offset,
     this.dismissible = false,
     required this.child,
-  })  : assert(inAsyncCall != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgetList = [];
-    widgetList.add(child);
-    if (inAsyncCall ?? false) {
-      Widget layOutProgressIndicator;
-      if (offset == null) {
-        layOutProgressIndicator = progressIndicator;
-      } else {
-        layOutProgressIndicator = progressIndicator;
-      }
-      final modal = [
-        Opacity(
-          opacity: opacity,
-          child: ModalBarrier(dismissible: dismissible, color: color),
-        ),
-        layOutProgressIndicator
-      ];
-      widgetList += modal;
-    }
     return Stack(
-      children: widgetList,
+      children: [
+        Positioned.fill(child: child),
+        if (inAsyncCall)
+          Opacity(
+            opacity: opacity,
+            child: ModalBarrier(dismissible: dismissible, color: color),
+          ),
+        if (inAsyncCall)
+          Center(child: progressIndicator),
+      ],
     );
   }
 }

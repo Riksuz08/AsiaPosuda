@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/modal_progress_hud.dart';
 
 import 'widgets/purchase_item_widget.dart';
 
@@ -54,25 +55,28 @@ class _OrdersPageState extends State<OrdersPage>
           ),
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: AppUtils.kPaddingAll16,
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, int index) {
-                  if (index.isEven) {
-                    return PurchaseItemWidget(
-                      onTap: () {},
-                    );
-                  }
-                  return AppUtils.kBoxHeight16;
-                },
-                childCount: 2.doubleTheListCount,
+      body: ModalProgressHUD(
+        inAsyncCall: true,
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: AppUtils.kPaddingAll16,
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (_, int index) {
+                    if (index.isEven) {
+                      return PurchaseItemWidget(
+                        onTap: () {},
+                      );
+                    }
+                    return AppUtils.kBoxHeight16;
+                  },
+                  childCount: 2.doubleTheListCount,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

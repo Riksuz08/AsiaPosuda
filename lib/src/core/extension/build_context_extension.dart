@@ -11,5 +11,5 @@ extension BuildContextExt on BuildContext {
 
   ThemeColors get color => Theme.of(this).extension<ThemeColors>()!;
 
-  AppTextStyles get textStyle => Theme.of(this).extension<AppTextStyles>()!;
+  ThemeTextStyles get textStyle => Theme.of(this).extension<ThemeTextStyles>()!;
 }

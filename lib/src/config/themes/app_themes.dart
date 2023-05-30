@@ -30,7 +30,7 @@ final appTheme = ThemeData(
 
 final ThemeData lightTheme = appTheme.copyWith(
   extensions: <ThemeExtension<dynamic>>[
-    AppTextStyles.light,
+    ThemeTextStyles.light,
     ThemeColors.light,
   ],
   colorScheme: ColorScheme.light(
@@ -73,7 +73,7 @@ final ThemeData lightTheme = appTheme.copyWith(
           return ThemeColors.light.primary;
         },
       ),
-      textStyle: MaterialStatePropertyAll(AppTextStyles.light.buttonStyle),
+      textStyle: MaterialStatePropertyAll(ThemeTextStyles.light.buttonStyle),
       elevation: const MaterialStatePropertyAll(0),
       shape: const MaterialStatePropertyAll(
         RoundedRectangleBorder(
@@ -134,7 +134,7 @@ final ThemeData lightTheme = appTheme.copyWith(
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
       (Set<MaterialState> states) {
-        return AppTextStyles.light.appBarTitle;
+        return ThemeTextStyles.light.appBarTitle;
       },
     ),
   ),
@@ -157,7 +157,7 @@ final ThemeData lightTheme = appTheme.copyWith(
       fontWeight: FontWeight.w600,
       fontSize: 17,
     ),
-    toolbarTextStyle: AppTextStyles.light.appBarTitle,
+    toolbarTextStyle: ThemeTextStyles.light.appBarTitle,
     backgroundColor: Colors.white,
     surfaceTintColor: Colors.white,
   ),
@@ -211,7 +211,7 @@ final ThemeData lightTheme = appTheme.copyWith(
 
 final ThemeData darkTheme = appTheme.copyWith(
   extensions: <ThemeExtension<dynamic>>[
-    AppTextStyles.dark,
+    ThemeTextStyles.dark,
     ThemeColors.dark,
   ],
   bottomSheetTheme: const BottomSheetThemeData(
@@ -256,7 +256,7 @@ final ThemeData darkTheme = appTheme.copyWith(
       statusBarBrightness: Brightness.dark,
     ),
     iconTheme: const IconThemeData(color: Colors.white),
-    titleTextStyle: AppTextStyles.dark.appBarTitle,
+    titleTextStyle: ThemeTextStyles.dark.appBarTitle,
     // backgroundColor: ThemeColors.cardBackgroundDark,
   ),
   textTheme: const TextTheme(

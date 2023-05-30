@@ -35,7 +35,7 @@ Future<T?> cupertinoSheet<T>({
             ),
           ),
           cancelButton: CupertinoActionSheetAction(
-            child: Text("AppTranslations.of(context).cancel"),
+            child: const Text("Cancel"),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
             },

@@ -5,6 +5,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
@@ -36,7 +37,7 @@ set deviceLocale(Locale? locale) {
   _deviceLocale ??= locale;
 }
 
-class AppOptions {
+class AppOptions extends Equatable {
   const AppOptions({
     required this.themeMode,
     required double? textScaleFactor,
@@ -102,7 +103,8 @@ class AppOptions {
         brightness = Brightness.dark;
         break;
       default:
-        brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+        brightness =
+            WidgetsBinding.instance.platformDispatcher.platformBrightness;
     }
 
     final overlayStyle = brightness == Brightness.dark
@@ -132,28 +134,6 @@ class AppOptions {
     );
   }
 
-  @override
-  bool operator ==(Object other) =>
-      other is AppOptions &&
-      themeMode == other.themeMode &&
-      _textScaleFactor == other._textScaleFactor &&
-      customTextDirection == other.customTextDirection &&
-      locale == other.locale &&
-      timeDilation == other.timeDilation &&
-      platform == other.platform &&
-      isTestMode == other.isTestMode;
-
-  @override
-  int get hashCode => Object.hash(
-        themeMode,
-        _textScaleFactor,
-        customTextDirection,
-        locale,
-        timeDilation,
-        platform,
-        isTestMode,
-      );
-
   static AppOptions of(BuildContext context) {
     final scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
@@ -165,6 +145,17 @@ class AppOptions {
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     scope.modelBindingState.updateModel(newModel);
   }
+
+  @override
+  List<Object?> get props => [
+        themeMode,
+        _textScaleFactor,
+        customTextDirection,
+        _locale,
+        timeDilation,
+        platform,
+        isTestMode,
+      ];
 }
 
 // Applies text GalleryOptions to a widget

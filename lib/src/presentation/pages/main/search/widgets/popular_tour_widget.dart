@@ -26,12 +26,8 @@ class PopularTourWidget extends StatelessWidget {
                   tilePadding: AppUtils.kPaddingHorizontal12,
                   backgroundColor: context.color.scaffoldBackground,
                   collapsedBackgroundColor: context.color.scaffoldBackground,
-                  title: Text(
-                    "Ташкент",
-                  ),
-                  subtitle: Text(
-                    "Ташкент",
-                  ),
+                  title: const Text('Ташкент'),
+                  subtitle: const Text('Ташкент'),
                   leading: ClipRRect(
                     borderRadius: AppUtils.kBorderRadius12,
                     child: CachedNetworkImage(
@@ -39,13 +35,13 @@ class PopularTourWidget extends StatelessWidget {
                       width: 56,
                       fit: BoxFit.fill,
                       imageUrl:
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSouNS7c7a9GUytu4faKljBLrIgKXtvZ6WAKVCsvb0wYOWfvuUeVR8mZtl5kX6NSew3r9Q&usqp=CAU",
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSouNS7c7a9GUytu4faKljBLrIgKXtvZ6WAKVCsvb0wYOWfvuUeVR8mZtl5kX6NSew3r9Q&usqp=CAU',
                     ),
                   ),
                   children: const <Widget>[
                     ListTile(
                       title: Text(
-                        "items.description",
+                        'items.description',
                         style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     )

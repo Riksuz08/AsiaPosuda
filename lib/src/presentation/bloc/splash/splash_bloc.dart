@@ -12,7 +12,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>(_splashHandler);
   }
 
-  void _splashHandler(
+  Future<void> _splashHandler(
     SplashEvent event,
     Emitter<SplashState> emit,
   ) async {

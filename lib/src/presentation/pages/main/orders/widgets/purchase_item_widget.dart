@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_text_styles.dart';
 import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/config/themes/theme_colors.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
@@ -46,7 +45,7 @@ class PurchaseItemWidget extends StatelessWidget {
                               ),
                             ),
                             AppUtils.kBoxWidth8,
-                            Text("20:50"),
+                            const Text("20:50"),
                             AppUtils.kBoxWidth8,
                             const CustomPaint(
                               painter: HorizontalLine(),
@@ -55,7 +54,7 @@ class PurchaseItemWidget extends StatelessWidget {
                             AppUtils.kBoxWidth8,
                             const Text("20:50"),
                             AppUtils.kSpacer,
-                            Text(
+                            const Text(
                               "3 час 52",
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
@@ -67,18 +66,18 @@ class PurchaseItemWidget extends StatelessWidget {
                         Row(
                           children: [
                             const SizedBox(width: 35),
-                            Expanded(
+                            const Expanded(
                               child: Text(
                                 "DME",
                               ),
                             ),
                             const SizedBox(width: 75),
-                            Expanded(
+                            const Expanded(
                               child: Text("DME"),
                             ),
                             AppUtils.kSpacer,
                             RichText(
-                              text: TextSpan(
+                              text: const TextSpan(
                                 children: [
                                   TextSpan(
                                     text: "TJM",
@@ -92,7 +91,7 @@ class PurchaseItemWidget extends StatelessWidget {
                           ],
                         ),
                         AppUtils.kBoxHeight8,
-                        Row(
+                        const Row(
                           children: [
                             Text("Turkish airlines"),
                           ],
@@ -106,23 +105,21 @@ class PurchaseItemWidget extends StatelessWidget {
               const Divider(height: 1),
               AppUtils.kBoxHeight12,
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.share),
+                  const Icon(Icons.share),
                   AppUtils.kBoxWidth16,
-                  Icon(Icons.favorite),
+                  const Icon(Icons.favorite),
                   AppUtils.kSpacer,
                   TextButton(
                     style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        backgroundColor: ThemeColors.light.primary),
-                    onPressed: () {
-
-                    },
-                    child: Text(
-                      "от 2 806 000 UZS",
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: ThemeColors.light.primary,
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      'от 2 806 000 UZS',
                     ),
                   ),
                 ],

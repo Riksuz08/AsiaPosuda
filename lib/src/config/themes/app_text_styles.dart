@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppTextStyles extends ThemeExtension<AppTextStyles> {
+class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
   final TextStyle appBarTitle;
   final TextStyle buttonStyle;
   final TextStyle regularCaption2;
@@ -26,7 +26,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   final TextStyle bodyTitle3;
   final TextStyle bodyLargeTitle;
 
-  const AppTextStyles({
+  const ThemeTextStyles({
     required this.appBarTitle,
     required this.buttonStyle,
     required this.regularCaption2,
@@ -53,7 +53,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     required this.bodyLargeTitle,
   });
 
-  static const AppTextStyles light = AppTextStyles(
+  static const ThemeTextStyles light = ThemeTextStyles(
     appBarTitle: TextStyle(
       color: Colors.black,
       fontSize: 20,
@@ -175,7 +175,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       fontWeight: FontWeight.w400,
     ),
   );
-  static const AppTextStyles dark = AppTextStyles(
+  static const ThemeTextStyles dark = ThemeTextStyles(
     appBarTitle: TextStyle(
       color: Colors.black,
       fontSize: 20,
@@ -299,7 +299,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   );
 
   @override
-  ThemeExtension<AppTextStyles> copyWith({
+  ThemeExtension<ThemeTextStyles> copyWith({
     TextStyle? appBarTitle,
     TextStyle? buttonStyle,
     TextStyle? regularBody,
@@ -325,7 +325,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     TextStyle? bodyTitle2,
     TextStyle? bodyTitle3,
   }) {
-    return AppTextStyles(
+    return ThemeTextStyles(
       appBarTitle: appBarTitle ?? this.appBarTitle,
       buttonStyle: buttonStyle ?? this.buttonStyle,
       regularBody: regularBody ?? this.regularBody,
@@ -354,12 +354,12 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   }
 
   @override
-  ThemeExtension<AppTextStyles> lerp(
-      ThemeExtension<AppTextStyles>? other, double t) {
-    if (other is! AppTextStyles) {
+  ThemeExtension<ThemeTextStyles> lerp(
+      ThemeExtension<ThemeTextStyles>? other, double t) {
+    if (other is! ThemeTextStyles) {
       return this;
     }
-    return AppTextStyles(
+    return ThemeTextStyles(
       appBarTitle: TextStyle.lerp(appBarTitle, other.appBarTitle, t)!,
       buttonStyle: TextStyle.lerp(buttonStyle, other.buttonStyle, t)!,
       regularBody: TextStyle.lerp(regularBody, other.regularBody, t)!,

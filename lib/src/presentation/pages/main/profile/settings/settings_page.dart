@@ -16,9 +16,9 @@ class SettingsPage extends StatelessWidget {
     final options = AppOptions.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text("AppTranslations.of(context).settings")),
+      appBar: AppBar(title: const Text("AppTranslations.of(context).settings")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: ClipRRect(
           borderRadius: AppUtils.kBorderRadius16,
           child: Material(
@@ -46,7 +46,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     );
                   },
-                  title: Text("AppTranslations.of(context).language"),
+                  title: const Text("AppTranslations.of(context).language"),
                 ),
                 AppUtils.kDivider,
                 ListTile(
@@ -65,7 +65,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     );
                   },
-                  title: Text("AppTranslations.of(context).theme"),
+                  title: const Text("AppTranslations.of(context).theme"),
                 ),
               ],
             ),
