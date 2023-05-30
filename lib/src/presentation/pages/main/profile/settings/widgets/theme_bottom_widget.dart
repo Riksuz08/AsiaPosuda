@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_modal_bottom_widget.dart';
 
 class ThemeBottomWidget extends StatelessWidget {
   final Function(ThemeMode) onChanged;
@@ -11,30 +10,36 @@ class ThemeBottomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomModalBottomWidget(
-      title: const Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Text("AppTranslations.of(context).theme"),
-      ),
-      minChildren: [
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Text('Theme'),
+        ),
         ListTile(
           onTap: () {
             onChanged(ThemeMode.system);
           },
-          title: const Text("AppTranslations.of(context).system"),
+          title: const Text('system'),
         ),
         ListTile(
           onTap: () {
             onChanged(ThemeMode.light);
           },
-          title: const Text("AppTranslations.of(context).light"),
+          title: const Text('light'),
         ),
-        ListTile(
-          onTap: () {
-            onChanged(ThemeMode.dark);
-          },
-          title: const Text("AppTranslations.of(context).dark"),
+        SafeArea(
+          minimum: const EdgeInsets.only(bottom: 16),
+          child: ListTile(
+            onTap: () {
+              onChanged(ThemeMode.dark);
+            },
+            title: const Text('dark'),
+          ),
         ),
+
       ],
     );
   }

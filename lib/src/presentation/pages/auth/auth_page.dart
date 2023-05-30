@@ -44,7 +44,7 @@ class _AuthPageState extends State<AuthPage> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: AppUtils.kPaddingHor16Ver12,
-                child: Text("Your phone number"),
+                child: Text('Your phone number'),
               ),
             ),
           ),
@@ -62,12 +62,12 @@ class _AuthPageState extends State<AuthPage> {
                   const Padding(
                     padding: AppUtils.kPaddingHorizontal16,
                     child:
-                        Text("We will send a verification code to your number"),
+                        Text('We will send a verification code to your number'),
                   ),
                   AppUtils.kGap40,
                   const Padding(
                     padding: AppUtils.kPaddingHorizontal16,
-                    child: Text("Phone number"),
+                    child: Text('Phone number'),
                   ),
                   AppUtils.kGap6,
                   Padding(
@@ -78,8 +78,8 @@ class _AuthPageState extends State<AuthPage> {
                       style: Theme.of(context).textTheme.titleMedium,
                       inputFormatters: [
                         MaskedTextInputFormatter(
-                          mask: "## ### ## ##",
-                          separator: " ",
+                          mask: '## ### ## ##',
+                          separator: ' ',
                         ),
                         FilteringTextInputFormatter.allow(
                           RegExp(r'\d'),
@@ -87,7 +87,7 @@ class _AuthPageState extends State<AuthPage> {
                         ),
                       ],
                       decoration: InputDecoration(
-                        prefixText: "+998 ",
+                        prefixText: '+998 ',
                         prefixStyle: Theme.of(context).textTheme.titleMedium,
                       ),
                       onChanged: (value) {
@@ -119,7 +119,7 @@ class _AuthPageState extends State<AuthPage> {
                             .add(AuthCheckMessageEvent(controller.text));
                       }
                     : null,
-                child: const Text("Verify phone number"),
+                child: const Text('Verify phone number'),
               );
             },
           ),

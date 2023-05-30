@@ -86,6 +86,9 @@ final ThemeData lightTheme = appTheme.copyWith(
   inputDecorationTheme: const InputDecorationTheme(),
   bottomSheetTheme: const BottomSheetThemeData(
     elevation: 0,
+    showDragHandle: true,
+    backgroundColor: Colors.white,
+    surfaceTintColor: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(24),
@@ -126,14 +129,14 @@ final ThemeData lightTheme = appTheme.copyWith(
     backgroundColor: Colors.white,
     height: kToolbarHeight,
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (Set<MaterialState> states) {
+      (states) {
         return const IconThemeData(
           color: Colors.black,
         );
       },
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (Set<MaterialState> states) {
+      (states) {
         return ThemeTextStyles.light.appBarTitle;
       },
     ),
@@ -167,6 +170,7 @@ final ThemeData lightTheme = appTheme.copyWith(
       fontWeight: FontWeight.w400,
       fontSize: 34,
     ),
+
     /// text field title style
     titleMedium: TextStyle(
       color: Colors.black,
@@ -178,12 +182,14 @@ final ThemeData lightTheme = appTheme.copyWith(
       fontWeight: FontWeight.w400,
       fontSize: 17,
     ),
+
     /// list tile title style
     bodyLarge: TextStyle(
       color: Colors.black,
       fontSize: 20,
       fontWeight: FontWeight.w600,
     ),
+
     /// list tile subtitle style
     bodyMedium: TextStyle(
       color: Colors.black,
@@ -228,7 +234,7 @@ final ThemeData darkTheme = appTheme.copyWith(
     indicator: BoxDecoration(
       color: Colors.transparent,
       borderRadius: const BorderRadius.all(Radius.circular(24)),
-      border: Border.all(color: Colors.blue, width: 2.0),
+      border: Border.all(color: Colors.blue, width: 2),
     ),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(

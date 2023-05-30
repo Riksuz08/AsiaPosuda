@@ -16,7 +16,7 @@ class SettingsPage extends StatelessWidget {
     final options = AppOptions.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("AppTranslations.of(context).settings")),
+      appBar: AppBar(title: const Text('Settings')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ClipRRect(
@@ -32,40 +32,44 @@ class SettingsPage extends StatelessWidget {
               children: [
                 ListTile(
                   onTap: () {
-                    customBottomSheet(
+                    customModalBottomSheet(
                       context: context,
-                      child: LanguageBottomWidget(
-                        onChanged: (lang) async {
-                          AppOptions.update(
-                            context,
-                            options.copyWith(locale: Locale(lang)),
-                          );
-                          Navigator.pop(context);
-                          await sl<LocalSource>().setLocale(lang);
-                        },
-                      ),
+                      builder: (_, controller) {
+                        return LanguageBottomWidget(
+                          onChanged: (lang) async {
+                            AppOptions.update(
+                              context,
+                              options.copyWith(locale: Locale(lang)),
+                            );
+                            Navigator.pop(context);
+                            await sl<LocalSource>().setLocale(lang);
+                          },
+                        );
+                      },
                     );
                   },
-                  title: const Text("AppTranslations.of(context).language"),
+                  title: const Text('Language'),
                 ),
                 AppUtils.kDivider,
                 ListTile(
                   onTap: () {
-                    customBottomSheet(
+                    customModalBottomSheet(
                       context: context,
-                      child: ThemeBottomWidget(
-                        onChanged: (mode) async {
-                          AppOptions.update(
-                            context,
-                            options.copyWith(themeMode: mode),
-                          );
-                          Navigator.pop(context);
-                          await sl<LocalSource>().setThemeMode(mode);
-                        },
-                      ),
+                      builder: (_, __) {
+                        return ThemeBottomWidget(
+                          onChanged: (mode) async {
+                            AppOptions.update(
+                              context,
+                              options.copyWith(themeMode: mode),
+                            );
+                            Navigator.pop(context);
+                            await sl<LocalSource>().setThemeMode(mode);
+                          },
+                        );
+                      },
                     );
                   },
-                  title: const Text("AppTranslations.of(context).theme"),
+                  title: const Text('Theme'),
                 ),
               ],
             ),

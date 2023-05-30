@@ -35,10 +35,10 @@ Future<void> init() async {
         receiveTimeout: const Duration(seconds: 30),
         connectTimeout: const Duration(seconds: 30),
         headers: {
-          "Authorization": "API-KEY",
-          "X-API-KEY": "P-qapkgqLxf6v25bwhNzgcIDHwjhFd4mzM",
-          "Resource-Id": Constants.resourceId,
-          "Environment-Id": Constants.environmentId,
+          'Authorization': 'API-KEY',
+          'X-API-KEY': 'P-qapkgqLxf6v25bwhNzgcIDHwjhFd4mzM',
+          'Resource-Id': Constants.resourceId,
+          'Environment-Id': Constants.environmentId,
         },
       )
       ..interceptors.addAll(
@@ -49,33 +49,33 @@ Future<void> init() async {
             requestBody: kDebugMode,
             responseBody: kDebugMode,
           ),
-          // if (kDebugMode) chuck.getDioInterceptor(),
+          if (kDebugMode) chuck.getDioInterceptor(),
         ],
       ),
   );
   sl<Dio>().interceptors.add(
         RetryInterceptor(
           dio: sl<Dio>(),
-          retries: 1,
-          toNoInternetPageNavigator: () async => await Navigator.pushNamed(
+          toNoInternetPageNavigator: () async => Navigator.pushNamed(
             rootNavigatorKey.currentContext!,
             Routes.internetConnection,
           ),
           accessTokenGetter: () => localSource.accessToken,
           refreshTokenFunction: () async {
             await localSource.userClear();
-            Navigator.pushNamedAndRemoveUntil(
+            await Navigator.pushNamedAndRemoveUntil(
               rootNavigatorKey.currentContext!,
               Routes.initial,
-              (Route<dynamic> route) => false,
+              (route) => false,
             );
           },
         ),
       );
 
-  sl.registerLazySingleton(() => InternetConnectionChecker());
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-  sl.registerSingleton<LocalSource>(LocalSource(_box));
+  sl
+    ..registerLazySingleton(InternetConnectionChecker.new)
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
+    ..registerSingleton<LocalSource>(LocalSource(_box));
 
   /// main
   mainFuture();
@@ -86,22 +86,22 @@ Future<void> init() async {
 
 void mainFuture() {
   /// splash
-  sl.registerFactory(() => SplashBloc());
-
-  /// main
-  sl.registerLazySingleton(() => MainBloc());
+  sl
+    ..registerFactory(SplashBloc.new)
+    ..registerLazySingleton(MainBloc.new);
 }
 
 void authFeature() {
   late final ApiClient authClient = ApiClient(sl(), Constants.authUrl);
-  sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
-  sl.registerFactory<ConfirmCodeBloc>(() => ConfirmCodeBloc(sl()));
-  sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(
-      apiClient: authClient,
-      networkInfo: sl(),
-    ),
-  );
+  sl
+    ..registerFactory<AuthBloc>(() => AuthBloc(sl()))
+    ..registerFactory<ConfirmCodeBloc>(() => ConfirmCodeBloc(sl()))
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(
+        apiClient: authClient,
+        networkInfo: sl(),
+      ),
+    );
 }
 
 Future<void> initHive() async {

@@ -1,61 +1,72 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
-Future<T?> customBottomSheet<T>({
-  required BuildContext context,
-  required Widget child,
+Future<T?> customCupertinoModalPopup<T>(
+  BuildContext context, {
+  String title = '',
+  String actionTitleOne = '',
+  String actionTitleTwo = '',
+  required Function() actionOne,
+  required Function() actionTwo,
 }) async {
-  return await showModalBottomSheet(
+  return showCupertinoModalPopup(
     context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return child;
+    builder: (_) {
+      return CupertinoActionSheet(
+        title: Text(title),
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: actionOne,
+            child: Text(actionTitleOne),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: actionTwo,
+            child: Text(actionTitleTwo),
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          child: const Text('Cancel'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
     },
   );
 }
 
-Future<T?> cupertinoSheet<T>({
+typedef WidgetScrollBuilder = Widget Function(
+  BuildContext context,
+  ScrollController? controller,
+);
+
+Future<T?> customModalBottomSheet<T>({
   required BuildContext context,
-  required Widget title,
-  required List<Widget> children,
+  required WidgetScrollBuilder builder,
+  bool isScrollControlled = false,
 }) async {
-  if (Platform.isIOS) {
-    return await showCupertinoModalPopup(
-      context: context,
-      builder: (ctx) {
-        return CupertinoActionSheet(
-          title: title,
-          actions: List.generate(
-            children.length,
-            (index) => CupertinoActionSheetAction(
-              onPressed: () {},
-              child: children[index],
-            ),
-          ),
-          cancelButton: CupertinoActionSheetAction(
-            child: const Text("Cancel"),
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-          ),
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    constraints: BoxConstraints(
+      maxHeight: context.mediaQuery.size.height * 0.9,
+      minHeight: context.mediaQuery.size.height * 0.2,
+    ),
+    builder: (_) {
+      if (isScrollControlled) {
+        return DraggableScrollableSheet(
+          initialChildSize: 1,
+          minChildSize: 0.5,
+          expand: false,
+          snap: true,
+          builder: (context, controller) {
+            return builder(context, controller);
+          },
         );
-      },
-    );
-  } else {
-    return await showModalBottomSheet(
-      context: context,
-      builder: (ctx) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            title,
-            ...children,
-          ],
-        );
-      },
-    );
-  }
+      } else {
+        return builder(context, null);
+      }
+    },
+  );
 }

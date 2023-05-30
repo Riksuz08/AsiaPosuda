@@ -66,7 +66,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Confirm code")),
+        appBar: AppBar(title: const Text('Confirm code')),
         body: Center(
           child: Pinput(
             length: 6,
@@ -75,11 +75,6 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
             defaultPinTheme: defaultPinTheme,
             focusedPinTheme: focusedPinTheme,
             submittedPinTheme: submittedPinTheme,
-            validator: (s) {
-              return s == '2222' ? null : 'Pin is incorrect';
-            },
-            pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-            showCursor: true,
             onCompleted: (pin) {
               if (pin.length == 6) {
                 context.read<ConfirmCodeBloc>().add(
@@ -113,7 +108,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
                             );
                       }
                     : null,
-                child: const Text("Продолжить"),
+                child: const Text('Продолжить'),
               );
             },
           ),
