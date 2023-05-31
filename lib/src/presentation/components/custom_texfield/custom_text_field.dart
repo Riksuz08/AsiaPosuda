@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medion_client_mobile/src/config/themes/app_colors.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -57,17 +57,16 @@ class CustomTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 4),
             child: Text(
-              "$titleText",
+              '$titleText',
               style: const TextStyle(
                 fontSize: 12,
                 height: 14 / 12,
-                color: AppColors.text1,
                 fontWeight: FontWeight.w400,
               ),
             ),
           ),
         TextFormField(
-          validator:(value) => validator!(value),
+          validator: (value) => validator!(value),
           textCapitalization: TextCapitalization.sentences,
           readOnly: readOnly,
           enabled: enabled ?? true,
@@ -78,7 +77,6 @@ class CustomTextField extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14,
             height: 16 / 14,
-            color: AppColors.text1,
             fontWeight: FontWeight.w400,
           ),
           textInputAction: inputAction ?? TextInputAction.next,
@@ -88,7 +86,7 @@ class CustomTextField extends StatelessWidget {
             errorText: showError ? errorText : null,
             hintText: hintText,
           ),
-          cursorColor: AppColors.assets,
+          cursorColor: context.color.primary,
           keyboardType: keyboardType,
           maxLines: maxLines ?? 1,
           minLines: minLines ?? 1,

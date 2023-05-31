@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+ 
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/modal_progress_hud.dart';
 

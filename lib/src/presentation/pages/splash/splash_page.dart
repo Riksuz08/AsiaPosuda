@@ -32,12 +32,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       });
     _scaleAnimation = TweenSequence<double>([
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: 1.0, end: 0.95),
-        weight: 1.0,
+        tween: Tween<double>(begin: 1, end: 0.95),
+        weight: 1,
       ),
       TweenSequenceItem<double>(
         tween: Tween<double>(begin: 0.95, end: 1.5),
-        weight: 2.0,
+        weight: 2,
       ),
     ]).animate(_scaleController);
     _opacityController = AnimationController(

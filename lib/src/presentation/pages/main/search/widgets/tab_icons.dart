@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class TabIcon extends StatelessWidget {
@@ -32,7 +31,6 @@ class TabIcon extends StatelessWidget {
             borderRadius: AppUtils.kBorderRadius10,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(

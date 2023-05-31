@@ -23,12 +23,7 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
 
 final localSource = sl<LocalSource>();
 
-Chuck chuck = Chuck(
-  showNotification: true,
-  showInspectorOnShake: false,
-  darkTheme: false,
-  navigatorKey: rootNavigatorKey,
-);
+Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
 final class AppRoutes {
   AppRoutes._();
@@ -61,7 +56,7 @@ final class AppRoutes {
           ),
         );
       case Routes.confirmCode:
-        final AuthSuccessState state = settings.arguments as AuthSuccessState;
+        final AuthSuccessState state = settings.arguments! as AuthSuccessState;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => sl<ConfirmCodeBloc>(),
@@ -77,7 +72,7 @@ final class AppRoutes {
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {
     if (kDebugMode) {
-      print("Navigate to: $settings");
+      print('Navigate to: $settings');
     }
     return MaterialPageRoute(
       builder: (_) => ErrorPage(

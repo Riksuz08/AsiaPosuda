@@ -25,7 +25,7 @@ class AppLocalizations {
 
   static Future<AppLocalizations> load(Locale locale) async {
     String jsonContent = await rootBundle.loadString(
-      "assets/locale/${locale.languageCode}.json",
+      'assets/locale/${locale.languageCode}.json',
     );
     _localizedValues = jsonDecode(jsonContent);
 

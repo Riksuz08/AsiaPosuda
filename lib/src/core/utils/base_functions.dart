@@ -1,27 +1,15 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class BaseFunctions {
-  BaseFunctions._();
+final String defaultSystemLocale = Platform.localeName.split('_').first;
 
-  static String getDefaultLocale() {
-    final String defaultSystemLocale = Platform.localeName;
-    switch (defaultSystemLocale.split("_").first) {
-      case "ru":
-        return "ru";
-      case "en":
-        return "en";
-      case "uz":
-        return "uz";
-      default:
-        return "ru";
-    }
-  }
+String get defaultLocale => switch (defaultSystemLocale) {
+      'ru' => 'ru',
+      'en' => 'en',
+      'uz' => 'uz',
+      _ => 'ru',
+    };
 
-  static String getDefaultTheme() {
-    Brightness brightness = SchedulerBinding.instance.window.platformBrightness;
-    return brightness.name;
-  }
-}
+String get defaultTheme =>
+    SchedulerBinding.instance.platformDispatcher.platformBrightness.name;

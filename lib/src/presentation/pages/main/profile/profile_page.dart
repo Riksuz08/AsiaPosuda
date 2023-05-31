@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 import 'widgets/logout_dialog.dart';

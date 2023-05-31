@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'themes.dart';
 
 class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
   final TextStyle appBarTitle;

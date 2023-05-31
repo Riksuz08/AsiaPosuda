@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medion_client_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class CardsClipRRect extends StatelessWidget {
   final Widget child;
@@ -10,8 +10,9 @@ class CardsClipRRect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 1,
-      color: Theme.of(context).cardColor,
-      shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
+      color: context.theme.cardColor,
+      surfaceTintColor: context.theme.cardColor,
+      shadowColor: context.theme.shadowColor,
       type: MaterialType.card,
       borderRadius: AppUtils.kBorderRadius8,
       child: ClipRRect(

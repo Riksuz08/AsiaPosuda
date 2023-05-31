@@ -35,15 +35,15 @@ final class LocalSource {
     await box.put(AppKeys.imageUrl, imageUrl);
   }
 
-  String get accessToken => box.get(AppKeys.accessToken, defaultValue: "");
+  String get accessToken => box.get(AppKeys.accessToken, defaultValue: '');
 
-  String get fullName => box.get(AppKeys.fullName, defaultValue: "");
+  String get fullName => box.get(AppKeys.fullName, defaultValue: '');
 
-  String get userId => box.get(AppKeys.userId, defaultValue: "");
+  String get userId => box.get(AppKeys.userId, defaultValue: '');
 
   String get locale => box.get(
         AppKeys.languageCode,
-        defaultValue: BaseFunctions.getDefaultLocale(),
+        defaultValue: defaultLocale,
       );
 
   Future<void> setThemeMode(ThemeMode mode) async {
@@ -54,17 +54,17 @@ final class LocalSource {
     await box.put(AppKeys.languageCode, lang);
   }
 
-  ThemeMode Function() get themeMode => () {
-        switch (box.get(AppKeys.themeMode)) {
-          case "system":
-            return ThemeMode.system;
-          case "light":
-            return ThemeMode.light;
-          case "dark":
-            return ThemeMode.dark;
-          default:
-            return ThemeMode.system;
-        }
+  Future<void> setKey(String key, dynamic value) async {
+    await box.put(key, value);
+  }
+
+  String getKey(String key) => box.get(key, defaultValue: '');
+
+  ThemeMode get themeMode => switch (box.get(AppKeys.themeMode)) {
+        'system' => ThemeMode.system,
+        'light' => ThemeMode.light,
+        'dark' => ThemeMode.dark,
+        _ => ThemeMode.system,
       };
 
   Future<void> clear() async {

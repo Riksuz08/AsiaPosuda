@@ -39,7 +39,6 @@ class ThemeBottomWidget extends StatelessWidget {
             title: const Text('dark'),
           ),
         ),
-
       ],
     );
   }

@@ -9,7 +9,7 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import 'src/app_options.dart';
 import 'src/config/router/app_routes.dart';
-import 'src/config/themes/app_themes.dart';
+import 'src/config/themes/themes.dart';
 import 'src/injector_container.dart';
 import 'src/core/l10n/app_localizations.dart';
 import 'src/core/constants/constants.dart';
@@ -43,7 +43,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModelBinding(
       initialModel: AppOptions(
-        themeMode: localSource.themeMode(),
+        themeMode: localSource.themeMode,
         textScaleFactor: systemTextScaleFactorOption,
         customTextDirection: CustomTextDirection.localeBased,
         locale: Locale(localSource.locale),
@@ -92,8 +92,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback = (cert, host, port) => true;
   }
 }
 

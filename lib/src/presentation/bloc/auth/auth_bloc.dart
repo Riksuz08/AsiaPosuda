@@ -31,11 +31,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final result = await authRepository.codeMessage(
       request: SendMessageRequest(
-        clientType: "WEB_USER",
-        email: "",
-        googleToken: "",
+        clientType: 'WEB_USER',
+        email: '',
+        googleToken: '',
         phone: "+998${event.phone.replaceAll(" ", "")}",
-        registerType: "phone",
+        registerType: 'phone',
       ),
     );
     result.fold(

@@ -25,7 +25,10 @@ Future showAlertDialog({
         actions: <Widget>[
           if (cancelActionText != null)
             TextButton(
-              child: Text(cancelActionText,style: Theme.of(context).dialogTheme.contentTextStyle,),
+              child: Text(
+                cancelActionText,
+                style: Theme.of(context).dialogTheme.contentTextStyle,
+              ),
               onPressed: () => Navigator.of(context).pop(false),
             ),
           TextButton(
@@ -57,7 +60,7 @@ Future showAlertDialog({
           CupertinoDialogAction(
             child: Text(
               defaultActionText,
-              style: Theme.of(context).primaryTextTheme.headline5,
+              style: Theme.of(context).primaryTextTheme.bodySmall,
             ),
             onPressed: () => Navigator.of(context).pop(true),
           ),

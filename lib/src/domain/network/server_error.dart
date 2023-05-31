@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart' hide Headers;
 
-class ServerError implements Exception {
+final class ServerError implements Exception {
   int? _errorCode;
-  String _errorMessage = "";
+  String _errorMessage = '';
 
   ServerError.withDioError({required DioError error}) {
     _handleError(error);
@@ -23,38 +23,38 @@ class ServerError implements Exception {
   void _handleError(DioError error) {
     _errorCode = error.response?.statusCode ?? 500;
     if (_errorCode == 500) {
-      _errorMessage = "Server error";
+      _errorMessage = 'Server error';
       return;
     }
     if (_errorCode == 502) {
-      _errorMessage = "Server down";
+      _errorMessage = 'Server down';
       return;
     }
     if (_errorCode == 404) {
-      _errorMessage = "Not Found";
+      _errorMessage = 'Not Found';
       return;
     }
     if (_errorCode == 413) {
-      _errorMessage = "Request Entity Too Large";
+      _errorMessage = 'Request Entity Too Large';
       return;
     }
     if (_errorCode == 401) {
-      _errorMessage = "Token expired";
+      _errorMessage = 'Token expired';
       return;
     }
     if (_errorCode == 403) {
-      _errorMessage = "Token expired";
+      _errorMessage = 'Token expired';
       return;
     }
     switch (error.type) {
       case DioErrorType.connectionTimeout:
-        _errorMessage = "Connection timeout";
+        _errorMessage = 'Connection timeout';
         break;
       case DioErrorType.sendTimeout:
-        _errorMessage = "Connection timeout";
+        _errorMessage = 'Connection timeout';
         break;
       case DioErrorType.receiveTimeout:
-        _errorMessage = "Connection timeout";
+        _errorMessage = 'Connection timeout';
         break;
       case DioErrorType.badResponse:
         {
@@ -66,16 +66,16 @@ class ServerError implements Exception {
           break;
         }
       case DioErrorType.cancel:
-        _errorMessage = "Canceled";
+        _errorMessage = 'Canceled';
         break;
       case DioErrorType.unknown:
-        _errorMessage = "Something wrong";
+        _errorMessage = 'Something wrong';
         break;
       case DioErrorType.badCertificate:
-        _errorMessage = "Bad certificate";
+        _errorMessage = 'Bad certificate';
         break;
       case DioErrorType.connectionError:
-        _errorMessage = "Connection error";
+        _errorMessage = 'Connection error';
         break;
     }
     return;

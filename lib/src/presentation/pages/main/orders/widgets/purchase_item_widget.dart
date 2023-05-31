@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
-import 'package:sample_bloc_mobile/src/config/themes/theme_colors.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/paint/horizontal_line.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/paint/horizontal_line_painter.dart';
 
 class PurchaseItemWidget extends StatelessWidget {
   final Function()? onTap;
@@ -23,7 +21,7 @@ class PurchaseItemWidget extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -38,24 +36,24 @@ class PurchaseItemWidget extends StatelessWidget {
                             ClipOval(
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                                    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80',
                                 width: 24,
                                 height: 24,
                                 fit: BoxFit.cover,
                               ),
                             ),
                             AppUtils.kBoxWidth8,
-                            const Text("20:50"),
+                            const Text('20:50'),
                             AppUtils.kBoxWidth8,
                             const CustomPaint(
                               painter: HorizontalLine(),
                               size: Size(60, 16),
                             ),
                             AppUtils.kBoxWidth8,
-                            const Text("20:50"),
+                            const Text('20:50'),
                             AppUtils.kSpacer,
                             const Text(
-                              "3 час 52",
+                              '3 час 52',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15,
@@ -68,22 +66,22 @@ class PurchaseItemWidget extends StatelessWidget {
                             const SizedBox(width: 35),
                             const Expanded(
                               child: Text(
-                                "DME",
+                                'DME',
                               ),
                             ),
                             const SizedBox(width: 75),
                             const Expanded(
-                              child: Text("DME"),
+                              child: Text('DME'),
                             ),
                             AppUtils.kSpacer,
                             RichText(
                               text: const TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "TJM",
+                                    text: 'TJM',
                                   ),
                                   TextSpan(
-                                    text: " 40мин",
+                                    text: ' 40мин',
                                   )
                                 ],
                               ),
@@ -93,7 +91,7 @@ class PurchaseItemWidget extends StatelessWidget {
                         AppUtils.kBoxHeight8,
                         const Row(
                           children: [
-                            Text("Turkish airlines"),
+                            Text('Turkish airlines'),
                           ],
                         )
                       ],

@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:sample_bloc_mobile/src/config/themes/theme_colors.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_text_styles.dart';
+part of 'themes.dart';
 
 final appTheme = ThemeData(
   useMaterial3: true,

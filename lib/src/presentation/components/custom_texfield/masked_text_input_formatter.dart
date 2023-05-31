@@ -26,7 +26,7 @@ class MaskedTextInputFormatter extends TextInputFormatter {
             ),
           );
         }
-        if (text.length == mask.replaceAll(separator, "").length &&
+        if (text.length == mask.replaceAll(separator, '').length &&
             oldValue.text.isEmpty) {
           String newText = '';
           int t = 0;

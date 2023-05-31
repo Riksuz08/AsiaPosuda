@@ -5,402 +5,393 @@ class LogoPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
-    path_0.moveTo(0, size.height * 0.3583034);
-    path_0.lineTo(0, size.height * 0.6386897);
-    path_0.cubicTo(
-        0,
-        size.height * 0.7162943,
-        size.width * 0.01048609,
-        size.height * 0.7876425,
-        size.width * 0.02764516,
-        size.height * 0.8264460);
-    path_0.lineTo(size.width * 0.08897289, size.height * 0.9666391);
-    path_0.cubicTo(
-        size.width * 0.1061321,
-        size.height * 1.005440,
-        size.width * 0.1271041,
-        size.height * 1.005440,
-        size.width * 0.1439452,
-        size.height * 0.9666391);
-    path_0.lineTo(size.width * 0.2055907, size.height * 0.8264460);
-    path_0.cubicTo(
-        size.width * 0.2227499,
-        size.height * 0.7876425,
-        size.width * 0.2332362,
-        size.height * 0.7162943,
-        size.width * 0.2332362,
-        size.height * 0.6386897);
-    path_0.lineTo(size.width * 0.2332362, size.height * 0.3583034);
-    path_0.cubicTo(
-        size.width * 0.2332362,
-        size.height * 0.2806977,
-        size.width * 0.2227499,
-        size.height * 0.2093494,
-        size.width * 0.2055907,
-        size.height * 0.1705460);
-    path_0.lineTo(size.width * 0.1439452, size.height * 0.02910241);
-    path_0.cubicTo(
-        size.width * 0.1267866,
-        size.height * -0.009700793,
-        size.width * 0.1058143,
-        size.height * -0.009700793,
-        size.width * 0.08897289,
-        size.height * 0.02910241);
-    path_0.lineTo(size.width * 0.02764516, size.height * 0.1692943);
-    path_0.cubicTo(size.width * 0.01048609, size.height * 0.2080977, 0,
-        size.height * 0.2806977, 0, size.height * 0.3583034);
-    path_0.close();
+    Path path_0 = Path()
+      ..moveTo(0, size.height * 0.3583034)
+      ..lineTo(0, size.height * 0.6386897)
+      ..cubicTo(
+          0,
+          size.height * 0.7162943,
+          size.width * 0.01048609,
+          size.height * 0.7876425,
+          size.width * 0.02764516,
+          size.height * 0.8264460)
+      ..lineTo(size.width * 0.08897289, size.height * 0.9666391)
+      ..cubicTo(
+          size.width * 0.1061321,
+          size.height * 1.005440,
+          size.width * 0.1271041,
+          size.height * 1.005440,
+          size.width * 0.1439452,
+          size.height * 0.9666391)
+      ..lineTo(size.width * 0.2055907, size.height * 0.8264460)
+      ..cubicTo(
+          size.width * 0.2227499,
+          size.height * 0.7876425,
+          size.width * 0.2332362,
+          size.height * 0.7162943,
+          size.width * 0.2332362,
+          size.height * 0.6386897)
+      ..lineTo(size.width * 0.2332362, size.height * 0.3583034)
+      ..cubicTo(
+          size.width * 0.2332362,
+          size.height * 0.2806977,
+          size.width * 0.2227499,
+          size.height * 0.2093494,
+          size.width * 0.2055907,
+          size.height * 0.1705460)
+      ..lineTo(size.width * 0.1439452, size.height * 0.02910241)
+      ..cubicTo(
+          size.width * 0.1267866,
+          size.height * -0.009700793,
+          size.width * 0.1058143,
+          size.height * -0.009700793,
+          size.width * 0.08897289,
+          size.height * 0.02910241)
+      ..lineTo(size.width * 0.02764516, size.height * 0.1692943)
+      ..cubicTo(size.width * 0.01048609, size.height * 0.2080977, 0,
+          size.height * 0.2806977, 0, size.height * 0.3583034)
+      ..close();
 
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = Colors.white.withOpacity(0.08);
+    Paint paint0Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(0.08);
     canvas.drawPath(path_0, paint0Fill);
 
-    Path path_1 = Path();
-    path_1.moveTo(size.width * 0.1192907, size.height * 0.7653402);
-    path_1.cubicTo(
-        size.width * 0.1154029,
-        size.height * 0.7653402,
-        size.width * 0.1115157,
-        size.height * 0.7615115,
-        size.width * 0.1078714,
-        size.height * 0.7538563);
-    path_1.lineTo(size.width * 0.07240029, size.height * 0.6772908);
-    path_1.cubicTo(
-        size.width * 0.06000962,
-        size.height * 0.6504943,
-        size.width * 0.05247813,
-        size.height * 0.6007287,
-        size.width * 0.05247813,
-        size.height * 0.5471345);
-    path_1.lineTo(size.width * 0.05247813, size.height * 0.4303759);
-    path_1.cubicTo(
-        size.width * 0.05247813,
-        size.height * 0.3767805,
-        size.width * 0.06025277,
-        size.height * 0.3270149,
-        size.width * 0.07240029,
-        size.height * 0.3002184);
-    path_1.lineTo(size.width * 0.1032557, size.height * 0.2341816);
-    path_1.cubicTo(
-        size.width * 0.1129738,
-        size.height * 0.2131276,
-        size.width * 0.1253644,
-        size.height * 0.2131276,
-        size.width * 0.1350825,
-        size.height * 0.2341816);
-    path_1.cubicTo(
-        size.width * 0.1353251,
-        size.height * 0.2351391,
-        size.width * 0.1355685,
-        size.height * 0.2351391,
-        size.width * 0.1358114,
-        size.height * 0.2360966);
-    path_1.lineTo(size.width * 0.1712828, size.height * 0.3251023);
-    path_1.cubicTo(
-        size.width * 0.1771137,
-        size.height * 0.3394563,
-        size.width * 0.1807580,
-        size.height * 0.3633828,
-        size.width * 0.1807580,
-        size.height * 0.3901805);
-    path_1.cubicTo(
-        size.width * 0.1807580,
-        size.height * 0.4169770,
-        size.width * 0.1773566,
-        size.height * 0.4418609,
-        size.width * 0.1712828,
-        size.height * 0.4562149);
-    path_1.cubicTo(
-        size.width * 0.1710394,
-        size.height * 0.4571724,
-        size.width * 0.1707968,
-        size.height * 0.4571724,
-        size.width * 0.1705539,
-        size.height * 0.4581299);
-    path_1.lineTo(size.width * 0.1375122, size.height * 0.5279931);
-    path_1.cubicTo(
-        size.width * 0.1311950,
-        size.height * 0.5413931,
-        size.width * 0.1231778,
-        size.height * 0.5318207,
-        size.width * 0.1197764,
-        size.height * 0.5069391);
-    path_1.cubicTo(
-        size.width * 0.1163749,
-        size.height * 0.4810989,
-        size.width * 0.1188047,
-        size.height * 0.4504736,
-        size.width * 0.1251216,
-        size.height * 0.4361184);
-    path_1.lineTo(size.width * 0.1477163, size.height * 0.3892230);
-    path_1.lineTo(size.width * 0.1224490, size.height * 0.3251023);
-    path_1.cubicTo(
-        size.width * 0.1205052,
-        size.height * 0.3212724,
-        size.width * 0.1180755,
-        size.height * 0.3212724,
-        size.width * 0.1161321,
-        size.height * 0.3260575);
-    path_1.lineTo(size.width * 0.08527726, size.height * 0.3920943);
-    path_1.cubicTo(
-        size.width * 0.08138950,
-        size.height * 0.4007069,
-        size.width * 0.07896006,
-        size.height * 0.4150621,
-        size.width * 0.07896006,
-        size.height * 0.4303759);
-    path_1.lineTo(size.width * 0.07896006, size.height * 0.5480920);
-    path_1.cubicTo(
-        size.width * 0.07896006,
-        size.height * 0.5634046,
-        size.width * 0.08138950,
-        size.height * 0.5787161,
-        size.width * 0.08527726,
-        size.height * 0.5863736);
-    path_1.lineTo(size.width * 0.1195335, size.height * 0.6600644);
-    path_1.lineTo(size.width * 0.1571915, size.height * 0.5787161);
-    path_1.cubicTo(
-        size.width * 0.1635079,
-        size.height * 0.5653172,
-        size.width * 0.1715257,
-        size.height * 0.5739322,
-        size.width * 0.1751700,
-        size.height * 0.5997713);
-    path_1.cubicTo(
-        size.width * 0.1785711,
-        size.height * 0.6246552,
-        size.width * 0.1763845,
-        size.height * 0.6562368,
-        size.width * 0.1698248,
-        size.height * 0.6705931);
-    path_1.lineTo(size.width * 0.1309522, size.height * 0.7538563);
-    path_1.cubicTo(
-        size.width * 0.1273079,
-        size.height * 0.7615115,
-        size.width * 0.1234207,
-        size.height * 0.7653402,
-        size.width * 0.1192907,
-        size.height * 0.7653402);
-    path_1.close();
+    Path path_1 = Path()
+      ..cubicTo(
+          size.width * 0.1154029,
+          size.height * 0.7653402,
+          size.width * 0.1115157,
+          size.height * 0.7615115,
+          size.width * 0.1078714,
+          size.height * 0.7538563)
+      ..cubicTo(
+          size.width * 0.06000962,
+          size.height * 0.6504943,
+          size.width * 0.05247813,
+          size.height * 0.6007287,
+          size.width * 0.05247813,
+          size.height * 0.5471345)
+      ..cubicTo(
+          size.width * 0.05247813,
+          size.height * 0.3767805,
+          size.width * 0.06025277,
+          size.height * 0.3270149,
+          size.width * 0.07240029,
+          size.height * 0.3002184)
+      ..cubicTo(
+          size.width * 0.1129738,
+          size.height * 0.2131276,
+          size.width * 0.1253644,
+          size.height * 0.2131276,
+          size.width * 0.1350825,
+          size.height * 0.2341816)
+      ..cubicTo(
+          size.width * 0.1353251,
+          size.height * 0.2351391,
+          size.width * 0.1355685,
+          size.height * 0.2351391,
+          size.width * 0.1358114,
+          size.height * 0.2360966)
+      ..cubicTo(
+          size.width * 0.1771137,
+          size.height * 0.3394563,
+          size.width * 0.1807580,
+          size.height * 0.3633828,
+          size.width * 0.1807580,
+          size.height * 0.3901805)
+      ..cubicTo(
+          size.width * 0.1807580,
+          size.height * 0.4169770,
+          size.width * 0.1773566,
+          size.height * 0.4418609,
+          size.width * 0.1712828,
+          size.height * 0.4562149)
+      ..cubicTo(
+          size.width * 0.1710394,
+          size.height * 0.4571724,
+          size.width * 0.1707968,
+          size.height * 0.4571724,
+          size.width * 0.1705539,
+          size.height * 0.4581299)
+      ..cubicTo(
+          size.width * 0.1311950,
+          size.height * 0.5413931,
+          size.width * 0.1231778,
+          size.height * 0.5318207,
+          size.width * 0.1197764,
+          size.height * 0.5069391)
+      ..cubicTo(
+          size.width * 0.1163749,
+          size.height * 0.4810989,
+          size.width * 0.1188047,
+          size.height * 0.4504736,
+          size.width * 0.1251216,
+          size.height * 0.4361184)
+      ..cubicTo(
+          size.width * 0.1205052,
+          size.height * 0.3212724,
+          size.width * 0.1180755,
+          size.height * 0.3212724,
+          size.width * 0.1161321,
+          size.height * 0.3260575)
+      ..cubicTo(
+          size.width * 0.08138950,
+          size.height * 0.4007069,
+          size.width * 0.07896006,
+          size.height * 0.4150621,
+          size.width * 0.07896006,
+          size.height * 0.4303759)
+      ..cubicTo(
+          size.width * 0.07896006,
+          size.height * 0.5634046,
+          size.width * 0.08138950,
+          size.height * 0.5787161,
+          size.width * 0.08527726,
+          size.height * 0.5863736)
+      ..cubicTo(
+          size.width * 0.1635079,
+          size.height * 0.5653172,
+          size.width * 0.1715257,
+          size.height * 0.5739322,
+          size.width * 0.1751700,
+          size.height * 0.5997713)
+      ..cubicTo(
+          size.width * 0.1785711,
+          size.height * 0.6246552,
+          size.width * 0.1763845,
+          size.height * 0.6562368,
+          size.width * 0.1698248,
+          size.height * 0.6705931)
+      ..cubicTo(
+          size.width * 0.1273079,
+          size.height * 0.7615115,
+          size.width * 0.1234207,
+          size.height * 0.7653402,
+          size.width * 0.1192907,
+          size.height * 0.7653402)
+      ..close();
 
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_1, paint_1_fill);
+    Paint paint1Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(1);
+    canvas.drawPath(path_1, paint1Fill);
 
-    Path path_2 = Path();
-    path_2.moveTo(size.width * 0.3127085, size.height * 0.6576529);
-    path_2.lineTo(size.width * 0.2565598, size.height * 0.6576529);
-    path_2.lineTo(size.width * 0.2565598, size.height * 0.3380943);
-    path_2.lineTo(size.width * 0.3127085, size.height * 0.3380943);
-    path_2.lineTo(size.width * 0.3127085, size.height * 0.3972701);
-    path_2.lineTo(size.width * 0.2734050, size.height * 0.3972701);
-    path_2.lineTo(size.width * 0.2734050, size.height * 0.4650575);
-    path_2.lineTo(size.width * 0.3119067, size.height * 0.4650575);
-    path_2.lineTo(size.width * 0.3119067, size.height * 0.5253103);
-    path_2.lineTo(size.width * 0.2734050, size.height * 0.5253103);
-    path_2.lineTo(size.width * 0.2734050, size.height * 0.5973977);
-    path_2.lineTo(size.width * 0.3127085, size.height * 0.5973977);
-    path_2.lineTo(size.width * 0.3127085, size.height * 0.6576529);
-    path_2.close();
+    Path path_2 = Path()
+      ..moveTo(size.width * 0.3127085, size.height * 0.6576529)
+      ..lineTo(size.width * 0.2565598, size.height * 0.6576529)
+      ..lineTo(size.width * 0.2565598, size.height * 0.3380943)
+      ..lineTo(size.width * 0.3127085, size.height * 0.3380943)
+      ..lineTo(size.width * 0.3127085, size.height * 0.3972701)
+      ..lineTo(size.width * 0.2734050, size.height * 0.3972701)
+      ..lineTo(size.width * 0.2734050, size.height * 0.4650575)
+      ..lineTo(size.width * 0.3119067, size.height * 0.4650575)
+      ..lineTo(size.width * 0.3119067, size.height * 0.5253103)
+      ..lineTo(size.width * 0.2734050, size.height * 0.5253103)
+      ..lineTo(size.width * 0.2734050, size.height * 0.5973977)
+      ..lineTo(size.width * 0.3127085, size.height * 0.5973977)
+      ..lineTo(size.width * 0.3127085, size.height * 0.6576529)
+      ..close();
 
-    Paint paint_2_fill = Paint()..style = PaintingStyle.fill;
-    paint_2_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_2, paint_2_fill);
+    Paint paint2Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_2, paint2Fill);
 
-    Path path_3 = Path();
-    path_3.moveTo(size.width * 0.3701983, size.height * 0.6576517);
-    path_3.lineTo(size.width * 0.3530875, size.height * 0.6576517);
-    path_3.lineTo(size.width * 0.3530875, size.height * 0.3972690);
-    path_3.lineTo(size.width * 0.3298251, size.height * 0.3972690);
-    path_3.lineTo(size.width * 0.3298251, size.height * 0.3380931);
-    path_3.lineTo(size.width * 0.3931924, size.height * 0.3380931);
-    path_3.lineTo(size.width * 0.3931924, size.height * 0.3972690);
-    path_3.lineTo(size.width * 0.3701983, size.height * 0.3972690);
-    path_3.lineTo(size.width * 0.3701983, size.height * 0.6576517);
-    path_3.close();
+    Path path_3 = Path()
+      ..moveTo(size.width * 0.3701983, size.height * 0.6576517)
+      ..lineTo(size.width * 0.3530875, size.height * 0.6576517)
+      ..lineTo(size.width * 0.3530875, size.height * 0.3972690)
+      ..lineTo(size.width * 0.3298251, size.height * 0.3972690)
+      ..lineTo(size.width * 0.3298251, size.height * 0.3380931)
+      ..lineTo(size.width * 0.3931924, size.height * 0.3380931)
+      ..lineTo(size.width * 0.3931924, size.height * 0.3972690)
+      ..lineTo(size.width * 0.3701983, size.height * 0.3972690)
+      ..lineTo(size.width * 0.3701983, size.height * 0.6576517)
+      ..close();
 
-    Paint paint_3_fill = Paint()..style = PaintingStyle.fill;
-    paint_3_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_3, paint_3_fill);
+    Paint paint3Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_3, paint3Fill);
 
-    Path path_4 = Path();
-    path_4.moveTo(size.width * 0.4410525, size.height * 0.6630287);
-    path_4.cubicTo(
-        size.width * 0.4268805,
-        size.height * 0.6630287,
-        size.width * 0.4159184,
-        size.height * 0.6458149,
-        size.width * 0.4076297,
-        size.height * 0.6124586);
-    path_4.lineTo(size.width * 0.4167201, size.height * 0.5608126);
-    path_4.cubicTo(
-        size.width * 0.4234052,
-        size.height * 0.5898644,
-        size.width * 0.4319621,
-        size.height * 0.6038506,
-        size.width * 0.4418542,
-        size.height * 0.6038506);
-    path_4.cubicTo(
-        size.width * 0.4461312,
-        size.height * 0.6038506,
-        size.width * 0.4496064,
-        size.height * 0.6006241,
-        size.width * 0.4520146,
-        size.height * 0.5930920);
-    path_4.cubicTo(
-        size.width * 0.4544198,
-        size.height * 0.5866356,
-        size.width * 0.4557580,
-        size.height * 0.5780299,
-        size.width * 0.4557580,
-        size.height * 0.5683448);
-    path_4.cubicTo(
-        size.width * 0.4557580,
-        size.height * 0.5597391,
-        size.width * 0.4546880,
-        size.height * 0.5522069,
-        size.width * 0.4522799,
-        size.height * 0.5468276);
-    path_4.cubicTo(
-        size.width * 0.4501429,
-        size.height * 0.5414460,
-        size.width * 0.4472012,
-        size.height * 0.5371425,
-        size.width * 0.4437259,
-        size.height * 0.5339149);
-    path_4.cubicTo(
-        size.width * 0.4402507,
-        size.height * 0.5317632,
-        size.width * 0.4367726,
-        size.height * 0.5274598,
-        size.width * 0.4327638,
-        size.height * 0.5231540);
-    path_4.cubicTo(
-        size.width * 0.4287522,
-        size.height * 0.5188517,
-        size.width * 0.4250087,
-        size.height * 0.5123954,
-        size.width * 0.4217988,
-        size.height * 0.5070161);
-    path_4.cubicTo(
-        size.width * 0.4183236,
-        size.height * 0.5005598,
-        size.width * 0.4156501,
-        size.height * 0.4908759,
-        size.width * 0.4132449,
-        size.height * 0.4779655);
-    path_4.cubicTo(
-        size.width * 0.4108367,
-        size.height * 0.4650540,
-        size.width * 0.4097668,
-        size.height * 0.4489138,
-        size.width * 0.4097668,
-        size.height * 0.4295460);
-    path_4.cubicTo(
-        size.width * 0.4097668,
-        size.height * 0.4015724,
-        size.width * 0.4124431,
-        size.height * 0.3789770,
-        size.width * 0.4180554,
-        size.height * 0.3606851);
-    path_4.cubicTo(
-        size.width * 0.4234052,
-        size.height * 0.3423943,
-        size.width * 0.4308921,
-        size.height * 0.3327115,
-        size.width * 0.4399825,
-        size.height * 0.3327115);
-    path_4.cubicTo(
-        size.width * 0.4525481,
-        size.height * 0.3327115,
-        size.width * 0.4629767,
-        size.height * 0.3477736,
-        size.width * 0.4709971,
-        size.height * 0.3768264);
-    path_4.lineTo(size.width * 0.4616385, size.height * 0.4263195);
-    path_4.cubicTo(
-        size.width * 0.4554898,
-        size.height * 0.4026494,
-        size.width * 0.4477347,
-        size.height * 0.3918885,
-        size.width * 0.4386443,
-        size.height * 0.3918885);
-    path_4.cubicTo(
-        size.width * 0.4351691,
-        size.height * 0.3918885,
-        size.width * 0.4322274,
-        size.height * 0.3951172,
-        size.width * 0.4303557,
-        size.height * 0.4004966);
-    path_4.cubicTo(
-        size.width * 0.4284840,
-        size.height * 0.4058759,
-        size.width * 0.4274140,
-        size.height * 0.4144839,
-        size.width * 0.4274140,
-        size.height * 0.4241667);
-    path_4.cubicTo(
-        size.width * 0.4274140,
-        size.height * 0.4316989,
-        size.width * 0.4284840,
-        size.height * 0.4381552,
-        size.width * 0.4308921,
-        size.height * 0.4435345);
-    path_4.cubicTo(
-        size.width * 0.4330292,
-        size.height * 0.4489138,
-        size.width * 0.4359708,
-        size.height * 0.4532195,
-        size.width * 0.4394461,
-        size.height * 0.4553701);
-    path_4.cubicTo(
-        size.width * 0.4429242,
-        size.height * 0.4575218,
-        size.width * 0.4463994,
-        size.height * 0.4618253,
-        size.width * 0.4504082,
-        size.height * 0.4661287);
-    path_4.cubicTo(
-        size.width * 0.4544198,
-        size.height * 0.4715103,
-        size.width * 0.4578950,
-        size.height * 0.4768897,
-        size.width * 0.4613732,
-        size.height * 0.4833460);
-    path_4.cubicTo(
-        size.width * 0.4648484,
-        size.height * 0.4898011,
-        size.width * 0.4675219,
-        size.height * 0.4994839,
-        size.width * 0.4699271,
-        size.height * 0.5123954);
-    path_4.cubicTo(
-        size.width * 0.4720671,
-        size.height * 0.5253069,
-        size.width * 0.4734023,
-        size.height * 0.5414460,
-        size.width * 0.4734023,
-        size.height * 0.5597391);
-    path_4.cubicTo(
-        size.width * 0.4734023,
-        size.height * 0.5898644,
-        size.width * 0.4707289,
-        size.height * 0.6146115,
-        size.width * 0.4653819,
-        size.height * 0.6339793);
-    path_4.cubicTo(
-        size.width * 0.4592332,
-        size.height * 0.6533460,
-        size.width * 0.4512128,
-        size.height * 0.6630287,
-        size.width * 0.4410525,
-        size.height * 0.6630287);
-    path_4.close();
+    Path path_4 = Path()
+      ..moveTo(size.width * 0.4410525, size.height * 0.6630287)
+      ..cubicTo(
+          size.width * 0.4268805,
+          size.height * 0.6630287,
+          size.width * 0.4159184,
+          size.height * 0.6458149,
+          size.width * 0.4076297,
+          size.height * 0.6124586)
+      ..lineTo(size.width * 0.4167201, size.height * 0.5608126)
+      ..cubicTo(
+          size.width * 0.4234052,
+          size.height * 0.5898644,
+          size.width * 0.4319621,
+          size.height * 0.6038506,
+          size.width * 0.4418542,
+          size.height * 0.6038506)
+      ..cubicTo(
+          size.width * 0.4461312,
+          size.height * 0.6038506,
+          size.width * 0.4496064,
+          size.height * 0.6006241,
+          size.width * 0.4520146,
+          size.height * 0.5930920)
+      ..cubicTo(
+          size.width * 0.4544198,
+          size.height * 0.5866356,
+          size.width * 0.4557580,
+          size.height * 0.5780299,
+          size.width * 0.4557580,
+          size.height * 0.5683448)
+      ..cubicTo(
+          size.width * 0.4557580,
+          size.height * 0.5597391,
+          size.width * 0.4546880,
+          size.height * 0.5522069,
+          size.width * 0.4522799,
+          size.height * 0.5468276)
+      ..cubicTo(
+          size.width * 0.4501429,
+          size.height * 0.5414460,
+          size.width * 0.4472012,
+          size.height * 0.5371425,
+          size.width * 0.4437259,
+          size.height * 0.5339149)
+      ..cubicTo(
+          size.width * 0.4402507,
+          size.height * 0.5317632,
+          size.width * 0.4367726,
+          size.height * 0.5274598,
+          size.width * 0.4327638,
+          size.height * 0.5231540)
+      ..cubicTo(
+          size.width * 0.4287522,
+          size.height * 0.5188517,
+          size.width * 0.4250087,
+          size.height * 0.5123954,
+          size.width * 0.4217988,
+          size.height * 0.5070161)
+      ..cubicTo(
+          size.width * 0.4183236,
+          size.height * 0.5005598,
+          size.width * 0.4156501,
+          size.height * 0.4908759,
+          size.width * 0.4132449,
+          size.height * 0.4779655)
+      ..cubicTo(
+          size.width * 0.4108367,
+          size.height * 0.4650540,
+          size.width * 0.4097668,
+          size.height * 0.4489138,
+          size.width * 0.4097668,
+          size.height * 0.4295460)
+      ..cubicTo(
+          size.width * 0.4097668,
+          size.height * 0.4015724,
+          size.width * 0.4124431,
+          size.height * 0.3789770,
+          size.width * 0.4180554,
+          size.height * 0.3606851)
+      ..cubicTo(
+          size.width * 0.4234052,
+          size.height * 0.3423943,
+          size.width * 0.4308921,
+          size.height * 0.3327115,
+          size.width * 0.4399825,
+          size.height * 0.3327115)
+      ..cubicTo(
+          size.width * 0.4525481,
+          size.height * 0.3327115,
+          size.width * 0.4629767,
+          size.height * 0.3477736,
+          size.width * 0.4709971,
+          size.height * 0.3768264)
+      ..lineTo(size.width * 0.4616385, size.height * 0.4263195)
+      ..cubicTo(
+          size.width * 0.4554898,
+          size.height * 0.4026494,
+          size.width * 0.4477347,
+          size.height * 0.3918885,
+          size.width * 0.4386443,
+          size.height * 0.3918885)
+      ..cubicTo(
+          size.width * 0.4351691,
+          size.height * 0.3918885,
+          size.width * 0.4322274,
+          size.height * 0.3951172,
+          size.width * 0.4303557,
+          size.height * 0.4004966)
+      ..cubicTo(
+          size.width * 0.4284840,
+          size.height * 0.4058759,
+          size.width * 0.4274140,
+          size.height * 0.4144839,
+          size.width * 0.4274140,
+          size.height * 0.4241667)
+      ..cubicTo(
+          size.width * 0.4274140,
+          size.height * 0.4316989,
+          size.width * 0.4284840,
+          size.height * 0.4381552,
+          size.width * 0.4308921,
+          size.height * 0.4435345)
+      ..cubicTo(
+          size.width * 0.4330292,
+          size.height * 0.4489138,
+          size.width * 0.4359708,
+          size.height * 0.4532195,
+          size.width * 0.4394461,
+          size.height * 0.4553701)
+      ..cubicTo(
+          size.width * 0.4429242,
+          size.height * 0.4575218,
+          size.width * 0.4463994,
+          size.height * 0.4618253,
+          size.width * 0.4504082,
+          size.height * 0.4661287)
+      ..cubicTo(
+          size.width * 0.4544198,
+          size.height * 0.4715103,
+          size.width * 0.4578950,
+          size.height * 0.4768897,
+          size.width * 0.4613732,
+          size.height * 0.4833460)
+      ..cubicTo(
+          size.width * 0.4648484,
+          size.height * 0.4898011,
+          size.width * 0.4675219,
+          size.height * 0.4994839,
+          size.width * 0.4699271,
+          size.height * 0.5123954)
+      ..cubicTo(
+          size.width * 0.4720671,
+          size.height * 0.5253069,
+          size.width * 0.4734023,
+          size.height * 0.5414460,
+          size.width * 0.4734023,
+          size.height * 0.5597391)
+      ..cubicTo(
+          size.width * 0.4734023,
+          size.height * 0.5898644,
+          size.width * 0.4707289,
+          size.height * 0.6146115,
+          size.width * 0.4653819,
+          size.height * 0.6339793)
+      ..cubicTo(
+          size.width * 0.4592332,
+          size.height * 0.6533460,
+          size.width * 0.4512128,
+          size.height * 0.6630287,
+          size.width * 0.4410525,
+          size.height * 0.6630287)
+      ..close();
 
-    Paint paint_4_fill = Paint()..style = PaintingStyle.fill;
-    paint_4_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_4, paint_4_fill);
+    Paint paint4Fill = Paint()..style = PaintingStyle.fill;
+    paint4Fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_4, paint4Fill);
 
     Path path_5 = Path();
     path_5.moveTo(size.width * 0.5155335, size.height * 0.6383356);
@@ -1184,170 +1175,173 @@ class LogoPainter extends CustomPainter {
     path_15.lineTo(size.width * 0.9262303, size.height * 0.6383322);
     path_15.close();
 
-    Paint paint_15_fill = Paint()..style = PaintingStyle.fill;
-    paint_15_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_15, paint_15_fill);
+    Paint paint15Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(1);
+    canvas.drawPath(path_15, paint15Fill);
 
-    Path path_16 = Path();
-    path_16.moveTo(size.width * 0.9743528, size.height * 0.6383345);
-    path_16.lineTo(size.width * 0.9641953, size.height * 0.6383345);
-    path_16.lineTo(size.width * 0.9641953, size.height * 0.6178908);
-    path_16.cubicTo(
-        size.width * 0.9612507,
-        size.height * 0.6351057,
-        size.width * 0.9567085,
-        size.height * 0.6437138,
-        size.width * 0.9510933,
-        size.height * 0.6437138);
-    path_16.cubicTo(
-        size.width * 0.9468163,
-        size.height * 0.6437138,
-        size.width * 0.9433411,
-        size.height * 0.6372586,
-        size.width * 0.9401312,
-        size.height * 0.6254230);
-    path_16.cubicTo(
-        size.width * 0.9371895,
-        size.height * 0.6135874,
-        size.width * 0.9355860,
-        size.height * 0.5974471,
-        size.width * 0.9355860,
-        size.height * 0.5770057);
-    path_16.cubicTo(
-        size.width * 0.9355860,
-        size.height * 0.5565621,
-        size.width * 0.9371895,
-        size.height * 0.5404230,
-        size.width * 0.9401312,
-        size.height * 0.5285862);
-    path_16.cubicTo(
-        size.width * 0.9430700,
-        size.height * 0.5167506,
-        size.width * 0.9468163,
-        size.height * 0.5113713,
-        size.width * 0.9510933,
-        size.height * 0.5113713);
-    path_16.cubicTo(
-        size.width * 0.9569738,
-        size.height * 0.5113713,
-        size.width * 0.9612507,
-        size.height * 0.5189034,
-        size.width * 0.9641953,
-        size.height * 0.5350414);
-    path_16.lineTo(size.width * 0.9641953, size.height * 0.5059920);
-    path_16.cubicTo(
-        size.width * 0.9641953,
-        size.height * 0.4941563,
-        size.width * 0.9633936,
-        size.height * 0.4844713,
-        size.width * 0.9617872,
-        size.height * 0.4780161);
-    path_16.cubicTo(
-        size.width * 0.9601837,
-        size.height * 0.4715621,
-        size.width * 0.9577755,
-        size.height * 0.4683333,
-        size.width * 0.9545685,
-        size.height * 0.4683333);
-    path_16.cubicTo(
-        size.width * 0.9500262,
-        size.height * 0.4683333,
-        size.width * 0.9460146,
-        size.height * 0.4758655,
-        size.width * 0.9422682,
-        size.height * 0.4909276);
-    path_16.lineTo(size.width * 0.9382566, size.height * 0.4618782);
-    path_16.cubicTo(
-        size.width * 0.9430700,
-        size.height * 0.4425103,
-        size.width * 0.9492216,
-        size.height * 0.4328276,
-        size.width * 0.9564431,
-        size.height * 0.4328276);
-    path_16.cubicTo(
-        size.width * 0.9620525,
-        size.height * 0.4328276,
-        size.width * 0.9663353,
-        size.height * 0.4382069,
-        size.width * 0.9695452,
-        size.height * 0.4500425);
-    path_16.cubicTo(
-        size.width * 0.9727493,
-        size.height * 0.4608011,
-        size.width * 0.9743528,
-        size.height * 0.4780161,
-        size.width * 0.9743528,
-        size.height * 0.5016885);
-    path_16.lineTo(size.width * 0.9743528, size.height * 0.6383345);
-    path_16.close();
-    path_16.moveTo(size.width * 0.9548397, size.height * 0.6146644);
-    path_16.cubicTo(
-        size.width * 0.9588513,
-        size.height * 0.6146644,
-        size.width * 0.9620525,
-        size.height * 0.6071322,
-        size.width * 0.9641953,
-        size.height * 0.5931437);
-    path_16.lineTo(size.width * 0.9641953, size.height * 0.5630172);
-    path_16.cubicTo(
-        size.width * 0.9631254,
-        size.height * 0.5565621,
-        size.width * 0.9617872,
-        size.height * 0.5501057,
-        size.width * 0.9601837,
-        size.height * 0.5468770);
-    path_16.cubicTo(
-        size.width * 0.9585802,
-        size.height * 0.5425736,
-        size.width * 0.9567085,
-        size.height * 0.5404230,
-        size.width * 0.9548397,
-        size.height * 0.5404230);
-    path_16.cubicTo(
-        size.width * 0.9521603,
-        size.height * 0.5404230,
-        size.width * 0.9500262,
-        size.height * 0.5436506,
-        size.width * 0.9484198,
-        size.height * 0.5511828);
-    path_16.cubicTo(
-        size.width * 0.9468163,
-        size.height * 0.5576379,
-        size.width * 0.9460146,
-        size.height * 0.5673207,
-        size.width * 0.9460146,
-        size.height * 0.5780816);
-    path_16.cubicTo(
-        size.width * 0.9460146,
-        size.height * 0.5888414,
-        size.width * 0.9468163,
-        size.height * 0.5985230,
-        size.width * 0.9484198,
-        size.height * 0.6049793);
-    path_16.cubicTo(
-        size.width * 0.9500262,
-        size.height * 0.6114345,
-        size.width * 0.9521603,
-        size.height * 0.6146644,
-        size.width * 0.9548397,
-        size.height * 0.6146644);
-    path_16.close();
+    Path path_16 = Path()
+      ..moveTo(size.width * 0.9743528, size.height * 0.6383345)
+      ..lineTo(size.width * 0.9641953, size.height * 0.6383345)
+      ..lineTo(size.width * 0.9641953, size.height * 0.6178908)
+      ..cubicTo(
+          size.width * 0.9612507,
+          size.height * 0.6351057,
+          size.width * 0.9567085,
+          size.height * 0.6437138,
+          size.width * 0.9510933,
+          size.height * 0.6437138)
+      ..cubicTo(
+          size.width * 0.9468163,
+          size.height * 0.6437138,
+          size.width * 0.9433411,
+          size.height * 0.6372586,
+          size.width * 0.9401312,
+          size.height * 0.6254230)
+      ..cubicTo(
+          size.width * 0.9371895,
+          size.height * 0.6135874,
+          size.width * 0.9355860,
+          size.height * 0.5974471,
+          size.width * 0.9355860,
+          size.height * 0.5770057)
+      ..cubicTo(
+          size.width * 0.9355860,
+          size.height * 0.5565621,
+          size.width * 0.9371895,
+          size.height * 0.5404230,
+          size.width * 0.9401312,
+          size.height * 0.5285862)
+      ..cubicTo(
+          size.width * 0.9430700,
+          size.height * 0.5167506,
+          size.width * 0.9468163,
+          size.height * 0.5113713,
+          size.width * 0.9510933,
+          size.height * 0.5113713)
+      ..cubicTo(
+          size.width * 0.9569738,
+          size.height * 0.5113713,
+          size.width * 0.9612507,
+          size.height * 0.5189034,
+          size.width * 0.9641953,
+          size.height * 0.5350414)
+      ..lineTo(size.width * 0.9641953, size.height * 0.5059920)
+      ..cubicTo(
+          size.width * 0.9641953,
+          size.height * 0.4941563,
+          size.width * 0.9633936,
+          size.height * 0.4844713,
+          size.width * 0.9617872,
+          size.height * 0.4780161)
+      ..cubicTo(
+          size.width * 0.9601837,
+          size.height * 0.4715621,
+          size.width * 0.9577755,
+          size.height * 0.4683333,
+          size.width * 0.9545685,
+          size.height * 0.4683333)
+      ..cubicTo(
+          size.width * 0.9500262,
+          size.height * 0.4683333,
+          size.width * 0.9460146,
+          size.height * 0.4758655,
+          size.width * 0.9422682,
+          size.height * 0.4909276)
+      ..lineTo(size.width * 0.9382566, size.height * 0.4618782)
+      ..cubicTo(
+          size.width * 0.9430700,
+          size.height * 0.4425103,
+          size.width * 0.9492216,
+          size.height * 0.4328276,
+          size.width * 0.9564431,
+          size.height * 0.4328276)
+      ..cubicTo(
+          size.width * 0.9620525,
+          size.height * 0.4328276,
+          size.width * 0.9663353,
+          size.height * 0.4382069,
+          size.width * 0.9695452,
+          size.height * 0.4500425)
+      ..cubicTo(
+          size.width * 0.9727493,
+          size.height * 0.4608011,
+          size.width * 0.9743528,
+          size.height * 0.4780161,
+          size.width * 0.9743528,
+          size.height * 0.5016885)
+      ..lineTo(size.width * 0.9743528, size.height * 0.6383345)
+      ..close()
+      ..moveTo(size.width * 0.9548397, size.height * 0.6146644)
+      ..cubicTo(
+          size.width * 0.9588513,
+          size.height * 0.6146644,
+          size.width * 0.9620525,
+          size.height * 0.6071322,
+          size.width * 0.9641953,
+          size.height * 0.5931437)
+      ..lineTo(size.width * 0.9641953, size.height * 0.5630172)
+      ..cubicTo(
+          size.width * 0.9631254,
+          size.height * 0.5565621,
+          size.width * 0.9617872,
+          size.height * 0.5501057,
+          size.width * 0.9601837,
+          size.height * 0.5468770)
+      ..cubicTo(
+          size.width * 0.9585802,
+          size.height * 0.5425736,
+          size.width * 0.9567085,
+          size.height * 0.5404230,
+          size.width * 0.9548397,
+          size.height * 0.5404230)
+      ..cubicTo(
+          size.width * 0.9521603,
+          size.height * 0.5404230,
+          size.width * 0.9500262,
+          size.height * 0.5436506,
+          size.width * 0.9484198,
+          size.height * 0.5511828)
+      ..cubicTo(
+          size.width * 0.9468163,
+          size.height * 0.5576379,
+          size.width * 0.9460146,
+          size.height * 0.5673207,
+          size.width * 0.9460146,
+          size.height * 0.5780816)
+      ..cubicTo(
+          size.width * 0.9460146,
+          size.height * 0.5888414,
+          size.width * 0.9468163,
+          size.height * 0.5985230,
+          size.width * 0.9484198,
+          size.height * 0.6049793)
+      ..cubicTo(
+          size.width * 0.9500262,
+          size.height * 0.6114345,
+          size.width * 0.9521603,
+          size.height * 0.6146644,
+          size.width * 0.9548397,
+          size.height * 0.6146644)
+      ..close();
 
-    Paint paint_16_fill = Paint()..style = PaintingStyle.fill;
-    paint_16_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_16, paint_16_fill);
+    Paint paint16Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white.withOpacity(1);
+    canvas.drawPath(path_16, paint16Fill);
 
-    Path path_17 = Path();
-    path_17.moveTo(size.width * 0.9970845, size.height * 0.6383356);
-    path_17.lineTo(size.width * 0.9866560, size.height * 0.6383356);
-    path_17.lineTo(size.width * 0.9866560, size.height * 0.3607391);
-    path_17.lineTo(size.width * 0.9970845, size.height * 0.3607391);
-    path_17.lineTo(size.width * 0.9970845, size.height * 0.6383356);
-    path_17.close();
+    Path path_17 = Path()
+      ..moveTo(size.width * 0.9970845, size.height * 0.6383356)
+      ..lineTo(size.width * 0.9866560, size.height * 0.6383356)
+      ..lineTo(size.width * 0.9866560, size.height * 0.3607391)
+      ..lineTo(size.width * 0.9970845, size.height * 0.3607391)
+      ..lineTo(size.width * 0.9970845, size.height * 0.6383356)
+      ..close();
 
-    Paint paint_17_fill = Paint()..style = PaintingStyle.fill;
-    paint_17_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_17, paint_17_fill);
+    Paint paint17Fill = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Colors.white;
+    canvas.drawPath(path_17, paint17Fill);
   }
 
   @override

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
@@ -45,22 +43,22 @@ class MainPage extends StatelessWidget {
             currentIndex: state.bottomMenu.index,
             items: [
               _navigationBarItem(
-                label: context.translate("search"),
+                label: context.translate('search'),
                 icon: AppIcons.search,
                 activeIcon: AppIcons.search,
               ),
               _navigationBarItem(
-                label: context.translate("orders"),
+                label: context.translate('orders'),
                 icon: AppIcons.history,
                 activeIcon: AppIcons.history,
               ),
               _navigationBarItem(
-                label: context.translate("favorites"),
+                label: context.translate('favorites'),
                 icon: AppIcons.favorite,
                 activeIcon: AppIcons.favorite_1,
               ),
               _navigationBarItem(
-                label: context.translate("profile"),
+                label: context.translate('profile'),
                 icon: AppIcons.profile,
                 activeIcon: AppIcons.active_profile,
               ),

@@ -1,6 +1,6 @@
-part of "auth_repository.dart";
+part of 'auth_repository.dart';
 
-class AuthRepositoryImpl extends AuthRepository {
+final class AuthRepositoryImpl extends AuthRepository {
   final ApiClient apiClient;
   final NetworkInfo networkInfo;
 
@@ -25,11 +25,7 @@ class AuthRepositoryImpl extends AuthRepository {
         );
       }
     } else {
-      return Left(
-        ServerFailure(
-          message: "No Internet Connection",
-        ),
-      );
+      return Left(ServerFailure(message: 'No Internet Connection'));
     }
   }
 
@@ -39,17 +35,18 @@ class AuthRepositoryImpl extends AuthRepository {
     late SendMessageResponse response;
     try {
       response = await apiClient.sendMessage(request);
-    } on TypeError catch (e, stacktrace) {
-      log("Type Error: ${e.toString()} stacktrace: $stacktrace");
-      throw ServerError.withError(message: e.toString());
     } on DioError catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withDioError(error: error);
     } on SocketException catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withError(message: error.toString());
     } catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      if (error is TypeError) {
+        log('Type Error: $error stacktrace: $stacktrace');
+        throw ServerError.withError(message: error.toString());
+      }
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withError(message: error.toString());
     }
     return response;
@@ -77,7 +74,7 @@ class AuthRepositoryImpl extends AuthRepository {
         );
       }
     } else {
-      return Left(ServerFailure(message: "No Internet Connection"));
+      return Left(ServerFailure(message: 'No Internet Connection'));
     }
   }
 
@@ -89,17 +86,18 @@ class AuthRepositoryImpl extends AuthRepository {
     late SendMessageResponse response;
     try {
       response = await apiClient.verifySmsCode(request, smsId, otp);
-    } on TypeError catch (e, stacktrace) {
-      log("Type Error: ${e.toString()} stacktrace: $stacktrace");
-      throw ServerError.withError(message: e.toString());
     } on DioError catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withDioError(error: error);
     } on SocketException catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withError(message: error.toString());
     } catch (error, stacktrace) {
-      log("Exception occurred: $error stacktrace: $stacktrace");
+      if (error is TypeError) {
+        log('Type Error: $error stacktrace: $stacktrace');
+        throw ServerError.withError(message: error.toString());
+      }
+      log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withError(message: error.toString());
     }
     return response;

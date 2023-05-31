@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medion_client_mobile/src/config/themes/app_colors.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class CustomPhoneTextField extends StatefulWidget {
   final String? titleText;
@@ -74,7 +74,7 @@ class CustomPhoneTextField extends StatefulWidget {
 
 class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
   String? _prefixText;
-  var focusNode = FocusNode();
+  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
@@ -104,17 +104,15 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
           Padding(
             padding: const EdgeInsets.only(bottom: 4),
             child: Text(
-              "${widget.titleText}",
+              '${widget.titleText}',
               style: const TextStyle(
                 fontSize: 12,
-                height: 14 / 12,
-                color: AppColors.text1,
                 fontWeight: FontWeight.w400,
               ),
             ),
           ),
         TextFormField(
-          validator:(value) => widget.validator!(value),
+          validator: (value) => widget.validator!(value),
           inputFormatters: widget.inputFormatters,
           style: const TextStyle(
             fontSize: 14,
@@ -128,7 +126,6 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
           onTap: widget.onTap,
           scrollPadding: EdgeInsets.zero,
           autofocus: widget.autoFocus,
-          textCapitalization: TextCapitalization.none,
           onChanged: widget.onChanged,
           onFieldSubmitted: (term) => _fieldFocusChange(
             context,
@@ -137,7 +134,6 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
           ),
           obscuringCharacter: '*',
           textInputAction: widget.inputAction,
-          textAlign: TextAlign.start,
           textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             suffixIcon: widget.suffixIcon,
@@ -150,7 +146,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
             hintText: _prefixText == null ? widget.hintText : '',
             errorText: widget.showError ?? false ? widget.errorText : null,
           ),
-          cursorColor: AppColors.assets,
+          cursorColor: context.color.primary,
           keyboardType: widget.keyboardType,
           onEditingComplete: widget.onComplete,
         ),
@@ -158,7 +154,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
     );
   }
 
-  _fieldFocusChange(
+  void _fieldFocusChange(
     BuildContext context,
     FocusNode? currentFocus,
     FocusNode? nextFocus,

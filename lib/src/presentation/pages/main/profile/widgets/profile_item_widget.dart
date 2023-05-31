@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class ProfileItemWidget extends StatelessWidget {
   const ProfileItemWidget({

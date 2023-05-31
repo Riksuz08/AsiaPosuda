@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class SearchBannerWidget extends StatelessWidget {
@@ -41,7 +40,7 @@ class SearchBannerWidget extends StatelessWidget {
                           borderRadius: AppUtils.kBorderRadius12,
                           child: CachedNetworkImage(
                             imageUrl:
-                                "https://a.cdn-hotels.com/gdcs/production85/d784/3a2d1bd9-05c4-414e-af06-a444d81a105b.jpg?impolicy=fcrop&w=800&h=533&q=medium",
+                                'https://a.cdn-hotels.com/gdcs/production85/d784/3a2d1bd9-05c4-414e-af06-a444d81a105b.jpg?impolicy=fcrop&w=800&h=533&q=medium',
                             fit: BoxFit.fitWidth,
                           ),
                         ),

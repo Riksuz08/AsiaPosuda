@@ -9,7 +9,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.translate("favorites")),
+        title: Text(context.translate('favorites')),
       ),
       body: const SearchBarWidget(),
     );

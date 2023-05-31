@@ -10,14 +10,7 @@
 // late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 // InitializationSettings initializationSettings = const InitializationSettings(
 //   android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-//   iOS: DarwinInitializationSettings(
-//     defaultPresentAlert: true,
-//     defaultPresentBadge: true,
-//     defaultPresentSound: true,
-//     requestAlertPermission: true,
-//     requestBadgePermission: true,
-//     requestSoundPermission: true,
-//   ),
+//   iOS: DarwinInitializationSettings(),
 // );
 //
 // class NotificationService {
@@ -28,7 +21,7 @@
 //     await setupFlutterNotifications();
 //     foregroundNotification();
 //     backgroundNotification();
-//     terminateNotification();
+//     await terminateNotification();
 //   }
 //
 //   static Future<void> setupFlutterNotifications() async {
@@ -105,7 +98,7 @@
 //     });
 //   }
 //
-//   static void terminateNotification() async {
+//   static Future<void> terminateNotification() async {
 //     RemoteMessage? remoteMessage =
 //         await FirebaseMessaging.instance.getInitialMessage();
 //     if (remoteMessage == null) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medion_client_mobile/src/config/themes/app_colors.dart';
-import 'package:medion_client_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class Cards extends StatelessWidget {
   final Color? color;
@@ -12,9 +11,9 @@ class Cards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 1,
-      color: color ?? Theme.of(context).cardColor,
-      surfaceTintColor: AppColors.white,
-      shadowColor: const Color.fromRGBO(0, 0, 0, 0.05),
+      color: color ?? context.theme.cardColor,
+      surfaceTintColor: color ?? context.theme.cardColor,
+      shadowColor: context.theme.shadowColor,
       type: MaterialType.card,
       borderRadius: AppUtils.kBorderRadius8,
       child: child,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 
 class LogOutDialog extends StatelessWidget {
@@ -18,11 +18,11 @@ class LogOutDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              "Log out",
+              'Log out',
               textAlign: TextAlign.center,
             ),
             const Text(
-              "Do you want to log out the app?",
+              'Do you want to log out the app?',
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -38,7 +38,7 @@ class LogOutDialog extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("No"),
+                    child: const Text('No'),
                   ),
                 ),
                 AppUtils.kGap12,
@@ -48,10 +48,13 @@ class LogOutDialog extends StatelessWidget {
                       context.read<MainBloc>().add(
                             const MainEventChanged(BottomMenu.search),
                           );
-                      localSource.clear();
-                      Navigator.pop(context);
+                      await localSource.clear().then(
+                        (value) {
+                          Navigator.pop(context);
+                        },
+                      );
                     },
-                    child: const Text("Yes"),
+                    child: const Text('Yes'),
                   ),
                 ),
               ]),

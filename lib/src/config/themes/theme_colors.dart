@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'themes.dart';
 
 class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color primary;

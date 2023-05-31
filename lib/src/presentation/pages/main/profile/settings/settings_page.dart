@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';

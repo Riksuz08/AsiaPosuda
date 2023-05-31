@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_icons.dart';
-import 'package:sample_bloc_mobile/src/config/themes/app_utils.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 import 'tab_icons.dart';
@@ -21,11 +19,11 @@ class SearchAppBar extends StatelessWidget {
       title: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: context.translate("your_journey_starts_here"),
+          text: context.translate('your_journey_starts_here'),
           style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
           children: const [
             TextSpan(
-              text: "\nНужно забронировать деловую поездку? Пойдем!",
+              text: '\nНужно забронировать деловую поездку? Пойдем!',
               style: TextStyle(
                 fontSize: 15,
                 height: 1.5,
@@ -41,29 +39,27 @@ class SearchAppBar extends StatelessWidget {
         child: Padding(
           padding: AppUtils.kPaddingHor16Ver12,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
             children: [
               TabIcon(
                 onTap: () {},
                 icon: AppIcons.avia,
                 isTabSelected: true,
-                text: "Авиа",
+                text: 'Авиа',
               ),
               AppUtils.kGap4,
               TabIcon(
                 onTap: () {},
                 icon: AppIcons.calving,
                 isTabSelected: false,
-                text: "Отели",
+                text: 'Отели',
               ),
               AppUtils.kGap4,
               TabIcon(
                 onTap: () {},
                 icon: AppIcons.railway,
                 isTabSelected: false,
-                text: "Ж/д билеты",
+                text: 'Ж/д билеты',
               ),
             ],
           ),

@@ -13,33 +13,33 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   List<Bird> selectedBirds = [];
   List<Bird> allBirds = [
     Bird(
-        name: "Chestnut-headed Bee-eater",
+        name: 'Chestnut-headed Bee-eater',
         image:
-            "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSwfSNy-jDW8YEt2Gs1c4jTuPLji3ORUBlQKt864EmVpqesvJgxQXyjmJQ6CKANWm52Kn-9h39-SguZu4U"),
+            'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSwfSNy-jDW8YEt2Gs1c4jTuPLji3ORUBlQKt864EmVpqesvJgxQXyjmJQ6CKANWm52Kn-9h39-SguZu4U'),
     Bird(
-        name: "Eurasian Hoopoe",
+        name: 'Eurasian Hoopoe',
         image:
-            "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRPkaOdtXoLECnC1KDjYP7rpFvzhYPmdiNnEnnO9aOn94T-acieG6F9rdw9HaIB45JpJoRblDEzw-jEbUA"),
+            'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRPkaOdtXoLECnC1KDjYP7rpFvzhYPmdiNnEnnO9aOn94T-acieG6F9rdw9HaIB45JpJoRblDEzw-jEbUA'),
     Bird(
-        name: "Changeable Hawk-eagle",
+        name: 'Changeable Hawk-eagle',
         image:
-            "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/145284511/1800"),
+            'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/145284511/1800'),
     Bird(
-        name: "Brahminy Starling",
+        name: 'Brahminy Starling',
         image:
-            "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/133728841/1800"),
+            'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/133728841/1800'),
     Bird(
-        name: "Blue-tailed Bee-eater",
+        name: 'Blue-tailed Bee-eater',
         image:
-            "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQfqpMSf_pQS1N8-tAQFiikl1Tjf0INmP4tHiMVoi8rssRSmjDvFrAf2nUMszzLTfNvNwRmBDFDd0GCuqQ"),
+            'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQfqpMSf_pQS1N8-tAQFiikl1Tjf0INmP4tHiMVoi8rssRSmjDvFrAf2nUMszzLTfNvNwRmBDFDd0GCuqQ'),
     Bird(
-        name: "Indian Peafowl",
+        name: 'Indian Peafowl',
         image:
-            "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTuga17uytePeXtHwUYGIoL34rtoLKV1nRIIc_xIQaMJidyMyvHo6TMOhtXdIEKfKW2MnjrPevQtxtSowc"),
+            'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTuga17uytePeXtHwUYGIoL34rtoLKV1nRIIc_xIQaMJidyMyvHo6TMOhtXdIEKfKW2MnjrPevQtxtSowc'),
     Bird(
-        name: "Common Kingfisher",
+        name: 'Common Kingfisher',
         image:
-            "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRBVg2F98UeEqwZheXO0zbN6zyPgkzxqTMJbDtEriIVzZGYSfh7c2BGiNmydhjmWHWYJJBKFooK1pRmh7o"),
+            'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRBVg2F98UeEqwZheXO0zbN6zyPgkzxqTMJbDtEriIVzZGYSfh7c2BGiNmydhjmWHWYJJBKFooK1pRmh7o'),
   ];
 
   @override
@@ -51,7 +51,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   void dispose() {
     controller.removeListener(searchListener);
-    controller.dispose();
     super.dispose();
   }
 
@@ -78,7 +77,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Scaffold(
       appBar: AppBar(
         title: SearchBar(
-          hintText: "Search",
+          hintText: 'Search',
           controller: controller,
           padding: const MaterialStatePropertyAll<EdgeInsets>(
             EdgeInsets.symmetric(horizontal: 15),
@@ -90,13 +89,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       body: ListView.builder(
         itemCount:
             selectedBirds.isEmpty ? allBirds.length : selectedBirds.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           final Bird item =
               selectedBirds.isEmpty ? allBirds[index] : selectedBirds[index];
 
           return Card(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
                   Container(
@@ -104,7 +103,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     width: 80,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
+                        Radius.circular(10),
                       ),
                     ),
                     child: CachedNetworkImage(

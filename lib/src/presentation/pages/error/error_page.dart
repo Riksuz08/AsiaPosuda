@@ -11,10 +11,12 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).backgroundColor),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
       body: Center(
         child: Text(
-          "Not found ${settings.name}",
+          'Not found ${settings.name}',
           textAlign: TextAlign.center,
         ),
       ),

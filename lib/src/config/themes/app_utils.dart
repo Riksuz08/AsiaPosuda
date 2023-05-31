@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+part of 'themes.dart';
 
 class AppUtils {
   AppUtils._();
@@ -51,9 +50,7 @@ class AppUtils {
   static const kBorderRadius10 = BorderRadius.all(Radius.circular(10));
   static const kBorderRadius12 = BorderRadius.all(Radius.circular(12));
   static const kBorderRadius16 = BorderRadius.all(Radius.circular(16));
-  static const kShapeRoundedNone = RoundedRectangleBorder(
-    borderRadius: BorderRadius.zero,
-  );
+  static const kShapeRoundedNone = RoundedRectangleBorder();
   static const kShapeRoundedAll12 = RoundedRectangleBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(12),

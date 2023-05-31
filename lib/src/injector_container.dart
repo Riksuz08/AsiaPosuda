@@ -44,8 +44,6 @@ Future<void> init() async {
       ..interceptors.addAll(
         [
           LogInterceptor(
-            error: kDebugMode,
-            request: kDebugMode,
             requestBody: kDebugMode,
             responseBody: kDebugMode,
           ),

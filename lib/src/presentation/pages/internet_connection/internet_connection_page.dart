@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class InternetConnectionPage extends StatefulWidget {
   const InternetConnectionPage({Key? key}) : super(key: key);
@@ -17,8 +18,9 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
   @override
   void initState() {
     super.initState();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
+      _updateConnectionStatus,
+    );
   }
 
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
@@ -35,7 +37,6 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -49,8 +50,8 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
               padding: const EdgeInsets.all(36),
               child: Image.asset(
                 'assets/png/no_internet.png',
-                height: size.height * 310 / 812,
-                width: size.width * 306 / 375,
+                height: context.mediaQuery.size.height * 310 / 812,
+                width: context.mediaQuery.size.width * 306 / 375,
               ),
             ),
             const Text(

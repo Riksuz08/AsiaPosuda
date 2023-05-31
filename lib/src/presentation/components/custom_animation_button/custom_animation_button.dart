@@ -4,9 +4,11 @@ class CustomAnimatedButton extends StatefulWidget {
   final Widget child;
   final VoidCallback onTap;
 
-  const CustomAnimatedButton(
-      {Key? key, required this.child, required this.onTap})
-      : super(key: key);
+  const CustomAnimatedButton({
+    Key? key,
+    required this.child,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   State<CustomAnimatedButton> createState() => _CustomAnimatedButtonState();
