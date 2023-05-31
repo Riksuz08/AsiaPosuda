@@ -1,7 +1,3 @@
-// Copyright 2019 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:async';
 import 'dart:io';
 
@@ -17,7 +13,6 @@ enum CustomTextDirection {
   rtl,
 }
 
-// See http://en.wikipedia.org/wiki/Right-to-left
 const List<String> rtlLanguages = <String>[
   'ar', // Arabic
   'fa', // Farsi
@@ -29,12 +24,12 @@ const List<String> rtlLanguages = <String>[
 // Fake locale to represent the system Locale option.
 const systemLocaleOption = Locale('system');
 
-Locale? _deviceLocale = Locale(Platform.localeName);
+Locale _deviceLocale = Locale(Platform.localeName);
 
-Locale? get deviceLocale => _deviceLocale;
+Locale get deviceLocale => _deviceLocale;
 
-set deviceLocale(Locale? locale) {
-  _deviceLocale ??= locale;
+set deviceLocale(Locale locale) {
+  _deviceLocale = locale;
 }
 
 class AppOptions extends Equatable {
@@ -55,11 +50,8 @@ class AppOptions extends Equatable {
   final Locale? _locale;
   final double timeDilation;
   final TargetPlatform? platform;
-  final bool isTestMode; // True for integration tests.
+  final bool isTestMode;
 
-  // We use a sentinel value to indicate the system text scale option. By
-  // default, return the actual text scale factor, otherwise return the
-  // sentinel value.
   double textScaleFactor(BuildContext context, {bool useSentinel = false}) {
     if (_textScaleFactor == systemTextScaleFactorOption) {
       return useSentinel
@@ -70,7 +62,7 @@ class AppOptions extends Equatable {
     }
   }
 
-  Locale? get locale => _locale ?? deviceLocale;
+  Locale get locale => _locale ?? deviceLocale;
 
   /// Returns a text direction based on the [CustomTextDirection] setting.
   /// If it is based on locale and the locale cannot be determined, returns
@@ -78,8 +70,7 @@ class AppOptions extends Equatable {
   TextDirection? resolvedTextDirection() {
     switch (customTextDirection) {
       case CustomTextDirection.localeBased:
-        final language = locale?.languageCode.toLowerCase();
-        if (language == null) return null;
+        final language = locale.languageCode.toLowerCase();
         return rtlLanguages.contains(language)
             ? TextDirection.rtl
             : TextDirection.ltr;
@@ -158,7 +149,6 @@ class AppOptions extends Equatable {
       ];
 }
 
-// Applies text GalleryOptions to a widget
 class ApplyTextOptions extends StatelessWidget {
   const ApplyTextOptions({
     super.key,
@@ -188,9 +178,6 @@ class ApplyTextOptions extends StatelessWidget {
   }
 }
 
-// Everything below is boilerplate except code relating to time dilation.
-// See https://medium.com/flutter/managing-flutter-application-state-with-inheritedwidgets-1140452befe1
-
 class _ModelBindingScope extends InheritedWidget {
   const _ModelBindingScope({
     required this.modelBindingState,
@@ -219,7 +206,7 @@ class ModelBinding extends StatefulWidget {
 
 class _ModelBindingState extends State<ModelBinding> {
   late AppOptions currentModel;
-  Timer? _timeDilationTimer;
+  late Timer? _timeDilationTimer;
 
   @override
   void initState() {
@@ -239,12 +226,12 @@ class _ModelBindingState extends State<ModelBinding> {
       _timeDilationTimer?.cancel();
       _timeDilationTimer = null;
       if (newModel.timeDilation > 1) {
-        // We delay the time dilation change long enough that the user can see
-        // that UI has started reacting and then we slam on the brakes so that
-        // they see that the time is in fact now dilated.
-        _timeDilationTimer = Timer(const Duration(milliseconds: 150), () {
-          timeDilation = newModel.timeDilation;
-        });
+        _timeDilationTimer = Timer(
+          const Duration(milliseconds: 150),
+          () {
+            timeDilation = newModel.timeDilation;
+          },
+        );
       } else {
         timeDilation = newModel.timeDilation;
       }
