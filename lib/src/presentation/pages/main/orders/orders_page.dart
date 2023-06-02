@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
- 
+
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/modal_progress_hud.dart';
 
 import 'widgets/purchase_item_widget.dart';
 
@@ -31,16 +30,16 @@ class _OrdersPageState extends State<OrdersPage>
         centerTitle: true,
         title: const Text('Мои заказы'),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(56.0),
+          preferredSize: const Size.fromHeight(56),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             child: Material(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(12),
               ),
               color: const Color(0xffE8F1F7),
               child: TabBar(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(4),
                 controller: tabController,
                 indicatorColor: Colors.white,
                 labelColor: Colors.black,
@@ -55,28 +54,25 @@ class _OrdersPageState extends State<OrdersPage>
           ),
         ),
       ),
-      body: ModalProgressHUD(
-        inAsyncCall: true,
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: AppUtils.kPaddingAll16,
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (_, int index) {
-                    if (index.isEven) {
-                      return PurchaseItemWidget(
-                        onTap: () {},
-                      );
-                    }
-                    return AppUtils.kBoxHeight16;
-                  },
-                  childCount: 2.doubleTheListCount,
-                ),
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: AppUtils.kPaddingAll16,
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, index) {
+                  if (index.isEven) {
+                    return PurchaseItemWidget(
+                      onTap: () {},
+                    );
+                  }
+                  return AppUtils.kBoxHeight16;
+                },
+                childCount: 2.doubleTheListCount,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

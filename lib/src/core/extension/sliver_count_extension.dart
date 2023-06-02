@@ -3,7 +3,7 @@ part of 'extension.dart';
 extension SliverCountExtension on int {
   int get doubleTheListCount => (this * 2) - 1;
 
-  int get exactIndex => (this ~/ 2);
+  int get exactIndex => this ~/ 2;
 
   int get lastIndex => (this * 2) - 2;
 

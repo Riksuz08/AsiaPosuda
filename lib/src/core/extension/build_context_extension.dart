@@ -1,5 +1,5 @@
-
 part of 'extension.dart';
+
 extension BuildContextExt on BuildContext {
   String translate(String key) => AppLocalizations.of(this).translate(key);
 

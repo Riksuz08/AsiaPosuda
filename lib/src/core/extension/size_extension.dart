@@ -1,4 +1,3 @@
-
 part of 'extension.dart';
 
 extension SizeExtension on BuildContext {
@@ -15,14 +14,14 @@ extension SizeExtension on BuildContext {
       : (MediaQuery.of(this).size.width - 48) / 2;
 
   EdgeInsets get kMargin16 => EdgeInsets.only(
-        top: (MediaQuery.of(this).padding.top),
+        top: MediaQuery.of(this).padding.top,
         left: isMobile ? 16 : 200,
         right: isMobile ? 16 : 200,
         bottom: MediaQuery.of(this).padding.bottom,
       );
 
   EdgeInsets get kMarginBottom16 => EdgeInsets.only(
-        bottom: (MediaQuery.of(this).padding.bottom),
+        bottom: MediaQuery.of(this).padding.bottom,
         left: isMobile ? 16 : 200,
         right: isMobile ? 16 : 200,
       );

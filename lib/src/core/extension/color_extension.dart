@@ -2,7 +2,7 @@ part of 'extension.dart';
 
 extension ColorJson on String {
   Color? get color => isNotEmpty
-      ? Color(int.parse((this).substring(1, 7), radix: 16) + 0xFF000000)
+      ? Color(int.parse(substring(1, 7), radix: 16) + 0xFF000000)
       : null;
 }
 

@@ -51,7 +51,10 @@ dependencies:
   # retrofit
   retrofit: ^4.0.1
   # alice = chuck
-  chuck_interceptor: ^1.1.4
+  chuck_interceptor:
+    git:
+      url: https://github.com/SunnatilloShavkatov/chuck_interceptor.git
+      ref: master
   # box
   gap: ^3.0.0
   # native splash

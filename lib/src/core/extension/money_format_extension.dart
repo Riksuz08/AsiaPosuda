@@ -3,9 +3,9 @@ part of 'extension.dart';
 extension MoneyFormatExtension on num {
   String get moneyFormat => isNegative
       ? "-${NumberFormat().format(abs()).split(",").join(" ")}"
-      : NumberFormat().format(this).split(",").join(" ");
+      : NumberFormat().format(this).split(',').join(' ');
 
-  String get moneyFormatSymbol => "$moneyFormat \$";
+  String get moneyFormatSymbol => '$moneyFormat \$';
 
   String formatter() {
     num currentBalance = this;

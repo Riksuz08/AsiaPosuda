@@ -1,25 +1,25 @@
 part of 'extension.dart';
 
 extension ParseString on DateTime {
-  String get formatDate => DateFormat("dd.MM.yyyy").format(this);
+  String get formatDate => DateFormat('dd.MM.yyyy').format(this);
 
   String get formatDateTime =>
       DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(this);
 
   String timeZone() {
-    var date = toIso8601String().split(".")[0];
+    var date = toIso8601String().split('.')[0];
     if (timeZoneOffset.isNegative) {
-      date += "-";
+      date += '-';
     } else {
-      date += "+";
+      date += '+';
     }
-    final timeZoneSplit = timeZoneOffset.toString().split(":");
+    final timeZoneSplit = timeZoneOffset.toString().split(':');
 
     var hour = int.parse(timeZoneSplit[0]);
     if (hour < 10) {
-      date += "0${timeZoneSplit[0]}";
+      date += '0${timeZoneSplit[0]}';
     }
-    date += ":${timeZoneSplit[1]}";
+    date += ':${timeZoneSplit[1]}';
     return date;
   }
 }
@@ -34,8 +34,8 @@ extension ParseExtension on String {
             .now()
             .toUtc()
             .hour;
-        DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
-        return DateFormat("dd.MM.yyyy").format(
+        DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+        return DateFormat('dd.MM.yyyy').format(
           date.add(Duration(hours: duration)),
         );
       };
@@ -49,8 +49,8 @@ extension ParseExtension on String {
             .now()
             .toUtc()
             .hour;
-        DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
-        return DateFormat("dd.MM.yyyy HH:mm").format(
+        DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+        return DateFormat('dd.MM.yyyy HH:mm').format(
           date.add(Duration(hours: duration)),
         );
       };
@@ -63,8 +63,8 @@ extension ParseExtension on String {
         .now()
         .toUtc()
         .hour;
-    DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
-    return DateFormat("dd.MM.yyyy").format(
+    DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+    return DateFormat('dd.MM.yyyy').format(
       date.add(Duration(hours: duration)),
     );
   }
@@ -77,8 +77,8 @@ extension ParseExtension on String {
         .now()
         .toUtc()
         .hour;
-    DateTime date = DateFormat("MM.dd.yyyy").parse(this);
-    return DateFormat("yyyy-MM-dd").format(
+    DateTime date = DateFormat('MM.dd.yyyy').parse(this);
+    return DateFormat('yyyy-MM-dd').format(
       date.add(Duration(hours: duration)),
     );
   }
@@ -91,8 +91,8 @@ extension ParseExtension on String {
         .now()
         .toUtc()
         .hour;
-    DateTime date = DateFormat("HH:mm").parse(this);
-    return DateFormat("HH:mm").format(
+    DateTime date = DateFormat('HH:mm').parse(this);
+    return DateFormat('HH:mm').format(
       date.add(Duration(hours: duration)),
     );
   }
@@ -105,8 +105,8 @@ extension ParseExtension on String {
         .now()
         .toUtc()
         .hour;
-    DateTime date = DateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(this);
-    return DateFormat("HH:mm").format(
+    DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+    return DateFormat('HH:mm').format(
       date.add(Duration(hours: duration)),
     );
   }
