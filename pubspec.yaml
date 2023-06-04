@@ -35,8 +35,6 @@ dependencies:
   # internet check
   connectivity_plus: ^4.0.1
   internet_connection_checker: ^1.0.0+1
-  # keyboard dismiss
-  keyboard_dismisser: ^3.0.0
   # cached image
   cached_network_image: ^3.2.3
   # freezed

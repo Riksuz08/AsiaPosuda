@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import 'src/app_options.dart';
 import 'src/config/router/app_routes.dart';
@@ -15,12 +14,25 @@ import 'src/core/l10n/app_localizations.dart';
 import 'src/core/constants/constants.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
 import 'src/presentation/bloc/log_bloc_observer.dart';
+import 'src/presentation/components/keyboard/keyboard_dismisser.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // await NotificationService.initialize();
+
+  // if (defaultTargetPlatform != TargetPlatform.linux &&
+  //     defaultTargetPlatform != TargetPlatform.windows) {
+  //   await NotificationService.initialize();
+  //
+  //   FlutterError.onError = (errorDetails) {
+  //     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  //   };
+  //   // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  //   PlatformDispatcher.instance.onError = (error, stack) {
+  //     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //     return true;
+  //   };
+  // }
 
   /// bloc logger
   if (kDebugMode) {
@@ -55,11 +67,11 @@ class MainApp extends StatelessWidget {
         providers: [
           BlocProvider<MainBloc>(create: (_) => sl<MainBloc>()),
         ],
-        child: KeyboardDismisser(
-          child: Builder(
-            builder: (ctx) {
-              final AppOptions options = AppOptions.of(ctx);
-              return MaterialApp(
+        child: Builder(
+          builder: (ctx) {
+            final AppOptions options = AppOptions.of(ctx);
+            return KeyboardDismiss(
+              child: MaterialApp(
                 /// title
                 debugShowCheckedModeBanner: false,
                 navigatorKey: rootNavigatorKey,
@@ -79,9 +91,9 @@ class MainApp extends StatelessWidget {
                 initialRoute: Routes.initial,
                 onGenerateRoute: AppRoutes.onGenerateRoute,
                 onUnknownRoute: AppRoutes.onUnknownRoute,
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -96,4 +108,10 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+/// flutter pub run flutter_launcher_icons:main
+/// flutter run -d windows
+/// flutter build apk --release
+/// flutter build apk --split-per-abi
+/// flutter build appbundle --release
 /// flutter pub run build_runner watch --delete-conflicting-outputs
+/// flutter pub ipa

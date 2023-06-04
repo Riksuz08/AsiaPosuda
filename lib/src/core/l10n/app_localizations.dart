@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class AppLocalizations {
+final class AppLocalizations {
   AppLocalizations._();
 
   static AppLocalizations of(BuildContext context) {

@@ -21,7 +21,6 @@ const List<String> rtlLanguages = <String>[
   'ur', // Urdu
 ];
 
-// Fake locale to represent the system Locale option.
 const systemLocaleOption = Locale('system');
 
 Locale _deviceLocale = Locale(Platform.localeName);
