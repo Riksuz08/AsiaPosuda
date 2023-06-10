@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:sample_bloc_mobile/src/core/either_dart/either.dart';
 import 'package:sample_bloc_mobile/src/core/platform/network_info.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_request.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_response.dart';
