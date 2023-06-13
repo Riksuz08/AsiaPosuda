@@ -20,7 +20,7 @@ class MaskedTextInputFormatter extends TextInputFormatter {
         if (text.length < mask.length && mask[text.length - 1] == separator) {
           return TextEditingValue(
             text:
-            '${oldValue.text}$separator${text.substring(text.length - 1)}',
+                '${oldValue.text}$separator${text.substring(text.length - 1)}',
             selection: TextSelection.collapsed(
               offset: newValue.selection.end + 1,
             ),
@@ -28,18 +28,20 @@ class MaskedTextInputFormatter extends TextInputFormatter {
         }
         if (text.length == mask.replaceAll(separator, '').length &&
             oldValue.text.isEmpty) {
-          String newText = '';
+          final StringBuffer bufferText = StringBuffer();
           int t = 0;
           for (int i = 0; i < text.length; i++) {
             if (mask[i + t] == separator) {
-              newText += separator;
+              bufferText.write(separator);
               t++;
             }
-            newText += text[i];
+            bufferText.write(text[i]);
           }
           return TextEditingValue(
-            text: newText,
-            selection: TextSelection.collapsed(offset: newText.length),
+            text: bufferText.toString(),
+            selection: TextSelection.collapsed(
+              offset: bufferText.toString().length,
+            ),
           );
         }
       } else {

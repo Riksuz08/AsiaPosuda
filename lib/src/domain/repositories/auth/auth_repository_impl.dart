@@ -35,7 +35,7 @@ final class AuthRepositoryImpl extends AuthRepository {
     late SendMessageResponse response;
     try {
       response = await apiClient.sendMessage(request);
-    } on DioError catch (error, stacktrace) {
+    } on DioException catch (error, stacktrace) {
       log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withDioError(error: error);
     } on SocketException catch (error, stacktrace) {
@@ -86,7 +86,7 @@ final class AuthRepositoryImpl extends AuthRepository {
     late SendMessageResponse response;
     try {
       response = await apiClient.verifySmsCode(request, smsId, otp);
-    } on DioError catch (error, stacktrace) {
+    } on DioException catch (error, stacktrace) {
       log('Exception occurred: $error stacktrace: $stacktrace');
       throw ServerError.withDioError(error: error);
     } on SocketException catch (error, stacktrace) {

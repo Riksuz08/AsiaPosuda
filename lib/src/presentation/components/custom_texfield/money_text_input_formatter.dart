@@ -18,13 +18,14 @@ class MoneyTextInputFormatter extends TextInputFormatter {
       String reversedText =
           String.fromCharCodes(newValue.text.runes.toList().reversed);
       List<String> chars = reversedText.replaceAll(' ', '').split('');
-      String reversedNewString = '';
+      final StringBuffer reversedNewStringBuffer = StringBuffer();
       for (int i = 0; i < chars.length; i++) {
-        if (i % 3 == 0 && i != 0) reversedNewString += ' ';
-        reversedNewString += chars[i];
+        if (i % 3 == 0 && i != 0) reversedNewStringBuffer.write(' ');
+        reversedNewStringBuffer.write(chars[i]);
       }
-      String newString =
-          String.fromCharCodes(reversedNewString.runes.toList().reversed);
+      String newString = String.fromCharCodes(
+        reversedNewStringBuffer.toString().runes.toList().reversed,
+      );
       newString = isUsd ? '\$$newString' : newString;
       return TextEditingValue(
         text: newString,

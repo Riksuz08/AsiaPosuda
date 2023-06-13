@@ -4,7 +4,7 @@ final class ServerError implements Exception {
   int? _errorCode;
   String _errorMessage = '';
 
-  ServerError.withDioError({required DioError error}) {
+  ServerError.withDioError({required DioException error}) {
     _handleError(error);
   }
 
@@ -20,7 +20,7 @@ final class ServerError implements Exception {
 
   String get message => _errorMessage;
 
-  void _handleError(DioError error) {
+  void _handleError(DioException error) {
     _errorCode = error.response?.statusCode ?? 500;
     if (_errorCode == 500) {
       _errorMessage = 'Server error';
@@ -47,16 +47,16 @@ final class ServerError implements Exception {
       return;
     }
     switch (error.type) {
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         _errorMessage = 'Connection timeout';
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         _errorMessage = 'Connection timeout';
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         _errorMessage = 'Connection timeout';
         break;
-      case DioErrorType.badResponse:
+      case DioExceptionType.badResponse:
         {
           if (error.response?.data['Error'] is Map<String, dynamic>) {
             _errorMessage = error.response!.data['Error']['message'].toString();
@@ -65,16 +65,16 @@ final class ServerError implements Exception {
           }
           break;
         }
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         _errorMessage = 'Canceled';
         break;
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         _errorMessage = 'Something wrong';
         break;
-      case DioErrorType.badCertificate:
+      case DioExceptionType.badCertificate:
         _errorMessage = 'Bad certificate';
         break;
-      case DioErrorType.connectionError:
+      case DioExceptionType.connectionError:
         _errorMessage = 'Connection error';
         break;
     }
