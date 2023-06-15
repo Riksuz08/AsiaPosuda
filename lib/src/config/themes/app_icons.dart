@@ -1,6 +1,6 @@
 part of 'themes.dart';
 
-class AppIcons {
+final class AppIcons {
   AppIcons._();
 
   static const String _fontFamily = 'AppIcons';

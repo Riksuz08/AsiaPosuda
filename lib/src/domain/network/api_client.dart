@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -13,7 +14,6 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, String baseUrl) =>
       _ApiClient(dio, baseUrl: baseUrl);
 
-  ///
   @POST('v2/send-message')
   Future<SendMessageResponse> sendMessage(
     @Body() SendMessageRequest request,
@@ -22,7 +22,7 @@ abstract class ApiClient {
   @POST('v2/verify-email/{smsId}/{otp}')
   Future<SendMessageResponse> verifySmsCode(
     @Body() VerifyRequest request,
-    @Path("smsId") String smsId,
-    @Path("otp") String otp,
+    @Path('smsId') String smsId,
+    @Path('otp') String otp,
   );
 }

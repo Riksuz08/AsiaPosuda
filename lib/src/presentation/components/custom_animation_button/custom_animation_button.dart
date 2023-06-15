@@ -21,13 +21,13 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
 
   @override
   void initState() {
+    super.initState();
     controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 100),
       reverseDuration: const Duration(milliseconds: 100),
     );
     animation = Tween<double>(begin: 1, end: 0.95).animate(controller);
-    super.initState();
   }
 
   @override

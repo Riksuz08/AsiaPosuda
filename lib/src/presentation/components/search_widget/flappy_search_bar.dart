@@ -1,13 +1,7 @@
-library flappy_search_bar;
-
 import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:barbeque_client_mobile/core/theme/app_colors.dart';
-import 'package:barbeque_client_mobile/core/theme/app_utils.dart';
-
-import '../../theme/app_icons.dart';
 
 mixin ControllerListener<T> on State<SearchBar<T>> {
   void onListChanged(List<T> items) {}
@@ -220,15 +214,12 @@ class SearchBar<T> extends StatefulWidget {
     this.searchBarController,
     this.minimumChars = 3,
     this.debounceDuration = const Duration(milliseconds: 500),
-    this.loader = const Center(child: CircularProgressIndicator()),
+    this.loader = const Center(child: CircularProgressIndicator.adaptive()),
     this.onError,
     this.emptyWidget = const SizedBox.shrink(),
     this.header,
     this.placeHolder,
-    this.icon = const Icon(
-      AppIcons.search,
-      color: AppColors.black3,
-    ),
+    this.icon = const Icon(Icons.search),
     this.hintText = '',
     this.hintStyle = const TextStyle(color: Color.fromRGBO(142, 142, 147, 1)),
     this.iconActiveColor = Colors.black,
@@ -348,7 +339,6 @@ class SearchBarState<T> extends State<SearchBar<T>>
     return ListView.builder(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: widget.listPadding,
-      physics: const BouncingScrollPhysics(),
       itemCount: items.length,
       shrinkWrap: widget.shrinkWrap,
       scrollDirection: widget.scrollDirection,
@@ -376,15 +366,14 @@ class SearchBarState<T> extends State<SearchBar<T>>
     }
   }
 
-  final duration = const Duration(milliseconds: 100);
-
   @override
   Widget build(BuildContext context) {
     final widthMax = MediaQuery.of(context).size.width;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         ColoredBox(
-          color: AppColors.white,
+          color: Colors.white,
           child: Padding(
             padding: widget.searchBarPadding,
             child: SizedBox(
@@ -393,7 +382,7 @@ class SearchBarState<T> extends State<SearchBar<T>>
                 duration: const Duration(milliseconds: 200),
                 width: widthMax,
                 decoration: const BoxDecoration(
-                  borderRadius: AppUtils.kBorderRadius12,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                   color: Color(0xFFF5F5F5),
                 ),
                 child: Theme(

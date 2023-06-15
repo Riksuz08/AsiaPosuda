@@ -4,8 +4,12 @@ abstract class Failure extends Equatable {}
 
 class ServerFailure extends Failure {
   final String message;
+  final int? statusCode;
 
-  ServerFailure({required this.message});
+  ServerFailure({
+    required this.message,
+    this.statusCode,
+  });
 
   @override
   List<Object?> get props => [message];

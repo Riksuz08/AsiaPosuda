@@ -1,4 +1,4 @@
-class AppKeys {
+final class AppKeys {
   AppKeys._();
 
   static const String ru = 'ru';

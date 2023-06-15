@@ -14,7 +14,7 @@ import 'src/core/l10n/app_localizations.dart';
 import 'src/core/constants/constants.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
 import 'src/presentation/bloc/log_bloc_observer.dart';
-import 'src/presentation/components/keyboard/keyboard_dismisser.dart';
+import 'src/presentation/components/keyboard/keyboard_dismiss.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +61,6 @@ class MainApp extends StatelessWidget {
         locale: Locale(localSource.locale),
         timeDilation: timeDilation,
         platform: defaultTargetPlatform,
-        isTestMode: true,
       ),
       child: MultiBlocProvider(
         providers: [

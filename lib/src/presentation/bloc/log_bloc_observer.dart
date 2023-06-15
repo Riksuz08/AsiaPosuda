@@ -13,7 +13,7 @@ class LogBlocObserver extends BlocObserver {
   @override
   void onClose(BlocBase bloc) {
     if (kDebugMode) {
-      print("$bloc closed");
+      print('$bloc closed');
     }
     super.onClose(bloc);
   }
@@ -22,7 +22,7 @@ class LogBlocObserver extends BlocObserver {
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
     if (kDebugMode) {
-      print("$bloc created");
+      print('$bloc created');
     }
   }
 
@@ -46,7 +46,7 @@ class LogBlocObserver extends BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
     if (kDebugMode) {
-      print(transition.toString());
+      print(transition);
     }
   }
 }

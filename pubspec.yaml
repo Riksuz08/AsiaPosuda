@@ -19,6 +19,8 @@ dependencies:
   path_provider: ^2.0.15
   # equatable
   equatable: ^2.0.5
+  # async
+  async: ^2.11.0
   # forms
   formz: ^0.6.0
   # internet check
@@ -33,7 +35,7 @@ dependencies:
   # bloc state manager
   flutter_bloc: ^8.1.3
   # interceptor
-  dio: ^5.2.1
+  dio: ^5.2.1+1
   dio_retry_plus: ^1.0.3
   # retrofit
   retrofit: ^4.0.1

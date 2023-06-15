@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart' hide Headers;
 
+import 'failure.dart';
+
 final class ServerError implements Exception {
   int? _errorCode;
   String _errorMessage = '';
@@ -80,4 +82,13 @@ final class ServerError implements Exception {
     }
     return;
   }
+}
+
+extension ServerErrorExtension on ServerError {
+  bool get isTokenExpired => errorCode == 401;
+
+  ServerFailure get failure => ServerFailure(
+        message: message,
+        statusCode: errorCode,
+      );
 }

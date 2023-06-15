@@ -39,7 +39,6 @@ class AppOptions extends Equatable {
     required Locale? locale,
     required this.timeDilation,
     required this.platform,
-    required this.isTestMode,
   })  : _textScaleFactor = textScaleFactor ?? 1.0,
         _locale = locale;
 
@@ -49,7 +48,6 @@ class AppOptions extends Equatable {
   final Locale? _locale;
   final double timeDilation;
   final TargetPlatform? platform;
-  final bool isTestMode;
 
   double textScaleFactor(BuildContext context, {bool useSentinel = false}) {
     if (_textScaleFactor == systemTextScaleFactorOption) {
@@ -120,7 +118,6 @@ class AppOptions extends Equatable {
       locale: locale ?? this.locale,
       timeDilation: timeDilation ?? this.timeDilation,
       platform: platform ?? this.platform,
-      isTestMode: isTestMode ?? this.isTestMode,
     );
   }
 
@@ -144,7 +141,6 @@ class AppOptions extends Equatable {
         _locale,
         timeDilation,
         platform,
-        isTestMode,
       ];
 }
 

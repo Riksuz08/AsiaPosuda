@@ -15,41 +15,24 @@ final class AuthRepositoryImpl extends AuthRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await _sendMessage(request: request);
+        final response = await apiClient.sendMessage(request);
         return Right(response);
-      } catch (e) {
+      } on DioException catch (error, stacktrace) {
+        log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
-          ServerFailure(
-            message: e is ServerError ? e.message : e.toString(),
-          ),
+          ServerError.withDioError(error: error).failure,
+        );
+      } catch (error, stacktrace) {
+        log('Exception occurred: $error stacktrace: $stacktrace');
+        return Left(
+          ServerError.withError(
+            message: error.toString(),
+          ).failure,
         );
       }
     } else {
       return Left(ServerFailure(message: 'No Internet Connection'));
     }
-  }
-
-  Future<SendMessageResponse> _sendMessage({
-    required SendMessageRequest request,
-  }) async {
-    late SendMessageResponse response;
-    try {
-      response = await apiClient.sendMessage(request);
-    } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withDioError(error: error);
-    } on SocketException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withError(message: error.toString());
-    } catch (error, stacktrace) {
-      if (error is TypeError) {
-        log('Type Error: $error stacktrace: $stacktrace');
-        throw ServerError.withError(message: error.toString());
-      }
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withError(message: error.toString());
-    }
-    return response;
   }
 
   @override
@@ -60,46 +43,27 @@ final class AuthRepositoryImpl extends AuthRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await _verifySmsCode(
-          request: request,
-          smsId: smsId,
-          otp: otp,
+        final response = await apiClient.verifySmsCode(
+          request,
+          smsId,
+          otp,
         );
         return Right(response);
-      } catch (e) {
+      } on DioException catch (error, stacktrace) {
+        log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
-          ServerFailure(
-            message: e is ServerError ? e.message : e.toString(),
-          ),
+          ServerError.withDioError(error: error).failure,
+        );
+      } catch (error, stacktrace) {
+        log('Exception occurred: $error stacktrace: $stacktrace');
+        return Left(
+          ServerError.withError(
+            message: error.toString(),
+          ).failure,
         );
       }
     } else {
       return Left(ServerFailure(message: 'No Internet Connection'));
     }
-  }
-
-  Future<SendMessageResponse> _verifySmsCode({
-    required VerifyRequest request,
-    required String smsId,
-    required String otp,
-  }) async {
-    late SendMessageResponse response;
-    try {
-      response = await apiClient.verifySmsCode(request, smsId, otp);
-    } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withDioError(error: error);
-    } on SocketException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withError(message: error.toString());
-    } catch (error, stacktrace) {
-      if (error is TypeError) {
-        log('Type Error: $error stacktrace: $stacktrace');
-        throw ServerError.withError(message: error.toString());
-      }
-      log('Exception occurred: $error stacktrace: $stacktrace');
-      throw ServerError.withError(message: error.toString());
-    }
-    return response;
   }
 }
