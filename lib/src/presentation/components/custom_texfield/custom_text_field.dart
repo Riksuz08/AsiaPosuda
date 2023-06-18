@@ -86,7 +86,7 @@ class CustomTextField extends StatelessWidget {
             errorText: showError ? errorText : null,
             hintText: hintText,
           ),
-          cursorColor: context.color.primary,
+          cursorColor: context.theme.colorScheme.primary,
           keyboardType: keyboardType,
           maxLines: maxLines ?? 1,
           minLines: minLines ?? 1,

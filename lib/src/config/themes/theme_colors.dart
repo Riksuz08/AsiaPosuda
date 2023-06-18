@@ -1,39 +1,49 @@
 part of 'themes.dart';
 
+/// A set of colors for the entire app.
+const colorLightScheme = ColorScheme.light(
+  primary: Color(0xFF0FB8D3),
+  onPrimary: Color(0xFFFFFFFF),
+  surface: Color(0xFFF7F9FC),
+  onSurface: Color(0xFF020000),
+  secondary: Color(0xFF69D7C7),
+  onSecondary: Color(0xFF020000),
+  error: Color(0xFFD93F2F),
+  onError: Color(0xFFFFFFFF),
+  background: Color(0xFFF7F5F6),
+  onBackground: Color(0xFF020000),
+);
+
+///
+const colorDarkScheme = ColorScheme.dark(
+  primary: Color(0xFF0FB8D3),
+  surface: Color(0xFFF7F9FC),
+  secondary: Color(0xFF69D7C7),
+  error: Color(0xFFD93F2F),
+  background: Color(0xFFF7F5F6),
+  onBackground: Color(0xFF020000),
+);
+
 class ThemeColors extends ThemeExtension<ThemeColors> {
-  final Color primary;
-  final Color scaffoldBackground;
-  final Color secondary;
-  final Color error;
-  final Color surface;
-  final Color white;
+  final Color cardColor;
 
   const ThemeColors({
-    required this.primary,
-    required this.scaffoldBackground,
-    this.secondary = Colors.black,
-    this.error = Colors.red,
-    this.surface = Colors.white,
-    this.white = Colors.white,
+    required this.cardColor,
   });
 
   static const ThemeColors light = ThemeColors(
-    primary: Color(0xFF0FB8D3),
-    scaffoldBackground: Color(0xFFF7F9FC),
+    cardColor: Colors.white,
   );
   static const ThemeColors dark = ThemeColors(
-    primary: Color(0xFF6F35A5),
-    scaffoldBackground: Color(0xFFF1F1F1),
+    cardColor: Color(0xFF1E1E1E),
   );
 
   @override
   ThemeExtension<ThemeColors> copyWith({
-    Color? primary,
-    Color? scaffoldBackground,
+    Color? cardColor,
   }) {
     return ThemeColors(
-      primary: primary ?? this.primary,
-      scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
+      cardColor: cardColor ?? this.cardColor,
     );
   }
 
@@ -44,9 +54,7 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       return this;
     }
     return ThemeColors(
-      primary: Color.lerp(primary, other.primary, t)!,
-      scaffoldBackground:
-          Color.lerp(scaffoldBackground, other.scaffoldBackground, t)!,
+      cardColor: Color.lerp(cardColor, other.cardColor, t)!,
     );
   }
 }

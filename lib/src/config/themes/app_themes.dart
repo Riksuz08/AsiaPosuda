@@ -28,21 +28,7 @@ final ThemeData lightTheme = appTheme.copyWith(
     ThemeTextStyles.light,
     ThemeColors.light,
   ],
-  colorScheme: ColorScheme.light(
-    primary: ThemeColors.light.primary,
-    secondary: ThemeColors.light.secondary,
-    error: Colors.red,
-    onPrimary: ThemeColors.light.primary,
-    onSecondary: ThemeColors.light.secondary,
-    onError: Colors.redAccent,
-    surface: Colors.transparent,
-    onSurface: Colors.transparent,
-    surfaceVariant: Colors.transparent,
-    background: ThemeColors.light.scaffoldBackground,
-    onBackground: ThemeColors.light.scaffoldBackground,
-  ),
-  primaryColor: ThemeColors.light.primary,
-  scaffoldBackgroundColor: ThemeColors.light.scaffoldBackground,
+  colorScheme: colorLightScheme,
   dialogBackgroundColor: Colors.white,
   cardColor: Colors.white,
   canvasColor: Colors.white,
@@ -65,7 +51,7 @@ final ThemeData lightTheme = appTheme.copyWith(
           if (states.contains(MaterialState.disabled)) {
             return Colors.grey;
           }
-          return ThemeColors.light.primary;
+          return colorLightScheme.primary;
         },
       ),
       textStyle: MaterialStatePropertyAll(ThemeTextStyles.light.buttonStyle),

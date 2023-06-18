@@ -113,7 +113,7 @@ class PurchaseItemWidget extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      backgroundColor: ThemeColors.light.primary,
+                      backgroundColor: context.theme.colorScheme.primary,
                     ),
                     onPressed: () {},
                     child: const Text(

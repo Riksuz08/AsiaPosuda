@@ -146,7 +146,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
             hintText: _prefixText == null ? widget.hintText : '',
             errorText: widget.showError ?? false ? widget.errorText : null,
           ),
-          cursorColor: context.color.primary,
+          cursorColor: context.theme.colorScheme.primary,
           keyboardType: widget.keyboardType,
           onEditingComplete: widget.onComplete,
         ),

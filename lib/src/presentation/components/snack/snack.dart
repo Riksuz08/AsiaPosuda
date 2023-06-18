@@ -15,7 +15,7 @@ class Snack {
       SnackBar(
         padding: AppUtils.kPaddingAll16,
         behavior: SnackBarBehavior.fixed,
-        backgroundColor: context.color.primary,
+        backgroundColor: context.theme.colorScheme.primary,
         clipBehavior: Clip.antiAlias,
         dismissDirection: DismissDirection.none,
         content: Text(message),

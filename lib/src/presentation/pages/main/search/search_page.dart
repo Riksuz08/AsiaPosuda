@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/main/search/widgets/summary_tour_widget.dart';
-
-import 'widgets/popular_tour_widget.dart';
-import 'widgets/search_appbar_widget.dart';
-import 'widgets/search_banner_widget.dart';
-import 'widgets/search_widget.dart';
 
 part 'mixin/search_mixin.dart';
 
@@ -30,19 +24,7 @@ class _SearchPageState extends State<SearchPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
-        slivers: [
-          const SearchAppBar(),
-          const SearchWidget(),
-          SearchBannerWidget(pageController: pageController),
-          const SummaryTour(),
-          const PopularTourWidget(),
-        ],
-      ),
-    );
+    return const Scaffold();
   }
 
   @override

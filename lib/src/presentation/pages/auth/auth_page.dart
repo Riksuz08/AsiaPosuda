@@ -35,7 +35,7 @@ class _AuthPageState extends State<AuthPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: context.color.white,
+        backgroundColor: context.color.cardColor,
         appBar: AppBar(
           bottom: const PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
