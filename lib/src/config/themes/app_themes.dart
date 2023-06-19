@@ -29,7 +29,8 @@ final ThemeData lightTheme = appTheme.copyWith(
     ThemeColors.light,
   ],
   colorScheme: colorLightScheme,
-  dialogBackgroundColor: Colors.white,
+  dialogBackgroundColor: colorLightScheme.surface,
+  scaffoldBackgroundColor: colorLightScheme.background,
   cardColor: Colors.white,
   canvasColor: Colors.white,
   dialogTheme: const DialogTheme(

@@ -90,7 +90,6 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           maxLines: maxLines ?? 1,
           minLines: minLines ?? 1,
-          scrollPhysics: const NeverScrollableScrollPhysics(),
           inputFormatters: inputFormatters,
           onEditingComplete: onComplete,
         ),
