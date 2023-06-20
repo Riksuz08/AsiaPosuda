@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final class Constants {
   Constants._();
 
-  static const String projectId = '1acd7a8f-a038-4e07-91cb-b689c368d855';
+  static const String projectId = 'a4dc1f1c-d20f-4c1a-abf5-b819076604bc';
   static const String environmentId = '29b028a4-1250-4792-a285-aae4705a39fc';
   static const String resourceId = '19ad6e31-6b86-4271-98c3-a1d57e915687';
 

@@ -4,8 +4,11 @@ part of 'auth_bloc.dart';
 class AuthState with _$AuthState {
   const factory AuthState() = _AuthState;
 
-  const factory AuthState.success(String smsId, String phone, Map data) =
-      AuthSuccessState;
+  const factory AuthState.success(
+    String smsId,
+    String phone,
+    Map data,
+  ) = AuthSuccessState;
 
   const factory AuthState.loading() = AuthLaodingState;
 
