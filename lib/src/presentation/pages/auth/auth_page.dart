@@ -79,9 +79,10 @@ class _AuthPageState extends State<AuthPage> {
                         MaskedTextInputFormatter(
                           mask: '## ### ## ##',
                           separator: ' ',
+                          filter: RegExp('[0-9]'),
                         ),
                         FilteringTextInputFormatter.allow(
-                          RegExp(r'\d'),
+                          RegExp('[0-9]'),
                           replacementString: ' ',
                         ),
                       ],

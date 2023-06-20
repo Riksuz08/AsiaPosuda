@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 class MaskedTextInputFormatter extends TextInputFormatter {
   final String mask;
   final String separator;
+  final RegExp filter;
 
   MaskedTextInputFormatter({
     required this.mask,
     required this.separator,
+    required this.filter,
   });
 
   @override
@@ -14,6 +16,9 @@ class MaskedTextInputFormatter extends TextInputFormatter {
       TextEditingValue oldValue, TextEditingValue newValue) {
     String text = newValue.text;
     String newText = newValue.toJSON()['text'].toString();
+    String separatorWithText = newValue.text.replaceAll(separator, '');
+    final Iterable<Match> matches = filter.allMatches(separatorWithText);
+    if (matches.length != separatorWithText.length) return oldValue;
     if (text.isNotEmpty) {
       if (text.length > oldValue.text.length) {
         if (text.length > mask.length) return oldValue;
