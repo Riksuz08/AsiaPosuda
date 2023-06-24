@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/config/themes/themes.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_request.dart';
-import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
 
@@ -24,18 +23,21 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
     return BlocConsumer<RegisterBloc, RegisterState>(
       bloc: _bloc,
       listener: (_, state) {
-        state.when(() => null,
-            registerLoading: () {},
-            registerError: (String errorMessage) {}, registerSuccess: () {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.main,
-            (route) => route.isFirst,
-          );
-        },
-            userFullNameErrorState: (String errorMessage) {},
-            userPhoneNumberErrorState: (String errorMessage) {},
-            userBloodGroupErrorState: (String errorMessage) {});
+        state.when(
+          () => null,
+          registerLoading: () {},
+          registerError: (String errorMessage) {},
+          registerSuccess: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.main,
+              (route) => route.isFirst,
+            );
+          },
+          userFullNameErrorState: (String errorMessage) {},
+          userPhoneNumberErrorState: (String errorMessage) {},
+          userBloodGroupErrorState: (String errorMessage) {},
+        );
       },
       builder: (_, state) {
         return Scaffold(
@@ -56,7 +58,6 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                   controller: _fullNameController,
                   textFieldPadding: AppUtils.kPaddingHorizontal12,
                   hintText: "ФИО",
-
                 ),
                 AppUtils.kBoxHeight14,
                 CustomTextField(
@@ -96,19 +97,21 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    _bloc.add(RegisterEvent.userRegister(
-                      request: RegisterUserRequest(
-                        clientName: "Asadbek easy",
-                        phoneNumber: "998650109",
-                        bloodGroup: '1',
-                        adres: "test",
-                        pasport: "asd",
-                        fcmToken: "",
-                        cleintLastname: "Bakhodirov",
-                        cleintLang: "",
-                        userId: 13,
+                    _bloc.add(
+                      RegisterEvent.userRegister(
+                        request: RegisterUserRequest(
+                          clientName: "Asadbek easy",
+                          phoneNumber: "998650109",
+                          bloodGroup: '1',
+                          adres: "test",
+                          pasport: "asd",
+                          fcmToken: "",
+                          cleintLastname: "Bakhodirov",
+                          cleintLang: "",
+                          userId: 13,
+                        ),
                       ),
-                    ));
+                    );
                   },
                   child: Text("Продолжить"),
                 ),

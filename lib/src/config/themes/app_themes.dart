@@ -78,14 +78,14 @@ final ThemeData lightTheme = appTheme.copyWith(
       ),
     ),
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: true,
     selectedLabelStyle: TextStyle(fontSize: 12),
     unselectedLabelStyle: TextStyle(fontSize: 12),
     unselectedItemColor: Color(0xffA0A9B6),
-    selectedItemColor: Color(0xff0FB8D3),
+    selectedItemColor: colorLightScheme.primary,
     elevation: 2,
   ),
   tabBarTheme: const TabBarTheme(

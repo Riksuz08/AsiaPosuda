@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/masked_text_input_formatter.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/modal_progress_hud.dart';
+
+part 'mixin/auth_mixin.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -14,15 +15,7 @@ class AuthPage extends StatefulWidget {
   State<AuthPage> createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
-  late final TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-  }
-
+class _AuthPageState extends State<AuthPage> with AuthMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -53,8 +46,9 @@ class _AuthPageState extends State<AuthPage> {
                   AppUtils.kGap24,
                   const Padding(
                     padding: AppUtils.kPaddingHorizontal16,
-                    child:
-                        Text('We will send a verification code to your number'),
+                    child: Text(
+                      'We will send a verification code to your number',
+                    ),
                   ),
                   AppUtils.kGap40,
                   const Padding(

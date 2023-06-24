@@ -6,6 +6,8 @@ import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 
+part 'mixin/confirm_code_mixin.dart';
+
 class ConfirmCodePage extends StatefulWidget {
   final AuthSuccessState state;
 
@@ -18,43 +20,8 @@ class ConfirmCodePage extends StatefulWidget {
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
 }
 
-class _ConfirmCodePageState extends State<ConfirmCodePage> {
-  late PinTheme defaultPinTheme;
-  late PinTheme focusedPinTheme;
-  late PinTheme submittedPinTheme;
-  late final TextEditingController controller;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    controller = TextEditingController();
-    defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: const TextStyle(
-        fontSize: 20,
-        color: Color.fromRGBO(30, 60, 87, 1),
-        fontWeight: FontWeight.w600,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
-    focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      color: Colors.white,
-      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(10),
-    );
-
-    submittedPinTheme = defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration?.copyWith(
-        color: const Color.fromRGBO(234, 239, 243, 1),
-      ),
-    );
-  }
-
+class _ConfirmCodePageState extends State<ConfirmCodePage>
+    with ConfirmCodeMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ConfirmCodeBloc, ConfirmCodeState>(
