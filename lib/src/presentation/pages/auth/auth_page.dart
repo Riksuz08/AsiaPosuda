@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/masked_text_input_formatter.dart';
@@ -19,7 +19,15 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (_, state) {},
+      listener: (_, state) {
+        if (state is AuthSuccessState) {
+          Navigator.pushNamed(
+            context,
+            Routes.confirmCode,
+            arguments: state,
+          );
+        }
+      },
       child: Scaffold(
         backgroundColor: context.color.cardColor,
         appBar: AppBar(
@@ -67,10 +75,6 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
                           mask: '## ### ## ##',
                           separator: ' ',
                           filter: RegExp('[0-9]'),
-                        ),
-                        FilteringTextInputFormatter.allow(
-                          RegExp('[0-9]'),
-                          replacementString: ' ',
                         ),
                       ],
                       decoration: InputDecoration(
