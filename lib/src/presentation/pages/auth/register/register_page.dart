@@ -11,7 +11,7 @@ import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/m
 part 'package:sample_bloc_mobile/src/presentation/pages/auth/register/mixin/register_mixin.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({
+  const RegisterPage({
     Key? key,
   }) : super(key: key);
 
@@ -27,7 +27,9 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
       listener: (_, state) {
         if (state is UserRegisterSuccessState) {
           localSource.setHasProfile(true);
-          context.read<MainBloc>().add(MainEventChanged(BottomMenu.search));
+          context
+              .read<MainBloc>()
+              .add(const MainEventChanged(BottomMenu.search));
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.main,
@@ -40,27 +42,23 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
           backgroundColor: colorLightScheme.background,
           appBar: AppBar(),
           body: SafeArea(
+            minimum: AppUtils.kPaddingAll16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppUtils.kBoxHeight20,
-                Padding(
-                  padding: AppUtils.kPaddingHorizontal12,
-                  child: Text("Создать аккаунт"),
-                ),
+                const Text('Создать аккаунт'),
                 AppUtils.kBoxHeight20,
                 CustomTextField(
                   onChanged: (value) {
-                    _bloc.add(FullNameChangedEvent());
+                    _bloc.add(const FullNameChangedEvent());
                   },
                   errorText: state is UserFullNameErrorState
                       ? state.errorMessage
                       : null,
-                  showError:
-                      state is UserFullNameErrorState ? state.showError : false,
+                  showError: state is UserFullNameErrorState && state.showError,
                   controller: _fullNameController,
-                  textFieldPadding: AppUtils.kPaddingHorizontal12,
-                  hintText: "ФИО",
+                  hintText: 'ФИО',
                 ),
                 AppUtils.kBoxHeight14,
                 CustomPhoneTextField(
@@ -72,62 +70,53 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                     ),
                   ],
                   onChanged: (value) {
-                    _bloc.add(PhoneNumberChangedEvent());
+                    _bloc.add(const PhoneNumberChangedEvent());
                   },
                   errorText: state is UserPhoneNumberErrorState
                       ? state.errorMessage
                       : null,
-                  showError: state is UserPhoneNumberErrorState
-                      ? state.showError
-                      : false,
+                  showError:
+                      state is UserPhoneNumberErrorState && state.showError,
                   controller: _phoneNumberController,
-                  hintText: "Номер телефона",
+                  hintText: 'Номер телефона',
                 ),
                 AppUtils.kBoxHeight14,
-                Padding(
-                  padding: AppUtils.kPaddingHorizontal12,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextField(
-                          controller: _bloodGroupController,
-                          onChanged: (value) {
-                            _bloc.add(BloodGroupChangedEvent());
-                          },
-                          errorText: state is UserBloodGroupErrorState
-                              ? state.errorMessage
-                              : null,
-                          showError: state is UserBloodGroupErrorState
-                              ? state.showError
-                              : false,
-                          hintText: "Группа крови",
-                        ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: _bloodGroupController,
+                        onChanged: (value) {
+                          _bloc.add(const BloodGroupChangedEvent());
+                        },
+                        errorText: state is UserBloodGroupErrorState
+                            ? state.errorMessage
+                            : null,
+                        showError: state is UserBloodGroupErrorState &&
+                            state.showError,
+                        hintText: 'Группа крови',
                       ),
-                      AppUtils.kBoxWidth8,
-                      Expanded(
-                        child: CustomTextField(
-                          hintText: "Дата рождения",
-                        ),
+                    ),
+                    AppUtils.kBoxWidth8,
+                    const Expanded(
+                      child: CustomTextField(
+                        hintText: 'Дата рождения',
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 )
               ],
             ),
           ),
           bottomNavigationBar: SafeArea(
             minimum: EdgeInsets.only(
+              left: 16,
+              right: 16,
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: Padding(
-              padding: AppUtils.kPaddingHorizontal16,
-              child: SizedBox(
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: _registerUser,
-                  child: Text("Продолжить"),
-                ),
-              ),
+            child: ElevatedButton(
+              onPressed: _registerUser,
+              child: const Text('Продолжить'),
             ),
           ),
         );

@@ -42,7 +42,7 @@ dependencies:
   # alice = chuck
   chuck_interceptor: ^2.0.0+1
   # box
-  gap: ^3.0.0
+  gap: ^3.0.1
   # native splash
   flutter_native_splash: ^2.3.1
   # pin put:

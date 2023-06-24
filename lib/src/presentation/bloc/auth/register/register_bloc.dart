@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 import 'package:sample_bloc_mobile/src/core/mixin/cache_mixin.dart';
-import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_request.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository.dart';
 
 part 'register_event.dart';
@@ -24,7 +22,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
 
   void _onPhoneNumberChangedEvent(PhoneNumberChangedEvent event, emit) {
     emit(
-      RegisterState.userPhoneNumberErrorState(
+      const RegisterState.userPhoneNumberErrorState(
         showError: false,
       ),
     );
@@ -32,16 +30,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
 
   void _onBloodGroupChangedEvent(BloodGroupChangedEvent event, emit) {
     emit(
-      RegisterState.userBloodGroupErrorState(
+      const RegisterState.userBloodGroupErrorState(
         showError: false,
-        errorMessage: "error",
+        errorMessage: 'error',
       ),
     );
   }
 
   void _onFullNameChangedEvent(FullNameChangedEvent event, emit) {
     emit(
-      RegisterState.userFullNameErrorState(
+      const RegisterState.userFullNameErrorState(
         showError: false,
       ),
     );
@@ -50,36 +48,36 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
   bool _areRequiredFieldValidated(UserRegisterEvent event, emit) {
     if (event.fullName.isEmpty) {
       emit(
-        RegisterState.userFullNameErrorState(
+        const RegisterState.userFullNameErrorState(
           showError: true,
-          errorMessage: "Enter at least 1 character",
+          errorMessage: 'Enter at least 1 character',
         ),
       );
       return false;
     }
     if (event.phoneNumber.isEmpty) {
       emit(
-        RegisterState.userPhoneNumberErrorState(
+        const RegisterState.userPhoneNumberErrorState(
           showError: true,
-          errorMessage: "Number is required",
+          errorMessage: 'Number is required',
         ),
       );
       return false;
     }
     if (event.phoneNumber.length < 12) {
       emit(
-        RegisterState.userPhoneNumberErrorState(
+        const RegisterState.userPhoneNumberErrorState(
           showError: true,
-          errorMessage: "Enter your number correctly",
+          errorMessage: 'Enter your number correctly',
         ),
       );
       return false;
     }
     if (event.bloodGroup.isEmpty) {
       emit(
-        RegisterState.userBloodGroupErrorState(
+        const RegisterState.userBloodGroupErrorState(
           showError: true,
-          errorMessage: "Blood group needed",
+          errorMessage: 'Blood group needed',
         ),
       );
       return false;
@@ -97,17 +95,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     );
     result.fold(
       (left) {
-        emit(RegisterState.registerError(errorMessage: ""));
+        emit(const RegisterState.registerError(errorMessage: ''));
       },
       (r) {
         setUserInfo(
-          name: r.data?.user?.name ?? "",
-          id: r.data?.userId ?? "",
-          login: r.data?.user?.login ?? "",
-          email: r.data?.user?.email ?? "",
-          phoneNumber: r.data?.user?.phone ?? "",
-          accessToken: r.data?.token?.accessToken ?? "",
-          refreshToken: r.data?.token?.refreshToken ?? "",
+          name: r.data?.user?.name ?? '',
+          id: r.data?.userId ?? '',
+          login: r.data?.user?.login ?? '',
+          email: r.data?.user?.email ?? '',
+          phoneNumber: r.data?.user?.phone ?? '',
+          accessToken: r.data?.token?.accessToken ?? '',
+          refreshToken: r.data?.token?.refreshToken ?? '',
           imageUrl: '',
         );
         emit(const RegisterState.registerSuccess());
@@ -117,17 +115,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
 
   Map<String, dynamic> _getUserRegisterRequestData(UserRegisterEvent event) {
     return {
-      "data": {
-        "addational_table": event.additionalProps,
-        "client_type_id": Constants.clientTypeId,
-        "company_id": Constants.companyId,
-        "project_id": Constants.projectId,
-        "expires_at": Constants.expiresAt,
-        "name": event.additionalProps["client_name"],
-        "phone": event.additionalProps["phone_number"],
-        "role_id": Constants.roledId,
-        "active": 1,
-        "type": "phone"
+      'data': {
+        'addational_table': event.additionalProps,
+        'client_type_id': Constants.clientTypeId,
+        'company_id': Constants.companyId,
+        'project_id': Constants.projectId,
+        'expires_at': Constants.expiresAt,
+        'name': event.additionalProps['client_name'],
+        'phone': event.additionalProps['phone_number'],
+        'role_id': Constants.roledId,
+        'active': 1,
+        'type': 'phone'
       }
     };
   }

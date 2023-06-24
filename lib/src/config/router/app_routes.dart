@@ -71,7 +71,7 @@ final class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => sl<RegisterBloc>(),
-            child: RegisterPage(),
+            child: const RegisterPage(),
           ),
         );
       default:
