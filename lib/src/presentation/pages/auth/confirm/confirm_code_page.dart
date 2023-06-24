@@ -28,6 +28,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
       listener: (_, state) {
         if (state is ConfirmCodeSuccessState) {
           if (state.isUserFound) {
+            localSource.setHasProfile(true);
             Navigator.popUntil(
               context,
               (route) => route.isFirst,

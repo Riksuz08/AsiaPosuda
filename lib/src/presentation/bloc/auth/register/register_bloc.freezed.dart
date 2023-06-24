@@ -19,19 +19,34 @@ mixin _$RegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(RegisterUserRequest request) userRegister,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(RegisterUserRequest request)? userRegister,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(RegisterUserRequest request)? userRegister,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +54,28 @@ mixin _$RegisterEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +137,12 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(RegisterUserRequest request) userRegister,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
   }) {
     return started();
   }
@@ -121,7 +151,12 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(RegisterUserRequest request)? userRegister,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
   }) {
     return started?.call();
   }
@@ -130,7 +165,12 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(RegisterUserRequest request)? userRegister,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -144,6 +184,10 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
   }) {
     return started(this);
   }
@@ -153,6 +197,9 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
   }) {
     return started?.call(this);
   }
@@ -162,6 +209,9 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -181,7 +231,11 @@ abstract class _$$UserRegisterEventCopyWith<$Res> {
           _$UserRegisterEvent value, $Res Function(_$UserRegisterEvent) then) =
       __$$UserRegisterEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({RegisterUserRequest request});
+  $Res call(
+      {Map<String, dynamic> additionalProps,
+      String phoneNumber,
+      String bloodGroup,
+      String fullName});
 }
 
 /// @nodoc
@@ -195,13 +249,28 @@ class __$$UserRegisterEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? request = null,
+    Object? additionalProps = null,
+    Object? phoneNumber = null,
+    Object? bloodGroup = null,
+    Object? fullName = null,
   }) {
     return _then(_$UserRegisterEvent(
-      request: null == request
-          ? _value.request
-          : request // ignore: cast_nullable_to_non_nullable
-              as RegisterUserRequest,
+      additionalProps: null == additionalProps
+          ? _value._additionalProps
+          : additionalProps // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      bloodGroup: null == bloodGroup
+          ? _value.bloodGroup
+          : bloodGroup // ignore: cast_nullable_to_non_nullable
+              as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -209,14 +278,31 @@ class __$$UserRegisterEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserRegisterEvent implements UserRegisterEvent {
-  const _$UserRegisterEvent({required this.request});
+  const _$UserRegisterEvent(
+      {required final Map<String, dynamic> additionalProps,
+      required this.phoneNumber,
+      required this.bloodGroup,
+      required this.fullName})
+      : _additionalProps = additionalProps;
+
+  final Map<String, dynamic> _additionalProps;
+  @override
+  Map<String, dynamic> get additionalProps {
+    if (_additionalProps is EqualUnmodifiableMapView) return _additionalProps;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_additionalProps);
+  }
 
   @override
-  final RegisterUserRequest request;
+  final String phoneNumber;
+  @override
+  final String bloodGroup;
+  @override
+  final String fullName;
 
   @override
   String toString() {
-    return 'RegisterEvent.userRegister(request: $request)';
+    return 'RegisterEvent.userRegister(additionalProps: $additionalProps, phoneNumber: $phoneNumber, bloodGroup: $bloodGroup, fullName: $fullName)';
   }
 
   @override
@@ -224,11 +310,23 @@ class _$UserRegisterEvent implements UserRegisterEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserRegisterEvent &&
-            (identical(other.request, request) || other.request == request));
+            const DeepCollectionEquality()
+                .equals(other._additionalProps, _additionalProps) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.bloodGroup, bloodGroup) ||
+                other.bloodGroup == bloodGroup) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, request);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_additionalProps),
+      phoneNumber,
+      bloodGroup,
+      fullName);
 
   @JsonKey(ignore: true)
   @override
@@ -240,29 +338,45 @@ class _$UserRegisterEvent implements UserRegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(RegisterUserRequest request) userRegister,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
   }) {
-    return userRegister(request);
+    return userRegister(additionalProps, phoneNumber, bloodGroup, fullName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(RegisterUserRequest request)? userRegister,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
   }) {
-    return userRegister?.call(request);
+    return userRegister?.call(
+        additionalProps, phoneNumber, bloodGroup, fullName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(RegisterUserRequest request)? userRegister,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
     required TResult orElse(),
   }) {
     if (userRegister != null) {
-      return userRegister(request);
+      return userRegister(additionalProps, phoneNumber, bloodGroup, fullName);
     }
     return orElse();
   }
@@ -272,6 +386,10 @@ class _$UserRegisterEvent implements UserRegisterEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
   }) {
     return userRegister(this);
   }
@@ -281,6 +399,9 @@ class _$UserRegisterEvent implements UserRegisterEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
   }) {
     return userRegister?.call(this);
   }
@@ -290,6 +411,9 @@ class _$UserRegisterEvent implements UserRegisterEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
     required TResult orElse(),
   }) {
     if (userRegister != null) {
@@ -301,12 +425,400 @@ class _$UserRegisterEvent implements UserRegisterEvent {
 
 abstract class UserRegisterEvent implements RegisterEvent {
   const factory UserRegisterEvent(
-      {required final RegisterUserRequest request}) = _$UserRegisterEvent;
+      {required final Map<String, dynamic> additionalProps,
+      required final String phoneNumber,
+      required final String bloodGroup,
+      required final String fullName}) = _$UserRegisterEvent;
 
-  RegisterUserRequest get request;
+  Map<String, dynamic> get additionalProps;
+  String get phoneNumber;
+  String get bloodGroup;
+  String get fullName;
   @JsonKey(ignore: true)
   _$$UserRegisterEventCopyWith<_$UserRegisterEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FullNameChangedEventCopyWith<$Res> {
+  factory _$$FullNameChangedEventCopyWith(_$FullNameChangedEvent value,
+          $Res Function(_$FullNameChangedEvent) then) =
+      __$$FullNameChangedEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FullNameChangedEventCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$FullNameChangedEvent>
+    implements _$$FullNameChangedEventCopyWith<$Res> {
+  __$$FullNameChangedEventCopyWithImpl(_$FullNameChangedEvent _value,
+      $Res Function(_$FullNameChangedEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FullNameChangedEvent implements FullNameChangedEvent {
+  const _$FullNameChangedEvent();
+
+  @override
+  String toString() {
+    return 'RegisterEvent.onFullNameChanged()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FullNameChangedEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
+  }) {
+    return onFullNameChanged();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
+  }) {
+    return onFullNameChanged?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onFullNameChanged != null) {
+      return onFullNameChanged();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
+  }) {
+    return onFullNameChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+  }) {
+    return onFullNameChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onFullNameChanged != null) {
+      return onFullNameChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FullNameChangedEvent implements RegisterEvent {
+  const factory FullNameChangedEvent() = _$FullNameChangedEvent;
+}
+
+/// @nodoc
+abstract class _$$BloodGroupChangedEventCopyWith<$Res> {
+  factory _$$BloodGroupChangedEventCopyWith(_$BloodGroupChangedEvent value,
+          $Res Function(_$BloodGroupChangedEvent) then) =
+      __$$BloodGroupChangedEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BloodGroupChangedEventCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$BloodGroupChangedEvent>
+    implements _$$BloodGroupChangedEventCopyWith<$Res> {
+  __$$BloodGroupChangedEventCopyWithImpl(_$BloodGroupChangedEvent _value,
+      $Res Function(_$BloodGroupChangedEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BloodGroupChangedEvent implements BloodGroupChangedEvent {
+  const _$BloodGroupChangedEvent();
+
+  @override
+  String toString() {
+    return 'RegisterEvent.onBloodGroupChanged()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$BloodGroupChangedEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
+  }) {
+    return onBloodGroupChanged();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
+  }) {
+    return onBloodGroupChanged?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onBloodGroupChanged != null) {
+      return onBloodGroupChanged();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
+  }) {
+    return onBloodGroupChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+  }) {
+    return onBloodGroupChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onBloodGroupChanged != null) {
+      return onBloodGroupChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BloodGroupChangedEvent implements RegisterEvent {
+  const factory BloodGroupChangedEvent() = _$BloodGroupChangedEvent;
+}
+
+/// @nodoc
+abstract class _$$PhoneNumberChangedEventCopyWith<$Res> {
+  factory _$$PhoneNumberChangedEventCopyWith(_$PhoneNumberChangedEvent value,
+          $Res Function(_$PhoneNumberChangedEvent) then) =
+      __$$PhoneNumberChangedEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PhoneNumberChangedEventCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$PhoneNumberChangedEvent>
+    implements _$$PhoneNumberChangedEventCopyWith<$Res> {
+  __$$PhoneNumberChangedEventCopyWithImpl(_$PhoneNumberChangedEvent _value,
+      $Res Function(_$PhoneNumberChangedEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PhoneNumberChangedEvent implements PhoneNumberChangedEvent {
+  const _$PhoneNumberChangedEvent();
+
+  @override
+  String toString() {
+    return 'RegisterEvent.onPhoneNumberChanged()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PhoneNumberChangedEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Map<String, dynamic> additionalProps,
+            String phoneNumber, String bloodGroup, String fullName)
+        userRegister,
+    required TResult Function() onFullNameChanged,
+    required TResult Function() onBloodGroupChanged,
+    required TResult Function() onPhoneNumberChanged,
+  }) {
+    return onPhoneNumberChanged();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult? Function()? onFullNameChanged,
+    TResult? Function()? onBloodGroupChanged,
+    TResult? Function()? onPhoneNumberChanged,
+  }) {
+    return onPhoneNumberChanged?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Map<String, dynamic> additionalProps, String phoneNumber,
+            String bloodGroup, String fullName)?
+        userRegister,
+    TResult Function()? onFullNameChanged,
+    TResult Function()? onBloodGroupChanged,
+    TResult Function()? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onPhoneNumberChanged != null) {
+      return onPhoneNumberChanged();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(UserRegisterEvent value) userRegister,
+    required TResult Function(FullNameChangedEvent value) onFullNameChanged,
+    required TResult Function(BloodGroupChangedEvent value) onBloodGroupChanged,
+    required TResult Function(PhoneNumberChangedEvent value)
+        onPhoneNumberChanged,
+  }) {
+    return onPhoneNumberChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(UserRegisterEvent value)? userRegister,
+    TResult? Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult? Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult? Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+  }) {
+    return onPhoneNumberChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(UserRegisterEvent value)? userRegister,
+    TResult Function(FullNameChangedEvent value)? onFullNameChanged,
+    TResult Function(BloodGroupChangedEvent value)? onBloodGroupChanged,
+    TResult Function(PhoneNumberChangedEvent value)? onPhoneNumberChanged,
+    required TResult orElse(),
+  }) {
+    if (onPhoneNumberChanged != null) {
+      return onPhoneNumberChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PhoneNumberChangedEvent implements RegisterEvent {
+  const factory PhoneNumberChangedEvent() = _$PhoneNumberChangedEvent;
 }
 
 /// @nodoc
@@ -314,9 +826,12 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
@@ -325,9 +840,12 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
@@ -336,9 +854,12 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
@@ -443,9 +964,12 @@ class _$_RegisterState implements _RegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
@@ -457,9 +981,12 @@ class _$_RegisterState implements _RegisterState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
@@ -471,9 +998,12 @@ class _$_RegisterState implements _RegisterState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
@@ -547,7 +1077,7 @@ abstract class _$$UserFullNameErrorStateCopyWith<$Res> {
           $Res Function(_$UserFullNameErrorState) then) =
       __$$UserFullNameErrorStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({String errorMessage});
+  $Res call({bool showError, String? errorMessage});
 }
 
 /// @nodoc
@@ -561,13 +1091,18 @@ class __$$UserFullNameErrorStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? errorMessage = null,
+    Object? showError = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$UserFullNameErrorState(
-      errorMessage: null == errorMessage
+      showError: null == showError
+          ? _value.showError
+          : showError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -575,14 +1110,16 @@ class __$$UserFullNameErrorStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserFullNameErrorState implements UserFullNameErrorState {
-  const _$UserFullNameErrorState({required this.errorMessage});
+  const _$UserFullNameErrorState({required this.showError, this.errorMessage});
 
   @override
-  final String errorMessage;
+  final bool showError;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState.userFullNameErrorState(errorMessage: $errorMessage)';
+    return 'RegisterState.userFullNameErrorState(showError: $showError, errorMessage: $errorMessage)';
   }
 
   @override
@@ -590,12 +1127,14 @@ class _$UserFullNameErrorState implements UserFullNameErrorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserFullNameErrorState &&
+            (identical(other.showError, showError) ||
+                other.showError == showError) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, showError, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -608,44 +1147,53 @@ class _$UserFullNameErrorState implements UserFullNameErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
   }) {
-    return userFullNameErrorState(errorMessage);
+    return userFullNameErrorState(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
   }) {
-    return userFullNameErrorState?.call(errorMessage);
+    return userFullNameErrorState?.call(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
     required TResult orElse(),
   }) {
     if (userFullNameErrorState != null) {
-      return userFullNameErrorState(errorMessage);
+      return userFullNameErrorState(showError, errorMessage);
     }
     return orElse();
   }
@@ -703,10 +1251,12 @@ class _$UserFullNameErrorState implements UserFullNameErrorState {
 }
 
 abstract class UserFullNameErrorState implements RegisterState {
-  const factory UserFullNameErrorState({required final String errorMessage}) =
-      _$UserFullNameErrorState;
+  const factory UserFullNameErrorState(
+      {required final bool showError,
+      final String? errorMessage}) = _$UserFullNameErrorState;
 
-  String get errorMessage;
+  bool get showError;
+  String? get errorMessage;
   @JsonKey(ignore: true)
   _$$UserFullNameErrorStateCopyWith<_$UserFullNameErrorState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -719,7 +1269,7 @@ abstract class _$$UserPhoneNumberErrorStateCopyWith<$Res> {
           $Res Function(_$UserPhoneNumberErrorState) then) =
       __$$UserPhoneNumberErrorStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({String errorMessage});
+  $Res call({bool showError, String? errorMessage});
 }
 
 /// @nodoc
@@ -733,13 +1283,18 @@ class __$$UserPhoneNumberErrorStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? errorMessage = null,
+    Object? showError = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$UserPhoneNumberErrorState(
-      errorMessage: null == errorMessage
+      showError: null == showError
+          ? _value.showError
+          : showError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -747,14 +1302,17 @@ class __$$UserPhoneNumberErrorStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserPhoneNumberErrorState implements UserPhoneNumberErrorState {
-  const _$UserPhoneNumberErrorState({required this.errorMessage});
+  const _$UserPhoneNumberErrorState(
+      {required this.showError, this.errorMessage});
 
   @override
-  final String errorMessage;
+  final bool showError;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState.userPhoneNumberErrorState(errorMessage: $errorMessage)';
+    return 'RegisterState.userPhoneNumberErrorState(showError: $showError, errorMessage: $errorMessage)';
   }
 
   @override
@@ -762,12 +1320,14 @@ class _$UserPhoneNumberErrorState implements UserPhoneNumberErrorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserPhoneNumberErrorState &&
+            (identical(other.showError, showError) ||
+                other.showError == showError) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, showError, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -780,44 +1340,53 @@ class _$UserPhoneNumberErrorState implements UserPhoneNumberErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
   }) {
-    return userPhoneNumberErrorState(errorMessage);
+    return userPhoneNumberErrorState(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
   }) {
-    return userPhoneNumberErrorState?.call(errorMessage);
+    return userPhoneNumberErrorState?.call(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
     required TResult orElse(),
   }) {
     if (userPhoneNumberErrorState != null) {
-      return userPhoneNumberErrorState(errorMessage);
+      return userPhoneNumberErrorState(showError, errorMessage);
     }
     return orElse();
   }
@@ -876,9 +1445,11 @@ class _$UserPhoneNumberErrorState implements UserPhoneNumberErrorState {
 
 abstract class UserPhoneNumberErrorState implements RegisterState {
   const factory UserPhoneNumberErrorState(
-      {required final String errorMessage}) = _$UserPhoneNumberErrorState;
+      {required final bool showError,
+      final String? errorMessage}) = _$UserPhoneNumberErrorState;
 
-  String get errorMessage;
+  bool get showError;
+  String? get errorMessage;
   @JsonKey(ignore: true)
   _$$UserPhoneNumberErrorStateCopyWith<_$UserPhoneNumberErrorState>
       get copyWith => throw _privateConstructorUsedError;
@@ -890,7 +1461,7 @@ abstract class _$$UserBloodGroupErrorStateCopyWith<$Res> {
           $Res Function(_$UserBloodGroupErrorState) then) =
       __$$UserBloodGroupErrorStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({String errorMessage});
+  $Res call({bool showError, String? errorMessage});
 }
 
 /// @nodoc
@@ -904,13 +1475,18 @@ class __$$UserBloodGroupErrorStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? errorMessage = null,
+    Object? showError = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$UserBloodGroupErrorState(
-      errorMessage: null == errorMessage
+      showError: null == showError
+          ? _value.showError
+          : showError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -918,14 +1494,17 @@ class __$$UserBloodGroupErrorStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserBloodGroupErrorState implements UserBloodGroupErrorState {
-  const _$UserBloodGroupErrorState({required this.errorMessage});
+  const _$UserBloodGroupErrorState(
+      {required this.showError, this.errorMessage});
 
   @override
-  final String errorMessage;
+  final bool showError;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState.userBloodGroupErrorState(errorMessage: $errorMessage)';
+    return 'RegisterState.userBloodGroupErrorState(showError: $showError, errorMessage: $errorMessage)';
   }
 
   @override
@@ -933,12 +1512,14 @@ class _$UserBloodGroupErrorState implements UserBloodGroupErrorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserBloodGroupErrorState &&
+            (identical(other.showError, showError) ||
+                other.showError == showError) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, showError, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -952,44 +1533,53 @@ class _$UserBloodGroupErrorState implements UserBloodGroupErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
   }) {
-    return userBloodGroupErrorState(errorMessage);
+    return userBloodGroupErrorState(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
   }) {
-    return userBloodGroupErrorState?.call(errorMessage);
+    return userBloodGroupErrorState?.call(showError, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
     required TResult orElse(),
   }) {
     if (userBloodGroupErrorState != null) {
-      return userBloodGroupErrorState(errorMessage);
+      return userBloodGroupErrorState(showError, errorMessage);
     }
     return orElse();
   }
@@ -1047,10 +1637,12 @@ class _$UserBloodGroupErrorState implements UserBloodGroupErrorState {
 }
 
 abstract class UserBloodGroupErrorState implements RegisterState {
-  const factory UserBloodGroupErrorState({required final String errorMessage}) =
-      _$UserBloodGroupErrorState;
+  const factory UserBloodGroupErrorState(
+      {required final bool showError,
+      final String? errorMessage}) = _$UserBloodGroupErrorState;
 
-  String get errorMessage;
+  bool get showError;
+  String? get errorMessage;
   @JsonKey(ignore: true)
   _$$UserBloodGroupErrorStateCopyWith<_$UserBloodGroupErrorState>
       get copyWith => throw _privateConstructorUsedError;
@@ -1096,9 +1688,12 @@ class _$UserRegisterLoadingState implements UserRegisterLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
@@ -1110,9 +1705,12 @@ class _$UserRegisterLoadingState implements UserRegisterLoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
@@ -1124,9 +1722,12 @@ class _$UserRegisterLoadingState implements UserRegisterLoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
@@ -1261,9 +1862,12 @@ class _$UserRegisterErrorState implements UserRegisterErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
@@ -1275,9 +1879,12 @@ class _$UserRegisterErrorState implements UserRegisterErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
@@ -1289,9 +1896,12 @@ class _$UserRegisterErrorState implements UserRegisterErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,
@@ -1405,9 +2015,12 @@ class _$UserRegisterSuccessState implements UserRegisterSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(String errorMessage) userFullNameErrorState,
-    required TResult Function(String errorMessage) userPhoneNumberErrorState,
-    required TResult Function(String errorMessage) userBloodGroupErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userFullNameErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userPhoneNumberErrorState,
+    required TResult Function(bool showError, String? errorMessage)
+        userBloodGroupErrorState,
     required TResult Function() registerLoading,
     required TResult Function(String errorMessage) registerError,
     required TResult Function() registerSuccess,
@@ -1419,9 +2032,12 @@ class _$UserRegisterSuccessState implements UserRegisterSuccessState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String errorMessage)? userFullNameErrorState,
-    TResult? Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult? Function(String errorMessage)? userBloodGroupErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult? Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult? Function()? registerLoading,
     TResult? Function(String errorMessage)? registerError,
     TResult? Function()? registerSuccess,
@@ -1433,9 +2049,12 @@ class _$UserRegisterSuccessState implements UserRegisterSuccessState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String errorMessage)? userFullNameErrorState,
-    TResult Function(String errorMessage)? userPhoneNumberErrorState,
-    TResult Function(String errorMessage)? userBloodGroupErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userFullNameErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userPhoneNumberErrorState,
+    TResult Function(bool showError, String? errorMessage)?
+        userBloodGroupErrorState,
     TResult Function()? registerLoading,
     TResult Function(String errorMessage)? registerError,
     TResult Function()? registerSuccess,

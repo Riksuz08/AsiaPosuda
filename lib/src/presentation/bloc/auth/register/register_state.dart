@@ -5,15 +5,18 @@ class RegisterState with _$RegisterState {
   const factory RegisterState() = _RegisterState;
 
   const factory RegisterState.userFullNameErrorState({
-    required String errorMessage,
+    required bool showError,
+    String? errorMessage,
   }) = UserFullNameErrorState;
 
   const factory RegisterState.userPhoneNumberErrorState({
-    required String errorMessage,
+    required bool showError,
+    String? errorMessage,
   }) = UserPhoneNumberErrorState;
 
   const factory RegisterState.userBloodGroupErrorState({
-    required String errorMessage,
+    required bool showError,
+    String? errorMessage,
   }) = UserBloodGroupErrorState;
 
   const factory RegisterState.registerLoading() = UserRegisterLoadingState;

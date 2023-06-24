@@ -33,7 +33,7 @@ class MainPage extends StatelessWidget {
             key: Constants.bottomNavigatorKey,
             onTap: (i) {
               if (i == 3 && !localSource.hasProfile) {
-                Navigator.pushNamed(context, Routes.register);
+                Navigator.pushNamed(context, Routes.auth);
                 return;
               }
               context

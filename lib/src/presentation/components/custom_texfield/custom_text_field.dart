@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final bool? enabled;
   final Function()? onTap;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final EdgeInsets textFieldPadding;
   final Function()? onComplete;
   final Function(String?)? validator;
@@ -48,6 +49,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.autofocus,
     this.textFieldPadding = AppUtils.kPadding0,
+    this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -87,7 +89,9 @@ class CustomTextField extends StatelessWidget {
             onChanged: onChanged,
             decoration: InputDecoration(
               suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
               errorText: showError ? errorText : null,
+              errorStyle: TextStyle(fontSize: 13),
               hintText: hintText,
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xff22B99A), width: 1),

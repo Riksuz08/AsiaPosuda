@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/config/themes/themes.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_request.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
 
 part 'package:sample_bloc_mobile/src/presentation/pages/auth/register/mixin/register_mixin.dart';
@@ -23,21 +25,15 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
     return BlocConsumer<RegisterBloc, RegisterState>(
       bloc: _bloc,
       listener: (_, state) {
-        state.when(
-          () => null,
-          registerLoading: () {},
-          registerError: (String errorMessage) {},
-          registerSuccess: () {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.main,
-              (route) => route.isFirst,
-            );
-          },
-          userFullNameErrorState: (String errorMessage) {},
-          userPhoneNumberErrorState: (String errorMessage) {},
-          userBloodGroupErrorState: (String errorMessage) {},
-        );
+        if (state is UserRegisterSuccessState) {
+          localSource.setHasProfile(true);
+          context.read<MainBloc>().add(MainEventChanged(BottomMenu.search));
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.main,
+            (route) => route.isFirst,
+          );
+        }
       },
       builder: (_, state) {
         return Scaffold(
@@ -54,13 +50,34 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                 ),
                 AppUtils.kBoxHeight20,
                 CustomTextField(
-                  showError: state is UserFullNameErrorState,
+                  onChanged: (value) {
+                    _bloc.add(FullNameChangedEvent());
+                  },
+                  errorText: state is UserFullNameErrorState
+                      ? state.errorMessage
+                      : null,
+                  showError:
+                      state is UserFullNameErrorState ? state.showError : false,
                   controller: _fullNameController,
                   textFieldPadding: AppUtils.kPaddingHorizontal12,
                   hintText: "ФИО",
                 ),
                 AppUtils.kBoxHeight14,
                 CustomTextField(
+                  inputFormatters: [
+                    MaskTextInputFormatter(
+                      mask: '+998 (##) ### ## ##',
+                    )
+                  ],
+                  onChanged: (value) {
+                    _bloc.add(PhoneNumberChangedEvent());
+                  },
+                  errorText: state is UserPhoneNumberErrorState
+                      ? state.errorMessage
+                      : null,
+                  showError: state is UserPhoneNumberErrorState
+                      ? state.showError
+                      : false,
                   controller: _phoneNumberController,
                   textFieldPadding: AppUtils.kPaddingHorizontal12,
                   hintText: "Номер телефона",
@@ -72,6 +89,16 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                     children: [
                       Expanded(
                         child: CustomTextField(
+                          controller: _bloodGroupController,
+                          onChanged: (value) {
+                            _bloc.add(BloodGroupChangedEvent());
+                          },
+                          errorText: state is UserBloodGroupErrorState
+                              ? state.errorMessage
+                              : null,
+                          showError: state is UserBloodGroupErrorState
+                              ? state.showError
+                              : false,
                           hintText: "Группа крови",
                         ),
                       ),
@@ -96,23 +123,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
               child: SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    _bloc.add(
-                      RegisterEvent.userRegister(
-                        request: RegisterUserRequest(
-                          clientName: "Asadbek easy",
-                          phoneNumber: "998650109",
-                          bloodGroup: '1',
-                          adres: "test",
-                          pasport: "asd",
-                          fcmToken: "",
-                          cleintLastname: "Bakhodirov",
-                          cleintLang: "",
-                          userId: 13,
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: _registerUser,
                   child: Text("Продолжить"),
                 ),
               ),

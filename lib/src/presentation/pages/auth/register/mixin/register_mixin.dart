@@ -32,16 +32,21 @@ mixin RegisterMixin on State<RegisterPage> {
     _phoneNumberController.dispose();
   }
 
-  bool _areRequiredFieldsValidated() {
-    if (_fullNameController.text.isEmpty) {
-      return false;
-    }
-    if (_bloodGroupController.text.isEmpty) {
-      return false;
-    }
-    if (_phoneNumberController.text.isEmpty) {
-      return false;
-    }
-    return true;
+  void _registerUser() {
+    String phoneNum =
+        _phoneNumberController.text.replaceAll(RegExp(r'[^\d]'), "");
+    _bloc.add(
+      RegisterEvent.userRegister(
+        additionalProps: {
+          "client_name": _fullNameController.text,
+          "phone_number": phoneNum,
+          "blood_group": _bloodGroupController.text,
+          "table_slug": "clients"
+        },
+        phoneNumber: phoneNum,
+        bloodGroup: _bloodGroupController.text,
+        fullName: _fullNameController.text,
+      ),
+    );
   }
 }
