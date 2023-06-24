@@ -25,7 +25,6 @@ dependencies:
   formz: ^0.6.0
   # internet check
   connectivity_plus: ^4.0.1
-  mask_text_input_formatter: ^2.4.0
   internet_connection_checker: ^1.0.0+1
   # cached image
   cached_network_image: ^3.2.3

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
@@ -22,7 +21,8 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
     return BlocListener<AuthBloc, AuthState>(
       listener: (_, state) {
         if (state is AuthSuccessState) {
-          Navigator.of(context).pushNamed(
+          Navigator.pushNamed(
+            context,
             Routes.confirmCode,
             arguments: state,
           );
@@ -75,10 +75,6 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
                           mask: '## ### ## ##',
                           separator: ' ',
                           filter: RegExp('[0-9]'),
-                        ),
-                        FilteringTextInputFormatter.allow(
-                          RegExp('[0-9]'),
-                          replacementString: ' ',
                         ),
                       ],
                       decoration: InputDecoration(

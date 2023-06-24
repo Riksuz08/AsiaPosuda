@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/config/themes/themes.dart';
-import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_request.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_phone_text_field.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/masked_text_input_formatter.dart';
 
 part 'package:sample_bloc_mobile/src/presentation/pages/auth/register/mixin/register_mixin.dart';
 
@@ -63,11 +63,13 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                   hintText: "ФИО",
                 ),
                 AppUtils.kBoxHeight14,
-                CustomTextField(
+                CustomPhoneTextField(
                   inputFormatters: [
-                    MaskTextInputFormatter(
-                      mask: '+998 (##) ### ## ##',
-                    )
+                    MaskedTextInputFormatter(
+                      mask: '## ### ## ##',
+                      separator: ' ',
+                      filter: RegExp('[0-9]'),
+                    ),
                   ],
                   onChanged: (value) {
                     _bloc.add(PhoneNumberChangedEvent());
@@ -79,7 +81,6 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                       ? state.showError
                       : false,
                   controller: _phoneNumberController,
-                  textFieldPadding: AppUtils.kPaddingHorizontal12,
                   hintText: "Номер телефона",
                 ),
                 AppUtils.kBoxHeight14,
