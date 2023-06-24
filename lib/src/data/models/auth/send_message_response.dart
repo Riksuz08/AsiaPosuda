@@ -5,18 +5,21 @@ class SendMessageResponse {
   final String? status;
   final String? description;
   final Map<String, dynamic>? data;
+  final String? message;
 
   const SendMessageResponse({
     this.status,
     this.description,
     this.data,
+    this.message,
   });
 
   factory SendMessageResponse.fromJson(Map<String, dynamic> json) {
     return SendMessageResponse(
       status: json['message'],
       description: json['error'],
-      data: json['data'],
+      data: json['data'] is Map ? json['data'] : {},
+      message: json['data'] is String ? json['data'] : "",
     );
   }
 

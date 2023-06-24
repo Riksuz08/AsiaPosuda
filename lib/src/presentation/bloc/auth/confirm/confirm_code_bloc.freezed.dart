@@ -19,7 +19,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -28,7 +28,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -37,7 +37,7 @@ mixin _$ConfirmCodeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -131,7 +131,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -143,7 +143,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -155,7 +155,7 @@ class _$_ConfirmCodeState implements _ConfirmCodeState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -217,6 +217,8 @@ abstract class _$$ConfirmCodeSuccessStateCopyWith<$Res> {
   factory _$$ConfirmCodeSuccessStateCopyWith(_$ConfirmCodeSuccessState value,
           $Res Function(_$ConfirmCodeSuccessState) then) =
       __$$ConfirmCodeSuccessStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isUserFound});
 }
 
 /// @nodoc
@@ -226,64 +228,89 @@ class __$$ConfirmCodeSuccessStateCopyWithImpl<$Res>
   __$$ConfirmCodeSuccessStateCopyWithImpl(_$ConfirmCodeSuccessState _value,
       $Res Function(_$ConfirmCodeSuccessState) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isUserFound = null,
+  }) {
+    return _then(_$ConfirmCodeSuccessState(
+      isUserFound: null == isUserFound
+          ? _value.isUserFound
+          : isUserFound // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ConfirmCodeSuccessState implements ConfirmCodeSuccessState {
-  const _$ConfirmCodeSuccessState();
+  const _$ConfirmCodeSuccessState({required this.isUserFound});
+
+  @override
+  final bool isUserFound;
 
   @override
   String toString() {
-    return 'ConfirmCodeState.success()';
+    return 'ConfirmCodeState.success(isUserFound: $isUserFound)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConfirmCodeSuccessState);
+            other is _$ConfirmCodeSuccessState &&
+            (identical(other.isUserFound, isUserFound) ||
+                other.isUserFound == isUserFound));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isUserFound);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConfirmCodeSuccessStateCopyWith<_$ConfirmCodeSuccessState> get copyWith =>
+      __$$ConfirmCodeSuccessStateCopyWithImpl<_$ConfirmCodeSuccessState>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
   }) {
-    return success();
+    return success(isUserFound);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
   }) {
-    return success?.call();
+    return success?.call(isUserFound);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(isUserFound);
     }
     return orElse();
   }
@@ -330,7 +357,13 @@ class _$ConfirmCodeSuccessState implements ConfirmCodeSuccessState {
 }
 
 abstract class ConfirmCodeSuccessState implements ConfirmCodeState {
-  const factory ConfirmCodeSuccessState() = _$ConfirmCodeSuccessState;
+  const factory ConfirmCodeSuccessState({required final bool isUserFound}) =
+      _$ConfirmCodeSuccessState;
+
+  bool get isUserFound;
+  @JsonKey(ignore: true)
+  _$$ConfirmCodeSuccessStateCopyWith<_$ConfirmCodeSuccessState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -373,7 +406,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -385,7 +418,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -397,7 +430,7 @@ class _$ConfirmCodeLaodingState implements ConfirmCodeLaodingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -520,7 +553,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -532,7 +565,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -544,7 +577,7 @@ class _$ConfirmCodePhoneState implements ConfirmCodePhoneState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,
@@ -646,7 +679,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function() success,
+    required TResult Function(bool isUserFound) success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
@@ -658,7 +691,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function()? success,
+    TResult? Function(bool isUserFound)? success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
@@ -670,7 +703,7 @@ class _$ConfirmCodeErrorState implements ConfirmCodeErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function()? success,
+    TResult Function(bool isUserFound)? success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
     TResult Function()? error,

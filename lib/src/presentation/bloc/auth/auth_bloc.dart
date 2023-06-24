@@ -22,6 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(const AuthState());
       return;
     }
+
     emit(AuthPhoneState(event.value));
   }
 

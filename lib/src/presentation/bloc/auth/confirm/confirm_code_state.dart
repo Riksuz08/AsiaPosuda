@@ -4,7 +4,7 @@ part of 'confirm_code_bloc.dart';
 class ConfirmCodeState with _$ConfirmCodeState {
   const factory ConfirmCodeState() = _ConfirmCodeState;
 
-  const factory ConfirmCodeState.success() = ConfirmCodeSuccessState;
+  const factory ConfirmCodeState.success({required bool isUserFound}) = ConfirmCodeSuccessState;
 
   const factory ConfirmCodeState.loading() = ConfirmCodeLaodingState;
 
