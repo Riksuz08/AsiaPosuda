@@ -27,14 +27,14 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
     return BlocListener<ConfirmCodeBloc, ConfirmCodeState>(
       listener: (_, state) {
         if (state is ConfirmCodeSuccessState) {
-          if (state.isUserFound) {
-            localSource.setHasProfile(true);
-            Navigator.popUntil(
-              context,
-              (route) => route.isFirst,
-            );
-            return;
-          }
+          // if (state.isUserFound) {
+          //   localSource.setHasProfile(true);
+          //   Navigator.popUntil(
+          //     context,
+          //     (route) => route.isFirst,
+          //   );
+          //   return;
+          // }
           Navigator.pushNamed(
             context,
             Routes.register,
