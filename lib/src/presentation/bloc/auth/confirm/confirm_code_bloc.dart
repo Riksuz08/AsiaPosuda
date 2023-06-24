@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/core/mixin/cache_mixin.dart';
@@ -34,17 +35,22 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
         emit(const ConfirmCodeErrorState());
       },
       (r) {
-        setUserInfo(
-          name: r.data?['user']['name'] ?? '',
-          id: r.data?['user_id'],
-          login: r.data?['user']['login'],
-          email: r.data?['user']['email'],
-          phoneNumber: r.data?['user']['phone'],
-          accessToken: r.data?['token']['access_token'],
-          refreshToken: r.data?['token']['refresh_token'],
-          imageUrl: '',
+        if (r.data?.isNotEmpty ?? false) {
+          setUserInfo(
+            name: r.data?['user']['name'] ?? '',
+            id: r.data?['user_id'],
+            login: r.data?['user']['login'],
+            email: r.data?['user']['email'],
+            phoneNumber: r.data?['user']['phone'],
+            accessToken: r.data?['token']['access_token'],
+            refreshToken: r.data?['token']['refresh_token'],
+            imageUrl: '',
+          );
+        }
+        emit(
+          ConfirmCodeSuccessState(
+              isUserFound: r.message != "User verified but not found"),
         );
-        emit(const ConfirmCodeSuccessState());
       },
     );
   }

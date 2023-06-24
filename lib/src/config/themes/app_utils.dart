@@ -23,12 +23,15 @@ final class AppUtils {
   static const kBoxHeight8 = SizedBox(height: 8);
   static const kBoxHeight12 = SizedBox(height: 12);
   static const kBoxHeight16 = SizedBox(height: 16);
+  static const kBoxHeight14 = SizedBox(height: 14);
+  static const kBoxHeight20 = SizedBox(height: 20);
   static const kBoxHeight24 = SizedBox(height: 24);
 
   /// divider
   static const kDivider = Divider(height: 1);
 
   /// padding
+  static const kPadding0 = EdgeInsets.zero;
   static const kPaddingAll6 = EdgeInsets.all(6);
   static const kPaddingAll8 = EdgeInsets.all(8);
   static const kPaddingAll16 = EdgeInsets.all(16);

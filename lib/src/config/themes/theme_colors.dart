@@ -2,7 +2,7 @@ part of 'themes.dart';
 
 /// A set of colors for the entire app.
 const colorLightScheme = ColorScheme.light(
-  primary: Color(0xFF0FB8D3),
+  primary: Color(0xff22B99A),
   onPrimary: Color(0xFFFFFFFF),
   surface: Color(0xFFF7F9FC),
   onSurface: Color(0xFF020000),

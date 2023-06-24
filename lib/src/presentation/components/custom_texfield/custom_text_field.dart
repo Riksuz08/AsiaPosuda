@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final bool? enabled;
   final Function()? onTap;
   final Widget? suffixIcon;
+  final EdgeInsets textFieldPadding;
   final Function()? onComplete;
   final Function(String?)? validator;
 
@@ -46,6 +47,7 @@ class CustomTextField extends StatelessWidget {
     this.onComplete,
     this.validator,
     this.autofocus,
+    this.textFieldPadding = AppUtils.kPadding0,
   }) : super(key: key);
 
   @override
@@ -65,33 +67,52 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
           ),
-        TextFormField(
-          validator: (value) => validator!(value),
-          textCapitalization: TextCapitalization.sentences,
-          readOnly: readOnly,
-          enabled: enabled ?? true,
-          autofocus: autofocus ?? false,
-          obscureText: obscureText ?? false,
-          controller: controller,
-          onTap: onTap,
-          style: const TextStyle(
-            fontSize: 14,
-            height: 16 / 14,
-            fontWeight: FontWeight.w400,
+        Padding(
+          padding: textFieldPadding,
+          child: TextFormField(
+            validator: (value) => validator!(value),
+            textCapitalization: TextCapitalization.sentences,
+            readOnly: readOnly,
+            enabled: enabled ?? true,
+            autofocus: autofocus ?? false,
+            obscureText: obscureText ?? false,
+            controller: controller,
+            onTap: onTap,
+            style: const TextStyle(
+              fontSize: 14,
+              height: 16 / 14,
+              fontWeight: FontWeight.w400,
+            ),
+            textInputAction: inputAction ?? TextInputAction.next,
+            onChanged: onChanged,
+            decoration: InputDecoration(
+              suffixIcon: suffixIcon,
+              errorText: showError ? errorText : null,
+              hintText: hintText,
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff22B99A), width: 1),
+                borderRadius: AppUtils.kBorderRadius10,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+                borderRadius: AppUtils.kBorderRadius10,
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 1),
+                borderRadius: AppUtils.kBorderRadius10,
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 1),
+                borderRadius: AppUtils.kBorderRadius10,
+              ),
+            ),
+            cursorColor: context.theme.colorScheme.primary,
+            keyboardType: keyboardType,
+            maxLines: maxLines ?? 1,
+            minLines: minLines ?? 1,
+            inputFormatters: inputFormatters,
+            onEditingComplete: onComplete,
           ),
-          textInputAction: inputAction ?? TextInputAction.next,
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            suffixIcon: suffixIcon,
-            errorText: showError ? errorText : null,
-            hintText: hintText,
-          ),
-          cursorColor: context.theme.colorScheme.primary,
-          keyboardType: keyboardType,
-          maxLines: maxLines ?? 1,
-          minLines: minLines ?? 1,
-          inputFormatters: inputFormatters,
-          onEditingComplete: onComplete,
         ),
       ],
     );

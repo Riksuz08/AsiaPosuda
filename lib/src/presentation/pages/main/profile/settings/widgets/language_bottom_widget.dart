@@ -25,7 +25,7 @@ class LanguageBottomWidget extends StatelessWidget {
           },
           title: const Text('RU'),
           trailing: Visibility(
-            visible: AppOptions.of(context).locale?.languageCode == 'ru',
+            visible: AppOptions.of(context).locale.languageCode == 'ru',
             child: const Icon(Icons.check),
           ),
         ),
@@ -35,7 +35,7 @@ class LanguageBottomWidget extends StatelessWidget {
           },
           title: const Text('UZ'),
           trailing: Visibility(
-            visible: AppOptions.of(context).locale?.languageCode == 'uz',
+            visible: AppOptions.of(context).locale.languageCode == 'uz',
             child: const Icon(Icons.check),
           ),
         ),
@@ -47,7 +47,7 @@ class LanguageBottomWidget extends StatelessWidget {
             },
             title: const Text('EN'),
             trailing: Visibility(
-              visible: AppOptions.of(context).locale?.languageCode == 'en',
+              visible: AppOptions.of(context).locale.languageCode == 'en',
               child: const Icon(Icons.check),
             ),
           ),

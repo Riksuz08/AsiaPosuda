@@ -4,13 +4,18 @@ final class Constants {
   Constants._();
 
   static const String projectId = 'a4dc1f1c-d20f-4c1a-abf5-b819076604bc';
-  static const String environmentId = '29b028a4-1250-4792-a285-aae4705a39fc';
-  static const String resourceId = '19ad6e31-6b86-4271-98c3-a1d57e915687';
+  static const String environmentId = 'dcd76a3d-c71b-4998-9e5c-ab1e783264d0';
+  static const String resourceId = 'a97e8954-5d8e-4469-a241-9a9af2ea2978';
+  static const String apiKey = 'P-JV2nVIRUtgyPO5xRNeYll2mT4F5QG4bS';
 
   /// test
   static const shipperId = 'd4b1658f-3271-4973-8591-98a82939a664';
-  static const baseUrl = 'https://test.customer.api.delever.uz/';
+  static const baseUrl = 'https://app.u-code.io/';
   static const authUrl = 'https://api.auth.u-code.io/';
+  static const clientTypeId = '24fd6d7e-c0e7-4029-88cc-2595e9c643d5';
+  static const companyId = '696c77b5-0ebd-4277-a278-a7343421a32a';
+  static const expiresAt = '2025-06-23T06:00:10.049Z';
+  static const roledId = '425486de-89dc-48a7-9fa8-47f7b4eeffcb';
 
   static GlobalKey<FormState> bottomNavigatorKey = GlobalKey<FormState>();
 }

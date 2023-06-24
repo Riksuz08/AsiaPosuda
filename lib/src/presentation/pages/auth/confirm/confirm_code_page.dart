@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:pinput/pinput.dart';
@@ -59,9 +60,16 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
     return BlocListener<ConfirmCodeBloc, ConfirmCodeState>(
       listener: (_, state) {
         if (state is ConfirmCodeSuccessState) {
-          Navigator.popUntil(
+          if (state.isUserFound) {
+            Navigator.popUntil(
+              context,
+              (route) => route.isFirst,
+            );
+            return;
+          }
+          Navigator.pushNamed(
             context,
-            (route) => route.isFirst,
+            Routes.register,
           );
         }
       },

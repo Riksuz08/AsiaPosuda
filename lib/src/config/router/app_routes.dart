@@ -6,9 +6,11 @@ import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/auth/auth_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/auth/confirm/confirm_code_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/auth/register/register_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/error/error_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/internet_connection/internet_connection_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
@@ -63,6 +65,13 @@ final class AppRoutes {
             child: ConfirmCodePage(
               state: state,
             ),
+          ),
+        );
+      case Routes.register:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<RegisterBloc>(),
+            child: RegisterPage(),
           ),
         );
       default:

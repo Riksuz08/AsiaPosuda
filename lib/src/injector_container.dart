@@ -12,7 +12,10 @@ import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/domain/network/api_client.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
+import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository.dart';
+import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository_impl.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart';
 
@@ -36,7 +39,7 @@ Future<void> init() async {
         connectTimeout: const Duration(seconds: 30),
         headers: {
           'Authorization': 'API-KEY',
-          'X-API-KEY': 'P-qapkgqLxf6v25bwhNzgcIDHwjhFd4mzM',
+          'X-API-KEY': Constants.apiKey,
           'Resource-Id': Constants.resourceId,
           'Environment-Id': Constants.environmentId,
         },
@@ -73,24 +76,45 @@ Future<void> init() async {
   sl
     ..registerLazySingleton(InternetConnectionChecker.new)
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
-    ..registerSingleton<LocalSource>(LocalSource(_box));
+    ..registerSingleton<LocalSource>(LocalSource(_box))
+    ..registerFactory<ApiClient>(
+      () => ApiClient(
+        sl(),
+        Constants.baseUrl,
+      ),
+    );
+  ;
 
   /// main
-  mainFuture();
+  mainFeature();
 
   /// auth
-  authFeature();
+  late final ApiClient authClient = ApiClient(sl(), Constants.authUrl);
+  authFeature(authClient);
+
+  registerFeature(authClient);
 }
 
-void mainFuture() {
+void mainFeature() {
   /// splash
   sl
     ..registerFactory(SplashBloc.new)
     ..registerLazySingleton(MainBloc.new);
 }
 
-void authFeature() {
-  late final ApiClient authClient = ApiClient(sl(), Constants.authUrl);
+void registerFeature(ApiClient authClient) {
+  sl
+    ..registerFactory<RegisterBloc>(() => RegisterBloc(sl()))
+    ..registerLazySingleton<RegisterUserRepository>(
+      () => RegisterUserRepositoryImpl(
+        apiClient: authClient,
+        networkInfo: sl(),
+      ),
+    );
+  ;
+}
+
+void authFeature(ApiClient authClient) {
   sl
     ..registerFactory<AuthBloc>(() => AuthBloc(sl()))
     ..registerFactory<ConfirmCodeBloc>(() => ConfirmCodeBloc(sl()))

@@ -26,14 +26,7 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (_, state) {
-        if (state is AuthSuccessState) {
-          Navigator.of(context).pushNamed(
-            Routes.confirmCode,
-            arguments: state,
-          );
-        }
-      },
+      listener: (_, state) {},
       child: Scaffold(
         backgroundColor: context.color.cardColor,
         appBar: AppBar(
