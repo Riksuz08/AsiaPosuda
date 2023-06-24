@@ -45,7 +45,7 @@ dependencies:
   gap: ^3.0.0
   # native splash
   flutter_native_splash: ^2.3.1
-  # pinput:
+  # pin put:
   pinput: ^2.2.31
 
 dev_dependencies:
