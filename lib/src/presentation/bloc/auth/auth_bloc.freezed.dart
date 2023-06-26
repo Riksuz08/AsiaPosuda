@@ -19,8 +19,8 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
@@ -30,7 +30,8 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
@@ -40,7 +41,8 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
@@ -134,8 +136,8 @@ class _$_AuthState implements _AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
@@ -148,7 +150,8 @@ class _$_AuthState implements _AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
@@ -161,7 +164,8 @@ class _$_AuthState implements _AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
@@ -225,7 +229,8 @@ abstract class _$$AuthSuccessStateCopyWith<$Res> {
           _$AuthSuccessState value, $Res Function(_$AuthSuccessState) then) =
       __$$AuthSuccessStateCopyWithImpl<$Res>;
   @useResult
-  $Res call({String smsId, String phone, Map<dynamic, dynamic> data});
+  $Res call(
+      {String smsId, String phone, String uiPhone, Map<dynamic, dynamic> data});
 }
 
 /// @nodoc
@@ -241,6 +246,7 @@ class __$$AuthSuccessStateCopyWithImpl<$Res>
   $Res call({
     Object? smsId = null,
     Object? phone = null,
+    Object? uiPhone = null,
     Object? data = null,
   }) {
     return _then(_$AuthSuccessState(
@@ -251,6 +257,10 @@ class __$$AuthSuccessStateCopyWithImpl<$Res>
       null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == uiPhone
+          ? _value.uiPhone
+          : uiPhone // ignore: cast_nullable_to_non_nullable
               as String,
       null == data
           ? _value._data
@@ -264,13 +274,15 @@ class __$$AuthSuccessStateCopyWithImpl<$Res>
 
 class _$AuthSuccessState implements AuthSuccessState {
   const _$AuthSuccessState(
-      this.smsId, this.phone, final Map<dynamic, dynamic> data)
+      this.smsId, this.phone, this.uiPhone, final Map<dynamic, dynamic> data)
       : _data = data;
 
   @override
   final String smsId;
   @override
   final String phone;
+  @override
+  final String uiPhone;
   final Map<dynamic, dynamic> _data;
   @override
   Map<dynamic, dynamic> get data {
@@ -281,7 +293,7 @@ class _$AuthSuccessState implements AuthSuccessState {
 
   @override
   String toString() {
-    return 'AuthState.success(smsId: $smsId, phone: $phone, data: $data)';
+    return 'AuthState.success(smsId: $smsId, phone: $phone, uiPhone: $uiPhone, data: $data)';
   }
 
   @override
@@ -291,12 +303,13 @@ class _$AuthSuccessState implements AuthSuccessState {
             other is _$AuthSuccessState &&
             (identical(other.smsId, smsId) || other.smsId == smsId) &&
             (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.uiPhone, uiPhone) || other.uiPhone == uiPhone) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, smsId, phone, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(runtimeType, smsId, phone, uiPhone,
+      const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -308,34 +321,36 @@ class _$AuthSuccessState implements AuthSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
     required TResult Function() error,
   }) {
-    return success(smsId, this.phone, data);
+    return success(smsId, this.phone, uiPhone, data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
     TResult? Function()? error,
   }) {
-    return success?.call(smsId, this.phone, data);
+    return success?.call(smsId, this.phone, uiPhone, data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
@@ -343,7 +358,7 @@ class _$AuthSuccessState implements AuthSuccessState {
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(smsId, this.phone, data);
+      return success(smsId, this.phone, uiPhone, data);
     }
     return orElse();
   }
@@ -390,11 +405,15 @@ class _$AuthSuccessState implements AuthSuccessState {
 }
 
 abstract class AuthSuccessState implements AuthState {
-  const factory AuthSuccessState(final String smsId, final String phone,
+  const factory AuthSuccessState(
+      final String smsId,
+      final String phone,
+      final String uiPhone,
       final Map<dynamic, dynamic> data) = _$AuthSuccessState;
 
   String get smsId;
   String get phone;
+  String get uiPhone;
   Map<dynamic, dynamic> get data;
   @JsonKey(ignore: true)
   _$$AuthSuccessStateCopyWith<_$AuthSuccessState> get copyWith =>
@@ -440,8 +459,8 @@ class _$AuthLaodingState implements AuthLaodingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
@@ -454,7 +473,8 @@ class _$AuthLaodingState implements AuthLaodingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
@@ -467,7 +487,8 @@ class _$AuthLaodingState implements AuthLaodingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
@@ -590,8 +611,8 @@ class _$AuthPhoneState implements AuthPhoneState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
@@ -604,7 +625,8 @@ class _$AuthPhoneState implements AuthPhoneState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
@@ -617,7 +639,8 @@ class _$AuthPhoneState implements AuthPhoneState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,
@@ -719,8 +742,8 @@ class _$AuthErrorState implements AuthErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function() $default, {
-    required TResult Function(
-            String smsId, String phone, Map<dynamic, dynamic> data)
+    required TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)
         success,
     required TResult Function() loading,
     required TResult Function(String phone) phone,
@@ -733,7 +756,8 @@ class _$AuthErrorState implements AuthErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function()? $default, {
-    TResult? Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult? Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult? Function()? loading,
     TResult? Function(String phone)? phone,
@@ -746,7 +770,8 @@ class _$AuthErrorState implements AuthErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function()? $default, {
-    TResult Function(String smsId, String phone, Map<dynamic, dynamic> data)?
+    TResult Function(String smsId, String phone, String uiPhone,
+            Map<dynamic, dynamic> data)?
         success,
     TResult Function()? loading,
     TResult Function(String phone)? phone,

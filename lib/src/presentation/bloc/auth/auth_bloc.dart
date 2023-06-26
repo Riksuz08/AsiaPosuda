@@ -48,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           AuthState.success(
             r.data?['sms_id'],
             "+998${event.phone.replaceAll(" ", "")}",
+            event.phone,
             r.data?['data'],
           ),
         );

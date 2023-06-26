@@ -15,6 +15,7 @@ import 'package:sample_bloc_mobile/src/presentation/pages/error/error_page.dart'
 import 'package:sample_bloc_mobile/src/presentation/pages/internet_connection/internet_connection_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/settings/settings_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/select_lang/select_lang_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/splash/splash_page.dart';
 
 part 'name_routes.dart';
@@ -74,6 +75,11 @@ final class AppRoutes {
             child: const RegisterPage(),
           ),
         );
+      case Routes.langSelect:
+        return MaterialPageRoute(
+          builder: (_) => const SelectLangPage(),
+        );
+
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage(settings: settings));
     }

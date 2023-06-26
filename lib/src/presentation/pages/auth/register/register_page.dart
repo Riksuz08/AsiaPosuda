@@ -40,16 +40,28 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
       builder: (_, state) {
         return Scaffold(
           backgroundColor: colorLightScheme.background,
-          appBar: AppBar(),
+          appBar: AppBar(
+            bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight - 12),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Создать аккаунт'),
+                ),
+              ),
+            ),
+          ),
           body: SafeArea(
             minimum: AppUtils.kPaddingAll16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppUtils.kBoxHeight20,
-                const Text('Создать аккаунт'),
-                AppUtils.kBoxHeight20,
+                AppUtils.kBoxHeight4,
                 CustomTextField(
+                  haveBorder: false,
+                  fillColor: const Color(0xFFEDEFF2),
+                  filled: true,
                   onChanged: (value) {
                     _bloc.add(const FullNameChangedEvent());
                   },
@@ -58,33 +70,32 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                       : null,
                   showError: state is UserFullNameErrorState && state.showError,
                   controller: _fullNameController,
-                  hintText: 'ФИО',
+                  hintText: 'Имя',
                 ),
                 AppUtils.kBoxHeight14,
-                CustomPhoneTextField(
-                  inputFormatters: [
-                    MaskedTextInputFormatter(
-                      mask: '## ### ## ##',
-                      separator: ' ',
-                      filter: RegExp('[0-9]'),
-                    ),
-                  ],
+                CustomTextField(
+                  haveBorder: false,
+                  fillColor: const Color(0xFFEDEFF2),
+                  filled: true,
                   onChanged: (value) {
-                    _bloc.add(const PhoneNumberChangedEvent());
+                    // _bloc.add(const FullNameChangedEvent());
                   },
-                  errorText: state is UserPhoneNumberErrorState
-                      ? state.errorMessage
-                      : null,
-                  showError:
-                      state is UserPhoneNumberErrorState && state.showError,
-                  controller: _phoneNumberController,
-                  hintText: 'Номер телефона',
+                  // errorText: state is UserFullNameErrorState
+                  //     ? state.errorMessage
+                  //     : null,
+                  // showError: state is UserFullNameErrorState && state.showError,
+                  controller: TextEditingController(),
+                  hintText: 'Домашний адрес',
                 ),
                 AppUtils.kBoxHeight14,
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: CustomTextField(
+                        haveBorder: false,
+                        fillColor: const Color(0xFFEDEFF2),
+                        filled: true,
                         controller: _bloodGroupController,
                         onChanged: (value) {
                           _bloc.add(const BloodGroupChangedEvent());
@@ -100,6 +111,9 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                     AppUtils.kBoxWidth8,
                     const Expanded(
                       child: CustomTextField(
+                        haveBorder: false,
+                        fillColor: Color(0xFFEDEFF2),
+                        filled: true,
                         hintText: 'Дата рождения',
                       ),
                     ),
