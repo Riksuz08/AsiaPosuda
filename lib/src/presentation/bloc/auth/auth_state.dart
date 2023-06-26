@@ -7,6 +7,7 @@ class AuthState with _$AuthState {
   const factory AuthState.success(
     String smsId,
     String phone,
+    String uiPhone,
     Map data,
   ) = AuthSuccessState;
 

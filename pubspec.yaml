@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/locale/
     - assets/fonts/
+    - assets/png/
 
   fonts:
     - family: AppIcons

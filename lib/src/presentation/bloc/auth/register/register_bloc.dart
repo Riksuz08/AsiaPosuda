@@ -55,24 +55,24 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
       );
       return false;
     }
-    if (event.phoneNumber.isEmpty) {
-      emit(
-        const RegisterState.userPhoneNumberErrorState(
-          showError: true,
-          errorMessage: 'Number is required',
-        ),
-      );
-      return false;
-    }
-    if (event.phoneNumber.length < 12) {
-      emit(
-        const RegisterState.userPhoneNumberErrorState(
-          showError: true,
-          errorMessage: 'Enter your number correctly',
-        ),
-      );
-      return false;
-    }
+    // if (event.phoneNumber.isEmpty) {
+    //   emit(
+    //     const RegisterState.userPhoneNumberErrorState(
+    //       showError: true,
+    //       errorMessage: 'Number is required',
+    //     ),
+    //   );
+    //   return false;
+    // }
+    // if (event.phoneNumber.length < 12) {
+    //   emit(
+    //     const RegisterState.userPhoneNumberErrorState(
+    //       showError: true,
+    //       errorMessage: 'Enter your number correctly',
+    //     ),
+    //   );
+    //   return false;
+    // }
     if (event.bloodGroup.isEmpty) {
       emit(
         const RegisterState.userBloodGroupErrorState(

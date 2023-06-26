@@ -46,6 +46,8 @@ final class LocalSource {
         defaultValue: defaultLocale,
       );
 
+  bool get lanSelected => box.get(AppKeys.langSelected, defaultValue: false);
+
   Future<void> setThemeMode(ThemeMode mode) async {
     await box.put(AppKeys.themeMode, mode.name);
   }
@@ -56,6 +58,10 @@ final class LocalSource {
 
   Future<void> setKey(String key, dynamic value) async {
     await box.put(key, value);
+  }
+
+  Future<void> setLangSelected(bool langSelected) async {
+    await box.put(AppKeys.langSelected, langSelected);
   }
 
   String getKey(String key) => box.get(key, defaultValue: '');

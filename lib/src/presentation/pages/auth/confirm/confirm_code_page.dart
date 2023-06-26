@@ -5,6 +5,7 @@ import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/buttons/bottom_navigation_button.dart';
 
 part 'mixin/confirm_code_mixin.dart';
 
@@ -42,37 +43,62 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Confirm code')),
-        body: Center(
-          child: Pinput(
-            length: 6,
-            autofocus: true,
-            controller: controller,
-            defaultPinTheme: defaultPinTheme,
-            focusedPinTheme: focusedPinTheme,
-            submittedPinTheme: submittedPinTheme,
-            onCompleted: (pin) {
-              if (pin.length == 6) {
-                context.read<ConfirmCodeBloc>().add(
-                      ConfirmCodeCheckMessageEvent(
-                        smsId: widget.state.smsId,
-                        otp: pin,
-                        data: widget.state.data,
-                      ),
-                    );
-              }
-            },
+        appBar: AppBar(
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight + 32),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Введите код подтверждения'),
+                  AppUtils.kBoxHeight8,
+                  Text(
+                    'Мы отправили вам 4-значный код подтверждения',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFA4A4A4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        bottomNavigationBar: SafeArea(
-          minimum: AppUtils.kPaddingAll16.copyWith(
-            bottom: 16 + MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: BlocBuilder<ConfirmCodeBloc, ConfirmCodeState>(
-            buildWhen: (previous, current) =>
-                previous is AuthPhoneState != current is AuthPhoneState,
-            builder: (_, state) {
-              return ElevatedButton(
+        body: Column(
+          children: [
+            AppUtils.kBoxHeight16,
+            Center(
+              child: Pinput(
+                length: 6,
+                autofocus: true,
+                controller: controller,
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                submittedPinTheme: submittedPinTheme,
+                onCompleted: (pin) {
+                  if (pin.length == 6) {
+                    context.read<ConfirmCodeBloc>().add(
+                          ConfirmCodeCheckMessageEvent(
+                            smsId: widget.state.smsId,
+                            otp: pin,
+                            data: widget.state.data,
+                          ),
+                        );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: BlocBuilder<ConfirmCodeBloc, ConfirmCodeState>(
+          buildWhen: (previous, current) =>
+              previous is AuthPhoneState != current is AuthPhoneState,
+          builder: (_, state) {
+            return BottomNavigationButton(
+              child: ElevatedButton(
                 onPressed: state is AuthPhoneState
                     ? () {
                         context.read<ConfirmCodeBloc>().add(
@@ -85,9 +111,9 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                       }
                     : null,
                 child: const Text('Продолжить'),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

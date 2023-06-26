@@ -24,6 +24,12 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Function()? onComplete;
   final Function(String?)? validator;
+  final String? prefixText;
+  final TextStyle? prefixStyle;
+  final EdgeInsets? contentPadding;
+  final bool haveBorder;
+  final TextStyle? style;
+  final bool? filled;
 
   const CustomTextField({
     Key? key,
@@ -48,6 +54,12 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.autofocus,
     this.prefixIcon,
+    this.prefixText,
+    this.prefixStyle,
+    this.contentPadding,
+    this.haveBorder = true,
+    this.style,
+    this.filled,
   }) : super(key: key);
 
   @override
@@ -77,7 +89,7 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText ?? false,
           controller: controller,
           onTap: onTap,
-          style: const TextStyle(
+          style: style ?? const TextStyle(
             fontSize: 14,
             height: 16 / 14,
             fontWeight: FontWeight.w400,
@@ -85,27 +97,40 @@ class CustomTextField extends StatelessWidget {
           textInputAction: inputAction ?? TextInputAction.next,
           onChanged: onChanged,
           decoration: InputDecoration(
+            fillColor: fillColor,
+            filled: filled,
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
             errorText: showError ? errorText : null,
             errorStyle: const TextStyle(fontSize: 13),
             hintText: hintText,
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff22B99A)),
+            contentPadding: contentPadding,
+            focusedBorder: OutlineInputBorder(
+              borderSide: haveBorder
+                  ? const BorderSide(color: Color(0xff22B99A))
+                  : BorderSide.none,
               borderRadius: AppUtils.kBorderRadius10,
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderSide: haveBorder
+                  ? BorderSide(color: Colors.grey.shade300)
+                  : BorderSide.none,
               borderRadius: AppUtils.kBorderRadius10,
             ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+            errorBorder: OutlineInputBorder(
+              borderSide: haveBorder
+                  ? const BorderSide(color: Colors.red)
+                  : BorderSide.none,
               borderRadius: AppUtils.kBorderRadius10,
             ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: haveBorder
+                  ? const BorderSide(color: Colors.red)
+                  : BorderSide.none,
               borderRadius: AppUtils.kBorderRadius10,
             ),
+            prefixText: prefixText,
+            prefixStyle: prefixStyle,
           ),
           cursorColor: context.theme.colorScheme.primary,
           keyboardType: keyboardType,

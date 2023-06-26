@@ -72,7 +72,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state.isTimerFinished) {
-          Navigator.pushReplacementNamed(context, Routes.main);
+          Navigator.pushReplacementNamed(context, localSource.lanSelected ? Routes.main : Routes.langSelect);
         }
       },
       child: AnnotatedRegion<SystemUiOverlayStyle>(
