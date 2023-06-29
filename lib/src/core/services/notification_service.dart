@@ -1,6 +1,5 @@
 // import 'dart:async';
 // import 'dart:io';
-// import 'package:easy_to_travel_mobile/firebase_options.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:flutter/foundation.dart';
@@ -16,8 +15,8 @@
 // class NotificationService {
 //   static Future<void> initialize() async {
 //     await Firebase.initializeApp(
-//       options: DefaultFirebaseOptions.currentPlatform,
-//     );
+//         // options: DefaultFirebaseOptions.currentPlatform,
+//         );
 //     await setupFlutterNotifications();
 //     foregroundNotification();
 //     backgroundNotification();
@@ -28,7 +27,6 @@
 //     if (Platform.isIOS) {
 //       await FirebaseMessaging.instance.requestPermission(
 //         announcement: true,
-//         provisional: false,
 //       );
 //     }
 //     channel = const AndroidNotificationChannel(
@@ -87,12 +85,12 @@
 //     flutterLocalNotificationsPlugin.initialize(initializationSettings,
 //         onDidReceiveNotificationResponse: (response) async {
 //       debugPrint('foreground notification tapped');
-//       debugPrint("$response");
+//       debugPrint('$response');
 //     });
 //   }
 //
 //   static void backgroundNotification() {
-//     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+//     FirebaseMessaging.onMessageOpenedApp.listen((message) {
 //       debugPrint('A new onMessageOpenedApp event was published!');
 //       showFlutterNotification(message);
 //     });
@@ -103,7 +101,8 @@
 //         await FirebaseMessaging.instance.getInitialMessage();
 //     if (remoteMessage == null) {
 //       FirebaseMessaging.onBackgroundMessage(
-//           _firebaseMessagingBackgroundHandler);
+//         _firebaseMessagingBackgroundHandler,
+//       );
 //     } else {
 //       showFlutterNotification(remoteMessage);
 //     }

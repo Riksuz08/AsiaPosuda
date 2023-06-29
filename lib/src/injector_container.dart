@@ -13,7 +13,6 @@ import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/domain/network/api_client.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository.dart';
-import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository_impl.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
@@ -27,7 +26,7 @@ final sl = GetIt.instance;
 late Box<dynamic> _box;
 
 Future<void> init() async {
-  ///External
+  /// External
   await initHive();
 
   sl.registerLazySingleton(
@@ -83,7 +82,6 @@ Future<void> init() async {
         Constants.baseUrl,
       ),
     );
-  ;
 
   /// main
   mainFeature();
@@ -111,7 +109,6 @@ void registerFeature(ApiClient authClient) {
         networkInfo: sl(),
       ),
     );
-  ;
 }
 
 void authFeature(ApiClient authClient) {

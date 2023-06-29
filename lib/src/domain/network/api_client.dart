@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
-import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_request.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/register/register_user_response.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_request.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_response.dart';

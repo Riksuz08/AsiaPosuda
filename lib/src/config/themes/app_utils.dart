@@ -1,6 +1,6 @@
 part of 'themes.dart';
 
-final class AppUtils {
+sealed class AppUtils {
   AppUtils._();
 
   static const kSpacer = Spacer();

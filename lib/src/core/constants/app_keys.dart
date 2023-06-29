@@ -1,9 +1,6 @@
-final class AppKeys {
+sealed class AppKeys {
   AppKeys._();
 
-  static const String ru = 'ru';
-  static const String uz = 'uz';
-  static const String en = 'en';
   static const String currentTransactionKey = 'current_transaction';
   static const String accessToken = 'access_token';
   static const String refreshToken = 'refresh_token';

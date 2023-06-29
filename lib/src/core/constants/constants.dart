@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final class Constants {
+sealed class Constants {
   Constants._();
 
   static const String projectId = 'a4dc1f1c-d20f-4c1a-abf5-b819076604bc';
