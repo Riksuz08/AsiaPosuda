@@ -13,6 +13,3 @@ part 'app_themes.dart';
 part 'theme_colors.dart';
 
 part 'app_utils.dart';
-
-
-

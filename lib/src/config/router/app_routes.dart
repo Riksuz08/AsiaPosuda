@@ -28,7 +28,7 @@ final localSource = sl<LocalSource>();
 
 Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
-final class AppRoutes {
+sealed class AppRoutes {
   AppRoutes._();
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
