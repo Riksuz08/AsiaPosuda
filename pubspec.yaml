@@ -40,7 +40,7 @@ dependencies:
   # retrofit
   retrofit: ^4.0.1
   # alice = chuck
-  chuck_interceptor: ^2.0.0+1
+  chuck_interceptor: ^2.0.1
   # box
   gap: ^3.0.1
   # native splash
