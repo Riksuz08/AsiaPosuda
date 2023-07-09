@@ -33,15 +33,15 @@ mixin RegisterMixin on State<RegisterPage> {
   }
 
   void _registerUser() {
-    String phoneNum =
-        _phoneNumberController.text.replaceAll(RegExp(r'[^\d]'), "");
+    final String phoneNum =
+        _phoneNumberController.text.replaceAll(RegExp('[0-9]'), '');
     _bloc.add(
       RegisterEvent.userRegister(
         additionalProps: {
-          "client_name": _fullNameController.text,
-          "phone_number": phoneNum,
-          "blood_group": _bloodGroupController.text,
-          "table_slug": "clients"
+          'client_name': _fullNameController.text,
+          'phone_number': phoneNum,
+          'blood_group': _bloodGroupController.text,
+          'table_slug': 'clients'
         },
         phoneNumber: phoneNum,
         bloodGroup: _bloodGroupController.text,

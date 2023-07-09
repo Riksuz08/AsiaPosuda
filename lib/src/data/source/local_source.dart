@@ -4,15 +4,18 @@ import 'package:sample_bloc_mobile/src/core/constants/app_keys.dart';
 import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
 
 final class LocalSource {
+  const LocalSource(this.box);
+
   final Box<dynamic> box;
 
-  LocalSource(this.box);
-
-  void setHasProfile(bool hasProfile) {
-    box.put(AppKeys.hasProfile, hasProfile);
+  void setHasProfile({
+    required bool value,
+  }) {
+    box.put(AppKeys.hasProfile, value);
   }
 
-  bool get hasProfile => box.get(AppKeys.hasProfile, defaultValue: false);
+  bool get hasProfile =>
+      box.get(AppKeys.hasProfile, defaultValue: false) as bool;
 
   Future<void> setUser({
     required String name,
@@ -35,20 +38,21 @@ final class LocalSource {
     await box.put(AppKeys.imageUrl, imageUrl);
   }
 
-  String get accessToken => box.get(AppKeys.accessToken, defaultValue: '');
+  String get accessToken =>
+      box.get(AppKeys.accessToken, defaultValue: '') as String;
 
-  String get fullName => box.get(AppKeys.fullName, defaultValue: '');
+  String get fullName => box.get(AppKeys.fullName, defaultValue: '') as String;
 
-  String get userId => box.get(AppKeys.userId, defaultValue: '');
+  String get userId => box.get(AppKeys.userId, defaultValue: '') as String;
 
   String get locale => box.get(
         AppKeys.languageCode,
         defaultValue: defaultLocale,
-      );
+      ) as String;
 
   bool get lanSelected =>
       box.get(AppKeys.langSelected, defaultValue: false) is bool
-          ? box.get(AppKeys.langSelected, defaultValue: false)
+          ? box.get(AppKeys.langSelected, defaultValue: false) as bool
           : false;
 
   Future<void> setThemeMode(ThemeMode mode) async {
@@ -59,15 +63,17 @@ final class LocalSource {
     await box.put(AppKeys.languageCode, lang);
   }
 
-  Future<void> setKey(String key, dynamic value) async {
+  Future<void> setKey(String key, String value) async {
     await box.put(key, value);
   }
 
-  Future<void> setLangSelected(bool langSelected) async {
-    await box.put(AppKeys.langSelected, langSelected);
+  Future<void> setLangSelected({
+    required bool value,
+  }) async {
+    await box.put(AppKeys.langSelected, value);
   }
 
-  String getKey(String key) => box.get(key, defaultValue: '');
+  String getKey(String key) => box.get(key, defaultValue: '') as String;
 
   ThemeMode get themeMode => switch (box.get(AppKeys.themeMode)) {
         'system' => ThemeMode.system,

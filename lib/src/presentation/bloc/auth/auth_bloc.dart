@@ -10,12 +10,12 @@ part 'auth_event.dart';
 part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository;
-
   AuthBloc(this.authRepository) : super(const AuthState()) {
     on<AuthPhoneChangeEvent>(_onChanged);
     on<AuthCheckMessageEvent>(_onSendMessage);
   }
+
+  final AuthRepository authRepository;
 
   void _onChanged(AuthPhoneChangeEvent event, Emitter<AuthState> emit) {
     if (event.value.length <= 11) {
@@ -46,10 +46,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (r) {
         emit(
           AuthState.success(
-            r.data?['sms_id'],
+            r.data?['sms_id'] as String? ?? '',
             "+998${event.phone.replaceAll(" ", "")}",
             event.phone,
-            r.data?['data'],
+            r.data?['data'] as Map? ?? {},
           ),
         );
       },

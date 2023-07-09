@@ -5,7 +5,7 @@ class HorizontalLine extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Path path_0 = Path()
+    final Path path_0 = Path()
       ..moveTo(size.width * 0.1812500, size.height * 0.5000000)
       ..cubicTo(
           size.width * 0.1812500,
@@ -90,19 +90,19 @@ class HorizontalLine extends CustomPainter {
           size.height * 0.5000000)
       ..close();
 
-    Paint paint0Fill = Paint()
+    final Paint paint0Fill = Paint()
       ..style = PaintingStyle.fill
       ..color = const Color(0xffDDE1E4);
     canvas.drawPath(path_0, paint0Fill);
 
-    Paint paint1Stroke = Paint()
+    final Paint paint1Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.01875000
       ..color = const Color(0xffDDE1E4);
     canvas.drawLine(Offset(size.width * 0.1812500, size.height * 0.4464286),
         Offset(size.width * 0.8187500, size.height * 0.4464286), paint1Stroke);
 
-    Path path_2 = Path()
+    final Path path_2 = Path()
       ..moveTo(size.width * 0.9937500, size.height * 0.5000000)
       ..cubicTo(
           size.width * 0.9937500,
@@ -187,12 +187,12 @@ class HorizontalLine extends CustomPainter {
           size.height * 0.5000000)
       ..close();
 
-    Paint paint2Fill = Paint()
+    final Paint paint2Fill = Paint()
       ..style = PaintingStyle.fill
       ..color = const Color(0xffDDE1E4);
     canvas.drawPath(path_2, paint2Fill);
 
-    Paint paint3Fill = Paint()
+    final Paint paint3Fill = Paint()
       ..style = PaintingStyle.fill
       ..color = const Color(0xffA0A9B6);
     canvas.drawCircle(
@@ -203,7 +203,5 @@ class HorizontalLine extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

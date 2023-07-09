@@ -5,7 +5,7 @@ enum NameInputError { empty, short, long }
 class NameInput extends FormzInput<String, NameInputError> {
   const NameInput.pure() : super.pure('');
 
-  const NameInput.dirty(String value) : super.dirty(value);
+  const NameInput.dirty(super.value) : super.dirty();
 
   @override
   NameInputError? validator(String value) {

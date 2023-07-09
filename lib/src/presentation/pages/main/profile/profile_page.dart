@@ -7,11 +7,10 @@ import 'widgets/logout_dialog.dart';
 import 'widgets/profile_item_widget.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(context.translate('profile'))),
       body: CustomScrollView(
         slivers: [
@@ -104,11 +103,9 @@ class ProfilePage extends StatelessWidget {
                     isBottom: true,
                     text: context.translate('logout'),
                     onTap: () {
-                      showDialog(
+                      showDialog<void>(
                         context: context,
-                        builder: (_) {
-                          return const LogOutDialog();
-                        },
+                        builder: (_) => const LogOutDialog(),
                       );
                     },
                   ),
@@ -119,5 +116,4 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
     );
-  }
 }

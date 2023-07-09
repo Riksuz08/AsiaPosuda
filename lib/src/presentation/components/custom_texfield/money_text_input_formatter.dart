@@ -1,11 +1,11 @@
 import 'package:flutter/services.dart';
 
 class MoneyTextInputFormatter extends TextInputFormatter {
-  final bool isUsd;
 
   MoneyTextInputFormatter({
     this.isUsd = false,
   });
+  final bool isUsd;
 
   @override
   TextEditingValue formatEditUpdate(
@@ -13,11 +13,11 @@ class MoneyTextInputFormatter extends TextInputFormatter {
     if (newValue.text.isEmpty) {
       return newValue.copyWith(text: '');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
-      int selectionIndexFromTheRight =
+      final int selectionIndexFromTheRight =
           newValue.text.length - newValue.selection.extentOffset;
-      String reversedText =
+      final String reversedText =
           String.fromCharCodes(newValue.text.runes.toList().reversed);
-      List<String> chars = reversedText.replaceAll(' ', '').split('');
+      final List<String> chars = reversedText.replaceAll(' ', '').split('');
       final StringBuffer reversedNewStringBuffer = StringBuffer();
       for (int i = 0; i < chars.length; i++) {
         if (i % 3 == 0 && i != 0) reversedNewStringBuffer.write(' ');

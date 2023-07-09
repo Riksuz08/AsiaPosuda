@@ -4,14 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCircularProgressIndicator extends StatelessWidget {
-  const CustomCircularProgressIndicator({Key? key}) : super(key: key);
+  const CustomCircularProgressIndicator({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Platform.isAndroid
-          ? const CircularProgressIndicator()
-          : const CupertinoActivityIndicator(radius: 12),
-    );
-  }
+  Widget build(BuildContext context) => Center(
+        child: Platform.isAndroid
+            ? const CircularProgressIndicator()
+            : const CupertinoActivityIndicator(radius: 12),
+      );
 }

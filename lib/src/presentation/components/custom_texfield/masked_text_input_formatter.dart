@@ -1,22 +1,22 @@
 import 'package:flutter/services.dart';
 
 class MaskedTextInputFormatter extends TextInputFormatter {
-  final String mask;
-  final String separator;
-  final RegExp filter;
 
   MaskedTextInputFormatter({
     required this.mask,
     required this.separator,
     required this.filter,
   });
+  final String mask;
+  final String separator;
+  final RegExp filter;
 
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    String text = newValue.text;
-    String newText = newValue.toJSON()['text'].toString();
-    String separatorWithText = newValue.text.replaceAll(separator, '');
+    final String text = newValue.text;
+    final String newText = newValue.toJSON()['text'].toString();
+    final String separatorWithText = newValue.text.replaceAll(separator, '');
     final Iterable<Match> matches = filter.allMatches(separatorWithText);
     if (matches.length != separatorWithText.length) return oldValue;
     if (text.isNotEmpty) {

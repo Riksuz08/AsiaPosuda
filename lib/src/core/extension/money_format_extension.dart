@@ -8,9 +8,9 @@ extension MoneyFormatExtension on num {
   String get moneyFormatSymbol => '$moneyFormat \$';
 
   String formatter() {
-    num currentBalance = this;
-    bool t = currentBalance.isNegative;
-    num value = currentBalance.abs();
+    final num currentBalance = this;
+    final bool t = currentBalance.isNegative;
+    final num value = currentBalance.abs();
     if (value < 10) {
       return (t ? '-' : '') + value.toInt().toString();
     } else if (value < 1000) {

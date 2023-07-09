@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
+  const ErrorPage({
+    super.key,
+    required this.settings,
+  });
+
   final RouteSettings settings;
 
-  const ErrorPage({
-    Key? key,
-    required this.settings,
-  }) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      ),
-      body: Center(
-        child: Text(
-          'Not found ${settings.name}',
-          textAlign: TextAlign.center,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
-      ),
-    );
-  }
+        body: Center(
+          child: Text(
+            'Not found ${settings.name}',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
 }

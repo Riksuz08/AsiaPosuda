@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
-import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
+import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/profile_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/search/search_page.dart';
@@ -11,15 +11,13 @@ import 'favorites/bookmark_page.dart';
 import 'orders/orders_page.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MainBloc, MainState>(
-      buildWhen: (previous, current) =>
-          previous.bottomMenu != current.bottomMenu,
-      builder: (_, state) {
-        return Scaffold(
+  Widget build(BuildContext context) => BlocBuilder<MainBloc, MainState>(
+        buildWhen: (previous, current) =>
+            previous.bottomMenu != current.bottomMenu,
+        builder: (_, state) => Scaffold(
           body: IndexedStack(
             index: state.bottomMenu.index,
             children: const [
@@ -64,10 +62,8 @@ class MainPage extends StatelessWidget {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
 
   BottomNavigationBarItem _navigationBarItem({
     required String label,

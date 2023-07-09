@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ThemeBottomWidget extends StatelessWidget {
-  final Function(ThemeMode) onChanged;
 
   const ThemeBottomWidget({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
+  final void Function(ThemeMode) onChanged;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -41,5 +40,4 @@ class ThemeBottomWidget extends StatelessWidget {
         ),
       ],
     );
-  }
 }

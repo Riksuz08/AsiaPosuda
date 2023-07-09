@@ -7,7 +7,7 @@
 //
 // class CachedNetworkSvgImage extends StatelessWidget {
 //   const CachedNetworkSvgImage({
-//     Key? key,
+//     super.key,
 //     required this.url,
 //     this.width,
 //     this.height,
@@ -21,7 +21,7 @@
 //     this.excludeFromSemantics = false,
 //     this.clipBehavior = Clip.hardEdge,
 //     this.colorFilter,
-//   }) : super(key: key);
+//   });
 //
 //   final String url;
 //   final double? width;
@@ -39,7 +39,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     if (url.isEmpty || !url.contains(".svg")) {
+//     if (url.isEmpty || !url.contains('.svg')) {
 //       return SizedBox(
 //         width: width,
 //         height: height,
@@ -55,7 +55,7 @@
 //         future: getImage(),
 //         builder: (_, snapshot) {
 //           if (snapshot.hasData && snapshot.data != null) {
-//             String file = snapshot.data!;
+//             final String file = snapshot.data!;
 //             return SvgPicture.string(
 //               file,
 //               width: width,
@@ -104,7 +104,7 @@
 //
 //   Future<String> getImage() async {
 //     if (localSource.getKey(url).isEmpty) {
-//       String value = await image(url);
+//       final String value = await image(url);
 //       await localSource.setKey(url, value);
 //       return value;
 //     } else {
@@ -113,12 +113,10 @@
 //   }
 // }
 //
-// Future<String> image(String url) {
-//   return Isolate.run<String>(
-//     () async {
-//       Dio dio = Dio();
-//       final response = await dio.get(url);
-//       return response.data;
-//     },
-//   );
-// }
+// Future<String> image(String url) => Isolate.run<String>(
+//       () async {
+//         final Dio dio = Dio();
+//         final Response response = await dio.get(url);
+//         return response.data;
+//       },
+//     );

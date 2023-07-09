@@ -125,7 +125,7 @@ void authFeature(ApiClient authClient) {
 
 Future<void> initHive() async {
   const boxName = 'bloc_mobile_box';
-  Directory directory = await getApplicationDocumentsDirectory();
+  final Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   _box = await Hive.openBox<dynamic>(boxName);
 }

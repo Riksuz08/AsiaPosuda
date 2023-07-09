@@ -11,7 +11,7 @@ import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/m
 part 'mixin/auth_mixin.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({Key? key}) : super(key: key);
+  const AuthPage({super.key});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -19,41 +19,39 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> with AuthMixin {
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (_, state) {
-        if (state is AuthSuccessState) {
-          Navigator.pushNamed(
-            context,
-            Routes.confirmCode,
-            arguments: state,
-          );
-          context.read<AuthBloc>().add(
-                AuthPhoneChangeEvent(phoneController.text),
-              );
-        }
-      },
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF7F7F7),
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          bottom: const PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: AppUtils.kPaddingHor16Ver12,
-                child: Text(
-                    '''Введите номер телефона\nдля входа или регистраций'''),
+  Widget build(BuildContext context) => BlocListener<AuthBloc, AuthState>(
+        listener: (_, state) {
+          if (state is AuthSuccessState) {
+            Navigator.pushNamed(
+              context,
+              Routes.confirmCode,
+              arguments: state,
+            );
+            context.read<AuthBloc>().add(
+                  AuthPhoneChangeEvent(phoneController.text),
+                );
+          }
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF7F7F7),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: AppUtils.kPaddingHor16Ver12,
+                  child: Text(
+                      '''Введите номер телефона\nдля входа или регистраций'''),
+                ),
               ),
             ),
           ),
-        ),
-        body: BlocBuilder<AuthBloc, AuthState>(
-          buildWhen: (previous, current) =>
-              previous is AuthLaodingState != current is AuthLaodingState,
-          builder: (_, state) {
-            return ModalProgressHUD(
+          body: BlocBuilder<AuthBloc, AuthState>(
+            buildWhen: (previous, current) =>
+                previous is AuthLaodingState != current is AuthLaodingState,
+            builder: (_, state) => ModalProgressHUD(
               inAsyncCall: state is AuthLaodingState,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -89,27 +87,24 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
                   ),
                 ],
               ),
-            );
-          },
-        ),
-        bottomNavigationBar: BlocBuilder<AuthBloc, AuthState>(
-          buildWhen: (previous, current) =>
-              previous is AuthPhoneState != current is AuthPhoneState,
-          builder: (_, state) {
-            return BottomNavigationButton(
+            ),
+          ),
+          bottomNavigationBar: BlocBuilder<AuthBloc, AuthState>(
+            buildWhen: (previous, current) =>
+                previous is AuthPhoneState != current is AuthPhoneState,
+            builder: (_, state) => BottomNavigationButton(
               child: ElevatedButton(
-                  onPressed: state is AuthPhoneState
-                      ? () {
-                          context
-                              .read<AuthBloc>()
-                              .add(AuthCheckMessageEvent(phoneController.text));
-                        }
-                      : null,
-                  child: const Text('Продолжить')),
-            );
-          },
+                onPressed: state is AuthPhoneState
+                    ? () {
+                        context
+                            .read<AuthBloc>()
+                            .add(AuthCheckMessageEvent(phoneController.text));
+                      }
+                    : null,
+                child: const Text('Продолжить'),
+              ),
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

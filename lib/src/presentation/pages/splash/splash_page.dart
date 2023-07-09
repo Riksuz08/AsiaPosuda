@@ -8,7 +8,7 @@ import 'package:sample_bloc_mobile/src/presentation/components/paint/logo_painte
 import '../../bloc/splash/splash_bloc.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -68,58 +68,59 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<SplashBloc, SplashState>(
-      listener: (context, state) {
-        if (state.isTimerFinished) {
-          Navigator.pushReplacementNamed(context, localSource.lanSelected ? Routes.main : Routes.langSelect);
-        }
-      },
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.light,
-        ),
-        child: Scaffold(
-          backgroundColor: context.theme.primaryColor,
-          body: Stack(
-            children: [
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 84,
-                child: Center(
-                  child: FadeTransition(
-                    opacity: AlwaysStoppedAnimation(
-                      1 - _opacityAnimation.value,
-                    ),
-                    child: const CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Center(
-                  child: Transform.scale(
-                    scale: _scaleAnimation.value,
+  Widget build(BuildContext context) => BlocListener<SplashBloc, SplashState>(
+        listener: (context, state) {
+          if (state.isTimerFinished) {
+            Navigator.pushReplacementNamed(
+              context,
+              localSource.lanSelected ? Routes.main : Routes.langSelect,
+            );
+          }
+        },
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.light,
+          ),
+          child: Scaffold(
+            backgroundColor: context.theme.primaryColor,
+            body: Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 84,
+                  child: Center(
                     child: FadeTransition(
                       opacity: AlwaysStoppedAnimation(
                         1 - _opacityAnimation.value,
                       ),
-                      child: const CustomPaint(
-                        painter: LogoPainter(),
-                        size: Size(343, 87),
+                      child: const CircularProgressIndicator(
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Positioned.fill(
+                  child: Center(
+                    child: Transform.scale(
+                      scale: _scaleAnimation.value,
+                      child: FadeTransition(
+                        opacity: AlwaysStoppedAnimation(
+                          1 - _opacityAnimation.value,
+                        ),
+                        child: const CustomPaint(
+                          painter: LogoPainter(),
+                          size: Size(343, 87),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

@@ -7,13 +7,12 @@ Future<T?> customCupertinoModalPopup<T>(
   String title = '',
   String actionTitleOne = '',
   String actionTitleTwo = '',
-  required Function() actionOne,
-  required Function() actionTwo,
-}) async {
-  return showCupertinoModalPopup(
-    context: context,
-    builder: (_) {
-      return CupertinoActionSheet(
+  required void Function() actionOne,
+  required void Function() actionTwo,
+}) async =>
+    showCupertinoModalPopup(
+      context: context,
+      builder: (_) => CupertinoActionSheet(
         title: Text(title),
         actions: [
           CupertinoActionSheetAction(
@@ -31,10 +30,8 @@ Future<T?> customCupertinoModalPopup<T>(
             Navigator.pop(context);
           },
         ),
-      );
-    },
-  );
-}
+      ),
+    );
 
 typedef WidgetScrollBuilder = Widget Function(
   BuildContext context,
@@ -45,28 +42,25 @@ Future<T?> customModalBottomSheet<T>({
   required BuildContext context,
   required WidgetScrollBuilder builder,
   bool isScrollControlled = false,
-}) async {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    constraints: BoxConstraints(
-      maxHeight: context.mediaQuery.size.height * 0.9,
-      minHeight: context.mediaQuery.size.height * 0.2,
-    ),
-    builder: (_) {
-      if (isScrollControlled) {
-        return DraggableScrollableSheet(
-          initialChildSize: 1,
-          minChildSize: 0.5,
-          expand: false,
-          snap: true,
-          builder: (context, controller) {
-            return builder(context, controller);
-          },
-        );
-      } else {
-        return builder(context, null);
-      }
-    },
-  );
-}
+}) async =>
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight: context.mediaQuery.size.height * 0.9,
+        minHeight: context.mediaQuery.size.height * 0.2,
+      ),
+      builder: (_) {
+        if (isScrollControlled) {
+          return DraggableScrollableSheet(
+            initialChildSize: 1,
+            minChildSize: 0.5,
+            expand: false,
+            snap: true,
+            builder: (context, controller) => builder(context, controller),
+          );
+        } else {
+          return builder(context, null);
+        }
+      },
+    );

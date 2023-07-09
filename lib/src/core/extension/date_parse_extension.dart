@@ -15,7 +15,7 @@ extension ParseString on DateTime {
     }
     final timeZoneSplit = timeZoneOffset.toString().split(':');
 
-    var hour = int.parse(timeZoneSplit[0]);
+    final hour = int.parse(timeZoneSplit[0]);
     if (hour < 10) {
       date += '0${timeZoneSplit[0]}';
     }
@@ -25,31 +25,19 @@ extension ParseString on DateTime {
 }
 
 extension ParseExtension on String {
-  String Function() get date =>
-          () {
+  String Function() get date => () {
         if (isEmpty) return '';
-        int duration = DateTime
-            .now()
-            .hour - DateTime
-            .now()
-            .toUtc()
-            .hour;
-        DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+        final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+        final DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
         return DateFormat('dd.MM.yyyy').format(
           date.add(Duration(hours: duration)),
         );
       };
 
-  String Function() get dateTime =>
-          () {
+  String Function() get dateTime => () {
         if (isEmpty) return '';
-        int duration = DateTime
-            .now()
-            .hour - DateTime
-            .now()
-            .toUtc()
-            .hour;
-        DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+        final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+        final DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
         return DateFormat('dd.MM.yyyy HH:mm').format(
           date.add(Duration(hours: duration)),
         );
@@ -57,13 +45,8 @@ extension ParseExtension on String {
 
   String dateTime1() {
     if (isEmpty) return '';
-    int duration = DateTime
-        .now()
-        .hour - DateTime
-        .now()
-        .toUtc()
-        .hour;
-    DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+    final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    final DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
     return DateFormat('dd.MM.yyyy').format(
       date.add(Duration(hours: duration)),
     );
@@ -71,13 +54,8 @@ extension ParseExtension on String {
 
   String dateTime2() {
     if (isEmpty) return '';
-    int duration = DateTime
-        .now()
-        .hour - DateTime
-        .now()
-        .toUtc()
-        .hour;
-    DateTime date = DateFormat('MM.dd.yyyy').parse(this);
+    final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    final DateTime date = DateFormat('MM.dd.yyyy').parse(this);
     return DateFormat('yyyy-MM-dd').format(
       date.add(Duration(hours: duration)),
     );
@@ -85,13 +63,8 @@ extension ParseExtension on String {
 
   String time1() {
     if (isEmpty) return '';
-    int duration = DateTime
-        .now()
-        .hour - DateTime
-        .now()
-        .toUtc()
-        .hour;
-    DateTime date = DateFormat('HH:mm').parse(this);
+    final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    final DateTime date = DateFormat('HH:mm').parse(this);
     return DateFormat('HH:mm').format(
       date.add(Duration(hours: duration)),
     );
@@ -99,13 +72,8 @@ extension ParseExtension on String {
 
   String time() {
     if (isEmpty) return '';
-    int duration = DateTime
-        .now()
-        .hour - DateTime
-        .now()
-        .toUtc()
-        .hour;
-    DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
+    final int duration = DateTime.now().hour - DateTime.now().toUtc().hour;
+    final DateTime date = DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(this);
     return DateFormat('HH:mm').format(
       date.add(Duration(hours: duration)),
     );

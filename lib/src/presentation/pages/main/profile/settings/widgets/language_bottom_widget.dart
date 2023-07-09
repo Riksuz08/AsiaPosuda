@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
 
 class LanguageBottomWidget extends StatelessWidget {
-  final Function(String) onChanged;
 
   const LanguageBottomWidget({
-    Key? key,
+    super.key,
     required this.onChanged,
-  }) : super(key: key);
+  });
+  final void Function(String) onChanged;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -54,5 +53,4 @@ class LanguageBottomWidget extends StatelessWidget {
         ),
       ],
     );
-  }
 }

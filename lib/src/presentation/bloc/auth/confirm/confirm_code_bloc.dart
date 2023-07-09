@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/core/mixin/cache_mixin.dart';
@@ -13,11 +12,11 @@ part 'confirm_code_bloc.freezed.dart';
 
 class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     with CacheMixin {
-  final AuthRepository authRepository;
-
   ConfirmCodeBloc(this.authRepository) : super(const ConfirmCodeState()) {
     on<ConfirmCodeCheckMessageEvent>(_onConfirmCode);
   }
+
+  final AuthRepository authRepository;
 
   Future<void> _onConfirmCode(ConfirmCodeCheckMessageEvent event,
       Emitter<ConfirmCodeState> emit) async {
@@ -37,19 +36,20 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
       (r) {
         if (r.data?.isNotEmpty ?? false) {
           setUserInfo(
-            name: r.data?['user']['name'] ?? '',
-            id: r.data?['user_id'],
-            login: r.data?['user']['login'],
-            email: r.data?['user']['email'],
-            phoneNumber: r.data?['user']['phone'],
-            accessToken: r.data?['token']['access_token'],
-            refreshToken: r.data?['token']['refresh_token'],
+            name: r.data?['user']['name'] as String? ?? '',
+            id: r.data?['user_id'] as String? ?? '',
+            login: r.data?['user']['login'] as String? ?? '',
+            email: r.data?['user']['email'] as String? ?? '',
+            phoneNumber: r.data?['user']['phone'] as String? ?? '',
+            accessToken: r.data?['token']['access_token'] as String? ?? '',
+            refreshToken: r.data?['token']['refresh_token'] as String? ?? '',
             imageUrl: '',
           );
         }
         emit(
           ConfirmCodeSuccessState(
-              isUserFound: r.message != "User verified but not found"),
+            isUserFound: r.message != 'User verified but not found',
+          ),
         );
       },
     );

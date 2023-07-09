@@ -1,14 +1,16 @@
 class RegisterUserResponse {
   RegisterUserResponse({
-      this.data, 
-      this.description, 
-      this.status,});
+    this.data,
+    this.description,
+    this.status,
+  });
 
-  RegisterUserResponse.fromJson(dynamic json) {
+  RegisterUserResponse.fromJson(Map json) {
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    description = json['description'];
-    status = json['status'];
+    description = json['description'] as String?;
+    status = json['status'] as String?;
   }
+
   Data? data;
   String? description;
   String? status;
@@ -22,46 +24,52 @@ class RegisterUserResponse {
     map['status'] = status;
     return map;
   }
-
 }
 
 class Data {
   Data({
-      this.addationalTable, 
-      this.appPermissions, 
-      this.clientPlatform, 
-      this.clientType, 
-      this.environmentId, 
-      this.loginTableSlug, 
-      this.permissions, 
-      this.resourceId, 
-      this.role, 
-      this.sessions, 
-      this.tables, 
-      this.token, 
-      this.user, 
-      this.userFound, 
-      this.userId,});
+    this.addationalTable,
+    this.appPermissions,
+    this.clientPlatform,
+    this.clientType,
+    this.environmentId,
+    this.loginTableSlug,
+    this.permissions,
+    this.resourceId,
+    this.role,
+    this.sessions,
+    this.tables,
+    this.token,
+    this.user,
+    this.userFound,
+    this.userId,
+  });
 
-  Data.fromJson(dynamic json) {
-    addationalTable = json['addational_table'] != null ? AddationalTable.fromJson(json['addational_table']) : null;
+  Data.fromJson(Map json) {
+    addationalTable = json['addational_table'] != null
+        ? AddationalTable.fromJson(json['addational_table'])
+        : null;
     if (json['app_permissions'] != null) {
       appPermissions = [];
       json['app_permissions'].forEach((v) {
         appPermissions?.add(AppPermissions.fromJson(v));
       });
     }
-    clientPlatform = json['client_platform'] != null ? ClientPlatform.fromJson(json['client_platform']) : null;
-    clientType = json['client_type'] != null ? ClientType.fromJson(json['client_type']) : null;
-    environmentId = json['environment_id'];
-    loginTableSlug = json['login_table_slug'];
+    clientPlatform = json['client_platform'] != null
+        ? ClientPlatform.fromJson(json['client_platform'])
+        : null;
+    clientType = json['client_type'] != null
+        ? ClientType.fromJson(json['client_type'])
+        : null;
+    environmentId = json['environment_id'] as String?;
+    loginTableSlug = json['login_table_slug'] as String?;
     if (json['permissions'] != null) {
       permissions = [];
       json['permissions'].forEach((v) {
         permissions?.add(Permissions.fromJson(v));
       });
     }
-    resourceId = json['resource_id'];
+    resourceId = json['resource_id'] as String?;
     role = json['role'] != null ? Role.fromJson(json['role']) : null;
     if (json['sessions'] != null) {
       sessions = [];
@@ -77,9 +85,10 @@ class Data {
     }
     token = json['token'] != null ? Token.fromJson(json['token']) : null;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    userFound = json['user_found'];
-    userId = json['user_id'];
+    userFound = json['user_found'] as bool?;
+    userId = json['user_id'] as String?;
   }
+
   AddationalTable? addationalTable;
   List<AppPermissions>? appPermissions;
   ClientPlatform? clientPlatform;
@@ -135,46 +144,49 @@ class Data {
     map['user_id'] = userId;
     return map;
   }
-
 }
 
 class User {
   User({
-      this.active, 
-      this.clientPlatformId, 
-      this.clientTypeId, 
-      this.companyId, 
-      this.email, 
-      this.expiresAt, 
-      this.id, 
-      this.language, 
-      this.login, 
-      this.name, 
-      this.password, 
-      this.phone, 
-      this.photoUrl, 
-      this.projectId, 
-      this.roleId, 
-      this.timezone,});
+    this.active,
+    this.clientPlatformId,
+    this.clientTypeId,
+    this.companyId,
+    this.email,
+    this.expiresAt,
+    this.id,
+    this.language,
+    this.login,
+    this.name,
+    this.password,
+    this.phone,
+    this.photoUrl,
+    this.projectId,
+    this.roleId,
+    this.timezone,
+  });
 
-  User.fromJson(dynamic json) {
-    active = json['active'];
-    clientPlatformId = json['client_platform_id'];
-    clientTypeId = json['client_type_id'];
-    companyId = json['company_id'];
-    email = json['email'];
-    expiresAt = json['expires_at'];
-    id = json['id'];
-    language = json['language'] != null ? Language.fromJson(json['language']) : null;
-    login = json['login'];
-    name = json['name'];
-    password = json['password'];
-    phone = json['phone'];
-    photoUrl = json['photo_url'];
-    projectId = json['project_id'];
-    roleId = json['role_id'];
-    timezone = json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
+  User.fromJson(Map json) {
+    active = json['active'] as num?;
+    clientPlatformId = json['client_platform_id'] as String?;
+    clientTypeId = json['client_type_id'] as String?;
+    companyId = json['company_id'] as String?;
+    email = json['email'] as String?;
+    expiresAt = json['expires_at'] as String?;
+    id = json['id'] as String?;
+    language =
+        json['language'] != null ? Language.fromJson(json['language']) : null;
+    login = json['login'] as String?;
+    name = json['name'] as String?;
+    password = json['password'] as String?;
+    phone = json['phone'] as String?;
+    photoUrl = json['photo_url'] as String?;
+    projectId = json['project_id'] as String?;
+    roleId = json['role_id'] as String?;
+    timezone =
+        json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
   }
+
   num? active;
   String? clientPlatformId;
   String? clientTypeId;
@@ -216,20 +228,21 @@ class User {
     }
     return map;
   }
-
 }
 
 class Timezone {
   Timezone({
-      this.id, 
-      this.name, 
-      this.text,});
+    this.id,
+    this.name,
+    this.text,
+  });
 
   Timezone.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     text = json['text'];
   }
+
   String? id;
   String? name;
   String? text;
@@ -241,15 +254,15 @@ class Timezone {
     map['text'] = text;
     return map;
   }
-
 }
 
 class Language {
   Language({
-      this.id, 
-      this.name, 
-      this.nativeName, 
-      this.shortName,});
+    this.id,
+    this.name,
+    this.nativeName,
+    this.shortName,
+  });
 
   Language.fromJson(dynamic json) {
     id = json['id'];
@@ -257,6 +270,7 @@ class Language {
     nativeName = json['native_name'];
     shortName = json['short_name'];
   }
+
   String? id;
   String? name;
   String? nativeName;
@@ -270,17 +284,17 @@ class Language {
     map['short_name'] = shortName;
     return map;
   }
-
 }
 
 class Token {
   Token({
-      this.accessToken, 
-      this.createdAt, 
-      this.expiresAt, 
-      this.refreshInSeconds, 
-      this.refreshToken, 
-      this.updatedAt,});
+    this.accessToken,
+    this.createdAt,
+    this.expiresAt,
+    this.refreshInSeconds,
+    this.refreshToken,
+    this.updatedAt,
+  });
 
   Token.fromJson(dynamic json) {
     accessToken = json['access_token'];
@@ -290,6 +304,7 @@ class Token {
     refreshToken = json['refresh_token'];
     updatedAt = json['updated_at'];
   }
+
   String? accessToken;
   String? createdAt;
   String? expiresAt;
@@ -307,18 +322,19 @@ class Token {
     map['updated_at'] = updatedAt;
     return map;
   }
-
 }
 
 class Tables {
   Tables({
-      this.objectId, 
-      this.tableSlug,});
+    this.objectId,
+    this.tableSlug,
+  });
 
   Tables.fromJson(dynamic json) {
     objectId = json['object_id'];
     tableSlug = json['table_slug'];
   }
+
   String? objectId;
   String? tableSlug;
 
@@ -328,25 +344,25 @@ class Tables {
     map['table_slug'] = tableSlug;
     return map;
   }
-
 }
 
 class Sessions {
   Sessions({
-      this.clientPlatformId, 
-      this.clientTypeId, 
-      this.createdAt, 
-      this.data, 
-      this.envId, 
-      this.expiresAt, 
-      this.id, 
-      this.integrationId, 
-      this.ip, 
-      this.isChanged, 
-      this.projectId, 
-      this.roleId, 
-      this.updatedAt, 
-      this.userId,});
+    this.clientPlatformId,
+    this.clientTypeId,
+    this.createdAt,
+    this.data,
+    this.envId,
+    this.expiresAt,
+    this.id,
+    this.integrationId,
+    this.ip,
+    this.isChanged,
+    this.projectId,
+    this.roleId,
+    this.updatedAt,
+    this.userId,
+  });
 
   Sessions.fromJson(dynamic json) {
     clientPlatformId = json['client_platform_id'];
@@ -364,6 +380,7 @@ class Sessions {
     updatedAt = json['updated_at'];
     userId = json['user_id'];
   }
+
   String? clientPlatformId;
   String? clientTypeId;
   String? createdAt;
@@ -397,16 +414,16 @@ class Sessions {
     map['user_id'] = userId;
     return map;
   }
-
 }
 
 class Role {
   Role({
-      this.clientPlatformId, 
-      this.clientTypeId, 
-      this.id, 
-      this.name, 
-      this.projectId,});
+    this.clientPlatformId,
+    this.clientTypeId,
+    this.id,
+    this.name,
+    this.projectId,
+  });
 
   Role.fromJson(dynamic json) {
     clientPlatformId = json['client_platform_id'];
@@ -415,6 +432,7 @@ class Role {
     name = json['name'];
     projectId = json['project_id'];
   }
+
   String? clientPlatformId;
   String? clientTypeId;
   String? id;
@@ -430,19 +448,19 @@ class Role {
     map['project_id'] = projectId;
     return map;
   }
-
 }
 
 class Permissions {
   Permissions({
-      this.clientTypeId, 
-      this.delete, 
-      this.id, 
-      this.read, 
-      this.roleId, 
-      this.tableSlug, 
-      this.update, 
-      this.write,});
+    this.clientTypeId,
+    this.delete,
+    this.id,
+    this.read,
+    this.roleId,
+    this.tableSlug,
+    this.update,
+    this.write,
+  });
 
   Permissions.fromJson(dynamic json) {
     clientTypeId = json['client_type_id'];
@@ -454,6 +472,7 @@ class Permissions {
     update = json['update'];
     write = json['write'];
   }
+
   String? clientTypeId;
   String? delete;
   String? id;
@@ -475,18 +494,18 @@ class Permissions {
     map['write'] = write;
     return map;
   }
-
 }
 
 class ClientType {
   ClientType({
-      this.confirmBy, 
-      this.id, 
-      this.name, 
-      this.projectId, 
-      this.selfRecover, 
-      this.selfRegister, 
-      this.tables,});
+    this.confirmBy,
+    this.id,
+    this.name,
+    this.projectId,
+    this.selfRecover,
+    this.selfRegister,
+    this.tables,
+  });
 
   ClientType.fromJson(dynamic json) {
     confirmBy = json['confirm_by'];
@@ -502,6 +521,7 @@ class ClientType {
       });
     }
   }
+
   num? confirmBy;
   String? id;
   String? name;
@@ -523,22 +543,21 @@ class ClientType {
     }
     return map;
   }
-
 }
-
-
 
 class Fields {
   Fields({
-      this.additionalProp1, 
-      this.additionalProp2, 
-      this.additionalProp3,});
+    this.additionalProp1,
+    this.additionalProp2,
+    this.additionalProp3,
+  });
 
   Fields.fromJson(dynamic json) {
     additionalProp1 = json['additionalProp1'];
     additionalProp2 = json['additionalProp2'];
     additionalProp3 = json['additionalProp3'];
   }
+
   dynamic additionalProp1;
   dynamic additionalProp2;
   dynamic additionalProp3;
@@ -550,15 +569,15 @@ class Fields {
     map['additionalProp3'] = additionalProp3;
     return map;
   }
-
 }
 
 class ClientPlatform {
   ClientPlatform({
-      this.id, 
-      this.name, 
-      this.projectId, 
-      this.subdomain,});
+    this.id,
+    this.name,
+    this.projectId,
+    this.subdomain,
+  });
 
   ClientPlatform.fromJson(dynamic json) {
     id = json['id'];
@@ -566,6 +585,7 @@ class ClientPlatform {
     projectId = json['project_id'];
     subdomain = json['subdomain'];
   }
+
   String? id;
   String? name;
   String? projectId;
@@ -579,19 +599,19 @@ class ClientPlatform {
     map['subdomain'] = subdomain;
     return map;
   }
-
 }
 
 class AppPermissions {
   AppPermissions({
-      this.clientTypeId, 
-      this.delete, 
-      this.id, 
-      this.read, 
-      this.roleId, 
-      this.tableSlug, 
-      this.update, 
-      this.write,});
+    this.clientTypeId,
+    this.delete,
+    this.id,
+    this.read,
+    this.roleId,
+    this.tableSlug,
+    this.update,
+    this.write,
+  });
 
   AppPermissions.fromJson(dynamic json) {
     clientTypeId = json['client_type_id'];
@@ -603,6 +623,7 @@ class AppPermissions {
     update = json['update'];
     write = json['write'];
   }
+
   String? clientTypeId;
   String? delete;
   String? id;
@@ -624,16 +645,17 @@ class AppPermissions {
     map['write'] = write;
     return map;
   }
-
 }
 
 class AddationalTable {
   AddationalTable({
-      this.fields,});
+    this.fields,
+  });
 
   AddationalTable.fromJson(dynamic json) {
     fields = json['fields'] != null ? Fields.fromJson(json['fields']) : null;
   }
+
   Fields? fields;
 
   Map<String, dynamic> toJson() {
@@ -643,6 +665,4 @@ class AddationalTable {
     }
     return map;
   }
-
 }
-

@@ -36,9 +36,8 @@ extension FutureEither<L, R> on Future<Either<L, R>> {
   Future<T> fold<T>(
     FutureOr<T> Function(L left) fnL,
     FutureOr<T> Function(R right) fnR,
-  ) {
-    return then((either) => either.fold(fnL, fnR));
-  }
+  ) =>
+      then((either) => either.fold(fnL, fnR));
 
   /// Swap [Left] and [Right]
   Future<Either<R, L>> swap() => this.fold<Either<R, L>>(Right.new, Left.new);

@@ -5,7 +5,7 @@ enum PasswordInputError { empty, short, long }
 class PasswordInput extends FormzInput<String, PasswordInputError> {
   const PasswordInput.pure() : super.pure('');
 
-  const PasswordInput.dirty(String value) : super.dirty(value);
+  const PasswordInput.dirty(super.value) : super.dirty();
 
   @override
   PasswordInputError? validator(String value) {

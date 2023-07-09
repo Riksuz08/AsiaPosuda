@@ -86,10 +86,8 @@ class AppOptions extends Equatable {
     switch (themeMode) {
       case ThemeMode.light:
         brightness = Brightness.light;
-        break;
       case ThemeMode.dark:
         brightness = Brightness.dark;
-        break;
       default:
         brightness =
             WidgetsBinding.instance.platformDispatcher.platformBrightness;
@@ -110,8 +108,7 @@ class AppOptions extends Equatable {
     double? timeDilation,
     TargetPlatform? platform,
     bool? isTestMode,
-  }) {
-    return AppOptions(
+  }) => AppOptions(
       themeMode: themeMode ?? this.themeMode,
       textScaleFactor: textScaleFactor ?? _textScaleFactor,
       customTextDirection: customTextDirection ?? this.customTextDirection,
@@ -119,7 +116,6 @@ class AppOptions extends Equatable {
       timeDilation: timeDilation ?? this.timeDilation,
       platform: platform ?? this.platform,
     );
-  }
 
   static AppOptions of(BuildContext context) {
     final scope =
@@ -158,7 +154,7 @@ class ApplyTextOptions extends StatelessWidget {
     final textDirection = options.resolvedTextDirection();
     final textScaleFactor = options.textScaleFactor(context);
 
-    Widget widget = MediaQuery(
+    final Widget widget = MediaQuery(
       data: MediaQuery.of(context).copyWith(
         textScaleFactor: textScaleFactor,
       ),

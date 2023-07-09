@@ -3,9 +3,6 @@ import 'package:dio/dio.dart' hide Headers;
 import 'failure.dart';
 
 final class ServerError implements Exception {
-  int? _errorCode;
-  String _errorMessage = '';
-
   ServerError.withDioError({required DioException error}) {
     _handleError(error);
   }
@@ -17,6 +14,9 @@ final class ServerError implements Exception {
     _errorMessage = message;
     _errorCode = code;
   }
+
+  int? _errorCode;
+  String _errorMessage = '';
 
   int get errorCode => _errorCode ?? 0;
 
@@ -51,13 +51,10 @@ final class ServerError implements Exception {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
         _errorMessage = 'Connection timeout';
-        break;
       case DioExceptionType.sendTimeout:
         _errorMessage = 'Connection timeout';
-        break;
       case DioExceptionType.receiveTimeout:
         _errorMessage = 'Connection timeout';
-        break;
       case DioExceptionType.badResponse:
         {
           if (error.response?.data['Error'] is Map<String, dynamic>) {
@@ -69,16 +66,12 @@ final class ServerError implements Exception {
         }
       case DioExceptionType.cancel:
         _errorMessage = 'Canceled';
-        break;
       case DioExceptionType.unknown:
         _errorMessage = 'Something wrong';
-        break;
       case DioExceptionType.badCertificate:
         _errorMessage = 'Bad certificate';
-        break;
       case DioExceptionType.connectionError:
         _errorMessage = 'Connection error';
-        break;
     }
     return;
   }

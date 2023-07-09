@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomAnimatedButton extends StatefulWidget {
-  final Widget child;
-  final VoidCallback onTap;
-
   const CustomAnimatedButton({
-    Key? key,
+    super.key,
     required this.child,
     required this.onTap,
-  }) : super(key: key);
+  });
+
+  final Widget child;
+  final VoidCallback onTap;
 
   @override
   State<CustomAnimatedButton> createState() => _CustomAnimatedButtonState();
@@ -31,25 +31,23 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (details) {
-        controller.forward();
-      },
-      onPanCancel: () {
-        controller.reverse();
-      },
-      onHorizontalDragCancel: () {
-        controller.reverse();
-      },
-      onTapUp: (details) {
-        controller.reverse();
-        widget.onTap();
-      },
-      child: ScaleTransition(
-        scale: animation,
-        child: widget.child,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => GestureDetector(
+        onTapDown: (details) {
+          controller.forward();
+        },
+        onPanCancel: () {
+          controller.reverse();
+        },
+        onHorizontalDragCancel: () {
+          controller.reverse();
+        },
+        onTapUp: (details) {
+          controller.reverse();
+          widget.onTap();
+        },
+        child: ScaleTransition(
+          scale: animation,
+          child: widget.child,
+        ),
+      );
 }

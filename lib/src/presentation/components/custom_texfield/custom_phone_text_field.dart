@@ -3,40 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class CustomPhoneTextField extends StatefulWidget {
-  final String? titleText;
-  final String? labelText;
-  final bool? showError;
-  final TextEditingController controller;
-  final bool autoFocus;
-  final Function(String value)? onChanged;
-  final TextInputType? keyboardType;
-  final String? prefixText;
-  final String? errorText;
-  final TextInputAction? inputAction;
-  final FocusNode? currentFocus;
-  final FocusNode? nextFocus;
-  final String? hintText;
-  final bool? obscureText;
-  final BuildContext? context;
-  final Function()? onTap, onComplete;
-  final bool readOnly;
-  final String? suffixText;
-  final Widget? suffixIcon, prefixIcon;
-  final TextStyle? suffixStyle;
-  final List<TextInputFormatter>? inputFormatters;
-  final Color? fillColor;
-  final EdgeInsets? contentPadding;
-  final InputBorder? focusedBorder,
-      enabledBorder,
-      errorBorder,
-      focusedErrorBorder;
-  final bool required;
-  final Function(String?)? validator;
-  final bool? filled;
-  final bool haveBorder;
-
   const CustomPhoneTextField({
-    Key? key,
+    super.key,
     this.titleText,
     this.showError,
     required this.controller,
@@ -70,7 +38,39 @@ class CustomPhoneTextField extends StatefulWidget {
     this.validator,
     this.filled,
     this.haveBorder = true,
-  }) : super(key: key);
+  });
+
+  final String? titleText;
+  final String? labelText;
+  final bool? showError;
+  final TextEditingController controller;
+  final bool autoFocus;
+  final void Function(String value)? onChanged;
+  final TextInputType? keyboardType;
+  final String? prefixText;
+  final String? errorText;
+  final TextInputAction? inputAction;
+  final FocusNode? currentFocus;
+  final FocusNode? nextFocus;
+  final String? hintText;
+  final bool? obscureText;
+  final BuildContext? context;
+  final void Function()? onTap, onComplete;
+  final bool readOnly;
+  final String? suffixText;
+  final Widget? suffixIcon, prefixIcon;
+  final TextStyle? suffixStyle;
+  final List<TextInputFormatter>? inputFormatters;
+  final Color? fillColor;
+  final EdgeInsets? contentPadding;
+  final InputBorder? focusedBorder,
+      enabledBorder,
+      errorBorder,
+      focusedErrorBorder;
+  final bool required;
+  final String Function(String?)? validator;
+  final bool? filled;
+  final bool haveBorder;
 
   @override
   State<CustomPhoneTextField> createState() => _CustomPhoneTextFieldState();
@@ -99,86 +99,82 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (widget.titleText != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Text(
-              '${widget.titleText}',
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.titleText != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(
+                '${widget.titleText}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
-          ),
-        TextFormField(
-          validator: (value) => widget.validator!(value),
-          inputFormatters: widget.inputFormatters,
-          style: const TextStyle(
-            fontSize: 14,
-            height: 16 / 14,
-            fontWeight: FontWeight.w400,
-          ),
-          obscureText: widget.obscureText ?? false,
-          readOnly: widget.readOnly,
-          controller: widget.controller,
-          focusNode: focusNode,
-          onTap: widget.onTap,
-          scrollPadding: EdgeInsets.zero,
-          autofocus: widget.autoFocus,
-          onChanged: widget.onChanged,
-          onFieldSubmitted: (term) => _fieldFocusChange(
-            context,
-            focusNode,
-            widget.nextFocus,
-          ),
-          obscuringCharacter: '*',
-          textInputAction: widget.inputAction,
-          textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
-            fillColor: widget.fillColor,
-            filled: widget.filled,
-            suffixIcon: widget.suffixIcon,
-            labelText: widget.labelText,
-            prefixText: _prefixText,
-            prefixIconConstraints: BoxConstraints(
-              maxWidth: _prefixText != null ? 56 : 12,
-              minWidth: _prefixText != null ? 48 : 12,
+          TextFormField(
+            validator: (value) => widget.validator!(value),
+            inputFormatters: widget.inputFormatters,
+            style: const TextStyle(
+              fontSize: 14,
+              height: 16 / 14,
+              fontWeight: FontWeight.w400,
             ),
-            hintText: _prefixText == null ? widget.hintText : '',
-            errorText: widget.showError ?? false ? widget.errorText : null,
-            border: widget.haveBorder
-                ? const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: AppUtils.kBorderRadius10,
-                  )
-                : null,
-            focusedBorder: _border(widget.haveBorder),
-            errorBorder: _border(widget.haveBorder),
-            enabledBorder: _border(widget.haveBorder),
-            disabledBorder: _border(widget.haveBorder),
-            focusedErrorBorder: _border(widget.haveBorder),
+            obscureText: widget.obscureText ?? false,
+            readOnly: widget.readOnly,
+            controller: widget.controller,
+            focusNode: focusNode,
+            onTap: widget.onTap,
+            scrollPadding: EdgeInsets.zero,
+            autofocus: widget.autoFocus,
+            onChanged: widget.onChanged,
+            onFieldSubmitted: (term) => _fieldFocusChange(
+              context,
+              focusNode,
+              widget.nextFocus,
+            ),
+            obscuringCharacter: '*',
+            textInputAction: widget.inputAction,
+            textAlignVertical: TextAlignVertical.center,
+            decoration: InputDecoration(
+              fillColor: widget.fillColor,
+              filled: widget.filled,
+              suffixIcon: widget.suffixIcon,
+              labelText: widget.labelText,
+              prefixText: _prefixText,
+              prefixIconConstraints: BoxConstraints(
+                maxWidth: _prefixText != null ? 56 : 12,
+                minWidth: _prefixText != null ? 48 : 12,
+              ),
+              hintText: _prefixText == null ? widget.hintText : '',
+              errorText: widget.showError ?? false ? widget.errorText : null,
+              border: widget.haveBorder
+                  ? const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: AppUtils.kBorderRadius10,
+                    )
+                  : null,
+              focusedBorder: _border(widget.haveBorder),
+              errorBorder: _border(widget.haveBorder),
+              enabledBorder: _border(widget.haveBorder),
+              disabledBorder: _border(widget.haveBorder),
+              focusedErrorBorder: _border(widget.haveBorder),
+            ),
+            cursorColor: context.theme.colorScheme.primary,
+            keyboardType: widget.keyboardType,
+            onEditingComplete: widget.onComplete,
           ),
-          cursorColor: context.theme.colorScheme.primary,
-          keyboardType: widget.keyboardType,
-          onEditingComplete: widget.onComplete,
-        ),
-      ],
-    );
-  }
+        ],
+      );
 
-  InputBorder? _border(bool haveBorder) {
-    return haveBorder
-        ? null
-        : const OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: AppUtils.kBorderRadius10,
-          );
-  }
+  InputBorder? _border(bool haveBorder) => haveBorder
+      ? null
+      : const OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: AppUtils.kBorderRadius10,
+        );
 
   void _fieldFocusChange(
     BuildContext context,

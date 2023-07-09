@@ -12,18 +12,18 @@ import 'package:sample_bloc_mobile/main.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 
 void main() {
-  testWidgets("Flutter Widget Test", (WidgetTester tester) async {
+  testWidgets('Flutter Widget Test', (tester) async {
     await tester.pumpWidget(const MainApp());
-    var button = find.byKey(Constants.bottomNavigatorKey);
+    final button = find.byKey(Constants.bottomNavigatorKey);
     expect(button, findsOneWidget);
     debugPrint('Reverse Text');
     await tester.tap(button);
     await tester.pump();
-    expect(find.text("sveD rettulF"), findsNothing);
+    expect(find.text('sveD rettulF'), findsNothing);
     debugPrint('sveD rettulF');
   });
 
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MainApp());
 

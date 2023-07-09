@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class InternetConnectionPage extends StatefulWidget {
-  const InternetConnectionPage({Key? key}) : super(key: key);
+  const InternetConnectionPage({super.key});
 
   @override
   InternetConnectionPageState createState() => InternetConnectionPageState();
@@ -36,11 +36,8 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+  Widget build(BuildContext context) => WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
@@ -81,8 +78,8 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
               setState(() {
                 isLoading = true;
               });
-              await Future.delayed(const Duration(milliseconds: 300));
-              var connectivityResult = await Connectivity().checkConnectivity();
+              await Future<void>.delayed(const Duration(milliseconds: 300));
+              final connectivityResult = await Connectivity().checkConnectivity();
               setState(() {
                 isLoading = false;
               });
@@ -95,5 +92,4 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
         ),
       ),
     );
-  }
 }

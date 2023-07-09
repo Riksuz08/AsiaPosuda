@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
       bloc: _bloc,
       listener: (_, state) {
         if (state is UserRegisterSuccessState) {
-          localSource.setHasProfile(true);
+          localSource.setHasProfile(value:true);
           context
               .read<MainBloc>()
               .add(const MainEventChanged(BottomMenu.search));

@@ -1,13 +1,13 @@
 part of 'auth_repository.dart';
 
 final class AuthRepositoryImpl extends AuthRepository {
-  final ApiClient apiClient;
-  final NetworkInfo networkInfo;
-
   const AuthRepositoryImpl({
     required this.apiClient,
     required this.networkInfo,
   }) : super();
+
+  final ApiClient apiClient;
+  final NetworkInfo networkInfo;
 
   @override
   Future<Either<Failure, SendMessageResponse>> codeMessage({
@@ -22,7 +22,7 @@ final class AuthRepositoryImpl extends AuthRepository {
         return Left(
           ServerError.withDioError(error: error).failure,
         );
-      } catch (error, stacktrace) {
+      } on Exception catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
           ServerError.withError(
@@ -31,7 +31,7 @@ final class AuthRepositoryImpl extends AuthRepository {
         );
       }
     } else {
-      return Left(ServerFailure(message: 'No Internet Connection'));
+      return const Left(ServerFailure(message: 'No Internet Connection'));
     }
   }
 
@@ -54,7 +54,7 @@ final class AuthRepositoryImpl extends AuthRepository {
         return Left(
           ServerError.withDioError(error: error).failure,
         );
-      } catch (error, stacktrace) {
+      } on Exception catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
           ServerError.withError(
@@ -63,7 +63,7 @@ final class AuthRepositoryImpl extends AuthRepository {
         );
       }
     } else {
-      return Left(ServerFailure(message: 'No Internet Connection'));
+      return const Left(ServerFailure(message: 'No Internet Connection'));
     }
   }
 }

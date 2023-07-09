@@ -5,7 +5,7 @@ enum PhoneInputError { error }
 class PhoneInput extends FormzInput<String, PhoneInputError> {
   const PhoneInput.pure() : super.pure('');
 
-  const PhoneInput.dirty(String value) : super.dirty(value);
+  const PhoneInput.dirty(super.value) : super.dirty();
 
   @override
   PhoneInputError? validator(String value) {

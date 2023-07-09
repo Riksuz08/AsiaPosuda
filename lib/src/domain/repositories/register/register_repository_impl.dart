@@ -1,13 +1,13 @@
 part of 'register_repository.dart';
 
 class RegisterUserRepositoryImpl implements RegisterUserRepository {
-  final ApiClient apiClient;
-  final NetworkInfo networkInfo;
-
   RegisterUserRepositoryImpl({
     required this.apiClient,
     required this.networkInfo,
   });
+
+  final ApiClient apiClient;
+  final NetworkInfo networkInfo;
 
   @override
   Future<Either<Failure, RegisterUserResponse>> registerUser({
@@ -22,7 +22,7 @@ class RegisterUserRepositoryImpl implements RegisterUserRepository {
         return Left(
           ServerError.withDioError(error: error).failure,
         );
-      } catch (error, stacktrace) {
+      } on Exception catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
           ServerError.withError(
@@ -31,7 +31,7 @@ class RegisterUserRepositoryImpl implements RegisterUserRepository {
         );
       }
     } else {
-      return Left(ServerFailure(message: 'No Internet Connection'));
+      return const Left(ServerFailure(message: 'No Internet Connection'));
     }
   }
 }

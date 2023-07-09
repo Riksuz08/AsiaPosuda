@@ -12,17 +12,17 @@ class RegisterUserRequest {
     this.tableSlug,
   });
 
-  RegisterUserRequest.fromJson(dynamic json) {
-    userId = json['user_id'];
-    clientName = json['client_name'];
-    cleintLastname = json['cleint_lastname'];
-    phoneNumber = json['phone_number'];
-    pasport = json['pasport'];
-    bloodGroup = json['blood_group'];
-    adres = json['adres'];
-    fcmToken = json['fcm_token'];
-    cleintLang = json['cleint_lang'];
-    tableSlug = json['table_slug'];
+  RegisterUserRequest.fromJson(Map json) {
+    userId = json['user_id'] as num?;
+    clientName = json['client_name'] as String?;
+    cleintLastname = json['cleint_lastname'] as String?;
+    phoneNumber = json['phone_number'] as String?;
+    pasport = json['pasport'] as String?;
+    bloodGroup = json['blood_group'] as String?;
+    adres = json['adres'] as String?;
+    fcmToken = json['fcm_token'] as String?;
+    cleintLang = json['cleint_lang'] as String?;
+    tableSlug = json['table_slug'] as String?;
   }
 
   num? userId;
@@ -47,7 +47,7 @@ class RegisterUserRequest {
     map['adres'] = adres;
     map['fcm_token'] = fcmToken;
     map['cleint_lang'] = cleintLang;
-    map['table_slug'] = "cleints";
+    map['table_slug'] = 'clients';
     return map;
   }
 }

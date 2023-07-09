@@ -7,12 +7,12 @@ class SendMessageRequest {
     this.registerType,
   });
 
-  SendMessageRequest.fromJson(dynamic json) {
-    clientType = json['client_type'];
-    email = json['email'];
-    googleToken = json['google_token'];
-    phone = json['phone'];
-    registerType = json['register_type'];
+  SendMessageRequest.fromJson(Map json) {
+    clientType = json['client_type'] as String?;
+    email = json['email'] as String?;
+    googleToken = json['google_token'] as String?;
+    phone = json['phone'] as String?;
+    registerType = json['register_type'] as String?;
   }
 
   String? clientType;

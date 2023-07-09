@@ -8,13 +8,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 final class AppLocalizations {
   AppLocalizations._();
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations) ??
-        instance;
-  }
+  static AppLocalizations of(BuildContext context) =>
+      Localizations.of<AppLocalizations>(context, AppLocalizations) ?? instance;
 
   static AppLocalizations get instance => AppLocalizations._();
-  static Map<String, dynamic> _localizedValues = {};
+  static Map<String, String> _localizedValues = {};
 
   String translate(String key) {
     if (_localizedValues.isNotEmpty) {
@@ -24,10 +22,10 @@ final class AppLocalizations {
   }
 
   static Future<AppLocalizations> load(Locale locale) async {
-    String jsonContent = await rootBundle.loadString(
+    final String jsonContent = await rootBundle.loadString(
       'assets/locale/${locale.languageCode}.json',
     );
-    _localizedValues = jsonDecode(jsonContent);
+    _localizedValues = jsonDecode(jsonContent) as Map<String, String>;
 
     // Dio dio = Dio();
     // String token = "d933cb36-26c1-4c9a-8440-5f0b643dea2f";
@@ -60,11 +58,10 @@ class TranslationsDelegate extends LocalizationsDelegate<AppLocalizations> {
       ['ru', 'uz', 'en'].contains(locale.languageCode);
 
   @override
-  Future<AppLocalizations> load(Locale locale) async {
-    return await SynchronousFuture<AppLocalizations>(
-      await AppLocalizations.load(locale),
-    );
-  }
+  Future<AppLocalizations> load(Locale locale) async =>
+      await SynchronousFuture<AppLocalizations>(
+        await AppLocalizations.load(locale),
+      );
 
   @override
   bool shouldReload(TranslationsDelegate old) => false;
