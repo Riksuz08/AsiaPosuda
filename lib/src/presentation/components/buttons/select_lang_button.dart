@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 
 class SelectLangButton extends StatelessWidget {
   const SelectLangButton({
@@ -33,7 +33,7 @@ class SelectLangButton extends StatelessWidget {
                   height: 24,
                   width: 36,
                 ),
-                AppUtils.kBoxWidth16,
+                AppUtils.kGap6,
                 Text(
                   lang,
                   style: const TextStyle(

@@ -1,6 +1,3 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:sample_bloc_mobile/src/core/utils/base_functions.dart';
-
 void main() {
   // test(
   //   "Function money formatter",

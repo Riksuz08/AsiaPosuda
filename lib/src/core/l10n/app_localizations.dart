@@ -12,7 +12,7 @@ final class AppLocalizations {
       Localizations.of<AppLocalizations>(context, AppLocalizations) ?? instance;
 
   static AppLocalizations get instance => AppLocalizations._();
-  static Map<String, String> _localizedValues = {};
+  static Map<String, dynamic> _localizedValues = {};
 
   String translate(String key) {
     if (_localizedValues.isNotEmpty) {
@@ -25,7 +25,8 @@ final class AppLocalizations {
     final String jsonContent = await rootBundle.loadString(
       'assets/locale/${locale.languageCode}.json',
     );
-    _localizedValues = jsonDecode(jsonContent) as Map<String, String>;
+
+    _localizedValues = jsonDecode(jsonContent);
 
     // Dio dio = Dio();
     // String token = "d933cb36-26c1-4c9a-8440-5f0b643dea2f";

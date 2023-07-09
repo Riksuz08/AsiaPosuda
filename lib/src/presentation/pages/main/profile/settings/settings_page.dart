@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
-import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/bottom_sheet/custom_bottom_sheet.dart';

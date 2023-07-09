@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 
 void show(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message),
-    ),
+    SnackBar(content: Text(message)),
   );
 }
 

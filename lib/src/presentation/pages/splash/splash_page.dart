@@ -73,7 +73,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           if (state.isTimerFinished) {
             Navigator.pushReplacementNamed(
               context,
-              localSource.lanSelected ? Routes.main : Routes.langSelect,
+              Routes.main,
             );
           }
         },

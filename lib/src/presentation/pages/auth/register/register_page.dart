@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/config/themes/themes.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_phone_text_field.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/masked_text_input_formatter.dart';
 
 part 'package:sample_bloc_mobile/src/presentation/pages/auth/register/mixin/register_mixin.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({
-    Key? key,
-  }) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -21,24 +18,23 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<RegisterBloc, RegisterState>(
-      bloc: _bloc,
-      listener: (_, state) {
-        if (state is UserRegisterSuccessState) {
-          localSource.setHasProfile(value:true);
-          context
-              .read<MainBloc>()
-              .add(const MainEventChanged(BottomMenu.search));
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.main,
-            (route) => route.isFirst,
-          );
-        }
-      },
-      builder: (_, state) {
-        return Scaffold(
+  Widget build(BuildContext context) =>
+      BlocConsumer<RegisterBloc, RegisterState>(
+        bloc: _bloc,
+        listener: (_, state) {
+          if (state is UserRegisterSuccessState) {
+            localSource.setHasProfile(value: true);
+            context
+                .read<MainBloc>()
+                .add(const MainEventChanged(BottomMenu.search));
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.main,
+              (route) => route.isFirst,
+            );
+          }
+        },
+        builder: (_, state) => Scaffold(
           backgroundColor: colorLightScheme.background,
           appBar: AppBar(
             bottom: const PreferredSize(
@@ -57,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppUtils.kBoxHeight4,
+                AppUtils.kGap4,
                 CustomTextField(
                   haveBorder: false,
                   fillColor: const Color(0xFFEDEFF2),
@@ -72,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                   controller: _fullNameController,
                   hintText: 'Имя',
                 ),
-                AppUtils.kBoxHeight14,
+                AppUtils.kGap12,
                 CustomTextField(
                   haveBorder: false,
                   fillColor: const Color(0xFFEDEFF2),
@@ -87,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                   controller: TextEditingController(),
                   hintText: 'Домашний адрес',
                 ),
-                AppUtils.kBoxHeight14,
+                AppUtils.kGap12,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         hintText: 'Группа крови',
                       ),
                     ),
-                    AppUtils.kBoxWidth8,
+                    AppUtils.kGap8,
                     const Expanded(
                       child: CustomTextField(
                         haveBorder: false,
@@ -133,8 +129,6 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
               child: const Text('Продолжить'),
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
 }

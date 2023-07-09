@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/scheduler.dart';
+part of 'utils.dart';
 
 final String defaultSystemLocale = Platform.localeName.split('_').first;
 

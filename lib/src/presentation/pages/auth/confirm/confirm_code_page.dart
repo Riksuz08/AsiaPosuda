@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
-import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/buttons/bottom_navigation_button.dart';
@@ -53,7 +53,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Введите код подтверждения'),
-                    AppUtils.kBoxHeight8,
+                    AppUtils.kGap8,
                     Text(
                       'Мы отправили вам 4-значный код подтверждения',
                       style: TextStyle(
@@ -69,7 +69,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
           ),
           body: Column(
             children: [
-              AppUtils.kBoxHeight16,
+              AppUtils.kGap16,
               Center(
                 child: Pinput(
                   length: 6,
@@ -97,21 +97,21 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
             buildWhen: (previous, current) =>
                 previous is AuthPhoneState != current is AuthPhoneState,
             builder: (_, state) => BottomNavigationButton(
-                child: ElevatedButton(
-                  onPressed: state is AuthPhoneState
-                      ? () {
-                          context.read<ConfirmCodeBloc>().add(
-                                ConfirmCodeCheckMessageEvent(
-                                  smsId: widget.state.smsId,
-                                  otp: controller.text,
-                                  data: widget.state.data,
-                                ),
-                              );
-                        }
-                      : null,
-                  child: const Text('Продолжить'),
-                ),
+              child: ElevatedButton(
+                onPressed: state is AuthPhoneState
+                    ? () {
+                        context.read<ConfirmCodeBloc>().add(
+                              ConfirmCodeCheckMessageEvent(
+                                smsId: widget.state.smsId,
+                                otp: controller.text,
+                                data: widget.state.data,
+                              ),
+                            );
+                      }
+                    : null,
+                child: const Text('Продолжить'),
               ),
+            ),
           ),
         ),
       );

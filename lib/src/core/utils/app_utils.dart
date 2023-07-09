@@ -1,32 +1,19 @@
-part of 'themes.dart';
+part of 'utils.dart';
 
 sealed class AppUtils {
   AppUtils._();
 
   static const kSpacer = Spacer();
 
+  static const kGap = Gap(0);
   static const kGap4 = Gap(4);
   static const kGap6 = Gap(6);
   static const kGap8 = Gap(8);
   static const kGap12 = Gap(12);
+  static const kGap16 = Gap(16);
   static const kGap20 = Gap(20);
   static const kGap24 = Gap(24);
   static const kGap40 = Gap(40);
-
-  /// box
-  static const kBox = SizedBox.shrink();
-  static const kBoxWidth4 = SizedBox(width: 4);
-  static const kBoxWidth8 = SizedBox(width: 8);
-  static const kBoxWidth12 = SizedBox(width: 12);
-  static const kBoxWidth16 = SizedBox(width: 16);
-  static const kBoxHeight2 = SizedBox(height: 2);
-  static const kBoxHeight4 = SizedBox(height: 4);
-  static const kBoxHeight8 = SizedBox(height: 8);
-  static const kBoxHeight12 = SizedBox(height: 12);
-  static const kBoxHeight16 = SizedBox(height: 16);
-  static const kBoxHeight14 = SizedBox(height: 14);
-  static const kBoxHeight20 = SizedBox(height: 20);
-  static const kBoxHeight24 = SizedBox(height: 24);
 
   /// divider
   static const kDivider = Divider(height: 1);

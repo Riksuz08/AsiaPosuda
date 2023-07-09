@@ -35,4 +35,10 @@ mixin ConfirmCodeMixin on State<ConfirmCodePage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }

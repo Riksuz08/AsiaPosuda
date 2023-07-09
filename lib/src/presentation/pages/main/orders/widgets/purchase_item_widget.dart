@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/paint/horizontal_line_painter.dart';
 
 class PurchaseItemWidget extends StatelessWidget {
@@ -41,14 +42,14 @@ class PurchaseItemWidget extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              AppUtils.kBoxWidth8,
+                              AppUtils.kGap8,
                               const Text('20:50'),
-                              AppUtils.kBoxWidth8,
+                              AppUtils.kGap8,
                               const CustomPaint(
                                 painter: HorizontalLine(),
                                 size: Size(60, 16),
                               ),
-                              AppUtils.kBoxWidth8,
+                              AppUtils.kGap8,
                               const Text('20:50'),
                               AppUtils.kSpacer,
                               const Text(
@@ -87,7 +88,7 @@ class PurchaseItemWidget extends StatelessWidget {
                               )
                             ],
                           ),
-                          AppUtils.kBoxHeight8,
+                          AppUtils.kGap8,
                           const Row(
                             children: [
                               Text('Turkish airlines'),
@@ -98,13 +99,13 @@ class PurchaseItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppUtils.kBoxHeight12,
+                AppUtils.kGap12,
                 const Divider(height: 1),
-                AppUtils.kBoxHeight12,
+                AppUtils.kGap12,
                 Row(
                   children: [
                     const Icon(Icons.share),
-                    AppUtils.kBoxWidth16,
+                    AppUtils.kGap16,
                     const Icon(Icons.favorite),
                     AppUtils.kSpacer,
                     TextButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 
 import 'widgets/purchase_item_widget.dart';
 
@@ -63,7 +64,7 @@ class _OrdersPageState extends State<OrdersPage>
                         onTap: () {},
                       );
                     }
-                    return AppUtils.kBoxHeight16;
+                    return AppUtils.kGap16;
                   },
                   childCount: 2.doubleTheListCount,
                 ),

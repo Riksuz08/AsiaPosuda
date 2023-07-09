@@ -2,8 +2,8 @@ import 'package:chuck_interceptor/chuck.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
+import 'package:sample_bloc_mobile/src/injector_container.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/confirm/confirm_code_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
@@ -15,7 +15,6 @@ import 'package:sample_bloc_mobile/src/presentation/pages/error/error_page.dart'
 import 'package:sample_bloc_mobile/src/presentation/pages/internet_connection/internet_connection_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/settings/settings_page.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/select_lang/select_lang_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/splash/splash_page.dart';
 
 part 'name_routes.dart';
@@ -26,7 +25,7 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
 
 final localSource = sl<LocalSource>();
 
-Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
+final Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
 sealed class AppRoutes {
   AppRoutes._();
@@ -74,10 +73,6 @@ sealed class AppRoutes {
             create: (_) => sl<RegisterBloc>(),
             child: const RegisterPage(),
           ),
-        );
-      case Routes.langSelect:
-        return MaterialPageRoute(
-          builder: (_) => const SelectLangPage(),
         );
 
       default:

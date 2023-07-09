@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 
 class CardsClipRRect extends StatelessWidget {
   const CardsClipRRect({super.key, required this.child});

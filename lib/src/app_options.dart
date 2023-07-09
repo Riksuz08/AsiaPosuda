@@ -107,15 +107,15 @@ class AppOptions extends Equatable {
     Locale? locale,
     double? timeDilation,
     TargetPlatform? platform,
-    bool? isTestMode,
-  }) => AppOptions(
-      themeMode: themeMode ?? this.themeMode,
-      textScaleFactor: textScaleFactor ?? _textScaleFactor,
-      customTextDirection: customTextDirection ?? this.customTextDirection,
-      locale: locale ?? this.locale,
-      timeDilation: timeDilation ?? this.timeDilation,
-      platform: platform ?? this.platform,
-    );
+  }) =>
+      AppOptions(
+        themeMode: themeMode ?? this.themeMode,
+        textScaleFactor: textScaleFactor ?? _textScaleFactor,
+        customTextDirection: customTextDirection ?? this.customTextDirection,
+        locale: locale ?? this.locale,
+        timeDilation: timeDilation ?? this.timeDilation,
+        platform: platform ?? this.platform,
+      );
 
   static AppOptions of(BuildContext context) {
     final scope =
@@ -239,10 +239,8 @@ class _ModelBindingState extends State<ModelBinding> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _ModelBindingScope(
-      modelBindingState: this,
-      child: widget.child,
-    );
-  }
+  Widget build(BuildContext context) => _ModelBindingScope(
+        modelBindingState: this,
+        child: widget.child,
+      );
 }
