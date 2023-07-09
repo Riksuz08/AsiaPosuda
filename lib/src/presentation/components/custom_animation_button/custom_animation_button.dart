@@ -50,4 +50,10 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
           child: widget.child,
         ),
       );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
