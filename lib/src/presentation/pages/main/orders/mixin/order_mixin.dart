@@ -4,7 +4,7 @@ mixin OrdersMixin on State<OrdersPage> {
   late final TabController tabController;
 
   void initStateController(TickerProvider tickerProvider) {
-    tabController = TabController(length: 2, vsync: tickerProvider);
+    tabController = TabController(length: 3, vsync: tickerProvider);
   }
 
   @override
