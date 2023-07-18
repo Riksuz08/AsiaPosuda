@@ -50,9 +50,9 @@ final DecorationTween _kGradientShadowTween = DecorationTween(
       // Eyeballed gradient used to mimic a drop shadow on the start side only.
       colors: <Color>[
         Color(0x00000000),
+        Color(0x00000000),
         Color(0x04000000),
         Color(0x12000000),
-        Color(0x38000000),
       ],
       stops: <double>[0, 0.3, 0.6, 1],
     ),
@@ -112,7 +112,6 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   }
 
   @override
-  // A relatively rigorous eyeball estimation.
   Duration get transitionDuration => const Duration(milliseconds: 400);
 
   @override
@@ -373,12 +372,6 @@ class CupertinoPageTransition extends StatelessWidget {
   })  : _primaryPositionAnimation = (linearTransition
                 ? primaryRouteAnimation
                 : CurvedAnimation(
-                    // The curves below have been rigorously derived from plots of native
-                    // iOS animation frames. Specifically, a video was taken of a page
-                    // transition animation and the distance in each frame that the page
-                    // moved was measured. A best fit bezier curve was the fitted to the
-                    // point set, which is linearToEaseIn. Conversely, easeInToLinear is the
-                    // reflection over the origin of linearToEaseIn.
                     parent: primaryRouteAnimation,
                     curve: Curves.linearToEaseOut,
                     reverseCurve: Curves.easeInToLinear,
