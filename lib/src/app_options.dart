@@ -7,6 +7,8 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 
+import 'presentation/components/cupertino_back/cupertino_back_gesture.dart';
+
 enum CustomTextDirection {
   localeBased,
   ltr,
@@ -178,7 +180,8 @@ class _ModelBindingScope extends InheritedWidget {
   final _ModelBindingState modelBindingState;
 
   @override
-  bool updateShouldNotify(_ModelBindingScope oldWidget) => true;
+  bool updateShouldNotify(_ModelBindingScope oldWidget) =>
+      modelBindingState != oldWidget.modelBindingState;
 }
 
 class ModelBinding extends StatefulWidget {
@@ -239,8 +242,11 @@ class _ModelBindingState extends State<ModelBinding> {
   }
 
   @override
-  Widget build(BuildContext context) => _ModelBindingScope(
-        modelBindingState: this,
-        child: widget.child,
+  Widget build(BuildContext context) => BackGestureWidthTheme(
+        backGestureWidth: BackGestureWidth.fraction(1 / 2),
+        child: _ModelBindingScope(
+          modelBindingState: this,
+          child: widget.child,
+        ),
       );
 }

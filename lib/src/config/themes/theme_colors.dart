@@ -25,13 +25,13 @@ const colorDarkScheme = ColorScheme.dark(
 );
 
 class ThemeColors extends ThemeExtension<ThemeColors> {
-  final Color cardColor;
-
   const ThemeColors({
     required this.cardColor,
   });
 
-  static const ThemeColors light = ThemeColors(
+  final Color cardColor;
+
+    static const ThemeColors light = ThemeColors(
     cardColor: Colors.white,
   );
   static const ThemeColors dark = ThemeColors(
@@ -41,11 +41,10 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
   @override
   ThemeExtension<ThemeColors> copyWith({
     Color? cardColor,
-  }) {
-    return ThemeColors(
-      cardColor: cardColor ?? this.cardColor,
-    );
-  }
+  }) =>
+      ThemeColors(
+        cardColor: cardColor ?? this.cardColor,
+      );
 
   @override
   ThemeExtension<ThemeColors> lerp(

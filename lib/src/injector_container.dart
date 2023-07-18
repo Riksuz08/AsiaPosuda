@@ -10,7 +10,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
-import 'package:sample_bloc_mobile/src/domain/network/api_client.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
@@ -21,6 +20,7 @@ import 'package:sample_bloc_mobile/src/presentation/bloc/splash/splash_bloc.dart
 import 'core/constants/constants.dart';
 import 'core/platform/network_info.dart';
 import 'presentation/bloc/auth/confirm/confirm_code_bloc.dart';
+import 'presentation/bloc/main/home/home_bloc.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> _box;
@@ -75,22 +75,16 @@ Future<void> init() async {
   sl
     ..registerLazySingleton(InternetConnectionChecker.new)
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
-    ..registerSingleton<LocalSource>(LocalSource(_box))
-    ..registerFactory<ApiClient>(
-      () => ApiClient(
-        sl(),
-        Constants.baseUrl,
-      ),
-    );
+    ..registerSingleton<LocalSource>(LocalSource(_box));
 
   /// main
   mainFeature();
+  homeFeature();
 
   /// auth
-  late final ApiClient authClient = ApiClient(sl(), Constants.authUrl);
-  authFeature(authClient);
+  authFeature();
 
-  registerFeature(authClient);
+  registerFeature();
 }
 
 void mainFeature() {
@@ -100,24 +94,28 @@ void mainFeature() {
     ..registerLazySingleton(MainBloc.new);
 }
 
-void registerFeature(ApiClient authClient) {
+void homeFeature() {
+  sl.registerFactory<HomeBloc>(HomeBloc.new);
+}
+
+void registerFeature() {
   sl
     ..registerFactory<RegisterBloc>(() => RegisterBloc(sl()))
     ..registerLazySingleton<RegisterUserRepository>(
       () => RegisterUserRepositoryImpl(
-        apiClient: authClient,
+        dio: sl(),
         networkInfo: sl(),
       ),
     );
 }
 
-void authFeature(ApiClient authClient) {
+void authFeature() {
   sl
     ..registerFactory<AuthBloc>(() => AuthBloc(sl()))
     ..registerFactory<ConfirmCodeBloc>(() => ConfirmCodeBloc(sl()))
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(
-        apiClient: authClient,
+        dio: sl(),
         networkInfo: sl(),
       ),
     );

@@ -11,8 +11,6 @@ part 'register_state.dart';
 part 'register_bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
-  final RegisterUserRepository registerUserRepository;
-
   RegisterBloc(this.registerUserRepository) : super(const RegisterState()) {
     on<UserRegisterEvent>(_onUserRegister);
     on<PhoneNumberChangedEvent>(_onPhoneNumberChangedEvent);
@@ -20,7 +18,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     on<FullNameChangedEvent>(_onFullNameChangedEvent);
   }
 
-  void _onPhoneNumberChangedEvent(PhoneNumberChangedEvent event, emit) {
+  final RegisterUserRepository registerUserRepository;
+
+  void _onPhoneNumberChangedEvent(
+      PhoneNumberChangedEvent event, Emitter<RegisterState> emit) {
     emit(
       const RegisterState.userPhoneNumberErrorState(
         showError: false,
@@ -28,7 +29,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     );
   }
 
-  void _onBloodGroupChangedEvent(BloodGroupChangedEvent event, emit) {
+  void _onBloodGroupChangedEvent(
+      BloodGroupChangedEvent event, Emitter<RegisterState> emit) {
     emit(
       const RegisterState.userBloodGroupErrorState(
         showError: false,
@@ -37,7 +39,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     );
   }
 
-  void _onFullNameChangedEvent(FullNameChangedEvent event, emit) {
+  void _onFullNameChangedEvent(
+      FullNameChangedEvent event, Emitter<RegisterState> emit) {
     emit(
       const RegisterState.userFullNameErrorState(
         showError: false,
@@ -45,7 +48,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     );
   }
 
-  bool _areRequiredFieldValidated(UserRegisterEvent event, emit) {
+  bool _areRequiredFieldValidated(
+      UserRegisterEvent event, Emitter<RegisterState> emit) {
     if (event.fullName.isEmpty) {
       emit(
         const RegisterState.userFullNameErrorState(
@@ -85,7 +89,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     return true;
   }
 
-  Future<void> _onUserRegister(UserRegisterEvent event, emit) async {
+  Future<void> _onUserRegister(
+      UserRegisterEvent event, Emitter<RegisterState> emit) async {
     if (!_areRequiredFieldValidated(event, emit)) {
       return;
     }
@@ -113,20 +118,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     );
   }
 
-  Map<String, dynamic> _getUserRegisterRequestData(UserRegisterEvent event) {
-    return {
-      'data': {
-        'addational_table': event.additionalProps,
-        'client_type_id': Constants.clientTypeId,
-        'company_id': Constants.companyId,
-        'project_id': Constants.projectId,
-        'expires_at': Constants.expiresAt,
-        'name': event.additionalProps['client_name'],
-        'phone': event.additionalProps['phone_number'],
-        'role_id': Constants.roledId,
-        'active': 1,
-        'type': 'phone'
-      }
-    };
-  }
+  Map<String, dynamic> _getUserRegisterRequestData(UserRegisterEvent event) => {
+        'data': {
+          'addational_table': event.additionalProps,
+          'client_type_id': Constants.clientTypeId,
+          'company_id': Constants.companyId,
+          'project_id': Constants.projectId,
+          'expires_at': Constants.expiresAt,
+          'name': event.additionalProps['client_name'],
+          'phone': event.additionalProps['phone_number'],
+          'role_id': Constants.roledId,
+          'active': 1,
+          'type': 'phone'
+        }
+      };
 }

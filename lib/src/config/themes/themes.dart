@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/cupertino_back/cupertino_back_gesture.dart';
 
 part 'app_icons.dart';
 

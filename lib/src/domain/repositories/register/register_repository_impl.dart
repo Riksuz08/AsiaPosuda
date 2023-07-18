@@ -2,11 +2,11 @@ part of 'register_repository.dart';
 
 class RegisterUserRepositoryImpl implements RegisterUserRepository {
   RegisterUserRepositoryImpl({
-    required this.apiClient,
+    required this.dio,
     required this.networkInfo,
   });
 
-  final ApiClient apiClient;
+  final Dio dio;
   final NetworkInfo networkInfo;
 
   @override
@@ -15,8 +15,11 @@ class RegisterUserRepositoryImpl implements RegisterUserRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await apiClient.registerUser(request);
-        return Right(response);
+        final Response response = await dio.post(
+          Constants.authUrl + Urls.register,
+          data: request,
+        );
+        return Right(RegisterUserResponse.fromJson(response.data));
       } on DioException catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(

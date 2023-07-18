@@ -12,107 +12,112 @@
 //   iOS: DarwinInitializationSettings(),
 // );
 //
-// Future<void> notificationServiceInitialize() async {
-//   await Firebase.initializeApp(
-//       // options: DefaultFirebaseOptions.currentPlatform,
+// sealed class NotificationService {
+//   const NotificationService._();
+//
+//   static Future<void> initialize() async {
+//     await Firebase.initializeApp(
+//         // options: DefaultFirebaseOptions.currentPlatform,
+//         );
+//     await setupFlutterNotifications();
+//     foregroundNotification();
+//     backgroundNotification();
+//     await terminateNotification();
+//   }
+//
+//   static Future<void> setupFlutterNotifications() async {
+//     if (Platform.isIOS) {
+//       await FirebaseMessaging.instance.requestPermission(
+//         announcement: true,
 //       );
-//   await setupFlutterNotifications();
-//   foregroundNotification();
-//   backgroundNotification();
-//   await terminateNotification();
-// }
+//     }
+//     channel = const AndroidNotificationChannel(
+//       'high_importance_channel', // id
+//       'High Importance Notifications', // title
+//       description:
+//           'This channel is used for important notifications.', // description
+//       importance: Importance.high,
+//     );
 //
-// Future<void> setupFlutterNotifications() async {
-//   if (Platform.isIOS) {
-//     await FirebaseMessaging.instance.requestPermission(
-//       announcement: true,
+//     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+//     await flutterLocalNotificationsPlugin
+//         .resolvePlatformSpecificImplementation<
+//             AndroidFlutterLocalNotificationsPlugin>()
+//         ?.createNotificationChannel(channel);
+//
+//     await FirebaseMessaging.instance
+//         .setForegroundNotificationPresentationOptions(
+//       alert: true,
+//       badge: true,
+//       sound: true,
 //     );
 //   }
-//   channel = const AndroidNotificationChannel(
-//     'high_importance_channel', // id
-//     'High Importance Notifications', // title
-//     description:
-//         'This channel is used for important notifications.', // description
-//     importance: Importance.high,
-//   );
 //
-//   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-//   await flutterLocalNotificationsPlugin
-//       .resolvePlatformSpecificImplementation<
-//           AndroidFlutterLocalNotificationsPlugin>()
-//       ?.createNotificationChannel(channel);
-//
-//   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-//     alert: true,
-//     badge: true,
-//     sound: true,
-//   );
-// }
-//
-// void showFlutterNotification(RemoteMessage message) {
-//   final RemoteNotification? notification = message.notification;
-//   if (message.data.isNotEmpty && !kIsWeb) {
-//     flutterLocalNotificationsPlugin.show(
-//       notification.hashCode,
-//       message.data['title'] as String?,
-//       message.data['body'] as String?,
-//       NotificationDetails(
-//         android: AndroidNotificationDetails(
-//           channel.id,
-//           channel.name,
-//           channelDescription: channel.description,
-//           styleInformation: BigTextStyleInformation(
-//             message.data['body'] as String? ?? '',
-//             contentTitle: message.data['title'] as String?,
+//   static void showFlutterNotification(RemoteMessage message) {
+//     final RemoteNotification? notification = message.notification;
+//     if (message.data.isNotEmpty && !kIsWeb) {
+//       flutterLocalNotificationsPlugin.show(
+//         notification.hashCode,
+//         message.data['title'] as String?,
+//         message.data['body'] as String?,
+//         NotificationDetails(
+//           android: AndroidNotificationDetails(
+//             channel.id,
+//             channel.name,
+//             channelDescription: channel.description,
+//             styleInformation: BigTextStyleInformation(
+//               message.data['body'] as String? ?? '',
+//               contentTitle: message.data['title'] as String?,
+//             ),
+//             icon: '@mipmap/ic_launcher',
+//             priority: Priority.high,
+//             importance: Importance.high,
+//             visibility: NotificationVisibility.public,
 //           ),
-//           icon: '@mipmap/ic_launcher',
-//           priority: Priority.high,
-//           importance: Importance.high,
-//           visibility: NotificationVisibility.public,
+//           iOS: const DarwinNotificationDetails(
+//             presentAlert: true,
+//             presentBadge: true,
+//             presentSound: true,
+//           ),
 //         ),
-//         iOS: const DarwinNotificationDetails(
-//           presentAlert: true,
-//           presentBadge: true,
-//           presentSound: true,
-//         ),
-//       ),
-//     );
+//       );
+//     }
 //   }
-// }
 //
-// void foregroundNotification() {
-//   FirebaseMessaging.onMessage.listen(showFlutterNotification);
+//   static void foregroundNotification() {
+//     FirebaseMessaging.onMessage.listen(showFlutterNotification);
 //
-//   ///When tapped
-//   flutterLocalNotificationsPlugin.initialize(initializationSettings,
-//       onDidReceiveNotificationResponse: (response) async {
-//     debugPrint('foreground notification tapped');
-//     debugPrint('$response');
-//   });
-// }
+//     ///When tapped
+//     flutterLocalNotificationsPlugin.initialize(initializationSettings,
+//         onDidReceiveNotificationResponse: (response) async {
+//       debugPrint('foreground notification tapped');
+//       debugPrint('$response');
+//     });
+//   }
 //
-// void backgroundNotification() {
-//   FirebaseMessaging.onMessageOpenedApp.listen((message) {
-//     debugPrint('A new onMessageOpenedApp event was published!');
-//     showFlutterNotification(message);
-//   });
-// }
+//   static void backgroundNotification() {
+//     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+//       debugPrint('A new onMessageOpenedApp event was published!');
+//       showFlutterNotification(message);
+//     });
+//   }
 //
-// Future<void> terminateNotification() async {
-//   final RemoteMessage? remoteMessage =
-//       await FirebaseMessaging.instance.getInitialMessage();
-//   if (remoteMessage == null) {
-//     FirebaseMessaging.onBackgroundMessage(
-//       _firebaseMessagingBackgroundHandler,
-//     );
-//   } else {
-//     showFlutterNotification(remoteMessage);
+//   static Future<void> terminateNotification() async {
+//     final RemoteMessage? remoteMessage =
+//         await FirebaseMessaging.instance.getInitialMessage();
+//     if (remoteMessage == null) {
+//       FirebaseMessaging.onBackgroundMessage(
+//         _firebaseMessagingBackgroundHandler,
+//       );
+//     } else {
+//       showFlutterNotification(remoteMessage);
+//     }
 //   }
 // }
 //
 // @pragma('vm:entry-point')
 // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 //   await Firebase.initializeApp();
-//   await setupFlutterNotifications();
-//   showFlutterNotification(message);
+//   await NotificationService.setupFlutterNotifications();
+//   NotificationService.showFlutterNotification(message);
 // }

@@ -2,11 +2,11 @@ part of 'auth_repository.dart';
 
 final class AuthRepositoryImpl extends AuthRepository {
   const AuthRepositoryImpl({
-    required this.apiClient,
     required this.networkInfo,
+    required this.dio,
   }) : super();
 
-  final ApiClient apiClient;
+  final Dio dio;
   final NetworkInfo networkInfo;
 
   @override
@@ -15,8 +15,11 @@ final class AuthRepositoryImpl extends AuthRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await apiClient.sendMessage(request);
-        return Right(response);
+        final Response response = await dio.post(
+          Constants.authUrl + Urls.sendMessage,
+          data: request.toJson(),
+        );
+        return Right(SendMessageResponse.fromJson(response.data));
       } on DioException catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(
@@ -43,12 +46,11 @@ final class AuthRepositoryImpl extends AuthRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await apiClient.verifySmsCode(
-          request,
-          smsId,
-          otp,
+        final Response response = await dio.post(
+          '${Constants.authUrl}${Urls.verifyEmail}/$smsId/$otp',
+          data: request.toJson(),
         );
-        return Right(response);
+        return Right(SendMessageResponse.fromJson(response.data));
       } on DioException catch (error, stacktrace) {
         log('Exception occurred: $error stacktrace: $stacktrace');
         return Left(

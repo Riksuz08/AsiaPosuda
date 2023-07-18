@@ -6,7 +6,7 @@ final appTheme = ThemeData(
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
       TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
       TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
       TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
     },
@@ -28,6 +28,7 @@ final ThemeData lightTheme = appTheme.copyWith(
     ThemeTextStyles.light,
     ThemeColors.light,
   ],
+  primaryColor: colorLightScheme.primary,
   colorScheme: colorLightScheme,
   dialogBackgroundColor: colorLightScheme.surface,
   scaffoldBackgroundColor: colorLightScheme.background,
@@ -43,9 +44,7 @@ final ThemeData lightTheme = appTheme.copyWith(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(
-        (states) {
-          return Colors.white;
-        },
+        (states) => Colors.white,
       ),
       backgroundColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -111,16 +110,12 @@ final ThemeData lightTheme = appTheme.copyWith(
     backgroundColor: Colors.white,
     height: kToolbarHeight,
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (states) {
-        return const IconThemeData(
+      (states) => const IconThemeData(
           color: Colors.black,
-        );
-      },
+        ),
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (states) {
-        return ThemeTextStyles.light.appBarTitle;
-      },
+      (states) => ThemeTextStyles.light.appBarTitle,
     ),
   ),
   appBarTheme: AppBarTheme(

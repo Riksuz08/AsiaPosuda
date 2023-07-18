@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 
 part 'splash_event.dart';
 
@@ -16,7 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     SplashEvent event,
     Emitter<SplashState> emit,
   ) async {
-    await Future<void>.delayed(const Duration(seconds: 2)).then(
+    await Future<void>.delayed(splashPageAnimationDuration).then(
       (value) => emit(
         const SplashState(isTimerFinished: true),
       ),
