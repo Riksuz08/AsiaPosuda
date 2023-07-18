@@ -5,10 +5,14 @@ final appTheme = ThemeData(
   applyElevationOverlayColor: true,
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
-      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android:
+          CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
+      TargetPlatform.iOS:
+          CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
+      TargetPlatform.macOS:
+          CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
+      TargetPlatform.windows:
+          CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
     },
   ),
   splashFactory:
@@ -111,8 +115,8 @@ final ThemeData lightTheme = appTheme.copyWith(
     height: kToolbarHeight,
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
       (states) => const IconThemeData(
-          color: Colors.black,
-        ),
+        color: Colors.black,
+      ),
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
       (states) => ThemeTextStyles.light.appBarTitle,
