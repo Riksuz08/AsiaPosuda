@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/awesome/awesome_loader.dart';
 
 import '../../bloc/splash/splash_bloc.dart';
 
@@ -38,11 +39,28 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           ),
           child: Scaffold(
             backgroundColor: context.theme.primaryColor,
-            body: Center(
-              child: Text(
-                'Logo',
-                style: context.theme.textTheme.titleLarge,
-              ),
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: Center(
+                    child: Text(
+                      'Logo',
+                      style: context.theme.textTheme.titleLarge,
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  bottom: 80,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: AwesomeLoader(
+                      loaderType: awesomeLoader3,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ),
