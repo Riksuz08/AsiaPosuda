@@ -37,7 +37,6 @@ class MainPage extends StatelessWidget {
                 child: child,
               ),
               child: IndexedStack(
-                key: ValueKey<int>(state.bottomMenu.index),
                 index: state.bottomMenu.index,
                 children: const [
                   HomePage(),
