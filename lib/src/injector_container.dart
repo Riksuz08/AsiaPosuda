@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -48,6 +49,8 @@ Future<void> init() async {
           LogInterceptor(
             requestBody: kDebugMode,
             responseBody: kDebugMode,
+            logPrint: (object) =>
+                kDebugMode ? log('Dio Log: ${object.toString()}') : null,
           ),
           if (kDebugMode) chuck.getDioInterceptor(),
         ],

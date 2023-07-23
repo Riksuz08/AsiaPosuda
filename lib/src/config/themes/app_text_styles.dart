@@ -1,31 +1,6 @@
 part of 'themes.dart';
 
 class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
-  final TextStyle appBarTitle;
-  final TextStyle buttonStyle;
-  final TextStyle regularCaption2;
-  final TextStyle regularCaption1;
-  final TextStyle regularFootnote;
-  final TextStyle regularSubheadline;
-  final TextStyle regularCallout;
-  final TextStyle regularBody;
-  final TextStyle regularHeadline;
-  final TextStyle regularTitle1;
-  final TextStyle regularTitle2;
-  final TextStyle regularTitle3;
-  final TextStyle regularLargeTitle;
-  final TextStyle bodyCaption2;
-  final TextStyle bodyCaption1;
-  final TextStyle bodyFootnote;
-  final TextStyle bodySubheadline;
-  final TextStyle bodyCallout;
-  final TextStyle bodyBody;
-  final TextStyle bodyHeadline;
-  final TextStyle bodyTitle1;
-  final TextStyle bodyTitle2;
-  final TextStyle bodyTitle3;
-  final TextStyle bodyLargeTitle;
-
   const ThemeTextStyles({
     required this.appBarTitle,
     required this.buttonStyle,
@@ -52,6 +27,31 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
     required this.bodyTitle3,
     required this.bodyLargeTitle,
   });
+
+  final TextStyle appBarTitle;
+  final TextStyle buttonStyle;
+  final TextStyle regularCaption2;
+  final TextStyle regularCaption1;
+  final TextStyle regularFootnote;
+  final TextStyle regularSubheadline;
+  final TextStyle regularCallout;
+  final TextStyle regularBody;
+  final TextStyle regularHeadline;
+  final TextStyle regularTitle1;
+  final TextStyle regularTitle2;
+  final TextStyle regularTitle3;
+  final TextStyle regularLargeTitle;
+  final TextStyle bodyCaption2;
+  final TextStyle bodyCaption1;
+  final TextStyle bodyFootnote;
+  final TextStyle bodySubheadline;
+  final TextStyle bodyCallout;
+  final TextStyle bodyBody;
+  final TextStyle bodyHeadline;
+  final TextStyle bodyTitle1;
+  final TextStyle bodyTitle2;
+  final TextStyle bodyTitle3;
+  final TextStyle bodyLargeTitle;
 
   static const ThemeTextStyles light = ThemeTextStyles(
     appBarTitle: TextStyle(
@@ -324,34 +324,33 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
     TextStyle? bodyTitle1,
     TextStyle? bodyTitle2,
     TextStyle? bodyTitle3,
-  }) {
-    return ThemeTextStyles(
-      appBarTitle: appBarTitle ?? this.appBarTitle,
-      buttonStyle: buttonStyle ?? this.buttonStyle,
-      regularBody: regularBody ?? this.regularBody,
-      regularCallout: regularCallout ?? this.regularCallout,
-      regularCaption1: regularCaption1 ?? this.regularCaption1,
-      regularCaption2: regularCaption2 ?? this.regularCaption2,
-      regularFootnote: regularFootnote ?? this.regularFootnote,
-      regularHeadline: regularHeadline ?? this.regularHeadline,
-      regularLargeTitle: regularLargeTitle ?? this.regularLargeTitle,
-      regularSubheadline: regularSubheadline ?? this.regularSubheadline,
-      regularTitle1: regularTitle1 ?? this.regularTitle1,
-      regularTitle2: regularTitle2 ?? this.regularTitle2,
-      regularTitle3: regularTitle3 ?? this.regularTitle3,
-      bodyBody: bodyBody ?? this.bodyBody,
-      bodyCallout: bodyCallout ?? this.bodyCallout,
-      bodyCaption1: bodyCaption1 ?? this.bodyCaption1,
-      bodyCaption2: bodyCaption2 ?? this.bodyCaption2,
-      bodyFootnote: bodyFootnote ?? this.bodyFootnote,
-      bodyHeadline: bodyHeadline ?? this.bodyHeadline,
-      bodyLargeTitle: bodyLargeTitle ?? this.bodyLargeTitle,
-      bodySubheadline: bodySubheadline ?? this.bodySubheadline,
-      bodyTitle1: bodyTitle1 ?? this.bodyTitle1,
-      bodyTitle2: bodyTitle2 ?? this.bodyTitle2,
-      bodyTitle3: bodyTitle3 ?? this.bodyTitle3,
-    );
-  }
+  }) =>
+      ThemeTextStyles(
+        appBarTitle: appBarTitle ?? this.appBarTitle,
+        buttonStyle: buttonStyle ?? this.buttonStyle,
+        regularBody: regularBody ?? this.regularBody,
+        regularCallout: regularCallout ?? this.regularCallout,
+        regularCaption1: regularCaption1 ?? this.regularCaption1,
+        regularCaption2: regularCaption2 ?? this.regularCaption2,
+        regularFootnote: regularFootnote ?? this.regularFootnote,
+        regularHeadline: regularHeadline ?? this.regularHeadline,
+        regularLargeTitle: regularLargeTitle ?? this.regularLargeTitle,
+        regularSubheadline: regularSubheadline ?? this.regularSubheadline,
+        regularTitle1: regularTitle1 ?? this.regularTitle1,
+        regularTitle2: regularTitle2 ?? this.regularTitle2,
+        regularTitle3: regularTitle3 ?? this.regularTitle3,
+        bodyBody: bodyBody ?? this.bodyBody,
+        bodyCallout: bodyCallout ?? this.bodyCallout,
+        bodyCaption1: bodyCaption1 ?? this.bodyCaption1,
+        bodyCaption2: bodyCaption2 ?? this.bodyCaption2,
+        bodyFootnote: bodyFootnote ?? this.bodyFootnote,
+        bodyHeadline: bodyHeadline ?? this.bodyHeadline,
+        bodyLargeTitle: bodyLargeTitle ?? this.bodyLargeTitle,
+        bodySubheadline: bodySubheadline ?? this.bodySubheadline,
+        bodyTitle1: bodyTitle1 ?? this.bodyTitle1,
+        bodyTitle2: bodyTitle2 ?? this.bodyTitle2,
+        bodyTitle3: bodyTitle3 ?? this.bodyTitle3,
+      );
 
   @override
   ThemeExtension<ThemeTextStyles> lerp(

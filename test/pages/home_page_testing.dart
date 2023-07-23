@@ -8,10 +8,10 @@ void main() {
     () {
       testWidgets(
         'Render 4 widgets of Type ListTile',
-        (WidgetTester tester) async {
+        (tester) async {
           await tester.pumpWidget(const MainApp());
           expect(
-            find.byKey(const Key("initial")),
+            find.byKey(const Key('initial')),
             findsNWidgets(1),
           ); // Expecting 4 ListTile widget on    Screen.
         },

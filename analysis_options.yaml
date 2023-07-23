@@ -33,60 +33,110 @@ analyzer:
     body_might_complete_normally_nullable: ignore
     # Error rules
     avoid_dynamic_calls: error
-    avoid_empty_else: warning
-    avoid_returning_null_for_future: warning
+    avoid_empty_else: error
+    avoid_returning_null_for_future: error
     avoid_slow_async_io: error
-    avoid_type_to_string: warning
+    avoid_type_to_string: error
     cancel_subscriptions: error
     close_sinks: error
-    empty_statements: warning
-    hash_and_equals: warning
-    iterable_contains_unrelated_type: warning
-    list_remove_unrelated_type: warning
+    empty_statements: error
+    hash_and_equals: error
+    iterable_contains_unrelated_type: error
+    list_remove_unrelated_type: error
 
     # Style Rules
     always_declare_return_types: error
-    always_put_control_body_on_new_line: warning
+    always_put_control_body_on_new_line: error
     avoid_equals_and_hash_code_on_mutable_classes: error
-    avoid_field_initializers_in_const_classes: warning
-    avoid_function_literals_in_foreach_calls: warning
-    avoid_returning_this: warning
-    avoid_unused_constructor_parameters: warning
+    avoid_field_initializers_in_const_classes: error
+    avoid_function_literals_in_foreach_calls: error
+    avoid_returning_this: error
+    avoid_unused_constructor_parameters: error
     avoid_void_async: error
-    await_only_futures: warning
-    conditional_uri_does_not_exist: warning
-    curly_braces_in_flow_control_structures: warning
-    no_leading_underscores_for_local_identifiers: warning
+    await_only_futures: error
+    camel_case_extensions: error
+    comment_references: error
+    conditional_uri_does_not_exist: error
+    curly_braces_in_flow_control_structures: error
+    directives_ordering: error
+    empty_constructor_bodies: error
+    empty_catches: error
+    file_names: error
+    implementation_imports: error
+    no_leading_underscores_for_local_identifiers: error
     null_closures: error
+    omit_local_variable_types: error
+    package_api_docs: error
+    package_prefixed_library_names: error
+    prefer_adjacent_string_concatenation: error
+    prefer_equal_for_default_values: error
+    prefer_if_null_operators: error
     parameter_assignments: error
-    prefer_asserts_with_message: warning
+    prefer_asserts_with_message: error
     prefer_const_constructors: error
-    prefer_const_constructors_in_immutables: warning
-    prefer_const_declarations: warning
-    prefer_const_literals_to_create_immutables: warning
-    prefer_expression_function_bodies: warning
+    prefer_const_constructors_in_immutables: error
+    prefer_const_declarations: error
+    prefer_const_literals_to_create_immutables: error
+    prefer_expression_function_bodies: error
     prefer_final_fields: error
     prefer_final_in_for_each: error
     prefer_final_locals: error
-    prefer_function_declarations_over_variables: warning
-    prefer_generic_function_type_aliases: warning
-    prefer_initializing_formals: warning
+    prefer_function_declarations_over_variables: error
+    prefer_generic_function_type_aliases: error
+    prefer_initializing_formals: error
     prefer_typing_uninitialized_variables: error
-    provide_deprecation_message: warning
-    recursive_getters: warning
-    tighten_type_of_initializing_formals: warning
+    provide_deprecation_message: error
+    recursive_getters: error
+    tighten_type_of_initializing_formals: error
     type_annotate_public_apis: error
-    unawaited_futures: warning
-    unnecessary_await_in_return: warning
-    unnecessary_this: warning
-    use_full_hex_values_for_flutter_colors: warning
-    use_function_type_syntax_for_parameters: warning
-    use_string_buffers: warning
-    use_enums: warning
-
+    unawaited_futures: error
+    unnecessary_await_in_return: error
+    unnecessary_this: error
+    use_full_hex_values_for_flutter_colors: error
+    use_function_type_syntax_for_parameters: error
+    use_string_buffers: error
+    use_enums: error
+    use_key_in_widget_constructors: error
+    use_rethrow_when_possible: error
+    use_setters_to_change_properties: error
+    use_to_and_as_if_applicable: error
+    valid_regexps: error
+    void_checks: error
+    tearoff_of_generative_constructor_of_abstract_class: error
+    prefer_spread_collections: error
+    prefer_int_literals: error
+    prefer_single_quotes: error
+    prefer_is_empty: error
+    prefer_is_not_empty: error
+    prefer_iterable_whereType: error
+    prefer_if_elements_to_conditional_expressions: error
+    prefer_conditional_assignment: error
+    prefer_conditional_expression: warning
     # Pub Rules
     depend_on_referenced_packages: error
-    secure_pubspec_urls: warning
+    secure_pubspec_urls: error
+    read_potentially_unassigned_final: error
+    # Flutter Rules
+    avoid_web_libraries_in_flutter: error
+    flutter_style_todos: error
+    no_logic_in_create_state: error
+    # Lint Rules
+    avoid_as: error
+    avoid_catches_without_on_clauses: error
+    avoid_catching_errors: error
+    avoid_classes_with_only_static_members: error
+    avoid_double_and_int_checks: error
+    avoid_implementing_value_types: error
+    avoid_init_to_null: error
+    avoid_js_rounded_ints: error
+    avoid_null_checks_in_equality_operators: error
+    avoid_positional_boolean_parameters: error
+    avoid_print: error
+    avoid_private_typedef_functions: error
+    binary_operator_written_out: error
+    body_might_complete_normally: error
+    diagnostic_describe_all_properties: error
+    empty_else: error
 
 linter:
   rules:

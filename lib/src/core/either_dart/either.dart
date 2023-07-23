@@ -93,12 +93,19 @@ sealed class Either<L, R> {
   }
 
   /// If the condition is true then return [rightValue] in [Right] else [leftValue] in [Left]
-  static Either<L, R> cond<L, R>(bool test, L leftValue, R rightValue) =>
+  static Either<L, R> cond<L, R>({
+    required bool test,
+    required L leftValue,
+    required R rightValue,
+  }) =>
       test ? Right(rightValue) : Left(leftValue);
 
   /// If the condition is true then return [rightValue] in [Right] else [leftValue] in [Left]
-  static Either<L, R> condLazy<L, R>(
-          bool test, Lazy<L> leftValue, Lazy<R> rightValue) =>
+  static Either<L, R> condLazy<L, R>({
+    required bool test,
+    required Lazy<L> leftValue,
+    required Lazy<R> rightValue,
+  }) =>
       test ? Right(rightValue()) : Left(leftValue());
 
   @override
