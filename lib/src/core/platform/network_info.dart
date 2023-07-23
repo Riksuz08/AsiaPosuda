@@ -1,16 +1,22 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 abstract class NetworkInfo {
   const NetworkInfo();
 
   Future<bool> get isConnected;
+
+  Stream<InternetStatus> get onStatusChange;
 }
 
 class NetworkInfoImpl implements NetworkInfo {
-  const NetworkInfoImpl(this.internetConnectionCheckerPlus);
+  const NetworkInfoImpl(this.internetConnection);
 
-  final InternetConnectionChecker internetConnectionCheckerPlus;
+  final InternetConnection internetConnection;
 
   @override
-  Future<bool> get isConnected => internetConnectionCheckerPlus.hasConnection;
+  Future<bool> get isConnected => internetConnection.hasInternetAccess;
+
+  @override
+  Stream<InternetStatus> get onStatusChange =>
+      internetConnection.onStatusChange;
 }

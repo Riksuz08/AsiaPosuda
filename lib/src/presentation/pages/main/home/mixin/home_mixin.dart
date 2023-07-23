@@ -7,6 +7,7 @@ mixin HomeMixin on State<HomePage> {
   @override
   void initState() {
     super.initState();
+    print('initState');
     scrollController = ScrollController();
   }
 

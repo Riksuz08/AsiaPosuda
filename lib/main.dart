@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,6 +12,7 @@ import 'src/config/router/app_routes.dart';
 import 'src/config/themes/themes.dart';
 import 'src/core/constants/constants.dart';
 import 'src/core/l10n/app_localizations.dart';
+import 'src/core/services/notification_service.dart';
 import 'src/injector_container.dart';
 import 'src/presentation/bloc/log_bloc_observer.dart';
 import 'src/presentation/bloc/main/main_bloc.dart';
@@ -20,17 +22,17 @@ void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // if (defaultTargetPlatform != TargetPlatform.linux &&
-  //     defaultTargetPlatform != TargetPlatform.windows) {
-  //   await NotificationService.initialize();
-  //
-  //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  //   // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-  //   PlatformDispatcher.instance.onError = (error, stack) {
-  //     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //     return true;
-  //   };
-  // }
+  if (defaultTargetPlatform != TargetPlatform.linux &&
+      defaultTargetPlatform != TargetPlatform.windows) {
+    await NotificationService.initialize();
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   /// bloc logger
   if (kDebugMode) {
@@ -61,11 +63,11 @@ class MainApp extends StatelessWidget {
           providers: [
             BlocProvider<MainBloc>(create: (_) => sl<MainBloc>()),
           ],
-          child: Builder(
-            builder: (ctx) {
-              final AppOptions options = AppOptions.of(ctx);
-              return KeyboardDismiss(
-                child: MaterialApp(
+          child: KeyboardDismiss(
+            child: Builder(
+              builder: (ctx) {
+                final AppOptions options = AppOptions.of(ctx);
+                return MaterialApp(
                   /// title
                   debugShowCheckedModeBanner: false,
                   navigatorKey: rootNavigatorKey,
@@ -86,9 +88,9 @@ class MainApp extends StatelessWidget {
                   initialRoute: Routes.initial,
                   onGenerateRoute: AppRoutes.onGenerateRoute,
                   onUnknownRoute: AppRoutes.onUnknownRoute,
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       );

@@ -6,6 +6,7 @@ import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/home/home_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/fade_indexed_stack/animated_fade_indexed_stack.dart';
 
 import 'favorites/bookmark_page.dart';
 import 'home/home_page.dart';
@@ -36,7 +37,7 @@ class MainPage extends StatelessWidget {
                 opacity: anim,
                 child: child,
               ),
-              child: IndexedStack(
+              child: FadeIndexedStack(
                 index: state.bottomMenu.index,
                 children: const [
                   HomePage(),

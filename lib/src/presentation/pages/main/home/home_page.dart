@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/home/home_bloc.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/buttons/bouncing_button.dart';
 
 part 'mixin/home_mixin.dart';
 
