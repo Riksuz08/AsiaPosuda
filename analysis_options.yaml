@@ -111,7 +111,6 @@ analyzer:
     prefer_iterable_whereType: error
     prefer_if_elements_to_conditional_expressions: error
     prefer_conditional_assignment: error
-    prefer_conditional_expression: warning
     # Pub Rules
     depend_on_referenced_packages: error
     secure_pubspec_urls: error
@@ -136,7 +135,6 @@ analyzer:
     binary_operator_written_out: error
     body_might_complete_normally: error
     diagnostic_describe_all_properties: error
-    empty_else: error
 
 linter:
   rules:
