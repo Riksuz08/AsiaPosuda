@@ -1,19 +1,52 @@
 part of 'auth_bloc.dart';
 
-@freezed
-class AuthState with _$AuthState {
-  const factory AuthState() = _AuthState;
+abstract class AuthState extends Equatable {
+  const AuthState();
+}
 
-  const factory AuthState.success(
-    String smsId,
-    String phone,
-    String uiPhone,
-    Map data,
-  ) = AuthSuccessState;
+class AuthInitialState extends AuthState {
+  const AuthInitialState();
 
-  const factory AuthState.loading() = AuthLaodingState;
+  @override
+  List<Object?> get props => [];
+}
 
-  const factory AuthState.phone(String phone) = AuthPhoneState;
+class AuthSuccessState extends AuthState {
+  const AuthSuccessState(
+    this.smsId,
+    this.phone,
+    this.uiPhone,
+    this.data,
+  );
 
-  const factory AuthState.error() = AuthErrorState;
+  final String smsId;
+  final String phone;
+  final String uiPhone;
+  final Map data;
+
+  @override
+  List<Object?> get props => [smsId, phone, uiPhone, data];
+}
+
+class AuthLoadingState extends AuthState {
+  const AuthLoadingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthPhoneState extends AuthState {
+  const AuthPhoneState(this.phone);
+
+  final String phone;
+
+  @override
+  List<Object?> get props => [phone];
+}
+
+class AuthErrorState extends AuthState {
+  const AuthErrorState();
+
+  @override
+  List<Object?> get props => [];
 }

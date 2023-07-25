@@ -7,7 +7,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(context.translate('favorites')),
+          title: Text(context.tr('favorites')),
         ),
       );
 }

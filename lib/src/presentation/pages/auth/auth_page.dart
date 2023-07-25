@@ -50,9 +50,9 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
           ),
           body: BlocBuilder<AuthBloc, AuthState>(
             buildWhen: (previous, current) =>
-                previous is AuthLaodingState != current is AuthLaodingState,
+                previous is AuthLoadingState != current is AuthLoadingState,
             builder: (_, state) => ModalProgressHUD(
-              inAsyncCall: state is AuthLaodingState,
+              inAsyncCall: state is AuthLoadingState,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

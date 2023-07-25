@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage>
             previous.isScrollingTop != current.isScrollingTop,
         listener: listener,
         child: Scaffold(
-          appBar: AppBar(title: Text(context.translate('search'))),
+          appBar: AppBar(title: Text(context.tr('search'))),
           body: CustomScrollView(
             controller: scrollController,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

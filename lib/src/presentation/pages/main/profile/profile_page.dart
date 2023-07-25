@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(context.translate('profile'))),
+      appBar: AppBar(title: Text(context.tr('profile'))),
       body: CustomScrollView(
         slivers: [
           const SliverGap(16),
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
                       AppIcons.address_book,
                       size: 20,
                     ),
-                    text: context.translate('notebook'),
+                    text: context.tr('notebook'),
                     isTop: true,
                     onTap: () {
                       // Navigator.pushNamed(context, Routes.notes);
@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
                       AppIcons.wallet,
                       size: 20,
                     ),
-                    text: context.translate('my_cards'),
+                    text: context.tr('my_cards'),
                     isBottom: true,
                     onTap: () {
                       // Navigator.pushNamed(context, Routes.myCards);
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                       AppIcons.info,
                       size: 20,
                     ),
-                    text: context.translate('about_us'),
+                    text: context.tr('about_us'),
                     isTop: true,
                     onTap: () {},
                   ),
@@ -69,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                       AppIcons.favorite_list,
                       size: 20,
                     ),
-                    text: context.translate('blog'),
+                    text: context.tr('blog'),
                     onTap: () {},
                   ),
                   const Divider(height: 1),
@@ -78,7 +78,7 @@ class ProfilePage extends StatelessWidget {
                       AppIcons.agreement,
                       size: 20,
                     ),
-                    text: context.translate('cooperation'),
+                    text: context.tr('cooperation'),
                     onTap: () {},
                   ),
                   const Divider(height: 1),
@@ -87,7 +87,7 @@ class ProfilePage extends StatelessWidget {
                       Icons.settings,
                       size: 20,
                     ),
-                    text: context.translate('settings'),
+                    text: context.tr('settings'),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -102,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                       size: 20,
                     ),
                     isBottom: true,
-                    text: context.translate('logout'),
+                    text: context.tr('logout'),
                     onTap: () {
                       showDialog<void>(
                         context: context,

@@ -1,8 +1,19 @@
-part of '../main/main_bloc.dart';
+part of 'main_bloc.dart';
 
-@freezed
-class MainState with _$MainState {
-  const factory MainState({
-    required BottomMenu bottomMenu,
-  }) = _MainState;
+class MainState extends Equatable {
+  const MainState({
+    this.bottomMenu = BottomMenu.search,
+  });
+
+  final BottomMenu bottomMenu;
+
+  MainState copyWith({
+    BottomMenu? bottomMenu,
+  }) =>
+      MainState(
+        bottomMenu: bottomMenu ?? this.bottomMenu,
+      );
+
+  @override
+  List<Object?> get props => [bottomMenu];
 }

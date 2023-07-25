@@ -1,5 +1,5 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/send_message_request.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
 
@@ -7,10 +7,8 @@ part 'auth_state.dart';
 
 part 'auth_event.dart';
 
-part 'auth_bloc.freezed.dart';
-
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc(this.authRepository) : super(const AuthState()) {
+  AuthBloc(this.authRepository) : super(const AuthInitialState()) {
     on<AuthPhoneChangeEvent>(_onChanged);
     on<AuthCheckMessageEvent>(_onSendMessage);
   }
@@ -19,7 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onChanged(AuthPhoneChangeEvent event, Emitter<AuthState> emit) {
     if (event.value.length <= 11) {
-      emit(const AuthState());
+      emit(const AuthInitialState());
       return;
     }
 
@@ -28,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onSendMessage(
       AuthCheckMessageEvent event, Emitter<AuthState> emit) async {
-    emit(const AuthState.loading());
+    emit(const AuthLoadingState());
 
     final result = await authRepository.codeMessage(
       request: SendMessageRequest(
@@ -41,11 +39,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     result.fold(
       (l) {
-        emit(const AuthState.error());
+        emit(const AuthErrorState());
       },
       (r) {
         emit(
-          AuthState.success(
+          AuthSuccessState(
             r.data?['sms_id'] as String? ?? '',
             "+998${event.phone.replaceAll(" ", "")}",
             event.phone,

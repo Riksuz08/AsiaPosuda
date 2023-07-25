@@ -58,7 +58,7 @@ analyzer:
     comment_references: error
     conditional_uri_does_not_exist: error
     curly_braces_in_flow_control_structures: error
-    directives_ordering: error
+    directives_ordering: warning
     empty_constructor_bodies: error
     empty_catches: error
     file_names: error
@@ -77,7 +77,8 @@ analyzer:
     prefer_const_constructors_in_immutables: error
     prefer_const_declarations: error
     prefer_const_literals_to_create_immutables: error
-    prefer_expression_function_bodies: error
+    prefer_expression_function_bodies: warning
+    use_decorated_box: warning
     prefer_final_fields: error
     prefer_final_in_for_each: error
     prefer_final_locals: error
@@ -138,6 +139,7 @@ analyzer:
 
 linter:
   rules:
+    use_decorated_box: true
     avoid_types_on_closure_parameters: true
     avoid_void_async: true
     cancel_subscriptions: true

@@ -31,21 +31,14 @@ class MainPage extends StatelessWidget {
             return true;
           },
           child: Scaffold(
-            body: AnimatedSwitcher(
-              duration: animationDuration,
-              transitionBuilder: (child, anim) => FadeTransition(
-                opacity: anim,
-                child: child,
-              ),
-              child: FadeIndexedStack(
-                index: state.bottomMenu.index,
-                children: const [
-                  HomePage(),
-                  OrdersPage(),
-                  FavoritesPage(),
-                  ProfilePage()
-                ],
-              ),
+            body: FadeIndexedStack(
+              index: state.bottomMenu.index,
+              children: const [
+                HomePage(),
+                OrdersPage(),
+                FavoritesPage(),
+                ProfilePage()
+              ],
             ),
             bottomNavigationBar: BottomNavigationBar(
               key: Constants.bottomNavigatorKey,
@@ -67,22 +60,22 @@ class MainPage extends StatelessWidget {
               currentIndex: state.bottomMenu.index,
               items: [
                 _navigationBarItem(
-                  label: context.translate('search'),
+                  label: context.tr('search'),
                   icon: AppIcons.search,
                   activeIcon: AppIcons.search,
                 ),
                 _navigationBarItem(
-                  label: context.translate('orders'),
+                  label: context.tr('orders'),
                   icon: AppIcons.history,
                   activeIcon: AppIcons.history,
                 ),
                 _navigationBarItem(
-                  label: context.translate('favorites'),
+                  label: context.tr('favorites'),
                   icon: AppIcons.favorite,
                   activeIcon: AppIcons.favorite_1,
                 ),
                 _navigationBarItem(
-                  label: context.translate('profile'),
+                  label: context.tr('profile'),
                   icon: AppIcons.profile,
                   activeIcon: AppIcons.active_profile,
                 ),

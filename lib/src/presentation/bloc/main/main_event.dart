@@ -1,6 +1,14 @@
 part of 'main_bloc.dart';
 
-@freezed
-class MainEvent with _$MainEvent {
-  const factory MainEvent.onChanged(BottomMenu menu) = MainEventChanged;
+abstract class MainEvent extends Equatable {
+  const MainEvent();
+}
+
+class MainEventChanged extends MainEvent {
+  const MainEventChanged(this.menu);
+
+  final BottomMenu menu;
+
+  @override
+  List<Object?> get props => [menu];
 }

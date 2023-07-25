@@ -1,7 +1,7 @@
 part of 'extension.dart';
 
 extension BuildContextExt on BuildContext {
-  String translate(String key) => AppLocalizations.of(this).translate(key);
+  String tr(String key) => AppLocalizations.of(this).translate(key);
 
   Locale get locale => Localizations.localeOf(this);
 

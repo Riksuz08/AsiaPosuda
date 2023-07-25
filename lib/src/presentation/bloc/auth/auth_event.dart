@@ -1,10 +1,30 @@
 part of 'auth_bloc.dart';
 
-@freezed
-class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.initial() = AuthEventInitial;
+abstract class AuthEvent extends Equatable {
+  const AuthEvent();
+}
 
-  const factory AuthEvent.phoneChanged(String value) = AuthPhoneChangeEvent;
+class AuthEventInitial extends AuthEvent {
+  const AuthEventInitial();
 
-  const factory AuthEvent.checkMessage(String phone) = AuthCheckMessageEvent;
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthPhoneChangeEvent extends AuthEvent {
+  const AuthPhoneChangeEvent(this.value);
+
+  final String value;
+
+  @override
+  List<Object?> get props => [value];
+}
+
+class AuthCheckMessageEvent extends AuthEvent {
+  const AuthCheckMessageEvent(this.phone);
+
+  final String phone;
+
+  @override
+  List<Object?> get props => [phone];
 }
