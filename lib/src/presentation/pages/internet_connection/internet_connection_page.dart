@@ -47,8 +47,8 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
               padding: const EdgeInsets.all(36),
               child: Image.asset(
                 'assets/png/no_internet.png',
-                height: context.getSize.height * 310 / 812,
-                width: context.getSize.width * 306 / 375,
+                height: context.kSize.height * 310 / 812,
+                width: context.kSize.width * 306 / 375,
               ),
             ),
             const Text(

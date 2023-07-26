@@ -47,8 +47,8 @@ Future<T?> customModalBottomSheet<T>({
       context: context,
       isScrollControlled: true,
       constraints: BoxConstraints(
-        maxHeight: context.getSize.height * 0.9,
-        minHeight: context.getSize.height * 0.2,
+        maxHeight: context.kSize.height * 0.9,
+        minHeight: context.kSize.height * 0.2,
       ),
       builder: (_) {
         if (isScrollControlled) {

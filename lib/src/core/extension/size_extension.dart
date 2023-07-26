@@ -9,15 +9,11 @@ extension SizeExtension on BuildContext {
       MediaQuery.sizeOf(this).width > 600 &&
       (Platform.isAndroid || Platform.isIOS);
 
-  double get doubleToWidth => isMobile
-      ? MediaQuery.sizeOf(this).width
-      : (MediaQuery.sizeOf(this).width - 48) / 2;
-
   EdgeInsets get kMargin16 => EdgeInsets.only(
         top: MediaQuery.paddingOf(this).top,
         left: isMobile ? 16 : 200,
         right: isMobile ? 16 : 200,
-        bottom: MediaQuery.of(this).padding.bottom,
+        bottom: MediaQuery.paddingOf(this).bottom,
       );
 
   EdgeInsets get kMarginBottom16 => EdgeInsets.only(
@@ -26,7 +22,7 @@ extension SizeExtension on BuildContext {
         right: isMobile ? 16 : 200,
       );
 
-  Size get getSize => MediaQuery.sizeOf(this);
+  Size get kSize => MediaQuery.sizeOf(this);
 }
 
 extension OrientationExtension on Orientation {
