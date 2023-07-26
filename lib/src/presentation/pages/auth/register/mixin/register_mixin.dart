@@ -36,7 +36,7 @@ mixin RegisterMixin on State<RegisterPage> {
     final String phoneNum =
         _phoneNumberController.text.replaceAll(RegExp('[0-9]'), '');
     _bloc.add(
-      RegisterEvent.userRegister(
+      UserRegisterEvent(
         additionalProps: {
           'client_name': _fullNameController.text,
           'phone_number': phoneNum,

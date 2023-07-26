@@ -1,5 +1,5 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/core/mixin/cache_mixin.dart';
 import 'package:sample_bloc_mobile/src/data/models/auth/verify_request.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/auth/auth_repository.dart';
@@ -8,11 +8,9 @@ part 'confirm_code_state.dart';
 
 part 'confirm_code_event.dart';
 
-part 'confirm_code_bloc.freezed.dart';
-
 class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     with CacheMixin {
-  ConfirmCodeBloc(this.authRepository) : super(const ConfirmCodeState()) {
+  ConfirmCodeBloc(this.authRepository) : super(const ConfirmInitialState()) {
     on<ConfirmCodeCheckMessageEvent>(_onConfirmCode);
   }
 
@@ -20,7 +18,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
 
   Future<void> _onConfirmCode(ConfirmCodeCheckMessageEvent event,
       Emitter<ConfirmCodeState> emit) async {
-    emit(const ConfirmCodeState.loading());
+    emit(const ConfirmCodeLoadingState());
     final result = await authRepository.verifySmsCode(
       request: VerifyRequest(
         registerType: 'phone',

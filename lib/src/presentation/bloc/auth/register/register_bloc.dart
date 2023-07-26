@@ -1,5 +1,5 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sample_bloc_mobile/src/core/constants/constants.dart';
 import 'package:sample_bloc_mobile/src/core/mixin/cache_mixin.dart';
 import 'package:sample_bloc_mobile/src/domain/repositories/register/register_repository.dart';
@@ -8,10 +8,9 @@ part 'register_event.dart';
 
 part 'register_state.dart';
 
-part 'register_bloc.freezed.dart';
-
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
-  RegisterBloc(this.registerUserRepository) : super(const RegisterState()) {
+  RegisterBloc(this.registerUserRepository)
+      : super(const RegisterInitialState()) {
     on<UserRegisterEvent>(_onUserRegister);
     on<PhoneNumberChangedEvent>(_onPhoneNumberChangedEvent);
     on<BloodGroupChangedEvent>(_onBloodGroupChangedEvent);
@@ -22,17 +21,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
 
   void _onPhoneNumberChangedEvent(
       PhoneNumberChangedEvent event, Emitter<RegisterState> emit) {
-    emit(
-      const RegisterState.userPhoneNumberErrorState(
-        showError: false,
-      ),
-    );
+    emit(const UserPhoneNumberErrorState(showError: false));
   }
 
   void _onBloodGroupChangedEvent(
       BloodGroupChangedEvent event, Emitter<RegisterState> emit) {
     emit(
-      const RegisterState.userBloodGroupErrorState(
+      const UserBloodGroupErrorState(
         showError: false,
         errorMessage: 'error',
       ),
@@ -42,7 +37,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
   void _onFullNameChangedEvent(
       FullNameChangedEvent event, Emitter<RegisterState> emit) {
     emit(
-      const RegisterState.userFullNameErrorState(
+      const UserFullNameErrorState(
         showError: false,
       ),
     );
@@ -52,7 +47,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
       UserRegisterEvent event, Emitter<RegisterState> emit) {
     if (event.fullName.isEmpty) {
       emit(
-        const RegisterState.userFullNameErrorState(
+        const UserFullNameErrorState(
           showError: true,
           errorMessage: 'Enter at least 1 character',
         ),
@@ -79,7 +74,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     // }
     if (event.bloodGroup.isEmpty) {
       emit(
-        const RegisterState.userBloodGroupErrorState(
+        const UserBloodGroupErrorState(
           showError: true,
           errorMessage: 'Blood group needed',
         ),
@@ -94,13 +89,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     if (!_areRequiredFieldValidated(event, emit)) {
       return;
     }
-    emit(const RegisterState.registerLoading());
+    emit(const UserRegisterLoadingState());
     final result = await registerUserRepository.registerUser(
       request: _getUserRegisterRequestData(event),
     );
     result.fold(
       (left) {
-        emit(const RegisterState.registerError(errorMessage: ''));
+        emit(const UserRegisterErrorState(errorMessage: ''));
       },
       (r) {
         setUserInfo(
@@ -113,7 +108,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
           refreshToken: r.data?.token?.refreshToken ?? '',
           imageUrl: '',
         );
-        emit(const RegisterState.registerSuccess());
+        emit(const UserRegisterSuccessState());
       },
     );
   }

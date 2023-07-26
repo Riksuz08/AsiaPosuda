@@ -1,16 +1,36 @@
 part of 'confirm_code_bloc.dart';
 
-@freezed
-class ConfirmCodeEvent with _$ConfirmCodeEvent {
-  /// bottom
-  const factory ConfirmCodeEvent.initial() = ConfirmCodeEventInitial;
+abstract class ConfirmCodeEvent extends Equatable {
+  const ConfirmCodeEvent();
+}
 
-  const factory ConfirmCodeEvent.phoneChanged(String value) =
-      ConfirmCodePhoneChangeEvent;
+class ConfirmCodeEventInitial extends ConfirmCodeEvent {
+  const ConfirmCodeEventInitial();
 
-  const factory ConfirmCodeEvent.checkMessage({
-    required String otp,
-    required String smsId,
-    required Map data,
-  }) = ConfirmCodeCheckMessageEvent;
+  @override
+  List<Object?> get props => [];
+}
+
+class ConfirmCodePhoneChangeEvent extends ConfirmCodeEvent {
+  const ConfirmCodePhoneChangeEvent(this.value);
+
+  final String value;
+
+  @override
+  List<Object?> get props => [value];
+}
+
+class ConfirmCodeCheckMessageEvent extends ConfirmCodeEvent {
+  const ConfirmCodeCheckMessageEvent({
+    required this.otp,
+    required this.smsId,
+    required this.data,
+  });
+
+  final String otp;
+  final String smsId;
+  final Map data;
+
+  @override
+  List<Object?> get props => [otp, smsId, data];
 }

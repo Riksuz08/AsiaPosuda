@@ -1,14 +1,44 @@
 part of 'confirm_code_bloc.dart';
 
-@freezed
-class ConfirmCodeState with _$ConfirmCodeState {
-  const factory ConfirmCodeState() = _ConfirmCodeState;
+abstract class ConfirmCodeState extends Equatable {
+  const ConfirmCodeState();
+}
 
-  const factory ConfirmCodeState.success({required bool isUserFound}) = ConfirmCodeSuccessState;
+class ConfirmInitialState extends ConfirmCodeState {
+  const ConfirmInitialState();
 
-  const factory ConfirmCodeState.loading() = ConfirmCodeLaodingState;
+  @override
+  List<Object?> get props => [];
+}
 
-  const factory ConfirmCodeState.phone(String phone) = ConfirmCodePhoneState;
+class ConfirmCodeSuccessState extends ConfirmCodeState {
+  const ConfirmCodeSuccessState({required this.isUserFound});
 
-  const factory ConfirmCodeState.error() = ConfirmCodeErrorState;
+  final bool isUserFound;
+
+  @override
+  List<Object?> get props => [isUserFound];
+}
+
+class ConfirmCodeLoadingState extends ConfirmCodeState {
+  const ConfirmCodeLoadingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ConfirmCodePhoneState extends ConfirmCodeState {
+  const ConfirmCodePhoneState(this.phone);
+
+  final String phone;
+
+  @override
+  List<Object?> get props => [phone];
+}
+
+class ConfirmCodeErrorState extends ConfirmCodeState {
+  const ConfirmCodeErrorState();
+
+  @override
+  List<Object?> get props => [];
 }
