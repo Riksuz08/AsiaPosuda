@@ -181,7 +181,8 @@ class _ModelBindingScope extends InheritedWidget {
 
   @override
   bool updateShouldNotify(_ModelBindingScope oldWidget) =>
-      modelBindingState != oldWidget.modelBindingState;
+      modelBindingState.currentModel !=
+      oldWidget.modelBindingState.currentModel;
 }
 
 class ModelBinding extends StatefulWidget {
