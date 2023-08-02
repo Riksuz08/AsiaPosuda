@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
@@ -76,7 +76,7 @@ Future<void> init() async {
       );
 
   sl
-    ..registerLazySingleton(InternetConnection.new)
+    ..registerLazySingleton(InternetConnectionChecker.new)
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
     ..registerSingleton<LocalSource>(LocalSource(_box));
 
