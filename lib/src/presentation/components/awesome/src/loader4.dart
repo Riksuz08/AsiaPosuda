@@ -66,21 +66,18 @@ class _Loader4State extends State<Loader4> with SingleTickerProviderStateMixin {
             Transform.translate(
               offset: Offset(-20, yAxis),
               child: Dot(
-                radius: 10,
                 color: widget.color,
               ),
             ),
             Transform.translate(
               offset: Offset(0, -yAxis),
               child: Dot(
-                radius: 10,
                 color: widget.color,
               ),
             ),
             Transform.translate(
               offset: Offset(20, yAxis),
               child: Dot(
-                radius: 10,
                 color: widget.color,
               ),
             ),

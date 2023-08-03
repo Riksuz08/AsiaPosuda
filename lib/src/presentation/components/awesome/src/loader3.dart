@@ -31,21 +31,21 @@ class _Loader3State extends State<Loader3> with SingleTickerProviderStateMixin {
     _animationRadiousIn = Tween<double>(begin: 1, end: 0.5).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0, 0.5, curve: Curves.linear),
+        curve: const Interval(0, 0.5),
       ),
     );
 
     _animationRadiousOut = Tween<double>(begin: 0.5, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.5, 1, curve: Curves.linear),
+        curve: const Interval(0.5, 1),
       ),
     );
 
     _animationRotation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0, 1, curve: Curves.linear),
+        curve: const Interval(0, 1),
       ),
     );
 
@@ -81,28 +81,24 @@ class _Loader3State extends State<Loader3> with SingleTickerProviderStateMixin {
                 Transform.translate(
                   offset: Offset(0, _radius),
                   child: Dot(
-                    radius: 10,
                     color: widget.color,
                   ),
                 ),
                 Transform.translate(
                   offset: Offset(_radius, 0),
                   child: Dot(
-                    radius: 10,
                     color: widget.color,
                   ),
                 ),
                 Transform.translate(
                   offset: Offset(-_radius, 0),
                   child: Dot(
-                    radius: 10,
                     color: widget.color,
                   ),
                 ),
                 Transform.translate(
                   offset: Offset(0, -_radius),
                   child: Dot(
-                    radius: 10,
                     color: widget.color,
                   ),
                 ),

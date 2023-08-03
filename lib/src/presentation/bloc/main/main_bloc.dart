@@ -6,7 +6,7 @@ part 'main_state.dart';
 part 'main_event.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  MainBloc() : super(const MainState(bottomMenu: BottomMenu.search)) {
+  MainBloc() : super(const MainState()) {
     on<MainEventChanged>(_onChangeMenu);
   }
 

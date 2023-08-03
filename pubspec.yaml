@@ -31,14 +31,14 @@ dependencies:
   connectivity_plus: ^4.0.2
   internet_connection_checker: ^1.0.0+1
   # interceptor
-  dio: ^5.3.1
+  dio: ^5.3.2
   dio_retry_plus: ^2.0.0
   # alice = chuck
   chuck_interceptor: ^2.0.1
   # box
   gap: ^3.0.1
   # pin put:
-  pinput: ^2.3.0
+  pinput: ^3.0.0
   # svg render
   flutter_svg: ^2.0.7
   # cached image

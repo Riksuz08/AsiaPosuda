@@ -69,7 +69,7 @@ class _Loader2State extends State<Loader2> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => Center(
         child: Stack(
-          alignment: const Alignment(0, 0),
+          alignment: Alignment.center,
           children: <Widget>[
             Positioned(
               top: offset1,
