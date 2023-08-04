@@ -76,15 +76,15 @@ class _Loader1State extends State<Loader1> with TickerProviderStateMixin {
       }
     });
 
-    _controller1.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _controller1.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _controller1.forward();
-      }
-    });
-
-    _controller1.forward(from: 0.5);
+    _controller1
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller1.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _controller1.forward();
+        }
+      })
+      ..forward(from: 0.5);
     _controller.forward();
   }
 

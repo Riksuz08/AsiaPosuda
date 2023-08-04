@@ -71,18 +71,19 @@ class FadeIndexedStackState extends State<FadeIndexedStack>
 
     if (didOpacityChanged || didCurveChanged || didIndexChanged) {
       _tween = _createTween();
-      _controller.reset();
-      _controller.forward();
+      _controller
+        ..reset()
+        ..forward();
       super.didUpdateWidget(oldWidget);
     }
   }
 
   Tween<double> _createTween() {
     final tween =
-        Tween<double>(begin: widget.beginOpacity, end: widget.endOpacity);
-    tween.chain(
-      CurveTween(curve: widget.curve),
-    );
+        Tween<double>(begin: widget.beginOpacity, end: widget.endOpacity)
+          ..chain(
+            CurveTween(curve: widget.curve),
+          );
     return tween;
   }
 

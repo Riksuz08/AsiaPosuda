@@ -43,19 +43,20 @@ class _Loader4State extends State<Loader4> with SingleTickerProviderStateMixin {
       ),
     );
 
-    _controller.addListener(() {
-      setState(() {
-        yAxis = _movement.value * _maxHeight;
-      });
-    });
-
-    _controller.repeat();
+    _controller
+      ..addListener(() {
+        setState(() {
+          yAxis = _movement.value * _maxHeight;
+        });
+      })
+      ..repeat();
   }
 
   @override
   void dispose() {
-    _controller.removeListener(() {});
-    _controller.dispose();
+    _controller
+      ..removeListener(() {})
+      ..dispose();
     super.dispose();
   }
 

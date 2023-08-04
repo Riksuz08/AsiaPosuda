@@ -45,24 +45,25 @@ class _Loader2State extends State<Loader2> with SingleTickerProviderStateMixin {
       ),
     );
 
-    _controller.addListener(() {
-      setState(() {
-        offset1 = _offsetAnimation.value;
-        if (_controller.value < 0.75) {
-          _length = _lengthAnimation.value;
-        } else {
-          _length = _lengthAnimation1.value;
-        }
-      });
-    });
-
-    _controller.repeat();
+    _controller
+      ..addListener(() {
+        setState(() {
+          offset1 = _offsetAnimation.value;
+          if (_controller.value < 0.75) {
+            _length = _lengthAnimation.value;
+          } else {
+            _length = _lengthAnimation1.value;
+          }
+        });
+      })
+      ..repeat();
   }
 
   @override
   void dispose() {
-    _controller.removeListener(() {});
-    _controller.dispose();
+    _controller
+      ..removeListener(() {})
+      ..dispose();
     super.dispose();
   }
 

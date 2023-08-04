@@ -5,7 +5,7 @@ class RegisterUserResponse {
     this.status,
   });
 
-  RegisterUserResponse.fromJson(Map json) {
+  RegisterUserResponse.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     description = json['description'] as String?;
     status = json['status'] as String?;

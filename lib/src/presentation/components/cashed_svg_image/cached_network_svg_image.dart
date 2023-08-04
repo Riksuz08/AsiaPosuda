@@ -109,6 +109,6 @@ Future<String> image(String url) => Isolate.run<String>(
       () async {
         final Dio dio = Dio();
         final Response response = await dio.get(url);
-        return response.data;
+        return response.data as String;
       },
     );

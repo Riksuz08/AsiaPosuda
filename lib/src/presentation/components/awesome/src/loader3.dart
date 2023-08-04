@@ -49,23 +49,24 @@ class _Loader3State extends State<Loader3> with SingleTickerProviderStateMixin {
       ),
     );
 
-    _controller.addListener(() {
-      setState(() {
-        if (_controller.value >= 0.0 && _controller.value <= 0.5) {
-          _radius = _initialRadius * _animationRadiousIn.value;
-        } else if (_controller.value >= 0.5 && _controller.value <= 1.0) {
-          _radius = _initialRadius * _animationRadiousOut.value;
-        }
-      });
-    });
-
-    _controller.repeat();
+    _controller
+      ..addListener(() {
+        setState(() {
+          if (_controller.value >= 0.0 && _controller.value <= 0.5) {
+            _radius = _initialRadius * _animationRadiousIn.value;
+          } else if (_controller.value >= 0.5 && _controller.value <= 1.0) {
+            _radius = _initialRadius * _animationRadiousOut.value;
+          }
+        });
+      })
+      ..repeat();
   }
 
   @override
   void dispose() {
-    _controller.removeListener(() {});
-    _controller.dispose();
+    _controller
+      ..removeListener(() {})
+      ..dispose();
     super.dispose();
   }
 
