@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 class InternetConnectionPage extends StatefulWidget {
   const InternetConnectionPage({super.key});
@@ -37,59 +36,59 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
 
   @override
   Widget build(BuildContext context) => WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(36),
-              child: Image.asset(
-                'assets/png/no_internet.png',
-                height: context.kSize.height * 310 / 812,
-                width: context.kSize.width * 306 / 375,
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(36),
+                child: Image.network(
+                  'https://static.vecteezy.com/system/resources/previews/002/737/785/original/no-internet-connection-illustration-concept-free-vector.jpg',
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-            ),
-            const Text(
-              'Нет доступа к интернету',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+              const Text(
+                'Нет доступа к интернету',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Проверьте подключение к интернету',
-              style: TextStyle(
-                color: Color(0xff818C99),
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
+              const SizedBox(height: 12),
+              const Text(
+                'Проверьте подключение к интернету',
+                style: TextStyle(
+                  color: Color(0xff818C99),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
+            ],
+          ),
+          bottomNavigationBar: SafeArea(
+            minimum: const EdgeInsets.all(16),
+            child: ElevatedButton(
+              child: const Text('Попробовать снова'),
+              onPressed: () async {
+                setState(() {
+                  isLoading = true;
+                });
+                await Future<void>.delayed(const Duration(milliseconds: 300));
+                final connectivityResult =
+                    await Connectivity().checkConnectivity();
+                setState(() {
+                  isLoading = false;
+                });
+                if (connectivityResult != ConnectivityResult.none) {
+                  if (!mounted) return;
+                  Navigator.of(context).pop();
+                }
+              },
             ),
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          minimum: const EdgeInsets.all(16),
-          child: ElevatedButton(
-            child: const Text('Попробовать снова'),
-            onPressed: () async {
-              setState(() {
-                isLoading = true;
-              });
-              await Future<void>.delayed(const Duration(milliseconds: 300));
-              final connectivityResult = await Connectivity().checkConnectivity();
-              setState(() {
-                isLoading = false;
-              });
-              if (connectivityResult != ConnectivityResult.none) {
-                if (!mounted) return;
-                Navigator.of(context).pop();
-              }
-            },
           ),
         ),
-      ),
-    );
+      );
 }

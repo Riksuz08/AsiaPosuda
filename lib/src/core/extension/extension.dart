@@ -18,3 +18,5 @@ part 'money_format_extension.dart';
 part 'size_extension.dart';
 
 part 'sliver_count_extension.dart';
+
+part 'type_parse_extension.dart';
