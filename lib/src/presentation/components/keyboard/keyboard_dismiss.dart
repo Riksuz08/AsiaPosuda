@@ -187,7 +187,7 @@ class KeyboardDismiss extends StatelessWidget {
   /// gesture.
   const KeyboardDismiss({
     super.key,
-    this.child,
+    required this.child,
     this.behavior,
     this.gestures = const [GestureType.onTap],
     this.dragStartBehavior = DragStartBehavior.start,
@@ -223,7 +223,7 @@ class KeyboardDismiss extends StatelessWidget {
   final bool excludeFromSemantics;
 
   /// The widget below this widget in the tree.
-  final Widget? child;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
