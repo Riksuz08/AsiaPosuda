@@ -4,8 +4,8 @@ import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/buttons/bottom_navigation_button.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/masked_text_input_formatter.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/inputs/custom_text_field.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/inputs/masked_text_input_formatter.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/loading_widgets/modal_progress_hud.dart';
 
 part 'mixin/auth_mixin.dart';

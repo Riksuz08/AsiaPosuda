@@ -151,17 +151,6 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
               ),
               hintText: _prefixText == null ? widget.hintText : '',
               errorText: widget.showError ?? false ? widget.errorText : null,
-              border: widget.haveBorder
-                  ? const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: AppUtils.kBorderRadius10,
-                    )
-                  : null,
-              focusedBorder: _border(widget.haveBorder),
-              errorBorder: _border(widget.haveBorder),
-              enabledBorder: _border(widget.haveBorder),
-              disabledBorder: _border(widget.haveBorder),
-              focusedErrorBorder: _border(widget.haveBorder),
             ),
             cursorColor: context.theme.colorScheme.primary,
             keyboardType: widget.keyboardType,
@@ -169,13 +158,6 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
           ),
         ],
       );
-
-  InputBorder? _border(bool haveBorder) => haveBorder
-      ? null
-      : const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: AppUtils.kBorderRadius10,
-        );
 
   void _fieldFocusChange(
     BuildContext context,

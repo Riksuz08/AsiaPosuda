@@ -5,7 +5,7 @@ import 'package:sample_bloc_mobile/src/config/themes/themes.dart';
 import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/auth/register/register_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
-import 'package:sample_bloc_mobile/src/presentation/components/custom_texfield/custom_text_field.dart';
+import 'package:sample_bloc_mobile/src/presentation/components/inputs/custom_text_field.dart';
 
 part 'package:sample_bloc_mobile/src/presentation/pages/auth/register/mixin/register_mixin.dart';
 
