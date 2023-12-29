@@ -8,6 +8,28 @@
   "female": "Ayol",
   "personal_info": "Foydalanuvchi ma'lumotlari",
   "profile": "Profil",
+
+
+  "contact_with_us": "Biz bilan bog'lanish",
+  "my_reviews": "Mening izohlarim",
+  "my_chats": "Mening yozishmalarim",
+  "notifications": "Xabarnomalar",
+  "new": "Yangi",
+  "populars": "Ko'p ko'rilgan",
+
+
+  "catalog": "Katalog",
+  "cart": "Savatcha",
+  "search_field": "Mahsulot va tovarlarni qidiring",
+  "products": "Mahsulotlar soni",
+  "order": "Buyurtma qilish",
+  "uzs": "so'm",
+  "main_to": "Asosiy",
+  "register": "Ro'yxatdan o'tish",
+  "login": "Kirish",
+
+
+  "my_orders": "Mening buyurtmalarim",
   "notebook": "Qaydlar daftarchasi",
   "my_cards": "Mening kartalarim",
   "about_us": "Biz haqimizda",
@@ -16,7 +38,7 @@
   "logout": "Tizimdan chiqish",
   "search": "Qidiruv",
   "orders": "Buyturtmalar",
-  "favorites": "Sevimlilar",
+  "favorites": "Yoqtirgan mahsulotlarim",
   "language": "Til",
   "save_changes": "Saqlash",
   "add_new_card": "Yangi karta qo'shish",

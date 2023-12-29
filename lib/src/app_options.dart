@@ -35,7 +35,7 @@ set deviceLocale(Locale locale) {
 
 class AppOptions extends Equatable {
   const AppOptions({
-    required this.themeMode,
+
     required double? textScaleFactor,
     required this.customTextDirection,
     required Locale? locale,
@@ -44,7 +44,6 @@ class AppOptions extends Equatable {
   })  : _textScaleFactor = textScaleFactor ?? 1.0,
         _locale = locale;
 
-  final ThemeMode themeMode;
   final double _textScaleFactor;
   final CustomTextDirection customTextDirection;
   final Locale? _locale;
@@ -83,24 +82,7 @@ class AppOptions extends Equatable {
   /// Returns a [SystemUiOverlayStyle] based on the [ThemeMode] setting.
   /// In other words, if the theme is dark, returns light; if the theme is
   /// light, returns dark.
-  SystemUiOverlayStyle resolvedSystemUiOverlayStyle() {
-    Brightness brightness;
-    switch (themeMode) {
-      case ThemeMode.light:
-        brightness = Brightness.light;
-      case ThemeMode.dark:
-        brightness = Brightness.dark;
-      default:
-        brightness =
-            WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    }
 
-    final overlayStyle = brightness == Brightness.dark
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark;
-
-    return overlayStyle;
-  }
 
   AppOptions copyWith({
     ThemeMode? themeMode,
@@ -111,7 +93,6 @@ class AppOptions extends Equatable {
     TargetPlatform? platform,
   }) =>
       AppOptions(
-        themeMode: themeMode ?? this.themeMode,
         textScaleFactor: textScaleFactor ?? _textScaleFactor,
         customTextDirection: customTextDirection ?? this.customTextDirection,
         locale: locale ?? this.locale,
@@ -133,7 +114,7 @@ class AppOptions extends Equatable {
 
   @override
   List<Object?> get props => [
-        themeMode,
+
         _textScaleFactor,
         customTextDirection,
         _locale,

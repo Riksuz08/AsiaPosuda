@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LanguageBottomWidget extends StatelessWidget {
 
@@ -14,6 +15,7 @@ class LanguageBottomWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
+        SizedBox(height: 15,),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text('Language'),
@@ -21,6 +23,7 @@ class LanguageBottomWidget extends StatelessWidget {
         ListTile(
           onTap: () {
             onChanged('ru');
+
           },
           title: const Text('RU'),
           trailing: Visibility(

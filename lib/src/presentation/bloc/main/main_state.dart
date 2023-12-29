@@ -2,7 +2,7 @@ part of 'main_bloc.dart';
 
 class MainState extends Equatable {
   const MainState({
-    this.bottomMenu = BottomMenu.search,
+    this.bottomMenu = BottomMenu.main,
   });
 
   final BottomMenu bottomMenu;

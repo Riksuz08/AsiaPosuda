@@ -46,7 +46,7 @@ class LogOutDialog extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           context.read<MainBloc>().add(
-                                const MainEventChanged(BottomMenu.search),
+                                const MainEventChanged(BottomMenu.main),
                               );
                           await localSource.clear().then(
                             (value) {

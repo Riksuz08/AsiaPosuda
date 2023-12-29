@@ -11,7 +11,4 @@ extension BuildContextExt on BuildContext {
 
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
 
-  ThemeColors get color => Theme.of(this).extension<ThemeColors>()!;
-
-  ThemeTextStyles get textStyle => Theme.of(this).extension<ThemeTextStyles>()!;
 }

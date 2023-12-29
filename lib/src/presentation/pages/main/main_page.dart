@@ -17,12 +17,12 @@ class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MainBloc, MainState>(
-        buildWhen: (previous, current) =>
-            previous.bottomMenu != current.bottomMenu,
-        builder: (_, state) => WillPopScope(
+  Widget build(BuildContext context) =>
+      BlocSelector<MainBloc, MainState, BottomMenu>(
+        selector: (state) => state.bottomMenu,
+        builder: (_, bottomMenu) => WillPopScope(
           onWillPop: () async {
-            if (state.bottomMenu.index != 0) {
+            if (bottomMenu.index != 0) {
               context
                   .read<MainBloc>()
                   .add(MainEventChanged(BottomMenu.values[0]));
@@ -32,52 +32,58 @@ class MainPage extends StatelessWidget {
           },
           child: Scaffold(
             body: FadeIndexedStack(
-              index: state.bottomMenu.index,
+              index: bottomMenu.index,
               children: const [
-                HomePage(),
-                OrdersPage(),
-                FavoritesPage(),
-                ProfilePage()
+                 HomePage(),
+                 OrdersPage(),
+                 FavoritesPage(),
+                 ProfilePage()
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
               key: Constants.bottomNavigatorKey,
               onTap: (i) {
-                if (state.bottomMenu.index == 0 && i == 0) {
+                if (bottomMenu.index == 0 && i == 0) {
                   context.read<HomeBloc>().add(
                         const HomeScroll(isScrollingTop: true),
                       );
                   return;
                 }
+
                 if (i == 3 && !localSource.hasProfile) {
-                  Navigator.pushNamed(context, Routes.auth);
+                  Navigator.pushNamed(context, Routes.register);
                   return;
                 }
+
                 context
                     .read<MainBloc>()
                     .add(MainEventChanged(BottomMenu.values[i]));
               },
-              currentIndex: state.bottomMenu.index,
+              currentIndex: bottomMenu.index,
+              selectedItemColor: const Color(0xFF79B531), // Change the color of the selected item
+              unselectedItemColor: Colors.grey, // Change the color of unselected items
+              selectedLabelStyle: TextStyle(color: Color(0xFF79B531)),// Change the text color of the selected label
+              unselectedLabelStyle: TextStyle(color: Colors.grey),
               items: [
                 _navigationBarItem(
-                  label: context.tr('search'),
-                  icon: AppIcons.search,
-                  activeIcon: AppIcons.search,
+                  label:context.tr('main'),
+                  icon: 'assets/png/asia.png',
+                  activeIcon: 'assets/png/asia.png',
                 ),
                 _navigationBarItem(
-                  label: context.tr('orders'),
-                  icon: AppIcons.history,
-                  activeIcon: AppIcons.history,
+                  label: context.tr('catalog'),
+                  icon: 'assets/png/search.png',
+                  activeIcon: 'assets/png/search.png',
                 ),
                 _navigationBarItem(
-                  label: context.tr('favorites'),
-                  icon: AppIcons.favorite,
-                  activeIcon: AppIcons.favorite_1,
+                  label: context.tr('cart'),
+                  icon:'assets/png/bag.png' ,
+                  activeIcon: 'assets/png/bag.png',
                 ),
                 _navigationBarItem(
-                  label: context.tr('profile'),
-                  icon: AppIcons.profile,
-                  activeIcon: AppIcons.active_profile,
+                  label:context.tr('profile'),
+                  icon: 'assets/png/user.png',
+                  activeIcon: 'assets/png/user.png',
                 ),
               ],
             ),
@@ -87,17 +93,17 @@ class MainPage extends StatelessWidget {
 
   BottomNavigationBarItem _navigationBarItem({
     required String label,
-    required IconData icon,
-    required IconData activeIcon,
+    required String icon,
+    required String activeIcon,
   }) =>
       BottomNavigationBarItem(
         icon: Padding(
           padding: AppUtils.kPaddingBottom2,
-          child: Icon(icon),
+          child: ImageIcon(AssetImage(icon)),
         ),
         activeIcon: Padding(
           padding: AppUtils.kPaddingBottom2,
-          child: Icon(activeIcon),
+          child: ImageIcon(AssetImage(activeIcon)),
         ),
         label: label,
         tooltip: label,

@@ -5,10 +5,31 @@
   "last_name": "Last name",
   "birth_date": "Date of Birth",
   "male": "Male",
+
+
+  "contact_with_us": "Contact with us",
+  "my_reviews": "My reviews",
+  "my_chats": "My chats",
+  "notifications": "Notifications",
+  "new": "New",
+  "populars": "Popular",
+
+  "catalog": "Catalog",
+  "cart": "Cart",
+  "search_field": "Search products and categories",
+  "products": "Products",
+  "order": "Order",
+  "uzs": "UZS",
+  "main_to": "To main",
+  "register": "Register",
+  "login": "Login",
+
+
   "female": "Female",
   "personal_info": "Personal information",
   "profile": "Profile",
   "notebook": "Notes",
+  "my_orders": "My orders",
   "my_cards": "My cards",
   "about_us": "About us",
   "blog": "Blog",

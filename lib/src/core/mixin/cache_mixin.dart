@@ -1,4 +1,5 @@
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
+import 'package:sample_bloc_mobile/src/data/source/local_source.dart';
 
 mixin CacheMixin {
   Future<void> setUserInfo({

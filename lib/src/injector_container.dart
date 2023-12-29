@@ -71,7 +71,7 @@ Future<void> init() async {
               Routes.initial,
               (route) => false,
             );
-          },
+          }, logPrint: (String message) {  },
         ),
       );
 

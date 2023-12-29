@@ -31,35 +31,25 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             );
           }
         },
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
+        child:  AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
           ),
           child: Scaffold(
-            backgroundColor: context.theme.primaryColor,
+            backgroundColor: Colors.white,
             body: Stack(
               children: [
                 Positioned.fill(
                   child: Center(
-                    child: Text(
-                      'Logo',
-                      style: context.theme.textTheme.titleLarge,
-                    ),
+                    child: SizedBox(
+                      width: 250, // Set the desired width
+                      height: 250, // Set the desired height
+                      child: Image.asset('assets/png/asia.png'),
+                    )
                   ),
                 ),
-                const Positioned(
-                  bottom: 80,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: AwesomeLoader(
-                      loaderType: awesomeLoader3,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
               ],
             ),
           ),
