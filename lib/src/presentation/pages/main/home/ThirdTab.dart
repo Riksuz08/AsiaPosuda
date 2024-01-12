@@ -7,14 +7,14 @@ import '../../../../core/services/http_service.dart';
 import '../../../../data/models/products/products_data.dart';
 import '../../products/components/product_card.dart';
 
-class SecondTab extends StatefulWidget {
-  const SecondTab({super.key});
+class ThirdTab extends StatefulWidget {
+  const ThirdTab({super.key});
 
   @override
-  State<SecondTab> createState() => _SecondTabState();
+  State<ThirdTab> createState() => _ThirdTabState();
 }
 
-class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixin{
+class _ThirdTabState extends State<ThirdTab> with AutomaticKeepAliveClientMixin{
   final PagingController<int, ProductItem> _pagingController =
   PagingController(firstPageKey: 1);
 
@@ -30,7 +30,7 @@ class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixi
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final products = await Get.put(HttpService()).fetchProductsByPopularity(pageKey);
+      final products = await Get.put(HttpService()).fetchProductsByDiscount(pageKey);
 
       final isLastPage = products.length < 20;
 
@@ -61,7 +61,7 @@ class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixi
     builderDelegate: PagedChildBuilderDelegate<ProductItem>(
       itemBuilder: (context, item, index) =>
 
-          ProductCard(products: item,isDiscount: false,),
+          ProductCard(products: item,isDiscount: true),
 
 
     ),

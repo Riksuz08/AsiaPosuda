@@ -14,7 +14,7 @@ class FirstTab extends StatefulWidget {
   State<FirstTab> createState() => _FirstTabState();
 }
 
-class _FirstTabState extends State<FirstTab>with AutomaticKeepAliveClientMixin<FirstTab> {
+class _FirstTabState extends State<FirstTab>with AutomaticKeepAliveClientMixin {
   final PagingController<int, ProductItem> _pagingController =
   PagingController(firstPageKey: 1);
 
@@ -61,7 +61,7 @@ class _FirstTabState extends State<FirstTab>with AutomaticKeepAliveClientMixin<F
         builderDelegate: PagedChildBuilderDelegate<ProductItem>(
           itemBuilder: (context, item, index) =>
 
-              ProductCard(products: item),
+              ProductCard(products: item,isDiscount: false,),
 
 
         ),

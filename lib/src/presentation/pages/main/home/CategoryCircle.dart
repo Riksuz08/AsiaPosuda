@@ -16,7 +16,7 @@ class CategoryCircle extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => ProductsList(
-            categoryId: category.id, // Use the appropriate ID for the category
+            categoryId: category.slug, // Use the appropriate ID for the category
             count: category.count,
             categoryName: category.name,
           ),

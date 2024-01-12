@@ -12,7 +12,7 @@ import '../../../core/services/http_service.dart';
 import 'components/product_loading_card.dart';
 
 class ProductsList extends StatefulWidget {
-  final int categoryId;
+  final String categoryId;
   final int count;
   final String categoryName;
   const ProductsList({Key? key, required this.categoryId, required this.count, required this.categoryName}) : super(key: key);
@@ -125,7 +125,7 @@ class _ProductsListState extends State<ProductsList> {
                     padding: const EdgeInsets.all(10),
                     builderDelegate: PagedChildBuilderDelegate<ProductItem>(
                       itemBuilder: (context, item, index) =>
-                          ProductCard(products: item),
+                          ProductCard(products: item,isDiscount: false,),
                     ),
 
 

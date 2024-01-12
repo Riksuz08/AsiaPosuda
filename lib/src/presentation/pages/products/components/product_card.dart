@@ -14,8 +14,8 @@ import '../product_details.dart';
 
 class ProductCard extends StatefulWidget {
   final ProductItem products;
-
-  const ProductCard({Key? key, required this.products}) : super(key: key);
+ final bool isDiscount;
+  const ProductCard({Key? key, required this.products, required this.isDiscount}) : super(key: key);
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -190,7 +190,34 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ),
 
-              )
+              ),
+              Visibility(
+                  visible: widget.isDiscount ? true : false,
+                  child: Positioned(
+                top: -18,
+                left: -18,
+                child:  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF79B531),
+                    ),
+                    child:Padding(
+                      padding: EdgeInsets.only(top: 10,left: 10),
+                      child:  Center(
+                          child: Transform.rotate(
+                            angle: -0.7,
+                            child: Text(
+                              (widget.products.id%10+13).toString()+'%',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                      ),
+                    )
+                ),
+
+              ))
             ],
           ),
         ),

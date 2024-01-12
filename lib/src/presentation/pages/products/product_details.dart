@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:sample_bloc_mobile/src/config/slugs.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart';
@@ -94,11 +95,19 @@ class _ProductDetailsState extends State<ProductDetails> {
       }
     });
   }
-
+  String getSlugByName(String name) {
+    for (final item in slugs) {
+      if (item['name'] == name) {
+        return item['slug'];
+      }
+    }
+    return ''; // Return an empty string if the name is not found in the data
+  }
   Future<void> _fetchPage(int pageKey) async {
     try {
+
       final products = await HttpService().fetchProductsOfSubCategories(
-        widget.product.categories.last,
+        getSlugByName(widget.product.categoriesName.last),
         pageKey,
       );
 
@@ -399,7 +408,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         builderDelegate:
                         PagedChildBuilderDelegate<ProductItem>(
                           itemBuilder: (context, item, index) =>
-                              ProductCard(products: item),
+                              ProductCard(products: item, isDiscount: false,),
                         ),
                       ),
                     ),

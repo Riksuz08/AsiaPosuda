@@ -6,6 +6,7 @@ import 'package:sample_bloc_mobile/src/presentation/pages/main/home/FirstTab.dar
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SearchPage.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SecondTab.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favoritePage/FavoriteProductsPage.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/home/ThirdTab.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/services/http_service.dart';
 import '../../../../data/models/product_categoories/categories.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _fetchAllCategories();
   }
 
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       final displayedCategories =
       allCategories.where((category) => category.display == 'subcategories').toList();
       setState(() {
-        categories = displayedCategories;
+        categories = allCategories;
       });
     } on Error catch (e) {
       print(e);
@@ -211,8 +212,10 @@ int valueX=0;
 
                 controller: _tabController,
                 tabs:  [
+                  Tab(text: context.tr('discount')),
                   Tab(text: context.tr('new')),
                   Tab(text: context.tr('populars')),
+
                 ],
                 indicator:  const UnderlineTabIndicator(
                   borderSide: BorderSide(
@@ -233,8 +236,10 @@ int valueX=0;
         body: TabBarView(
           controller: _tabController,
           children: const [
+            ThirdTab(),
             FirstTab(),
             SecondTab(),
+
           ],
         ),
       ),

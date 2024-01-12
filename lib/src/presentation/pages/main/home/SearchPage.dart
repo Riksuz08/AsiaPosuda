@@ -37,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
         itemCount: widget.product.length,
         itemBuilder: (context, index) {
           final product = widget.product[index];
-          return ProductCard(products: product);
+          return ProductCard(products: product,isDiscount: false,);
         },
     );
 }

@@ -38,7 +38,7 @@ class _FavoriteProductsPageState extends State<FavoriteProductsPage> {
       itemCount: FavoriteProductsPage.favoriteProducts.length,
       itemBuilder: (context, index) {
         final product = FavoriteProductsPage.favoriteProducts[index];
-        return ProductCard(products: product);
+        return ProductCard(products: product,isDiscount: false,);
       },
     )
 

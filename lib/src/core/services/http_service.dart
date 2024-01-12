@@ -17,16 +17,18 @@ class HttpService {
   Future<List<CategoryData>> fetchCategory() async {
     final responce = await http.get(Uri.parse(
         '${Config
-            .baseUrl}/products/categories?per_page=100&consumer_key=${Config
-            .consumerKey}&consumer_secret=${Config.consumerSecret}&parent=0'
+            .baseUrl}/products/categories'
+            '?filter[limit] =100'
+            '&consumer_key=${Config.consumerKey}'
+            '&consumer_secret=${Config.consumerSecret}'
     ));
     if (responce.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(responce.body);
+      final List<dynamic> body = jsonDecode(responce.body)['product_categories'];
 
       final List<CategoryData> categories = body
           .map(
             (category) {
-          print(category);
+
           return CategoryData.fromJson(category);
         },
       )
@@ -39,43 +41,43 @@ class HttpService {
 
 
   Future<List<SubCategoryData>> fetchSubCategory(int parent) async {
-    final responce = await http.get(Uri.parse(
-        '${Config.baseUrl}/products/categories?per_page=20&consumer_key=${Config
-            .consumerKey}&consumer_secret=${Config
-            .consumerSecret}&parent=${parent}'
+    final response = await http.get(Uri.parse(
+        '${Config.baseUrl}/products/categories?filter[limit] =20&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}'
     ));
-    if (responce.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(responce.body);
 
+    if (response.statusCode == 200) {
+      final List<dynamic> body = jsonDecode(response.body)['product_categories'];
+
+      // Filter categories based on the parent value
       final List<SubCategoryData> categories = body
-          .map(
-            (category) {
-          print(category);
-          return SubCategoryData.fromJson(category);
-        },
-      )
+          .where((category) => category['parent'] == parent)
+          .map((category) {
+
+        return SubCategoryData.fromJson(category);
+      })
           .toList();
+
       return categories;
     } else {
-      throw Exception('Failed');
+      throw Exception('Failed to fetch subcategories');
     }
   }
 
-  Future<List<ProductItem>> fetchProductsOfSubCategories(int category,
+  Future<List<ProductItem>> fetchProductsOfSubCategories(String category,
       int pageNo) async {
     final responce = await http.get(Uri.parse(
         '${Config
-            .baseUrl}/products?per_page=20&page=${pageNo}&consumer_key=${Config
+            .baseUrl}/products?filter[limit]=20&page=${pageNo}&consumer_key=${Config
             .consumerKey}&consumer_secret=${Config
-            .consumerSecret}&category=${category}'
+            .consumerSecret}&filter[category]=${category}'
     ));
     if (responce.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(responce.body);
+      final List<dynamic> body = jsonDecode(responce.body)['products'];
 
       final List<ProductItem> products = body
           .map(
             (product) {
-          print(product);
+
           return ProductItem.fromJson(product);
         },
       )
@@ -90,17 +92,17 @@ class HttpService {
     try {
       final response = await http.get(Uri.parse(
           '${Config
-              .baseUrl}/products?per_page=20&page=${pageNo}&consumer_key=${Config
+              .baseUrl}/products?filter[limit] =20&page=${pageNo}&consumer_key=${Config
               .consumerKey}&consumer_secret=${Config.consumerSecret}'
       ));
 
       if (response.statusCode == 200) {
-        final List<dynamic> body = jsonDecode(response.body);
+        final List<dynamic> body = jsonDecode(response.body)['products'];
 
         final List<ProductItem> products = body
             .map(
               (product) {
-            print(product);
+
             return ProductItem.fromJson(product);
           },
         )
@@ -120,16 +122,16 @@ class HttpService {
   Future<List<ProductItem>> fetchSearchProducts(String searchItem) async {
     final responce = await http.get(Uri.parse(
         '${Config
-            .baseUrl}/products?per_page=100&search=${searchItem}&page=1&consumer_key=${Config
+            .baseUrl}/products?filter[limit]=20&filter[q]=${searchItem}&page=1&consumer_key=${Config
             .consumerKey}&consumer_secret=${Config.consumerSecret}'
     ));
     if (responce.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(responce.body);
+      final List<dynamic> body = jsonDecode(responce.body)['products'];
 
       final List<ProductItem> products = body
           .map(
             (product) {
-          print(product);
+
           return ProductItem.fromJson(product);
         },
       )
@@ -143,16 +145,16 @@ class HttpService {
   Future<List<ProductItem>> fetchProductsByPopularity(int pageNo) async {
     final responce = await http.get(Uri.parse(
         '${Config
-            .baseUrl}/products?orderby=popularity&per_page=20&page=${pageNo}&consumer_key=${Config
-            .consumerKey}&consumer_secret=${Config.consumerSecret}'
+            .baseUrl}/products?filter[limit]=20&page=${pageNo}&consumer_key=${Config
+            .consumerKey}&consumer_secret=${Config.consumerSecret}&filter[order]=desc&filter[orderby]=meta_value_num&filter[orderby_meta_key]=total_sales'
     ));
     if (responce.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(responce.body);
+      final List<dynamic> body = jsonDecode(responce.body)['products'];
 
       final List<ProductItem> products = body
           .map(
             (product) {
-          print(product);
+
           return ProductItem.fromJson(product);
         },
       )
@@ -162,7 +164,28 @@ class HttpService {
       throw Exception('Failed');
     }
   }
+  Future<List<ProductItem>> fetchProductsByDiscount(int pageNo) async {
+    final responce = await http.get(Uri.parse(
+        '${Config
+            .baseUrl}/products?filter[limit]=20&page=${pageNo}&consumer_key=${Config
+            .consumerKey}&consumer_secret=${Config.consumerSecret}&filter[type]=variable'
+    ));
+    if (responce.statusCode == 200) {
+      final List<dynamic> body = jsonDecode(responce.body)['products'];
 
+      final List<ProductItem> products = body
+          .map(
+            (product) {
+
+          return ProductItem.fromJson(product);
+        },
+      )
+          .toList();
+      return products;
+    } else {
+      throw Exception('Failed');
+    }
+  }
   Future<ProductItem> fetchProduct(int productId) async {
     final response = await http.get(Uri.parse(
       '${Config.baseUrl}/products/$productId?consumer_key=${Config
@@ -171,7 +194,7 @@ class HttpService {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> body = jsonDecode(response.body);
-      print(body);
+
       return ProductItem.fromJson(body);
     } else {
       throw Exception('Failed to load product');
@@ -299,11 +322,11 @@ class HttpService {
     ));
 
     if (response.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(response.body);
+      final List<dynamic> body = jsonDecode(response.body)['customers'];
 
       if (body.isNotEmpty) {
         final Map<String, dynamic> customerData = body.first;
-        final Map<String, dynamic> billing = customerData['billing'];
+        final Map<String, dynamic> billing = customerData['billing_address'];
 
         final String firstName = billing['first_name'];
         final String phoneNumber = billing['phone'];

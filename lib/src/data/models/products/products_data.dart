@@ -17,7 +17,7 @@ class ProductItem {
   late int parent;
   late String price;
   late String pricehtml;
-  late String stockstatus;
+  late bool stockstatus;
   late List<ProductAttribute> attributes;
   late int quantity;
 
@@ -44,66 +44,49 @@ class ProductItem {
     final List<ProductAttribute> attributes = jsonAttributes != null
         ? jsonAttributes.map((attr) => ProductAttribute.fromJson(attr)).toList()
         : [];
-    List<String> imagesList = [];
-
-    if (json['images'] != null) {
-      final List<dynamic> imageList = json['images'];
-
-      for (final image in imageList) {
-        if (image['src'] != null) {
-          imagesList.add(image['src'] as String);
-        }
+    final List<String> imagesList = (json['images'] as List<dynamic>?)
+        ?.where((image) => image != null && image['src'] != null)
+        .map((image) => image['src'] as String)
+        .toList()
+        ?? ['https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png'];
+    final List<int> categoriesList = (json['categories'] as List<dynamic>?)
+        ?.where((category) => category != null)
+        .map((category) {
+      if (category is int) {
+        return category;
+      } else if (category is String) {
+        // Handle cases where 'category' is a string, you may want to convert it to int or ignore it
+        return int.tryParse(category) ?? 0; // Convert to int, or use a default value if conversion fails
       }
-    } else {
-      imagesList = ['https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png'];
-    }
-    List<int> categoriesList = [];
-
-    if (json['categories'] != null) {
-      final List<dynamic> categoryList = json['categories'];
-
-      for (final image in categoryList) {
-        if (image['id'] != null) {
-          categoriesList.add(image['id']);
-        }
-      }
-    } else {
-      categoriesList = [];
-    }
-    List<String> categoriesNameList = [];
-
-    if (json['categories'] != null) {
-      final List<dynamic> categoryList = json['categories'];
-
-      for (final image in categoryList) {
-        if (image['name'] != null) {
-          categoriesNameList.add(image['name']);
-        }
-      }
-    } else {
-      categoriesNameList = [];
-    }
+      return 0; // Default value for unknown types
+    })
+        .toList()
+        ?? [];
+    final List<String> categoriesNameList = (json['categories'] as List<dynamic>?)
+        ?.whereType<String>()
+        .toList()
+        ?? [];
     return ProductItem(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      description:  json['description'] as String,
-      permalink: json['permalink'] as String,
-      shortdescription:  json['short_description'] as String,
-      images: imagesList,
-      categories: categoriesList,
-      categoriesName: categoriesNameList,
-      parent: json['parent'] != null ? json['parent'] as int : 0,
-      price: json['price'] as String,
-      pricehtml: json['price_html'] as String,
-      stockstatus: json['stock_status'] as String,
-      attributes: attributes,
-      quantity: 0
+        id: json['id'] as int,
+        name: json['title'] as String,
+        description:  json['description'] as String,
+        permalink: json['permalink'] as String,
+        shortdescription:  json['short_description'] as String,
+        images: imagesList,
+        categories: categoriesList,
+        categoriesName: categoriesNameList,
+        parent: json['parent_id'] != null ? json['parent_id'] as int : 0,
+        price: json['price'] as String,
+        pricehtml: json['price_html'] as String,
+        stockstatus: json['in_stock'],
+        attributes: attributes,
+        quantity: 0
     );
   }
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'name': name,
+    'title': name,
     'description': description,
     'permalink' : permalink,
     'short_description': shortdescription,
@@ -112,13 +95,13 @@ class ProductItem {
     'parent': parent,
     'price': price,
     'price_html': pricehtml, // Adjusted field name to match your JSON structure
-    'stock_status': stockstatus,
+    'in_stock': stockstatus,
     'attributes': attributes.map((attr) => attr.toJson()).toList(),
   };
 
   Map<String, dynamic> toMap() => {
     'id': id,
-    'name': name,
+    'title': name,
     'price': price,
     'images': images.join(','), // Convert List<String> to a single string
     'description': description,
@@ -126,20 +109,20 @@ class ProductItem {
     'short_description': shortdescription,
     'parent': parent,
     'price_html': pricehtml,
-    'stock_status': stockstatus,
+    'in_stock': stockstatus,
     'attributes': attributes.map((attr) => attr.toJson()).toList(),
   };
   ProductItem.fromMap(Map<String, dynamic> map)
       : id = map['id'] as int,
-        name = map['name'] as String,
+        name = map['title'] as String,
         price = map['price'] as String,
         images = (map['images'] as String).split(','), // Convert back to List<String>
         description = map['description'] as String,
         permalink = map['permalink'] as String,
         shortdescription = map['short_description'] as String,
-        parent = map['parent'] as int,
+        parent = map['parent_id'] as int,
         pricehtml = map['price_html'] as String,
-        stockstatus = map['stock_status'] as String,
+        stockstatus = map['in_stock'],
         attributes = (map['attributes'] as List<dynamic>)
             .map((attr) => ProductAttribute.fromJson(attr))
             .toList();
@@ -149,7 +132,7 @@ class ProductItem {
 
 
 class ProductAttribute {
-  late int id;
+
   late String name;
   late int position;
   late bool visible;
@@ -157,7 +140,7 @@ class ProductAttribute {
   late List<String> options;
 
   ProductAttribute({
-    required this.id,
+
     required this.name,
     required this.position,
     required this.visible,
@@ -166,7 +149,7 @@ class ProductAttribute {
   });
 
   factory ProductAttribute.fromJson(Map<String, dynamic> json) => ProductAttribute(
-    id: json['id'] as int,
+
     name: json['name'] as String,
     position: json['position'] as int,
     visible: json['visible'] as bool,
@@ -175,7 +158,7 @@ class ProductAttribute {
   );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
+
     'name': name,
     'position': position,
     'visible': visible,

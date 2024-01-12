@@ -123,7 +123,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                            ),
                                          ),
                                          onTap: (){
-                                           Navigator.push(context,MaterialPageRoute(builder: (context) => ProductsList(categoryId: categorySub.id,count: categorySub.count,categoryName:categorySub.name)));
+                                           Navigator.push(context,MaterialPageRoute(builder: (context) => ProductsList(categoryId: categorySub.slug,count: categorySub.count,categoryName:categorySub.name)));
                                            //  Navigator.pushNamed(context, '/productsOfSubCategory');
                                          },
                                        );
