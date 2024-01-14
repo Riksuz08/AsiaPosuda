@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import '../../../../data/models/products/products_data.dart';
@@ -162,19 +163,20 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                 ),
                               ),
                             ),
-                            title: Text(
-                              product.name,
-                              style: const TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
+                            title:   Text('${product.price} сум'),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${product.price} сум'),
+                                Text(
+                                  product.name,
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                  ),
+                                ),
                                 const SizedBox(height: 8,),
                                 //count container
                                 Container(
+                                  height: 35,
                                   width: 100,
                                   padding: const EdgeInsets.all(5),
                                   decoration: BoxDecoration(
@@ -184,37 +186,49 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            if (count > 1) {
-                                              product.quantity--;
+                                      Container(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              if (count > 1) {
+                                                product.quantity--;
 
-                                            } else {
-                                              FavoritesPage.orderProducts.remove(product);
-                                            }
-                                            totalPrices();
-                                          });
-                                        },
-                                        child: const Icon(Icons.remove),
+                                              } else {
+                                                FavoritesPage.orderProducts.remove(product);
+                                              }
+                                              totalPrices();
+                                            });
+                                          },
+                                          child: const Icon(Icons.remove),
+                                        ),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(6),
+                                            color: Colors.white
+                                        ),
                                       ),
                                       Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 8),
                                         child: Text(
                                           '$count',
-                                          style: const TextStyle(fontSize: 20),
+                                          style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            product.quantity++;
-                                            totalPrices();
-                                          });
+                                      Container(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              product.quantity++;
+                                              totalPrices();
+                                            });
 
-                                        },
-                                        child: const Icon(Icons.add),
-                                      ),
+                                          },
+                                          child: const Icon(Icons.add),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(6),
+                                          color: Colors.white
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -222,10 +236,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             ),
                           ),
                           SizedBox(height: 2,),
-                          Container(
-                            height: 1,
+                          Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+                              child:Container(
+                            height: 0.1,
                             color: Colors.grey,
-                          )
+                          ))
                         ],
                       )
                   );
@@ -237,7 +252,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
               left: 0,
               right: 0,
               child: Container(
+
                 padding: const EdgeInsets.all(16),
+
                 color: Colors.white,
                 child: Row(
                   children: [

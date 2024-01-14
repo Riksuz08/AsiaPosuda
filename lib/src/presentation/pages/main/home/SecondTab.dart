@@ -47,10 +47,11 @@ class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixi
   }
   @override
   Widget build(BuildContext context) => PagedGridView<int, ProductItem>(
+
     shrinkWrap: true,
     pagingController: _pagingController,
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      mainAxisExtent: 250,
+      mainAxisExtent: 330,
       childAspectRatio: 2 / 3,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,

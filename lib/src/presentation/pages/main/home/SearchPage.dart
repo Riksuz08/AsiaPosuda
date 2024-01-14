@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisExtent: 250,
+          mainAxisExtent: 310,
           childAspectRatio: 2 / 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,

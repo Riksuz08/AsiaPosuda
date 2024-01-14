@@ -92,7 +92,7 @@ class HttpService {
     try {
       final response = await http.get(Uri.parse(
           '${Config
-              .baseUrl}/products?filter[limit] =20&page=${pageNo}&consumer_key=${Config
+              .baseUrl}/products?filter[limit] =40&page=${pageNo}&consumer_key=${Config
               .consumerKey}&consumer_secret=${Config.consumerSecret}'
       ));
 
@@ -222,33 +222,33 @@ class HttpService {
         .consumerKey}&consumer_secret=${Config.consumerSecret}';
 
     final Map<String, dynamic> data = {
-      "email": emailController.text,
-      "first_name": nameController.text,
-      "last_name": surnameController.text,
-      "password": passwordController.text,
-      "billing": {
-        "first_name": nameController.text,
-        "last_name": surnameController.text,
-        "company": "",
-        "address_1": "",
-        "address_2": "",
-        "city": "",
-        "state": "",
-        "postcode": "",
-        "country": "",
-        "email": emailController.text,
-        "phone": phoneController.text
+      'email': emailController.text,
+      'first_name': nameController.text,
+      'last_name': surnameController.text,
+      'password': passwordController.text,
+      'billing': {
+        'first_name': nameController.text,
+        'last_name': surnameController.text,
+        'company': '',
+        'address_1': '',
+        'address_2': '',
+        'city': '',
+        'state': '',
+        'postcode': '',
+        'country': '',
+        'email': emailController.text,
+        'phone': phoneController.text
       },
-      "shipping": {
-        "first_name": nameController.text,
-        "last_name": surnameController.text,
-        "company": "",
-        "address_1": "",
-        "address_2": "",
-        "city": "",
-        "state": "",
-        "postcode": "",
-        "country": ""
+      'shipping': {
+        'first_name': nameController.text,
+        'last_name': surnameController.text,
+        'company': '',
+        'address_1': '',
+        'address_2': '',
+        'city': '',
+        'state': '',
+        'postcode': '',
+        'country': ''
       }
     };
 
@@ -288,8 +288,8 @@ class HttpService {
     final List<String> parts = email.split('@');
     final String username = parts.first;
     final Map<String, dynamic> data = {
-      "username": username,
-      "password": passwordController.text,
+      'username': username,
+      'password': passwordController.text,
     };
 
     try {

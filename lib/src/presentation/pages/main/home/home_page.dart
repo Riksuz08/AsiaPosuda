@@ -62,7 +62,7 @@ int valueX=0;
   @override
   Widget build(BuildContext context) {
     final List<String> bannerImageUrls = [
-      'https://asiaposuda.uz/wp-content/uploads/2023/11/skidka.png',
+      // 'https://asiaposuda.uz/wp-content/uploads/2023/11/skidka.png',
       'https://asiaposuda.uz/wp-content/uploads/2023/10/1.png',
       'https://asiaposuda.uz/wp-content/uploads/2023/10/2.png',
       'https://asiaposuda.uz/wp-content/uploads/2023/07/1-banner-int-ovsinlarap_result-1.jpg',
@@ -209,7 +209,6 @@ int valueX=0;
           SliverPersistentHeader(
             delegate: _TabBarDelegate(
               child: TabBar(
-
                 controller: _tabController,
                 tabs:  [
                   Tab(text: context.tr('discount')),
@@ -223,6 +222,7 @@ int valueX=0;
                     width: 2,
                   ),
                 ),
+
                 labelColor: const Color(0xFF79B531),
                 unselectedLabelColor: Colors.grey,
                 labelStyle: const TextStyle(
@@ -314,9 +314,14 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   _TabBarDelegate({required this.child});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: child);
-  }
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SizedBox.expand(
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          color: Colors.white, // Set the background color to transparent
+        ),
+        child: child,
+      ),
+    );
 
   @override
   double get maxExtent => child.preferredSize.height;

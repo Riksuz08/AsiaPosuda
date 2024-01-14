@@ -115,7 +115,7 @@ class _ProductsListState extends State<ProductsList> {
               child:PagedGridView<int, ProductItem>(
                     pagingController: _pagingController,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 250,
+                        mainAxisExtent: 330,
                         childAspectRatio: 2 / 3,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,

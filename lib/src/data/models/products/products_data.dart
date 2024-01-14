@@ -16,6 +16,7 @@ class ProductItem {
   late List<String> categoriesName;
   late int parent;
   late String price;
+  late int totalsales;
   late String pricehtml;
   late bool stockstatus;
   late List<ProductAttribute> attributes;
@@ -31,6 +32,7 @@ class ProductItem {
     required this.categories,
     required this.categoriesName,
     required this.images,
+    required this.totalsales,
     required this.parent,
     required this.price,
     required this.pricehtml,
@@ -75,6 +77,7 @@ class ProductItem {
         images: imagesList,
         categories: categoriesList,
         categoriesName: categoriesNameList,
+        totalsales: json['total_sales'] !=null ? json['total_sales'] as int : 0,
         parent: json['parent_id'] != null ? json['parent_id'] as int : 0,
         price: json['price'] as String,
         pricehtml: json['price_html'] as String,
@@ -94,6 +97,7 @@ class ProductItem {
     'images': images,
     'parent': parent,
     'price': price,
+    'total_sales':totalsales,
     'price_html': pricehtml, // Adjusted field name to match your JSON structure
     'in_stock': stockstatus,
     'attributes': attributes.map((attr) => attr.toJson()).toList(),
@@ -108,6 +112,7 @@ class ProductItem {
     'permalink':permalink,
     'short_description': shortdescription,
     'parent': parent,
+    'total_sales':totalsales,
     'price_html': pricehtml,
     'in_stock': stockstatus,
     'attributes': attributes.map((attr) => attr.toJson()).toList(),
@@ -119,6 +124,7 @@ class ProductItem {
         images = (map['images'] as String).split(','), // Convert back to List<String>
         description = map['description'] as String,
         permalink = map['permalink'] as String,
+        totalsales = map['total_sales'] as int,
         shortdescription = map['short_description'] as String,
         parent = map['parent_id'] as int,
         pricehtml = map['price_html'] as String,

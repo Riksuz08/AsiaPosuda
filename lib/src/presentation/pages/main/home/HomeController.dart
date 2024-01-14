@@ -13,7 +13,6 @@ class HomeController extends GetxController {
       if (products.isNotEmpty) {
         searchResults.assignAll(products);
       }
-      print(searchResults.first.name+'Sarvar');
     } catch (e) {
       // Handle error
       print(e);

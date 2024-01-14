@@ -20,14 +20,18 @@
 
   "catalog": "Katalog",
   "cart": "Savatcha",
-  "search_field": "Mahsulot va tovarlarni qidiring",
+  "search_field": "Tovarlarni qidiring",
   "products": "Mahsulotlar soni",
-  "order": "Buyurtma qilish",
+  "order": "Rasmiylashtirish",
   "uzs": "so'm",
   "main_to": "Asosiy",
   "register": "Ro'yxatdan o'tish",
   "login": "Kirish",
   "discount": "Chegirma",
+  "aboutproduct": "Tovar ma'lumotlari",
+  "fulldesc": "Ko'proq ma'lumot",
+
+
 
   "my_orders": "Mening buyurtmalarim",
   "notebook": "Qaydlar daftarchasi",

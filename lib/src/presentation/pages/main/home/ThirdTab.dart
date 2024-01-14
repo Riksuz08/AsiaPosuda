@@ -47,10 +47,12 @@ class _ThirdTabState extends State<ThirdTab> with AutomaticKeepAliveClientMixin{
   }
   @override
   Widget build(BuildContext context) => PagedGridView<int, ProductItem>(
+
     shrinkWrap: true,
     pagingController: _pagingController,
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      mainAxisExtent: 250,
+
+      mainAxisExtent: 330,
       childAspectRatio: 2 / 3,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
@@ -59,6 +61,7 @@ class _ThirdTabState extends State<ThirdTab> with AutomaticKeepAliveClientMixin{
     physics: const BouncingScrollPhysics(),
     padding: const EdgeInsets.all(10),
     builderDelegate: PagedChildBuilderDelegate<ProductItem>(
+
       itemBuilder: (context, item, index) =>
 
           ProductCard(products: item,isDiscount: true),

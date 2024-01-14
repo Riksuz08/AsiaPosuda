@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:sample_bloc_mobile/src/config/slugs.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart';
 import 'package:sample_bloc_mobile/src/data/source/choice_chip.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favorites/bookmark_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/orders/orders_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/products/components/full_description.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/products/product_carousel_slider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../config/slugs.dart';
 import '../../../core/services/http_service.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../main/favoritePage/FavoriteProductsPage.dart';
@@ -52,6 +54,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   void initState() {
     super.initState();
+    extractNumbersWithoutSpaces();
     getItemDropDownMenu();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
@@ -65,7 +68,10 @@ class _ProductDetailsState extends State<ProductDetails> {
       print('Could not launch $url');
     }
   }
-
+void shareProduct(){
+     final String message = widget.product.name +'\n'+widget.product.permalink;
+    Share.share(message);
+}
   void toggleFavorite() {
     setState(() {
       final isFavorite = FavoriteProductsPage.favoriteProducts.contains(
@@ -95,7 +101,39 @@ class _ProductDetailsState extends State<ProductDetails> {
       }
     });
   }
+  int maxprice=0;
+  int minprice=0;
+  int percent = 0;
+   void extractNumbersWithoutSpaces() {
+    // Remove spaces from the input string
+    final String stringWithoutSpaces = widget.product.pricehtml.replaceAll(' ', '');
+
+    // Use the regular expression to extract numbers
+    final RegExp regExp = RegExp(r'\d+');
+    final List<Match> matches = regExp.allMatches(stringWithoutSpaces).toList();
+
+    // Convert matched substrings to integers and return a list of numbers
+    final List prices = matches.map((match) => int.parse(match.group(0)!)).toList();
+    if(prices.length==2 && !prices.contains(0)){
+
+      if(prices[0]>prices[1]){
+        maxprice = prices[0];
+        minprice=prices[1];
+      }else{
+        minprice = prices[0];
+        maxprice=prices[1];
+      }
+      percent = ((maxprice-minprice)*100/maxprice).round();
+    }else{
+      if(prices.isNotEmpty){
+      minprice=prices.last;
+      }else{
+        minprice=0;
+      }
+    }
+  }
   String getSlugByName(String name) {
+
     for (final item in slugs) {
       if (item['name'] == name) {
         return item['slug'];
@@ -105,7 +143,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
   Future<void> _fetchPage(int pageKey) async {
     try {
-
       final products = await HttpService().fetchProductsOfSubCategories(
         getSlugByName(widget.product.categoriesName.last),
         pageKey,
@@ -122,7 +159,8 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     String? inStock;
-    if (widget.product.stockstatus.toString() == 'instock') {
+    if (widget.product.stockstatus) {
+
       inStock = 'Есть в наличии';
     } else {
       inStock = 'Нет в наличии';
@@ -145,9 +183,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     ProductCarouselSlider(product: widget.product),
                     Container(
+
                       width: MediaQuery
                           .of(context)
                           .size
@@ -156,7 +194,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         widget.product.name,
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+
+                        ),
                       ),
                     ),
                     Row(
@@ -175,8 +217,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              color: widget.product.stockstatus.toString() ==
-                                  'instock' ?
+                              color: widget.product.stockstatus  ?
                               Color(0xFF79B531) : Colors.red,
                             ),
                           ),
@@ -184,6 +225,83 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                       ],
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final dropdownItem in dropdownItems)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8),
+                                // Adjust the left padding as needed
+                                child: Text(dropdownItem['name'] ?? ''),
+                              ),
+                              Wrap(
+                                spacing: 8,
+                                children: [
+                                  for (final option in dropdownItem['options'])
+                                    TChoiceChip(
+                                      text: option.toString(),
+                                      selected: selectedDropdownValues[dropdownItem['name']] ==
+                                          option,
+                                      onSelected: (value) {
+                                        setState(() {
+                                          selectedDropdownValues[dropdownItem['name']] =
+                                              option;
+                                        });
+                                      },
+                                    ),
+                                ],
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                    SizedBox(height: 25,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(children: [
+                          Text(minprice.toString()+' '+context.tr('uzs'),style: TextStyle(fontSize: 20),),
+                          SizedBox(width: 10,),
+                          Visibility(
+                            visible: percent==0 ? false : true,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Color(0xFF79B531)
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                                  child: Text('-'+percent.toString()+'%',style: TextStyle(color: Colors.white,fontSize: 10),),
+                                )
+                            ),
+                          )
+                        ],),
+
+                       Visibility(
+                         visible: maxprice.toString() == '0' ? false : true ,
+                         child:  Text(maxprice.toString()+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey),),
+                       ),
+                        SizedBox(height: 10,),
+                       Visibility(
+                         visible: percent==0 ? false : true,
+                         child:  Container(
+                             decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(15),
+                                 color: Color(0xFF79B531)
+                             ),
+                             child: Padding(
+                               padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                               child: Text(context.tr('discount'),style: TextStyle(color: Colors.white,fontSize: 10),),
+                             )
+                         ),
+                       )
+                      ],
+                    ),
+                    SizedBox(height: 15,),
                     Row(
                       children: [
 
@@ -256,122 +374,78 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ],
                       ),),
 
-                    Visibility(
-                      visible: widget.product.description.isNotEmpty
-                          ? true
-                          : false,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Описание товара: ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Container(
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: InkWell(
+                          onTap: (){
+                           Navigator.push(
+                          context,
+                         MaterialPageRoute(
+                           builder: (
+                               context) =>  FullDescription(fulldesctription: widget.product.description,),
+                         ),
+                       );
+                     },
+                          child: Container(
+                       padding: EdgeInsets.all(10),
+                       width: MediaQuery.of(context).size.width,
+                       decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(15),
+                           color: Colors.grey[200]
+                       ),
 
-                            alignment: Alignment.centerLeft,
-                            child: Html(
-                              data: widget.product.description,
-                              style: {
-                                'ul': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                                'p': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                                'div': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final dropdownItem in dropdownItems)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8),
-                                // Adjust the left padding as needed
-                                child: Text(dropdownItem['name'] ?? ''),
-                              ),
-                              Wrap(
-                                spacing: 8,
-                                children: [
-                                  for (final option in dropdownItem['options'])
-                                    TChoiceChip(
-                                      text: option.toString(),
-                                      selected: selectedDropdownValues[dropdownItem['name']] ==
-                                          option,
-                                      onSelected: (value) {
-                                        setState(() {
-                                          selectedDropdownValues[dropdownItem['name']] =
-                                              option;
-                                        });
-                                      },
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 5,),
-                        Image.asset('assets/png/asia_noText.png', width: 30,height: 30,),
-                        MaterialButton(
-                          onPressed: _launchURLInBrowser,
-                          child: Text('Открыть на сайте',style: TextStyle(color: Color(
-                              0xFF79B531)),),
-                          textColor: Colors.black,
-                          padding: const EdgeInsets.all(5.0),
-                        ),
-                      ],
-                    ),
-                    
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF79B531),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.all(Radius.circular(15))
-                      ),
-                      child: Column(
-                        children: [
-                          Text("Доставка",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
-                          Row(
-                            children: [
-                              SizedBox(width: 10,),
-                              Image(image:NetworkImage('https://asiaposuda.uz/wp-content/uploads/2021/08/delivery.webp'),width: 100,height: 100,),
-                              SizedBox(width: 10,),
-                              Expanded(child:Column(
-                                children: [
-                                  Text('Доставка по всему Ташкенту  30000 сум. \n Доставка по региону по договоренности с клиентом ',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ),)
+                       child: Center(
+                         child: Text(context.tr('fulldesc'),),
+                       ),
+                     ),
+                     )
+                   ),
 
 
-                            ],
+                    // Row(
+                    //   children: [
+                    //     SizedBox(width: 5,),
+                    //     Image.asset('assets/png/asia_noText.png', width: 30,height: 30,),
+                    //     MaterialButton(
+                    //       onPressed: _launchURLInBrowser,
+                    //       child: Text('Открыть на сайте',style: TextStyle(color: Color(
+                    //           0xFF79B531)),),
+                    //       textColor: Colors.black,
+                    //       padding: const EdgeInsets.all(5.0),
+                    //     ),
+                    //   ],
+                    // ),
 
-                          ),
-
-                        ],
-                      )
-                    ),
+                    // Container(
+                    //   decoration: const BoxDecoration(
+                    //     color: Color(0xFF79B531),
+                    //     shape: BoxShape.rectangle,
+                    //     borderRadius: BorderRadius.all(Radius.circular(15))
+                    //   ),
+                    //   child: Column(
+                    //     children: [
+                    //       Text("Доставка",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                    //       Row(
+                    //         children: [
+                    //           SizedBox(width: 10,),
+                    //           Image(image:NetworkImage('https://asiaposuda.uz/wp-content/uploads/2021/08/delivery.webp'),width: 100,height: 100,),
+                    //           SizedBox(width: 10,),
+                    //           Expanded(child:Column(
+                    //             children: [
+                    //               Text('Доставка по всему Ташкенту  30000 сум. \n Доставка по региону по договоренности с клиентом ',
+                    //                 style: TextStyle(color: Colors.white),
+                    //               )
+                    //             ],
+                    //           ),)
+                    //
+                    //
+                    //         ],
+                    //
+                    //       ),
+                    //
+                    //     ],
+                    //   )
+                    // ),
                     SizedBox(height: 10,),
 
                     Container(
@@ -397,7 +471,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         shrinkWrap: true,
                         gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: 250,
+                          mainAxisExtent: 330,
                           childAspectRatio: 2 / 3,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -408,7 +482,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         builderDelegate:
                         PagedChildBuilderDelegate<ProductItem>(
                           itemBuilder: (context, item, index) =>
-                              ProductCard(products: item, isDiscount: false,),
+                              ProductCard(products: item,isDiscount: false,),
                         ),
                       ),
                     ),
@@ -442,18 +516,32 @@ class _ProductDetailsState extends State<ProductDetails> {
                     icon:
                     const Icon(Icons.arrow_back, color: Colors.white),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      toggleFavorite();
-                    },
-                    icon: Icon(
-                      FavoriteProductsPage.favoriteProducts.contains(
-                          widget.product)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          toggleFavorite();
+                        },
+                        icon: Icon(
+                          FavoriteProductsPage.favoriteProducts.contains(
+                              widget.product)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                            shareProduct();
+                        },
+                        icon: Icon(
+                          Icons.ios_share_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  )
+
                 ],
               ),
             ),
@@ -475,47 +563,47 @@ class _ProductDetailsState extends State<ProductDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Цена: ', style: TextStyle(fontSize: 10,color: Color(0xFF727070)),),
-                  Text(widget.product.price.toString()+' '+context.tr('uzs')),
+                  Text(widget.product.price.toString()+' '+context.tr('uzs'),style: TextStyle(fontSize: 18),),
                 ],
               ),
 
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.shade300,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          if (_count > 1) {
-                            _count--;
-                          }
-                        });
-                      },
-                      child: const Icon(Icons.remove),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        '$_count',
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _count++;
-                        });
-                      },
-                      child: const Icon(Icons.add),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.all(5),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     color: Colors.grey.shade300,
+              //   ),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       InkWell(
+              //         onTap: () {
+              //           setState(() {
+              //             if (_count > 1) {
+              //               _count--;
+              //             }
+              //           });
+              //         },
+              //         child: const Icon(Icons.remove),
+              //       ),
+              //       Container(
+              //         padding: const EdgeInsets.symmetric(horizontal: 8),
+              //         child: Text(
+              //           '$_count',
+              //           style: const TextStyle(fontSize: 20),
+              //         ),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           setState(() {
+              //             _count++;
+              //           });
+              //         },
+              //         child: const Icon(Icons.add),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               ElevatedButton(
                 onPressed: () {
                   toggleOrder();
@@ -566,12 +654,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         duration: Duration(seconds: 2),
         backgroundColor: Color(0xFF79B531),
         action: SnackBarAction(
-          label: 'Go',
+          label: 'Перейти',
           textColor: Colors.white,// Change the label as needed
           onPressed: () {
             // Add the action you want to perform when the button is clicked
             // For example, you can navigate to a new screen.
-           navigateToHome();
+            navigateToHome();
           },
         ),
       ),

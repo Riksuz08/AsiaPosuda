@@ -16,7 +16,7 @@
 
   "catalog": "Catalog",
   "cart": "Cart",
-  "search_field": "Search products and categories",
+  "search_field": "Search products",
   "products": "Products",
   "order": "Order",
   "uzs": "UZS",
@@ -24,6 +24,8 @@
   "register": "Register",
   "login": "Login",
   "discount": "Discount",
+  "aboutproduct": "About product",
+  "fulldesc": "Full description",
 
 
   "female": "Female",

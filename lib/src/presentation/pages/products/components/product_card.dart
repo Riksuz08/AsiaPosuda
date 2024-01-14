@@ -14,7 +14,7 @@ import '../product_details.dart';
 
 class ProductCard extends StatefulWidget {
   final ProductItem products;
- final bool isDiscount;
+  final bool isDiscount;
   const ProductCard({Key? key, required this.products, required this.isDiscount}) : super(key: key);
 
   @override
@@ -22,7 +22,12 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    extractNumbersWithoutSpaces();
+  }
   bool isVisible=false;
   void toggleFavorite()  {
     setState(() {
@@ -37,6 +42,35 @@ class _ProductCardState extends State<ProductCard> {
 
     });
     isVisible=true;
+  }
+
+  int maxprice=0;
+  int minprice=0;
+  void extractNumbersWithoutSpaces() {
+    // Remove spaces from the input string
+    final String stringWithoutSpaces = widget.products.pricehtml.replaceAll(' ', '');
+
+    // Use the regular expression to extract numbers
+    final RegExp regExp = RegExp(r'\d+');
+    final List<Match> matches = regExp.allMatches(stringWithoutSpaces).toList();
+
+    // Convert matched substrings to integers and return a list of numbers
+    final List prices = matches.map((match) => int.parse(match.group(0)!)).toList();
+    if(prices.length==2 && !prices.contains(0)){
+      if(prices[0]>prices[1]){
+        maxprice = prices[0];
+        minprice=prices[1];
+      }else{
+        minprice = prices[0];
+        maxprice=prices[1];
+      }
+    }else{
+      if(prices.isNotEmpty) {
+        minprice = prices.last;
+      }else{
+        minprice=0;
+      }
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -62,7 +96,7 @@ class _ProductCardState extends State<ProductCard> {
           );
         },
         child: Material(
-          elevation: 8,
+          elevation: 2,
           shadowColor: Colors.grey.shade300,
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -71,98 +105,98 @@ class _ProductCardState extends State<ProductCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
-                  Flexible(
-                    flex: 6,
-                    child: Center(
-                      child: Hero(
-                        tag: widget.products.id,
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: (widget.products.images.isNotEmpty)
-                                ? widget.products.images.first
-                                : 'https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png',
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            placeholder: (context, url) => Container(
-                              color: Colors.grey.shade300,
-                            ),
-                            errorWidget: (context, url, error) => const Center(
-                              child: Icon(
-                                Icons.error_outline,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(height: 10),
-                  Flexible(
-                    flex: 6,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(7),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.products.name,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Icon(Icons.star, color: Colors.yellow, size: 14),
-                                SizedBox(width: 6),
-                                Text(generateRandomRating().toString(), style: TextStyle(fontSize: 10)),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              widget.products.categoriesName.join(', '),
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              '${widget.products.price} сум',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                                color: const Color(0xFF79B531),
-                              ),
-                            ),
-                          ],
+                  Center(
+                    child:  Container(
+                        width: 140,
+                        height: 170, // Adjusted height to 250
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        child: CachedNetworkImage(
+                          imageUrl: (widget.products.images.isNotEmpty)
+                              ? widget.products.images.first
+                              : 'https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png',
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          placeholder: (context, url) => Container(
+                            color: Colors.grey.shade300,
+                          ),
+                          errorWidget: (context, url, error) => const Center(
+                            child: Icon(
+                              Icons.error_outline,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ),
+
+                  const SizedBox(height: 10),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(7),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.products.name,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(Icons.star, color: Colors.yellow, size: 14),
+                             const SizedBox(width: 6),
+                              Text(generateRandomRating().toString(), style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                              const SizedBox(width: 6),
+                              Text('(${widget.products.totalsales} продаж)', style: const TextStyle(fontSize: 10))
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            widget.products.categoriesName.join(', '),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 5),
+                          Visibility(
+                            visible: maxprice.toString() == '0' ? false : true ,
+                            child:  Text(maxprice.toString()+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey,fontSize: 12),),
+                          ),
+
+                          Text(
+                            '${minprice} сум',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              color:  Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+
                 ],
               ),
               Positioned(
@@ -194,30 +228,28 @@ class _ProductCardState extends State<ProductCard> {
               Visibility(
                   visible: widget.isDiscount ? true : false,
                   child: Positioned(
-                top: -18,
-                left: -18,
-                child:  Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFF79B531),
+                    top: MediaQuery.of(context).size.height*0.23,
+                    left: 20,
+                    child:  Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFF79B531),
+                        ),
+                        child:Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
+                          child:  Center(
+                              child: Transform.rotate(
+                                angle: 0,
+                                child: Text(
+                                  'Акция',
+                                  style: TextStyle(color: Colors.white,fontSize: 14),
+                                ),
+                              )
+                          ),
+                        )
                     ),
-                    child:Padding(
-                      padding: EdgeInsets.only(top: 10,left: 10),
-                      child:  Center(
-                          child: Transform.rotate(
-                            angle: -0.7,
-                            child: Text(
-                              (widget.products.id%10+13).toString()+'%',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                      ),
-                    )
-                ),
 
-              ))
+                  ))
             ],
           ),
         ),
