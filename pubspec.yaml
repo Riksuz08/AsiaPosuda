@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
   http: ^1.1.0
+  lottie: ^3.0.0
   image_picker: ^1.0.5
   fluttertoast: ^8.0.7
   url_launcher: ^6.2.2
@@ -99,6 +100,9 @@ flutter:
     - assets/png/asia_noText.png
     - assets/png/empty_cart.jpg
     - assets/png/profilimage.png
+    - assets/png/asia_banner.png
+    - assets/png/phone.png
+    - assets/png/telegram.png
 
   fonts:
     - family: AppIcons

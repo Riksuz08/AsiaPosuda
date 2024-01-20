@@ -21,6 +21,7 @@ class ProductItem {
   late bool stockstatus;
   late List<ProductAttribute> attributes;
   late int quantity;
+  late List<Variations> variations;
 
 
   ProductItem({
@@ -38,7 +39,8 @@ class ProductItem {
     required this.pricehtml,
     required this.stockstatus,
     required this.attributes,
-    required this.quantity
+    required this.quantity,
+    required this.variations
   });
 
   factory ProductItem.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,12 @@ class ProductItem {
     final List<ProductAttribute> attributes = jsonAttributes != null
         ? jsonAttributes.map((attr) => ProductAttribute.fromJson(attr)).toList()
         : [];
+
+    final List<dynamic>? jsonVariations = json['variations'];
+    final List<Variations> variations = jsonVariations != null
+        ? jsonVariations.map((attr) => Variations.fromJson(attr)).toList()
+        : [];
+
     final List<String> imagesList = (json['images'] as List<dynamic>?)
         ?.where((image) => image != null && image['src'] != null)
         .map((image) => image['src'] as String)
@@ -83,7 +91,8 @@ class ProductItem {
         pricehtml: json['price_html'] as String,
         stockstatus: json['in_stock'],
         attributes: attributes,
-        quantity: 0
+        quantity: 0,
+      variations: variations
     );
   }
 
@@ -170,5 +179,47 @@ class ProductAttribute {
     'visible': visible,
     'variation': variation,
     'options': options,
+  };
+}
+
+
+class Variations {
+
+  late String image;
+  late String option;
+
+
+  Variations({
+    required this.image,
+    required this.option
+  });
+
+  factory Variations.fromJson(Map<String, dynamic> json) {
+    final List<String> images = (json['image'] as List<dynamic>?)
+        ?.where((image) => image != null && image['src'] != null)
+        .map((image) => image['src'] as String)
+        .toList()
+        ?? [
+          'https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png'
+        ];
+
+    final List<String> attributes = (json['attributes'] as List<dynamic>?)
+        ?.where((image) => image != null && image['option'] != null)
+        .map((image) => image['option'] as String)
+        .toList()
+        ?? [
+          'https://asiaposuda.uz/wp-content/uploads/2023/08/cropped-bez-imeni-1.png'
+        ];
+    return Variations(
+      image: images.first,
+      option: attributes.first
+
+    );
+  }
+  Map<String, dynamic> toJson() => {
+
+    'image': image,
+    'option': option,
+
   };
 }

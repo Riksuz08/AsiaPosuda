@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:intl/intl.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/services/http_service.dart';
 import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart' as pr;
@@ -72,6 +73,19 @@ class _ProductCardState extends State<ProductCard> {
       }
     }
   }
+String formatNumber(int number) {
+  final String reversed = number.toString().split('').reversed.join();
+  String result = '';
+
+  for (int i = 0; i < reversed.length; i++) {
+    result += reversed[i];
+    if ((i + 1) % 3 == 0 && i + 1 < reversed.length) {
+      result += ' ';
+    }
+  }
+
+  return result.split('').reversed.join();
+}
   @override
   Widget build(BuildContext context) {
     double generateRandomRating() {
@@ -181,11 +195,11 @@ class _ProductCardState extends State<ProductCard> {
                           SizedBox(height: 5),
                           Visibility(
                             visible: maxprice.toString() == '0' ? false : true ,
-                            child:  Text(maxprice.toString()+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey,fontSize: 12),),
+                            child:  Text(formatNumber(maxprice)+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey,fontSize: 12),),
                           ),
 
                           Text(
-                            '${minprice} сум',
+                            '${formatNumber(minprice)} сум',
                             style: const TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 15,
@@ -228,7 +242,7 @@ class _ProductCardState extends State<ProductCard> {
               Visibility(
                   visible: widget.isDiscount ? true : false,
                   child: Positioned(
-                    top: MediaQuery.of(context).size.height*0.23,
+                    bottom: 330*0.49,
                     left: 20,
                     child:  Container(
                         decoration: BoxDecoration(

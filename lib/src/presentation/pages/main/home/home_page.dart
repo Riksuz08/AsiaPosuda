@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
@@ -108,14 +109,14 @@ int valueX=0;
                         final product = searchResults[index];
 
                         return ListTile(
-                          leading: Image.network(
-                            product.images.first, // Replace with the URL of your product image
+                          leading: CachedNetworkImage(
+                            imageUrl:product.images.first,
                             width: 50, // Adjust the width as needed
                             height: 50, // Adjust the height as needed
                             fit: BoxFit.cover,
                           ),
                           title: Text(product.name),
-                          subtitle: Text('\$${product.price.toString()}'), // Assuming price is a numeric value
+                          subtitle: Text('${product.price.toString()} ${context.tr('uzs')}'), // Assuming price is a numeric value
                           // Customize the UI as needed
                           onTap: () {
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -180,7 +181,7 @@ int valueX=0;
                       color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
-                        image: NetworkImage(imageUrl),
+                        image: CachedNetworkImageProvider(imageUrl),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -235,6 +236,7 @@ int valueX=0;
         ],
         body: TabBarView(
           controller: _tabController,
+
           children: const [
             ThirdTab(),
             FirstTab(),

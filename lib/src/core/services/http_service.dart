@@ -222,11 +222,12 @@ class HttpService {
         .consumerKey}&consumer_secret=${Config.consumerSecret}';
 
     final Map<String, dynamic> data = {
+    'customer': {
       'email': emailController.text,
       'first_name': nameController.text,
       'last_name': surnameController.text,
       'password': passwordController.text,
-      'billing': {
+      'billing_address': {
         'first_name': nameController.text,
         'last_name': surnameController.text,
         'company': '',
@@ -239,7 +240,7 @@ class HttpService {
         'email': emailController.text,
         'phone': phoneController.text
       },
-      'shipping': {
+      'shipping_address': {
         'first_name': nameController.text,
         'last_name': surnameController.text,
         'company': '',
@@ -250,6 +251,7 @@ class HttpService {
         'postcode': '',
         'country': ''
       }
+    }
     };
 
     try {
@@ -318,14 +320,14 @@ class HttpService {
   }
   Future<void> getUser(String email) async {
     final response = await http.get(Uri.parse(
-      '${Config.baseUrl}/customers?email=$email&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}',
+      '${Config.baseUrl}/customers/email/$email?consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}',
     ));
 
     if (response.statusCode == 200) {
-      final List<dynamic> body = jsonDecode(response.body)['customers'];
+      final dynamic body = jsonDecode(response.body)['customer'];
 
       if (body.isNotEmpty) {
-        final Map<String, dynamic> customerData = body.first;
+        final Map<String, dynamic> customerData = body;
         final Map<String, dynamic> billing = customerData['billing_address'];
 
         final String firstName = billing['first_name'];

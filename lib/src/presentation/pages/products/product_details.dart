@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lottie/lottie.dart';
+import 'package:sample_bloc_mobile/src/config/color_slug.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 
 import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart';
@@ -12,6 +15,7 @@ import 'package:sample_bloc_mobile/src/presentation/pages/main/favorites/bookmar
 import 'package:sample_bloc_mobile/src/presentation/pages/main/orders/orders_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/products/components/full_description.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/products/product_carousel_slider.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/products/products_list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,13 +36,21 @@ class ProductDetails extends StatefulWidget {
 
 
 class _ProductDetailsState extends State<ProductDetails> {
-
+  final CarouselController _carouselController = CarouselController();
   final PagingController<int, ProductItem> _pagingController =
   PagingController(firstPageKey: 1);
   bool isVisible = false;
   late List<Map<String, dynamic>> dropdownItems = [];
   Map<String, dynamic> selectedDropdownValues = {};
 
+
+
+  void scrollToImage(String imageUrl) {
+    final index = widget.product.images.indexOf(imageUrl);
+    if (index != -1) {
+      _carouselController.animateToPage(index);
+    }
+  }
   void getItemDropDownMenu() {
     for (final item in widget.product.attributes) {
       // Assuming item.name is the name of the option and item.options is the list of options
@@ -49,8 +61,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       dropdownItems.add(dropdownItem);
     }
     print(dropdownItems.toString());
-  }
 
+  }
+  bool _isButtonVisible = true;
   @override
   void initState() {
     super.initState();
@@ -59,6 +72,19 @@ class _ProductDetailsState extends State<ProductDetails> {
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+  }
+  String formatNumber(int number) {
+    final String reversed = number.toString().split('').reversed.join();
+    String result = '';
+
+    for (int i = 0; i < reversed.length; i++) {
+      result += reversed[i];
+      if ((i + 1) % 3 == 0 && i + 1 < reversed.length) {
+        result += ' ';
+      }
+    }
+
+    return result.split('').reversed.join();
   }
   Future<void> _launchURLInBrowser() async {
     final url = Uri.parse(widget.product.permalink);
@@ -141,6 +167,23 @@ void shareProduct(){
     }
     return ''; // Return an empty string if the name is not found in the data
   }
+  String getColorSlugByName(String name) {
+
+    for (final item in colorSlugs) {
+      if (item['name'] == name) {
+        return item['slug'];
+      }
+    }
+    return ''; // Return an empty string if the name is not found in the data
+  }
+  String getSrcImageWithSlug(String name){
+     for(final variation in widget.product.variations){
+       if(variation.option==getColorSlugByName(name)){
+         return variation.image;
+       }
+     }
+     return '';
+  }
   Future<void> _fetchPage(int pageKey) async {
     try {
       final products = await HttpService().fetchProductsOfSubCategories(
@@ -183,7 +226,7 @@ void shareProduct(){
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ProductCarouselSlider(product: widget.product),
+                    ProductCarouselSlider(product: widget.product,carouselController: _carouselController),
                     Container(
 
                       width: MediaQuery
@@ -248,8 +291,13 @@ void shareProduct(){
                                           option,
                                       onSelected: (value) {
                                         setState(() {
+
                                           selectedDropdownValues[dropdownItem['name']] =
                                               option;
+                                          print(selectedDropdownValues[dropdownItem['name']]);
+                                          print(getColorSlugByName(selectedDropdownValues[dropdownItem['name']]));
+                                          print(getSrcImageWithSlug(selectedDropdownValues[dropdownItem['name']]));
+                                          scrollToImage(getSrcImageWithSlug(selectedDropdownValues[dropdownItem['name']]));
                                         });
                                       },
                                     ),
@@ -264,7 +312,7 @@ void shareProduct(){
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(children: [
-                          Text(minprice.toString()+' '+context.tr('uzs'),style: TextStyle(fontSize: 20),),
+                          Text(formatNumber(minprice)+' '+context.tr('uzs'),style: TextStyle(fontSize: 20),),
                           SizedBox(width: 10,),
                           Visibility(
                             visible: percent==0 ? false : true,
@@ -283,7 +331,7 @@ void shareProduct(){
 
                        Visibility(
                          visible: maxprice.toString() == '0' ? false : true ,
-                         child:  Text(maxprice.toString()+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey),),
+                         child:  Text(formatNumber(maxprice)+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey),),
                        ),
                         SizedBox(height: 10,),
                        Visibility(
@@ -446,8 +494,48 @@ void shareProduct(){
                     //     ],
                     //   )
                     // ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 20,),
 
+                    SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var categoryName in widget.product.categoriesName)
+                              GestureDetector(
+                                onTap: () {
+                                  print(categoryName);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductsList(
+                                        categoryId: getSlugByName(categoryName),
+                                        count: 0,
+                                        categoryName: categoryName,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Color(0xFF79B531),
+                                  ),
+                                  margin: EdgeInsets.only(right: 8), // Adjust the spacing between containers
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    child: Text(
+                                      categoryName,
+                                      style: TextStyle(color: Colors.white, fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              )
+                          ],
+                        ),
+                      ),
+
+
+                    const SizedBox(height: 20,),
                     Container(
                       height: 1,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -562,8 +650,15 @@ void shareProduct(){
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Цена: ', style: TextStyle(fontSize: 10,color: Color(0xFF727070)),),
-                  Text(widget.product.price.toString()+' '+context.tr('uzs'),style: TextStyle(fontSize: 18),),
+                  Visibility(
+                    visible: maxprice.toString() == '0' ? true : false ,
+                    child: Text('Цена: ', style: TextStyle(fontSize: 10,color: Color(0xFF727070)),),
+                  ),
+                  Text(formatNumber(minprice)+' '+context.tr('uzs'),style: TextStyle(fontSize: 17),),
+                  Visibility(
+                    visible: maxprice.toString() == '0' ? false : true ,
+                    child:  Text(formatNumber(maxprice)+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey,fontSize: 11),),
+                  ),
                 ],
               ),
 
@@ -604,25 +699,56 @@ void shareProduct(){
               //     ],
               //   ),
               // ),
-              ElevatedButton(
-                onPressed: () {
-                  toggleOrder();
-                  showCustomSnackBar(context, 'Перейти на корзинку');
-                  print(FavoritesPage.orderProducts.toString());
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Visibility(
+                    visible: _isButtonVisible,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _isButtonVisible = false;
+                          toggleOrder();
+                          showCustomSnackBar(context, 'Перейти на корзинку');
+                          print(FavoritesPage.orderProducts.toString());
+                          FavoritesPage.checkedProducts.add(
+                              widget.product);
+                        });
+
+                        // Simulate animation duration
+                        Future.delayed(Duration(seconds: 2), () {
+                          setState(() {
+                            _isButtonVisible = true;
+                          });
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                        ),
+                        backgroundColor: Color(0xFF79B531),
+                      ),
+                      child: const Text(
+                        'В корзину',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
+                  Visibility(
+                    visible: !_isButtonVisible,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 30),
+                      child: Lottie.network(
+                        'https://lottie.host/f312197c-99b3-43d7-89a2-de652938e63d/5BykGjCcwC.json',
+                        width: 80,
+                        height: 80,
+                      ),
+                    )
                   ),
-                  backgroundColor: Color(0xFF79B531),
-                ),
-                child: const Text(
-                  'В корзину',
-                  style: TextStyle(fontSize: 12, color: Colors.white),
-                ),
+                ],
               ),
             ],
           ),

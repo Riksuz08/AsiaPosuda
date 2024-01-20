@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/product_categoories/categories.dart';
@@ -33,7 +34,7 @@ class CategoryCircle extends StatelessWidget {
             color: Colors.transparent,
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage(category.image!),
+              image: CachedNetworkImageProvider(category.image!),
             ),
           ),
         ),

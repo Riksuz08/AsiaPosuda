@@ -66,49 +66,52 @@ class _ProductsListState extends State<ProductsList> {
         color: Colors.white,
         child: Column(
           children: [
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xF1F1F1FF),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child:  TextField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: TextStyle(fontWeight: FontWeight.w300),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: Color(0xFF748BA4),
-                    hintText: context.tr('search_field'),
-                    border: InputBorder.none,
+            AppBar(
+
+              backgroundColor: Colors.white,
+              // Remove elevation if not needed
+              automaticallyImplyLeading: false, // Don't automatically add a back button
+              title: Row(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child:Row(
+                        children: [
+                          Icon(Icons.arrow_back,size: 18,),
+                          SizedBox(width: 5,),
+                          Text(context.tr('catalog'),style: TextStyle(fontSize: 14),),
+                        ],
+                      )
 
                   ),
-                ),
+
+                  const Spacer(),
+                  Center(
+                    child: Text(widget.categoryName), // Your custom center title
+                  ),
+                  const Spacer(),
+                  Spacer(),
+                  Spacer()
+                ],
               ),
             ),
-            const SizedBox(height: 20,),
-
-            Row(children: [
-              const SizedBox(width: 10,),
-              Text(
-                categoryName,
-                style: const TextStyle(
-                    fontSize: 24
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: int.parse(productCount) > 0
+                  ? Row(
+                children: [
+                  Text(
+                    '$productCount товара',
+                    style: const TextStyle(fontSize: 15, color: Colors.grey),
+                  ),
+                ],
               )
-            ],),
+                  : SizedBox(), // If productCount is 0, show an empty SizedBox
+            ),
 
-         Row(children: [
-           const SizedBox(width: 10,),
-           Text(
-               '$productCount товара',
-             style: const TextStyle(
-               fontSize: 10,
-               color: Colors.grey
-             ),
-           )
-         ],),
+            SizedBox(height: 10,),
 
 
             Expanded(
@@ -124,8 +127,9 @@ class _ProductsListState extends State<ProductsList> {
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(10),
                     builderDelegate: PagedChildBuilderDelegate<ProductItem>(
-                      itemBuilder: (context, item, index) =>
-                          ProductCard(products: item,isDiscount: false,),
+                      itemBuilder: (context, item, index)  {
+                        return ProductCard(products: item, isDiscount: false);
+                      }
                     ),
 
 

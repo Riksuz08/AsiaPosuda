@@ -1,9 +1,14 @@
 
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/my_chats.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/my_orders.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/my_reviews.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/notification_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/widgets/logout_dialog.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/widgets/profile_item_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,7 +75,12 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       text:context.tr('my_orders'),
                       isTop: true,
                       onTap: () {
-                        // Navigator.pushNamed(context, Routes.notes);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyOrders()
+                            )
+                        );
                       },
                     ),
                     const Divider(height: 1),
@@ -79,7 +89,12 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       text: context.tr('my_reviews'),
                       isBottom: true,
                       onTap: () {
-                        // Navigator.pushNamed(context, Routes.myCards);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyReviews()
+                            )
+                        );
                       },
                     ),
                   ],
@@ -96,19 +111,97 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       icon:const Icon(Icons.chat),
                       text: context.tr('my_chats'),
                       isTop: true,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyChats()
+                            )
+                        );
+                      },
                     ),
                     const Divider(height: 1),
                     ProfileItemWidget(
                       icon:const Icon(Icons.notifications),
                       text: context.tr('notifications'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationPage()
+                            )
+                        );
+                      },
                     ),
                     const Divider(height: 1),
                     ProfileItemWidget(
                       icon:const Icon(Icons.mail),
                       text: context.tr('contact_with_us'),
-                      onTap: () {},
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context)=> Container(
+                                  decoration:  BoxDecoration(
+
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                  ),
+                                  height: MediaQuery.of(context).size.height*0.45,
+                                  width: MediaQuery.of(context).size.width,
+                                  // color:Colors.white,
+                                  child: Column(
+                                      children: [
+                                        SizedBox(height: 20,),
+                                        Image.asset('assets/png/asia_banner.png'),
+                                        Padding(padding: EdgeInsets.all(10),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 20,),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.place,color:Colors.grey),
+                                                SizedBox(width: 10,),
+                                                Text("Адресс: Parkent k.o'chasi, 229-uy"),
+                                              ],
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.phone,color: Colors.grey,),
+                                                SizedBox(width: 10,),
+                                                Text('Телефон номер: +998 71 205 04 05'),
+
+                                              ],
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.phone,color: Colors.grey,),
+                                                SizedBox(width: 10,),
+                                                Text('Телефон номер: +998 71 205 04 06'),
+
+                                              ],
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.email,color: Colors.grey,),
+                                                SizedBox(width: 10,),
+                                                Text('Email: asiaposuda@gmail.com')
+                                              ],
+                                            )
+                                          ],
+                                        ),)
+
+                                      ],
+                                  ),
+                                )
+                        );
+
+                      },
                     ),
                     const Divider(height: 1),
                     ProfileItemWidget(

@@ -17,21 +17,26 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+
+  bool _isPasswordVisible = false;
+
   void navigateToHome() {
     Navigator.of(context).popUntil((route) => route.isFirst);
     context.read<MainBloc>().add(const MainEventChanged(BottomMenu.profile));
-
   }
+
   Future<void> _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', _emailController.text);
   }
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final HttpService httpService = HttpService();
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -55,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -63,8 +68,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   filled: true,
                   fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 validator: (value) {
@@ -82,8 +87,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   filled: true,
                   fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 validator: (value) {
@@ -101,8 +106,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   filled: true,
                   fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 keyboardType: TextInputType.phone,
@@ -123,15 +128,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   filled: true,
                   fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
-                  } else if (!RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$').hasMatch(value)) {
+                  } else if (!RegExp(
+                      r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                      .hasMatch(value)) {
                     return 'Please enter a valid email';
                   }
                   return null;
@@ -145,11 +152,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   filled: true,
                   fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
                   ),
                 ),
-                obscureText: true,
+                obscureText: !_isPasswordVisible,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your password';
@@ -161,19 +181,19 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-
                     print('Name: ${_nameController.text}');
                     print('Surname: ${_surnameController.text}');
                     print('Phone Number: ${_phoneController.text}');
                     print('Email: ${_emailController.text}');
                     print('Password: ${_passwordController.text}');
                     try {
-                      final bool loginSuccess = await httpService.registerUser(
-                          _emailController,
-                          _nameController,
-                          _surnameController,
-                          _passwordController,
-                          _phoneController
+                      final bool loginSuccess =
+                      await httpService.registerUser(
+                        _emailController,
+                        _nameController,
+                        _surnameController,
+                        _passwordController,
+                        _phoneController,
                       );
 
                       if (loginSuccess) {
@@ -183,7 +203,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         await httpService.getUser(_emailController.text);
                       } else {
                         // Handle unsuccessful login (show an error message, etc.)
-                        print('Login failed. Please check your credentials.');
+                        print(
+                            'Login failed. Please check your credentials.');
                       }
                     } catch (error) {
                       // Handle network or other errors
@@ -193,10 +214,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     print('Email: ${_emailController.text}');
                     print('Password: ${_passwordController.text}');
                   }
-
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF79B531), // Set the background color here
+                  primary: Color(0xFF79B531),
+                  // Set the background color here
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -209,31 +230,32 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [ 
-                    Text('Уже есть аккаунт?  '),
-
-                    GestureDetector(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Уже есть аккаунт?  '),
+                  GestureDetector(
                       onTap: () {
                         // Navigate to another screen when the text is clicked
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AuthPage()),
+                          MaterialPageRoute(
+                              builder: (context) => AuthPage()),
                         );
                       },
-                      child: Text(context.tr('login'), style: TextStyle(color: Color(0xFF79B531)),)
-                    )
-                  ],
-                ),
-
+                      child: Text(
+                        context.tr('login'),
+                        style: TextStyle(color: Color(0xFF79B531)),
+                      ))
+                ],
+              ),
             ],
           ),
         ),
       ),
-    )
+    ),
   );
-
 }
-
