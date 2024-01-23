@@ -1,11 +1,13 @@
 import 'dart:io';
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/my_orders.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/order_provider.dart';
 
 import 'src/app_options.dart';
 import 'src/config/router/app_routes.dart';
@@ -19,9 +21,6 @@ import 'src/presentation/components/keyboard/keyboard_dismiss.dart';
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-
-
 
   /// bloc logger
   if (kDebugMode) {
@@ -50,6 +49,10 @@ class MainApp extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider<MainBloc>(create: (_) => sl<MainBloc>()),
+            ChangeNotifierProvider(
+              create: (context) => OrderProvider(),
+              child: MyOrders(),
+            )
           ],
           child: KeyboardDismiss(
             child: Builder(
@@ -60,7 +63,6 @@ class MainApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   navigatorKey: rootNavigatorKey,
                   scaffoldMessengerKey: scaffoldMessengerKey,
-
 
                   /// lang
                   locale: options.locale,

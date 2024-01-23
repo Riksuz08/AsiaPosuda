@@ -4,9 +4,9 @@
 
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:enableOnBackInvokedCallback="true"
-        android:label="sample_bloc_mobile">
+        android:label="Asia Posuda">
         
         <activity
             android:name=".MainActivity"

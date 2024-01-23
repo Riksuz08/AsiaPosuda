@@ -8,6 +8,7 @@ import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SearchPage.d
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SecondTab.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favoritePage/FavoriteProductsPage.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/ThirdTab.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/products/products_list.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/services/http_service.dart';
 import '../../../../data/models/product_categoories/categories.dart';
@@ -23,15 +24,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController? _tabController;
   final HomeController controller = Get.put(HomeController());
   final HttpService httpService = HttpService();
   List<CategoryData> categories = [];
-  String query='';
-
-
-
+  String query = '';
 
   @override
   void initState() {
@@ -43,8 +42,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Future<void> _fetchAllCategories() async {
     try {
       final allCategories = await httpService.fetchCategory();
-      final displayedCategories =
-      allCategories.where((category) => category.display == 'subcategories').toList();
+      final displayedCategories = allCategories
+          .where((category) => category.display == 'subcategories')
+          .toList();
       setState(() {
         categories = allCategories;
       });
@@ -52,14 +52,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       print(e);
     }
   }
+
   double height = 0;
 
-int valueX=0;
+  int valueX = 0;
   @override
   void dispose() {
     _tabController?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final List<String> bannerImageUrls = [
@@ -76,32 +78,29 @@ int valueX=0;
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverPersistentHeader(
-
             delegate: _SearchBarDelegate(
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
                   print(value.toString());
-                  valueX=value.length;
+                  valueX = value.length;
                   controller.searchResults.clear();
-                  if(value.length>2) {
-
+                  if (value.length > 2) {
                     controller.fetchSearchResults(value);
-
                   }
-
                 });
               },
             ),
             pinned: true,
           ),
-
           SliverList(
             delegate: SliverChildListDelegate([
-              Obx((){
+              Obx(() {
                 final searchResults = controller.searchResults;
-                if(searchResults.isNotEmpty){
+                if (searchResults.isNotEmpty) {
                   return Container(
-                    height: (valueX<3) ? 0 : MediaQuery.of(context).size.height-165,
+                    height: (valueX < 3)
+                        ? 0
+                        : MediaQuery.of(context).size.height - 165,
                     color: Colors.white,
                     child: ListView.builder(
                       itemCount: searchResults.length,
@@ -110,32 +109,32 @@ int valueX=0;
 
                         return ListTile(
                           leading: CachedNetworkImage(
-                            imageUrl:product.images.first,
+                            imageUrl: product.images.first,
                             width: 50, // Adjust the width as needed
                             height: 50, // Adjust the height as needed
                             fit: BoxFit.cover,
                           ),
                           title: Text(product.name),
-                          subtitle: Text('${product.price.toString()} ${context.tr('uzs')}'), // Assuming price is a numeric value
+                          subtitle: Text(
+                              '${product.price.toString()} ${context.tr('uzs')}'), // Assuming price is a numeric value
                           // Customize the UI as needed
                           onTap: () {
                             FocusScope.of(context).requestFocus(FocusNode());
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProductDetails(
-                                        product:product
-                                    )
-                                )
-                            );
+                                    builder: (context) =>
+                                        ProductDetails(product: product)));
                           },
                         );
                       },
                     ),
                   );
-                }else{
+                } else {
                   return Container(
-                    height: (valueX < 3) ? 0 : MediaQuery.of(context).size.height - 165,
+                    height: (valueX < 3)
+                        ? 0
+                        : MediaQuery.of(context).size.height - 165,
                     color: Colors.white,
                     child: ListView.builder(
                       itemCount: 10,
@@ -147,46 +146,60 @@ int valueX=0;
                             leading: Container(
                               width: 50,
                               height: 50,
-                              color: Colors.white, // Shimmer color for the image container
+                              color: Colors
+                                  .white, // Shimmer color for the image container
                             ),
                             title: Container(
                               height: 16,
                               width: MediaQuery.of(context).size.width * 0.7,
-                              color: Colors.white, // Shimmer color for the title container
+                              color: Colors
+                                  .white, // Shimmer color for the title container
                             ),
                             subtitle: Container(
                               height: 16,
                               width: MediaQuery.of(context).size.width * 0.5,
-                              color: Colors.white, // Shimmer color for the subtitle container
+                              color: Colors
+                                  .white, // Shimmer color for the subtitle container
                             ),
-                            onTap: () {
-                            },
+                            onTap: () {},
                           ),
                         );
                       },
                     ),
                   );
                 }
-
               }),
-
-
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               CarouselSlider(
-                items: bannerImageUrls.map((imageUrl) => Builder(
-                  builder: (BuildContext context) => Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(imageUrl),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                )).toList(),
+                items: bannerImageUrls
+                    .map((imageUrl) => Builder(
+                        builder: (BuildContext context) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProductsList(
+                                            categoryId: 'dinova-saina',
+                                            count: 0,
+                                            categoryName: 'Dinova Saina')));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(imageUrl),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            )))
+                    .toList(),
                 options: CarouselOptions(
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 5),
@@ -211,23 +224,22 @@ int valueX=0;
             delegate: _TabBarDelegate(
               child: TabBar(
                 controller: _tabController,
-                tabs:  [
+                tabs: [
                   Tab(text: context.tr('discount')),
                   Tab(text: context.tr('new')),
                   Tab(text: context.tr('populars')),
-
                 ],
-                indicator:  const UnderlineTabIndicator(
+                indicator: const UnderlineTabIndicator(
                   borderSide: BorderSide(
                     color: Color(0xFF79B531),
                     width: 2,
                   ),
                 ),
-
                 labelColor: const Color(0xFF79B531),
                 unselectedLabelColor: Colors.grey,
                 labelStyle: const TextStyle(
-                  fontWeight: FontWeight.normal, // Change this line to set the font weight
+                  fontWeight: FontWeight
+                      .normal, // Change this line to set the font weight
                 ),
               ),
             ),
@@ -236,12 +248,10 @@ int valueX=0;
         ],
         body: TabBarView(
           controller: _tabController,
-
           children: const [
             ThirdTab(),
             FirstTab(),
             SecondTab(),
-
           ],
         ),
       ),
@@ -253,52 +263,56 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   final ValueChanged<String> onChanged;
   _SearchBarDelegate({required this.onChanged});
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => Container(
-      color: Colors.white, // Set background color to white
-      padding: const EdgeInsets.only(top: 30, left: 20, right: 10),
-      child: Column(
-        children: [
-          const SizedBox(height: 20,),
-          Row(
+  Widget build(
+          BuildContext context, double shrinkOffset, bool overlapsContent) =>
+      Container(
+          color: Colors.white, // Set background color to white
+          padding: const EdgeInsets.only(top: 30, left: 20, right: 10),
+          child: Column(
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xF1F1F1FF),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child:  TextField(
-                    textAlignVertical: TextAlignVertical.center,
-                    onChanged: onChanged,
-                    decoration:  InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      prefixIconColor: Color(0xFF748BA4),
-                      hintText: context.tr('search_field'),
-                      border: InputBorder.none,
-                      hintStyle: TextStyle(fontWeight: FontWeight.w300),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xF1F1F1FF),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: TextField(
+                        textAlignVertical: TextAlignVertical.center,
+                        onChanged: onChanged,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          prefixIconColor: Color(0xFF748BA4),
+                          hintText: context.tr('search_field'),
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoriteProductsPage(),
+                        ),
+                      );
+                    },
+                    child: const Icon(Icons.favorite_border),
+                  ),
+                ],
               ),
-
-              const SizedBox(width: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FavoriteProductsPage(),
-                    ),
-                  );
-                },
-                child: const Icon(Icons.favorite_border),
-              ),
+              const SizedBox(
+                height: 10,
+              )
             ],
-          ),
-          const SizedBox(height: 10,)
-        ],
-      )
-  );
+          ));
 
   @override
   double get maxExtent => 108;
@@ -307,7 +321,8 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => 108;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }
 
 class _TabBarDelegate extends SliverPersistentHeaderDelegate {
@@ -316,14 +331,16 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   _TabBarDelegate({required this.child});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SizedBox.expand(
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: Colors.white, // Set the background color to transparent
+  Widget build(
+          BuildContext context, double shrinkOffset, bool overlapsContent) =>
+      SizedBox.expand(
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            color: Colors.white, // Set the background color to transparent
+          ),
+          child: child,
         ),
-        child: child,
-      ),
-    );
+      );
 
   @override
   double get maxExtent => child.preferredSize.height;
@@ -332,6 +349,6 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => child.preferredSize.height;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }
-

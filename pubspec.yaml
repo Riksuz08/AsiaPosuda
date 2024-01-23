@@ -80,11 +80,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   json_annotation: ^4.8.1
   flutter_launcher_icons: ^0.13.1
-flutter_launcher_icons:
-    android: "launcher_icon"
-    ios: true
-    image_path: "assets/png/asia.png"
-    min_sdk_android: 21
+
 
 flutter:
 
@@ -108,3 +104,12 @@ flutter:
     - family: AppIcons
       fonts:
         - asset: assets/fonts/AppIcons.ttf
+
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: "AppIcon"
+  image_path: "assets/png/asia_noText.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  remove_alpha_ios: true

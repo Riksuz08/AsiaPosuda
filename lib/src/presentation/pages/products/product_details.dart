@@ -34,16 +34,13 @@ class ProductDetails extends StatefulWidget {
   State<ProductDetails> createState() => _ProductDetailsState();
 }
 
-
 class _ProductDetailsState extends State<ProductDetails> {
   final CarouselController _carouselController = CarouselController();
   final PagingController<int, ProductItem> _pagingController =
-  PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 1);
   bool isVisible = false;
   late List<Map<String, dynamic>> dropdownItems = [];
   Map<String, dynamic> selectedDropdownValues = {};
-
-
 
   void scrollToImage(String imageUrl) {
     final index = widget.product.images.indexOf(imageUrl);
@@ -51,6 +48,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       _carouselController.animateToPage(index);
     }
   }
+
   void getItemDropDownMenu() {
     for (final item in widget.product.attributes) {
       // Assuming item.name is the name of the option and item.options is the list of options
@@ -61,18 +59,23 @@ class _ProductDetailsState extends State<ProductDetails> {
       dropdownItems.add(dropdownItem);
     }
     print(dropdownItems.toString());
-
   }
+
   bool _isButtonVisible = true;
   @override
   void initState() {
     super.initState();
+    for (final item in widget.product.variations) {
+      print(item.image);
+      print(item.option);
+    }
     extractNumbersWithoutSpaces();
     getItemDropDownMenu();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
   }
+
   String formatNumber(int number) {
     final String reversed = number.toString().split('').reversed.join();
     String result = '';
@@ -86,6 +89,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     return result.split('').reversed.join();
   }
+
   Future<void> _launchURLInBrowser() async {
     final url = Uri.parse(widget.product.permalink);
     if (await canLaunchUrl(url)) {
@@ -94,14 +98,17 @@ class _ProductDetailsState extends State<ProductDetails> {
       print('Could not launch $url');
     }
   }
-void shareProduct(){
-     final String message = widget.product.name +'\n'+widget.product.permalink;
+
+  void shareProduct() {
+    final String message =
+        widget.product.name + '\n' + widget.product.permalink;
     Share.share(message);
-}
+  }
+
   void toggleFavorite() {
     setState(() {
-      final isFavorite = FavoriteProductsPage.favoriteProducts.contains(
-          widget.product);
+      final isFavorite =
+          FavoriteProductsPage.favoriteProducts.contains(widget.product);
 
       if (isFavorite) {
         FavoriteProductsPage.favoriteProducts.remove(widget.product);
@@ -117,9 +124,8 @@ void shareProduct(){
       final isInCart = FavoritesPage.orderProducts.contains(widget.product);
 
       if (isInCart) {
-        final existingProduct =
-        FavoritesPage.orderProducts.firstWhere((p) =>
-        p.id == widget.product.id);
+        final existingProduct = FavoritesPage.orderProducts
+            .firstWhere((p) => p.id == widget.product.id);
         existingProduct.quantity = existingProduct.quantity + _count;
       } else {
         widget.product.quantity = _count;
@@ -127,39 +133,48 @@ void shareProduct(){
       }
     });
   }
-  int maxprice=0;
-  int minprice=0;
+
+  int maxprice = 0;
+  int minprice = 0;
   int percent = 0;
-   void extractNumbersWithoutSpaces() {
+  bool hasDelWord(String text) {
+    final RegExp regExp = RegExp(r'\bdel\b');
+    return regExp.hasMatch(text);
+  }
+
+  bool inSkidka = false;
+  void extractNumbersWithoutSpaces() {
+    inSkidka = hasDelWord(widget.product.pricehtml);
     // Remove spaces from the input string
-    final String stringWithoutSpaces = widget.product.pricehtml.replaceAll(' ', '');
+    final String stringWithoutSpaces =
+        widget.product.pricehtml.replaceAll(' ', '');
 
     // Use the regular expression to extract numbers
     final RegExp regExp = RegExp(r'\d+');
     final List<Match> matches = regExp.allMatches(stringWithoutSpaces).toList();
 
     // Convert matched substrings to integers and return a list of numbers
-    final List prices = matches.map((match) => int.parse(match.group(0)!)).toList();
-    if(prices.length==2 && !prices.contains(0)){
-
-      if(prices[0]>prices[1]){
+    final List prices =
+        matches.map((match) => int.parse(match.group(0)!)).toList();
+    if (prices.length == 2 && !prices.contains(0)) {
+      if (prices[0] > prices[1]) {
         maxprice = prices[0];
-        minprice=prices[1];
-      }else{
+        minprice = prices[1];
+      } else {
         minprice = prices[0];
-        maxprice=prices[1];
+        maxprice = prices[1];
       }
-      percent = ((maxprice-minprice)*100/maxprice).round();
-    }else{
-      if(prices.isNotEmpty){
-      minprice=prices.last;
-      }else{
-        minprice=0;
+      percent = ((maxprice - minprice) * 100 / maxprice).round();
+    } else {
+      if (prices.isNotEmpty) {
+        minprice = prices.last;
+      } else {
+        minprice = 0;
       }
     }
   }
-  String getSlugByName(String name) {
 
+  String getSlugByName(String name) {
     for (final item in slugs) {
       if (item['name'] == name) {
         return item['slug'];
@@ -167,8 +182,8 @@ void shareProduct(){
     }
     return ''; // Return an empty string if the name is not found in the data
   }
-  String getColorSlugByName(String name) {
 
+  String getColorSlugByName(String name) {
     for (final item in colorSlugs) {
       if (item['name'] == name) {
         return item['slug'];
@@ -176,14 +191,25 @@ void shareProduct(){
     }
     return ''; // Return an empty string if the name is not found in the data
   }
-  String getSrcImageWithSlug(String name){
-     for(final variation in widget.product.variations){
-       if(variation.option==getColorSlugByName(name)){
-         return variation.image;
-       }
-     }
-     return '';
+
+  String getSrcImageWithSlug(String name) {
+    for (final variation in widget.product.variations) {
+      if (variation.option == getColorSlugByName(name)) {
+        return variation.image;
+      }
+    }
+    return '';
   }
+
+  String getSrcImageWithOption(String name) {
+    for (final variation in widget.product.variations) {
+      if (variation.option == name) {
+        return variation.image;
+      }
+    }
+    return '';
+  }
+
   Future<void> _fetchPage(int pageKey) async {
     try {
       final products = await HttpService().fetchProductsOfSubCategories(
@@ -192,7 +218,7 @@ void shareProduct(){
       );
 
       _pagingController.appendLastPage(products);
-    } on (Error, ) catch (e) {
+    } on (Error,) catch (e) {
       _pagingController.error = e;
     }
   }
@@ -203,7 +229,6 @@ void shareProduct(){
   Widget build(BuildContext context) {
     String? inStock;
     if (widget.product.stockstatus) {
-
       inStock = 'Есть в наличии';
     } else {
       inStock = 'Нет в наличии';
@@ -217,367 +242,510 @@ void shareProduct(){
     }
 
     return Scaffold(
-
       body: Stack(
         children: [
           SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ProductCarouselSlider(
+                    product: widget.product,
+                    carouselController: _carouselController),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(10),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.product.name,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Row(
                   children: [
-                    ProductCarouselSlider(product: widget.product,carouselController: _carouselController),
+                    SizedBox(width: 6),
+                    Icon(Icons.star, color: Colors.yellow, size: 20),
+                    SizedBox(width: 6),
+                    Text(generateRandomRating().toString(),
+                        style: TextStyle(fontSize: 14)),
+                    SizedBox(width: 20),
                     Container(
-
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
                       padding: const EdgeInsets.all(10),
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.topRight,
                       child: Text(
-                        widget.product.name,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 6),
-                        Icon(Icons.star, color: Colors.yellow, size: 20),
-                        SizedBox(width: 6),
-                        Text(generateRandomRating().toString(),
-                            style: TextStyle(fontSize: 14)),
-                        SizedBox(width: 20),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          alignment: Alignment.topRight,
-                          child: Text(
-                            inStock,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: widget.product.stockstatus  ?
-                              Color(0xFF79B531) : Colors.red,
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final dropdownItem in dropdownItems)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8),
-                                // Adjust the left padding as needed
-                                child: Text(dropdownItem['name'] ?? ''),
-                              ),
-                              Wrap(
-                                spacing: 8,
-                                children: [
-                                  for (final option in dropdownItem['options'])
-                                    TChoiceChip(
-                                      text: option.toString(),
-                                      selected: selectedDropdownValues[dropdownItem['name']] ==
-                                          option,
-                                      onSelected: (value) {
-                                        setState(() {
-
-                                          selectedDropdownValues[dropdownItem['name']] =
-                                              option;
-                                          print(selectedDropdownValues[dropdownItem['name']]);
-                                          print(getColorSlugByName(selectedDropdownValues[dropdownItem['name']]));
-                                          print(getSrcImageWithSlug(selectedDropdownValues[dropdownItem['name']]));
-                                          scrollToImage(getSrcImageWithSlug(selectedDropdownValues[dropdownItem['name']]));
-                                        });
-                                      },
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
-                    SizedBox(height: 25,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Text(formatNumber(minprice)+' '+context.tr('uzs'),style: TextStyle(fontSize: 20),),
-                          SizedBox(width: 10,),
-                          Visibility(
-                            visible: percent==0 ? false : true,
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Color(0xFF79B531)
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                                  child: Text('-'+percent.toString()+'%',style: TextStyle(color: Colors.white,fontSize: 10),),
-                                )
-                            ),
-                          )
-                        ],),
-
-                       Visibility(
-                         visible: maxprice.toString() == '0' ? false : true ,
-                         child:  Text(formatNumber(maxprice)+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey),),
-                       ),
-                        SizedBox(height: 10,),
-                       Visibility(
-                         visible: percent==0 ? false : true,
-                         child:  Container(
-                             decoration: BoxDecoration(
-                                 borderRadius: BorderRadius.circular(15),
-                                 color: Color(0xFF79B531)
-                             ),
-                             child: Padding(
-                               padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                               child: Text(context.tr('discount'),style: TextStyle(color: Colors.white,fontSize: 10),),
-                             )
-                         ),
-                       )
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Row(
-                      children: [
-
-                        const Text('Категории:  ',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),),
-                        Expanded(child: Text(
-                          widget.product.categoriesName.join(', '),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          ),
-
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 5,),
-                    Container(
-
-                      height: 1,
-                      padding: const EdgeInsets.symmetric(horizontal: 10,),
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      color: Colors.grey.shade300,
-                    ),
-
-
-                    SizedBox(height: 6,),
-                    Visibility(
-                      visible: widget.product.shortdescription.isNotEmpty
-                          ? true
-                          : false,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Краткое описание товара: ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Container(
-
-                            alignment: Alignment.centerLeft,
-                            child: Html(
-                              data: widget.product.shortdescription,
-                              style: {
-                                'ul': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                                'p': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                                'div': Style(
-                                  fontSize: FontSize(12),
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              },
-                            ),
-                          ),
-                        ],
-                      ),),
-
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: InkWell(
-                          onTap: (){
-                           Navigator.push(
-                          context,
-                         MaterialPageRoute(
-                           builder: (
-                               context) =>  FullDescription(fulldesctription: widget.product.description,),
-                         ),
-                       );
-                     },
-                          child: Container(
-                       padding: EdgeInsets.all(10),
-                       width: MediaQuery.of(context).size.width,
-                       decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(15),
-                           color: Colors.grey[200]
-                       ),
-
-                       child: Center(
-                         child: Text(context.tr('fulldesc'),),
-                       ),
-                     ),
-                     )
-                   ),
-
-
-                    // Row(
-                    //   children: [
-                    //     SizedBox(width: 5,),
-                    //     Image.asset('assets/png/asia_noText.png', width: 30,height: 30,),
-                    //     MaterialButton(
-                    //       onPressed: _launchURLInBrowser,
-                    //       child: Text('Открыть на сайте',style: TextStyle(color: Color(
-                    //           0xFF79B531)),),
-                    //       textColor: Colors.black,
-                    //       padding: const EdgeInsets.all(5.0),
-                    //     ),
-                    //   ],
-                    // ),
-
-                    // Container(
-                    //   decoration: const BoxDecoration(
-                    //     color: Color(0xFF79B531),
-                    //     shape: BoxShape.rectangle,
-                    //     borderRadius: BorderRadius.all(Radius.circular(15))
-                    //   ),
-                    //   child: Column(
-                    //     children: [
-                    //       Text("Доставка",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
-                    //       Row(
-                    //         children: [
-                    //           SizedBox(width: 10,),
-                    //           Image(image:NetworkImage('https://asiaposuda.uz/wp-content/uploads/2021/08/delivery.webp'),width: 100,height: 100,),
-                    //           SizedBox(width: 10,),
-                    //           Expanded(child:Column(
-                    //             children: [
-                    //               Text('Доставка по всему Ташкенту  30000 сум. \n Доставка по региону по договоренности с клиентом ',
-                    //                 style: TextStyle(color: Colors.white),
-                    //               )
-                    //             ],
-                    //           ),)
-                    //
-                    //
-                    //         ],
-                    //
-                    //       ),
-                    //
-                    //     ],
-                    //   )
-                    // ),
-                    const SizedBox(height: 20,),
-
-                    SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            for (var categoryName in widget.product.categoriesName)
-                              GestureDetector(
-                                onTap: () {
-                                  print(categoryName);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductsList(
-                                        categoryId: getSlugByName(categoryName),
-                                        count: 0,
-                                        categoryName: categoryName,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Color(0xFF79B531),
-                                  ),
-                                  margin: EdgeInsets.only(right: 8), // Adjust the spacing between containers
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    child: Text(
-                                      categoryName,
-                                      style: TextStyle(color: Colors.white, fontSize: 15),
-                                    ),
-                                  ),
-                                ),
-                              )
-                          ],
-                        ),
-                      ),
-
-
-                    const SizedBox(height: 20,),
-                    Container(
-                      height: 1,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      color: Colors.grey.shade300,
-                    ),
-                    Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      padding: const EdgeInsets.all(5),
-                      child: const Text('Похожие товары',style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400,fontSize: 18),),
-                    ),
-                    SafeArea(
-                      child: PagedGridView<int, ProductItem>(
-                        pagingController: _pagingController,
-                        shrinkWrap: true,
-                        gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: 330,
-                          childAspectRatio: 2 / 3,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 2,
-                        ),
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.all(10),
-                        builderDelegate:
-                        PagedChildBuilderDelegate<ProductItem>(
-                          itemBuilder: (context, item, index) =>
-                              ProductCard(products: item,isDiscount: false,),
+                        inStock,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: widget.product.stockstatus
+                              ? Color(0xFF79B531)
+                              : Colors.red,
                         ),
                       ),
                     ),
                   ],
                 ),
-              )
-          ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (final dropdownItem in dropdownItems)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            // Adjust the left padding as needed
+                            child: Text(dropdownItem['name'] ?? ''),
+                          ),
+                          Wrap(
+                            spacing: 8,
+                            children: [
+                              for (final option in dropdownItem['options'])
+                                TChoiceChip(
+                                  text: option.toString(),
+                                  selected: selectedDropdownValues[
+                                          dropdownItem['name']] ==
+                                      option,
+                                  onSelected: (value) {
+                                    setState(() {
+                                      selectedDropdownValues[
+                                          dropdownItem['name']] = option;
+                                      print(selectedDropdownValues[
+                                          dropdownItem['name']]);
+                                      print(getColorSlugByName(
+                                          selectedDropdownValues[
+                                              dropdownItem['name']]));
+                                      print(getSrcImageWithSlug(
+                                          selectedDropdownValues[
+                                              dropdownItem['name']]));
+                                      scrollToImage(getSrcImageWithSlug(
+                                          selectedDropdownValues[
+                                              dropdownItem['name']]));
+                                      scrollToImage(getSrcImageWithOption(
+                                          selectedDropdownValues[
+                                              dropdownItem['name']]));
+                                    });
+                                  },
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Visibility(
+                      visible: inSkidka,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '${formatNumber(minprice)} сум',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Visibility(
+                                visible: percent == 0 ? false : true,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Color(0xFF79B531)),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 2),
+                                      child: Text(
+                                        '-' + percent.toString() + '%',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 10),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                          Visibility(
+                            visible: maxprice.toString() == '0' ? false : true,
+                            child: Text(
+                              formatNumber(maxprice) + ' ' + context.tr('uzs'),
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Colors.grey,
+                                  fontSize: 14),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Visibility(
+                            visible: percent == 0 ? false : true,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Color(0xFF79B531)),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2),
+                                  child: Text(
+                                    context.tr('discount'),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 10),
+                                  ),
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: !inSkidka,
+                      child: Row(
+                        children: [
+                          // Visibility(
+                          //   visible:
+                          //       maxprice.toString() == '0' ? false : true,
+                          //   child: Text(
+                          //     formatNumber(maxprice) +
+                          //         ' ' +
+                          //         context.tr('uzs'),
+                          //     style: TextStyle(
+                          //         color: Colors.grey, fontSize: 12),
+                          //   ),
+                          // ),
+                          Visibility(
+                            visible: (maxprice != 0 && minprice != 0),
+                            child: Text(
+                              '${formatNumber(minprice)} - ${formatNumber(maxprice)} сум',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: (minprice != 0 && maxprice == 0),
+                            child: Text(
+                              '${formatNumber(minprice)} сум',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       formatNumber(minprice) + ' ' + context.tr('uzs'),
+                    //       style: TextStyle(fontSize: 20),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10,
+                    //     ),
+                    //     Visibility(
+                    //       visible: percent == 0 ? false : true,
+                    //       child: Container(
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(15),
+                    //               color: Color(0xFF79B531)),
+                    //           child: Padding(
+                    //             padding: EdgeInsets.symmetric(
+                    //                 horizontal: 5, vertical: 2),
+                    //             child: Text(
+                    //               '-' + percent.toString() + '%',
+                    //               style: TextStyle(
+                    //                   color: Colors.white, fontSize: 10),
+                    //             ),
+                    //           )),
+                    //     )
+                    //   ],
+                    // ),
+                    // Visibility(
+                    //   visible: maxprice.toString() == '0' ? false : true,
+                    //   child: Text(
+                    //     formatNumber(maxprice) + ' ' + context.tr('uzs'),
+                    //     style: TextStyle(
+                    //         decoration: TextDecoration.lineThrough,
+                    //         color: Colors.grey),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // Visibility(
+                    //   visible: percent == 0 ? false : true,
+                    //   child: Container(
+                    //       decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(15),
+                    //           color: Color(0xFF79B531)),
+                    //       child: Padding(
+                    //         padding: EdgeInsets.symmetric(
+                    //             horizontal: 5, vertical: 2),
+                    //         child: Text(
+                    //           context.tr('discount'),
+                    //           style:
+                    //               TextStyle(color: Colors.white, fontSize: 10),
+                    //         ),
+                    //       )),
+                    // )
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'Категории:  ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        widget.product.categoriesName.join(', '),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 1,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey.shade300,
+                ),
+
+                SizedBox(
+                  height: 6,
+                ),
+                Visibility(
+                  visible:
+                      widget.product.shortdescription.isNotEmpty ? true : false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Краткое описание товара: ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Html(
+                          data: widget.product.shortdescription,
+                          style: {
+                            'ul': Style(
+                              fontSize: FontSize(12),
+                              fontWeight: FontWeight.normal,
+                            ),
+                            'p': Style(
+                              fontSize: FontSize(12),
+                              fontWeight: FontWeight.normal,
+                            ),
+                            'div': Style(
+                              fontSize: FontSize(12),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullDescription(
+                              fulldesctription: widget.product.description,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.grey[200]),
+                        child: Center(
+                          child: Text(
+                            context.tr('fulldesc'),
+                          ),
+                        ),
+                      ),
+                    )),
+
+                // Row(
+                //   children: [
+                //     SizedBox(width: 5,),
+                //     Image.asset('assets/png/asia_noText.png', width: 30,height: 30,),
+                //     MaterialButton(
+                //       onPressed: _launchURLInBrowser,
+                //       child: Text('Открыть на сайте',style: TextStyle(color: Color(
+                //           0xFF79B531)),),
+                //       textColor: Colors.black,
+                //       padding: const EdgeInsets.all(5.0),
+                //     ),
+                //   ],
+                // ),
+
+                // Container(
+                //   decoration: const BoxDecoration(
+                //     color: Color(0xFF79B531),
+                //     shape: BoxShape.rectangle,
+                //     borderRadius: BorderRadius.all(Radius.circular(15))
+                //   ),
+                //   child: Column(
+                //     children: [
+                //       Text("Доставка",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                //       Row(
+                //         children: [
+                //           SizedBox(width: 10,),
+                //           Image(image:NetworkImage('https://asiaposuda.uz/wp-content/uploads/2021/08/delivery.webp'),width: 100,height: 100,),
+                //           SizedBox(width: 10,),
+                //           Expanded(child:Column(
+                //             children: [
+                //               Text('Доставка по всему Ташкенту  30000 сум. \n Доставка по региону по договоренности с клиентом ',
+                //                 style: TextStyle(color: Colors.white),
+                //               )
+                //             ],
+                //           ),)
+                //
+                //
+                //         ],
+                //
+                //       ),
+                //
+                //     ],
+                //   )
+                // ),
+                const SizedBox(
+                  height: 20,
+                ),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (var categoryName in widget.product.categoriesName)
+                        GestureDetector(
+                          onTap: () {
+                            print(categoryName);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductsList(
+                                  categoryId: getSlugByName(categoryName),
+                                  count: 0,
+                                  categoryName: categoryName,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Color(0xFF79B531),
+                            ),
+                            margin: EdgeInsets.only(
+                                right:
+                                    8), // Adjust the spacing between containers
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              child: Text(
+                                categoryName,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                            ),
+                          ),
+                        )
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 1,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey.shade300,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(5),
+                  child: const Text(
+                    'Похожие товары',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18),
+                  ),
+                ),
+                SafeArea(
+                  child: PagedGridView<int, ProductItem>(
+                    pagingController: _pagingController,
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 330,
+                      childAspectRatio: 2 / 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                    ),
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.all(10),
+                    builderDelegate: PagedChildBuilderDelegate<ProductItem>(
+                      itemBuilder: (context, item, index) => ProductCard(
+                        products: item,
+                        isDiscount: false,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
           Positioned(
             top: 0,
             left: 0,
@@ -588,10 +756,7 @@ void shareProduct(){
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.8),
-                    Colors.transparent
-                  ],
+                  colors: [Colors.black.withOpacity(0.8), Colors.transparent],
                 ),
               ),
               child: Row(
@@ -601,8 +766,7 @@ void shareProduct(){
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon:
-                    const Icon(Icons.arrow_back, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                   Row(
                     children: [
@@ -611,8 +775,8 @@ void shareProduct(){
                           toggleFavorite();
                         },
                         icon: Icon(
-                          FavoriteProductsPage.favoriteProducts.contains(
-                              widget.product)
+                          FavoriteProductsPage.favoriteProducts
+                                  .contains(widget.product)
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: Colors.white,
@@ -620,7 +784,7 @@ void shareProduct(){
                       ),
                       IconButton(
                         onPressed: () {
-                            shareProduct();
+                          shareProduct();
                         },
                         icon: Icon(
                           Icons.ios_share_outlined,
@@ -629,7 +793,6 @@ void shareProduct(){
                       ),
                     ],
                   )
-
                 ],
               ),
             ),
@@ -637,10 +800,7 @@ void shareProduct(){
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.1,
         color: Colors.white,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 1),
@@ -651,13 +811,25 @@ void shareProduct(){
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Visibility(
-                    visible: maxprice.toString() == '0' ? true : false ,
-                    child: Text('Цена: ', style: TextStyle(fontSize: 10,color: Color(0xFF727070)),),
+                    visible: maxprice.toString() == '0' ? true : false,
+                    child: Text(
+                      'Цена: ',
+                      style: TextStyle(fontSize: 10, color: Color(0xFF727070)),
+                    ),
                   ),
-                  Text(formatNumber(minprice)+' '+context.tr('uzs'),style: TextStyle(fontSize: 17),),
+                  Text(
+                    formatNumber(minprice) + ' ' + context.tr('uzs'),
+                    style: TextStyle(fontSize: 17),
+                  ),
                   Visibility(
-                    visible: maxprice.toString() == '0' ? false : true ,
-                    child:  Text(formatNumber(maxprice)+' '+context.tr('uzs'),style: TextStyle( decoration: TextDecoration.lineThrough,color: Colors.grey,fontSize: 11),),
+                    visible: maxprice.toString() == '0' ? false : true,
+                    child: Text(
+                      formatNumber(maxprice) + ' ' + context.tr('uzs'),
+                      style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          color: Colors.grey,
+                          fontSize: 11),
+                    ),
                   ),
                 ],
               ),
@@ -711,8 +883,7 @@ void shareProduct(){
                           toggleOrder();
                           showCustomSnackBar(context, 'Перейти на корзинку');
                           print(FavoritesPage.orderProducts.toString());
-                          FavoritesPage.checkedProducts.add(
-                              widget.product);
+                          FavoritesPage.checkedProducts.add(widget.product);
                         });
 
                         // Simulate animation duration
@@ -738,32 +909,29 @@ void shareProduct(){
                     ),
                   ),
                   Visibility(
-                    visible: !_isButtonVisible,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 30),
-                      child: Lottie.network(
-                        'https://lottie.host/f312197c-99b3-43d7-89a2-de652938e63d/5BykGjCcwC.json',
-                        width: 80,
-                        height: 80,
-                      ),
-                    )
-                  ),
+                      visible: !_isButtonVisible,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 30),
+                        child: Lottie.network(
+                          'https://lottie.host/f312197c-99b3-43d7-89a2-de652938e63d/5BykGjCcwC.json',
+                          width: 80,
+                          height: 80,
+                        ),
+                      )),
                 ],
               ),
             ],
           ),
-
         ),
       ),
-
-
     );
   }
+
   void navigateToHome() {
     Navigator.of(context).popUntil((route) => route.isFirst);
     context.read<MainBloc>().add(const MainEventChanged(BottomMenu.favorites));
-
   }
+
   void showCustomSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -781,7 +949,7 @@ void shareProduct(){
         backgroundColor: Color(0xFF79B531),
         action: SnackBarAction(
           label: 'Перейти',
-          textColor: Colors.white,// Change the label as needed
+          textColor: Colors.white, // Change the label as needed
           onPressed: () {
             // Add the action you want to perform when the button is clicked
             // For example, you can navigate to a new screen.
@@ -791,7 +959,4 @@ void shareProduct(){
       ),
     );
   }
-
-
-
 }

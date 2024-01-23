@@ -208,8 +208,12 @@ class _OrdersPageState extends State<OrdersPage> {
                   );
                 } else {
                   return SliverToBoxAdapter(
-                    child: const ShimmerLoadingGrid(),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height, // Set a fixed height or adjust it based on your layout
+                      child: const ShimmerLoadingGrid(),
+                    ),
                   );
+
                 }
               },
             ),
