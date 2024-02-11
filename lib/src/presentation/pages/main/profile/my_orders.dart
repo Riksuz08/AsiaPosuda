@@ -64,7 +64,7 @@ class _MyOrdersState extends State<MyOrders> {
                 return _activeOrders(context, orderModels.allOrders);
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Text('Нету активных заказов'),
                 );
               }
             }),
@@ -74,7 +74,7 @@ class _MyOrdersState extends State<MyOrders> {
                 return _allOrders(context, orderModels.allOrders);
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Text('Нету заказов'),
                 );
               }
             }),

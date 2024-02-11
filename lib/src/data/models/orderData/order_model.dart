@@ -4,7 +4,7 @@ class OrderModel {
   late String status;
   late String totalPrice;
   late int orderQuantity;
-  late LineItems lineItems;
+  late List<LineItems> lineItems;
 
   OrderModel({
     required this.id,
@@ -21,20 +21,19 @@ class OrderModel {
         'status': status,
         'total_price': totalPrice,
         'order_quantity': orderQuantity,
-        'line_items': lineItems.toJson(),
+        'line_items': lineItems.map((item) => item.toJson()).toList(),
       };
+
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-    final List<LineItems> lineItemsJson = json['line_items'];
+    final List<dynamic> lineItemsJson = json['line_items'];
     return OrderModel(
       id: json['id'],
       createdAt: json['created_at'],
       status: json['status'],
       totalPrice: json['total'],
       orderQuantity: json['total_line_items_quantity'],
-      lineItems: LineItems.fromJsonList(
-        json['line_items'] is List
-            ? json['line_items'][0] // Assuming you want the first item
-            : json['line_items'],
+      lineItems: List<LineItems>.from(
+        lineItemsJson.map((item) => LineItems.fromJson(item)),
       ),
     );
   }
@@ -65,28 +64,13 @@ class LineItems {
         'name': name,
         'product_id': productId,
       };
-  factory LineItems.fromJsonList(List<dynamic> jsonList) {
-    if (jsonList.isNotEmpty) {
-      // Assuming you want to handle the first item in the list
-      final Map<String, dynamic> firstItem = jsonList[0];
-      return LineItems(
-        id: firstItem['id'],
-        total: firstItem['total'],
-        price: firstItem['price'],
-        quantity: firstItem['quantity'],
-        name: firstItem['name'],
-        productId: firstItem['product_id'],
+
+  factory LineItems.fromJson(Map<String, dynamic> json) => LineItems(
+        id: json['id'],
+        total: json['total'],
+        price: json['price'],
+        quantity: json['quantity'],
+        name: json['name'],
+        productId: json['product_id'],
       );
-    } else {
-      // Handle the case where the list is empty (if needed)
-      return LineItems(
-        id: 0,
-        total: '0.00',
-        price: '0.00',
-        quantity: 0,
-        name: '',
-        productId: 0,
-      );
-    }
-  }
 }

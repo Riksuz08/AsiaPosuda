@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sample_bloc_mobile/src/app_options.dart';
@@ -25,7 +23,10 @@ class SettingsPage extends StatelessWidget {
         centerTitle: true,
         shadowColor: Colors.grey.shade50,
         backgroundColor: Colors.white,
-        title:  Text(context.tr('settings'), style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal),),
+        title: Text(
+          context.tr('settings'),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -40,30 +41,28 @@ class SettingsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-
                 ListTile(
                   onTap: () {
-
                     customModalBottomSheet<void>(
                       context: context,
                       builder: (_, controller) => LanguageBottomWidget(
-                          onChanged: (lang) async {
-                            showCustomSnackBar(context,'Перезапустите приложение');
-                            AppOptions.update(
-                              context,
-                              options.copyWith(locale: Locale(lang)),
-                            );
-                            Navigator.pop(context);
-                            await sl<LocalSource>().setLocale(lang);
-
-                          },
-                        ),
+                        onChanged: (lang) async {
+                          showCustomSnackBar(
+                              context, 'Перезапустите приложение');
+                          AppOptions.update(
+                            context,
+                            options.copyWith(locale: Locale(lang)),
+                          );
+                          print(lang);
+                          Navigator.pop(context);
+                          await sl<LocalSource>().setLocale(lang);
+                        },
+                      ),
                     );
                   },
                   title: Text(context.tr('language')),
                   tileColor: Colors.white,
                 ),
-
               ],
             ),
           ),
@@ -71,6 +70,7 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
   void showCustomSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

@@ -14,42 +14,43 @@ class _FullDescriptionState extends State<FullDescription> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-
         centerTitle: true,
         shadowColor: Colors.grey.shade50,
         backgroundColor: Colors.white,
-        title:  Text(context.tr('aboutproduct'), style: const TextStyle(color: Colors.black,fontWeight: FontWeight.normal),),
+        title: Text(
+          context.tr('aboutproduct'),
+          style: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.normal),
+        ),
       ),
-    body: Padding(
-
-      padding: EdgeInsets.all(10),
-      child:  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          Container(
-
-            alignment: Alignment.centerLeft,
-            child: Html(
-              data: widget.fulldesctription,
-              style: {
-                'ul': Style(
-                  fontSize: FontSize(15),
-                  fontWeight: FontWeight.bold,
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Html(
+                  data: widget.fulldesctription,
+                  style: {
+                    'ul': Style(
+                      fontSize: FontSize(15),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    'p': Style(
+                      fontSize: FontSize(15),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    'div': Style(
+                      fontSize: FontSize(15),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  },
                 ),
-                'p': Style(
-                  fontSize: FontSize(15),
-                  fontWeight: FontWeight.bold,
-                ),
-                'div': Style(
-                  fontSize: FontSize(15),
-                  fontWeight: FontWeight.bold,
-                ),
-              },
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    )
-    );
+        ),
+      ));
 }

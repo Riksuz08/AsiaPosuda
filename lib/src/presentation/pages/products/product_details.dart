@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sample_bloc_mobile/src/config/color_slug.dart';
@@ -35,11 +36,16 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  String currentPrice = '';
+  String regularPrice = '';
+  late final ProductItem variableProduct;
+
   final CarouselController _carouselController = CarouselController();
   final PagingController<int, ProductItem> _pagingController =
       PagingController(firstPageKey: 1);
   bool isVisible = false;
   late List<Map<String, dynamic>> dropdownItems = [];
+  late List<Map<String, dynamic>> variations = [];
   Map<String, dynamic> selectedDropdownValues = {};
 
   void scrollToImage(String imageUrl) {
@@ -58,19 +64,29 @@ class _ProductDetailsState extends State<ProductDetails> {
       };
       dropdownItems.add(dropdownItem);
     }
+
     print(dropdownItems.toString());
+  }
+
+  String removeSymbolsAndSpaces(String input) {
+    // Use a regular expression to match only numbers and letters
+    final RegExp regExp = RegExp(r'[a-zA-Z0-9]');
+
+    // Use the replaceAll method to remove symbols and spaces
+    return input.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
   }
 
   bool _isButtonVisible = true;
   @override
   void initState() {
     super.initState();
-    for (final item in widget.product.variations) {
-      print(item.image);
-      print(item.option);
-    }
+    // for (final item in widget.product.variations) {
+    //   print(item.image);
+    //   print(item.option);
+    // }
     extractNumbersWithoutSpaces();
     getItemDropDownMenu();
+
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -88,15 +104,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     }
 
     return result.split('').reversed.join();
-  }
-
-  Future<void> _launchURLInBrowser() async {
-    final url = Uri.parse(widget.product.permalink);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      print('Could not launch $url');
-    }
   }
 
   void shareProduct() {
@@ -119,19 +126,50 @@ class _ProductDetailsState extends State<ProductDetails> {
     isVisible = true;
   }
 
-  void toggleOrder() {
-    setState(() {
-      final isInCart = FavoritesPage.orderProducts.contains(widget.product);
+  Future<void> toggleOrder() async {
+    if (id != -1) {
+      final ProductItem variableProduct =
+          await HttpService().fetchProductById(id);
+      print(variableProduct);
+      setState(() {
+        final isInCart = FavoritesPage.orderProducts
+            .any((product) => product.id == variableProduct.id);
 
-      if (isInCart) {
-        final existingProduct = FavoritesPage.orderProducts
-            .firstWhere((p) => p.id == widget.product.id);
-        existingProduct.quantity = existingProduct.quantity + _count;
-      } else {
-        widget.product.quantity = _count;
-        FavoritesPage.orderProducts.add(widget.product);
-      }
-    });
+        print(isInCart);
+        if (isInCart) {
+          final existingProduct = FavoritesPage.orderProducts
+              .firstWhere((p) => p.id == variableProduct.id);
+
+          setState(() {
+            showOptionSnackBar(context, 'Есть такой товар!');
+            showCustomSnackBar(context, 'Перейти на корзинку');
+            // existingProduct.quantity = existingProduct.quantity + 1;
+          });
+        } else {
+          print(variableProduct.price);
+          if (variableProduct.price != '') {
+            variableProduct.quantity = 1;
+            FavoritesPage.orderProducts.add(variableProduct);
+            FavoritesPage.checkedProducts.add(variableProduct);
+            FavoritesPage.category = widget.product.categoriesName.last;
+            showCustomSnackBar(context, 'Перейти на корзинку');
+          } else {
+            showOptionSnackBar(context, 'Нельзя добавить этот товар!');
+          }
+        }
+      });
+    } else {
+      setState(() {
+        if (widget.product.price != '') {
+          widget.product.quantity = 1;
+          FavoritesPage.orderProducts.add(widget.product);
+          FavoritesPage.checkedProducts.add(widget.product);
+          showCustomSnackBar(context, 'Перейти на корзинку');
+        } else {
+          showOptionSnackBar(context, 'Нельзя добавить этот товар!');
+        }
+      });
+    }
   }
 
   int maxprice = 0;
@@ -180,7 +218,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         return item['slug'];
       }
     }
-    return ''; // Return an empty string if the name is not found in the data
+    return '';
   }
 
   String getColorSlugByName(String name) {
@@ -189,7 +227,13 @@ class _ProductDetailsState extends State<ProductDetails> {
         return item['slug'];
       }
     }
-    return ''; // Return an empty string if the name is not found in the data
+    return '';
+  }
+
+  String removeNonAlphanumericAndSpaces(String input) {
+    RegExp alphanumeric = RegExp(r'[a-zA-Z0-9]');
+    Iterable<Match> matches = alphanumeric.allMatches(input);
+    return matches.map((match) => match.group(0)!).join();
   }
 
   String getSrcImageWithSlug(String name) {
@@ -201,9 +245,31 @@ class _ProductDetailsState extends State<ProductDetails> {
     return '';
   }
 
+  int getIdWithSlug(String name) {
+    for (final variation in widget.product.variations) {
+      if (variation.option == getColorSlugByName(name)) {
+        return variation.id;
+      }
+    }
+    return -1;
+  }
+
+  int getIdWithOption(String name) {
+    for (final variation in widget.product.variations) {
+      print(
+          '${removeNonAlphanumericAndSpaces(variation.option)}and${removeNonAlphanumericAndSpaces(name)}');
+      if (removeNonAlphanumericAndSpaces(variation.option) ==
+          removeNonAlphanumericAndSpaces(name)) {
+        return variation.id;
+      }
+    }
+    return -1;
+  }
+
   String getSrcImageWithOption(String name) {
     for (final variation in widget.product.variations) {
-      if (variation.option == name) {
+      if (removeNonAlphanumericAndSpaces(variation.option) ==
+          removeNonAlphanumericAndSpaces(name)) {
         return variation.image;
       }
     }
@@ -223,8 +289,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     }
   }
 
-  int _count = 1;
-
+  int id = -1;
+  dynamic optionx;
   @override
   Widget build(BuildContext context) {
     String? inStock;
@@ -291,48 +357,97 @@ class _ProductDetailsState extends State<ProductDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     for (final dropdownItem in dropdownItems)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            // Adjust the left padding as needed
-                            child: Text(dropdownItem['name'] ?? ''),
-                          ),
-                          Wrap(
-                            spacing: 8,
-                            children: [
-                              for (final option in dropdownItem['options'])
-                                TChoiceChip(
-                                  text: option.toString(),
-                                  selected: selectedDropdownValues[
-                                          dropdownItem['name']] ==
-                                      option,
-                                  onSelected: (value) {
-                                    setState(() {
-                                      selectedDropdownValues[
-                                          dropdownItem['name']] = option;
-                                      print(selectedDropdownValues[
-                                          dropdownItem['name']]);
-                                      print(getColorSlugByName(
-                                          selectedDropdownValues[
-                                              dropdownItem['name']]));
-                                      print(getSrcImageWithSlug(
-                                          selectedDropdownValues[
-                                              dropdownItem['name']]));
-                                      scrollToImage(getSrcImageWithSlug(
-                                          selectedDropdownValues[
-                                              dropdownItem['name']]));
-                                      scrollToImage(getSrcImageWithOption(
-                                          selectedDropdownValues[
-                                              dropdownItem['name']]));
-                                    });
-                                  },
-                                ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      if (dropdownItem['name'] != 'Brendlar' &&
+                          dropdownItem['name'] != 'Ishlab chiqarilgan davlat' &&
+                          dropdownItem['name'] != 'Material')
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              // Adjust the left padding as needed
+                              child: Text(dropdownItem['name'] ?? ''),
+                            ),
+                            Wrap(
+                              spacing: 8,
+                              children: [
+                                for (final option in dropdownItem['options'])
+                                  TChoiceChip(
+                                    text: option.toString(),
+                                    selected: selectedDropdownValues[
+                                            dropdownItem['name']] ==
+                                        option,
+                                    onSelected: (value) {
+                                      setState(() {
+                                        optionx = option;
+                                        selectedDropdownValues[
+                                            dropdownItem['name']] = option;
+                                        print('x' +
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]);
+                                        print(getColorSlugByName(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]));
+                                        print(getSrcImageWithSlug(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]));
+                                        print(getIdWithSlug(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]));
+                                        print(id.toString() + 'do');
+                                        id = getIdWithSlug(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]);
+                                        if (id == -1) {
+                                          id = getIdWithOption(
+                                              selectedDropdownValues[
+                                                  dropdownItem['name']]);
+                                        }
+                                        print(id.toString() + 'posle');
+                                        scrollToImage(getSrcImageWithSlug(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]));
+                                        scrollToImage(getSrcImageWithOption(
+                                            selectedDropdownValues[
+                                                dropdownItem['name']]));
+                                        for (final item
+                                            in widget.product.variations) {
+                                          if (removeSymbolsAndSpaces(
+                                                  item.option) ==
+                                              removeSymbolsAndSpaces(
+                                                  selectedDropdownValues[
+                                                      dropdownItem['name']])) {
+                                            setState(() {
+                                              currentPrice = item.price;
+                                              regularPrice = item.regularprice;
+
+                                              if (currentPrice ==
+                                                  regularPrice) {
+                                                inSkidka = false;
+                                                maxprice = 0;
+                                                minprice =
+                                                    int.parse(currentPrice);
+                                              } else if (int.parse(
+                                                      regularPrice) >
+                                                  int.parse(currentPrice)) {
+                                                inSkidka = true;
+                                                maxprice =
+                                                    int.parse(regularPrice);
+                                                minprice =
+                                                    int.parse(currentPrice);
+                                              } else {}
+                                            });
+                                          }
+                                        }
+                                        print("Current price" + currentPrice);
+                                      });
+                                    },
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
                   ],
                 ),
                 SizedBox(
@@ -878,20 +993,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                     visible: _isButtonVisible,
                     child: ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          _isButtonVisible = false;
-                          toggleOrder();
-                          showCustomSnackBar(context, 'Перейти на корзинку');
-                          print(FavoritesPage.orderProducts.toString());
-                          FavoritesPage.checkedProducts.add(widget.product);
-                        });
-
-                        // Simulate animation duration
-                        Future.delayed(Duration(seconds: 2), () {
+                        if (optionx.toString() != 'null' ||
+                            dropdownItems.isEmpty) {
                           setState(() {
-                            _isButtonVisible = true;
+                            _isButtonVisible = false;
+                            toggleOrder();
                           });
-                        });
+
+                          // Simulate animation duration
+                          Future.delayed(const Duration(seconds: 2), () {
+                            setState(() {
+                              _isButtonVisible = true;
+                            });
+                          });
+                        } else {
+                          showOptionSnackBar(context, 'Выберите опцию');
+                          print('select option');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -911,7 +1029,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Visibility(
                       visible: !_isButtonVisible,
                       child: Padding(
-                        padding: EdgeInsets.only(right: 30),
+                        padding: const EdgeInsets.only(right: 30),
                         child: Lottie.network(
                           'https://lottie.host/f312197c-99b3-43d7-89a2-de652938e63d/5BykGjCcwC.json',
                           width: 80,
@@ -956,6 +1074,25 @@ class _ProductDetailsState extends State<ProductDetails> {
             navigateToHome();
           },
         ),
+      ),
+    );
+  }
+
+  void showOptionSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: RichText(
+          text: TextSpan(
+            text: message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Color(0xFF79B531),
       ),
     );
   }

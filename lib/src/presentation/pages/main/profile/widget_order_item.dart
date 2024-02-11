@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sample_bloc_mobile/src/data/models/orderData/order_model.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/order_details.dart';
 
 class WidgetOrderItem extends StatelessWidget {
   final OrderModel orderModel;
   const WidgetOrderItem({super.key, required this.orderModel});
+  String formatDate(String dateString) {
+    print(orderModel.toJson());
+    final DateTime date = DateTime.parse(dateString);
+    final DateFormat formatter = DateFormat('dd MMM, yyyy');
+    final String formattedDate = formatter.format(date.toLocal());
+    final String dateneed = formattedDate.replaceAll('+', 'в');
+    return dateneed;
+  }
 
   @override
   Widget build(BuildContext context) => Container(
@@ -24,10 +33,13 @@ class WidgetOrderItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               iconText(
-                  Icon(Icons.edit),
+                  Icon(
+                    Icons.edit,
+                    size: 18,
+                  ),
                   Text(
                     'Номер заказа',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   )),
               Text(
                 orderModel.id.toString(),
@@ -42,13 +54,16 @@ class WidgetOrderItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               iconText(
-                  Icon(Icons.today),
+                  Icon(
+                    Icons.today,
+                    size: 18,
+                  ),
                   Text(
                     'Время заказа',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   )),
               Text(
-                orderModel.createdAt,
+                formatDate(orderModel.createdAt),
                 style: TextStyle(fontSize: 14),
               )
             ],
@@ -63,16 +78,16 @@ class WidgetOrderItem extends StatelessWidget {
                 const Row(
                   children: [
                     Text(
-                      ' Order Details ',
-                      style: TextStyle(color: Colors.black),
+                      ' Детали ',
+                      style: TextStyle(color: Colors.white),
                     ),
                     Icon(
                       Icons.chevron_right,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ],
                 ),
-                Colors.green,
+                Color(0xFF79B531),
                 () {
                   Navigator.push(
                       context,

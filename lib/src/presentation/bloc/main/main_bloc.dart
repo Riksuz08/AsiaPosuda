@@ -19,5 +19,6 @@ enum BottomMenu {
   main,
   catalog,
   favorites,
+  site,
   profile,
 }

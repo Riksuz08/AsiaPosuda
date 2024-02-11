@@ -225,9 +225,9 @@ class _HomePageState extends State<HomePage>
               child: TabBar(
                 controller: _tabController,
                 tabs: [
-                  Tab(text: context.tr('discount')),
+                  Tab(text: context.tr('low_price')),
                   Tab(text: context.tr('new')),
-                  Tab(text: context.tr('populars')),
+                  Tab(text: context.tr('discount')),
                 ],
                 indicator: const UnderlineTabIndicator(
                   borderSide: BorderSide(
@@ -249,9 +249,9 @@ class _HomePageState extends State<HomePage>
         body: TabBarView(
           controller: _tabController,
           children: const [
-            ThirdTab(),
-            FirstTab(),
             SecondTab(),
+            FirstTab(),
+            ThirdTab(),
           ],
         ),
       ),

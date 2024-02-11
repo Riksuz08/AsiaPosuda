@@ -14,9 +14,10 @@ class SecondTab extends StatefulWidget {
   State<SecondTab> createState() => _SecondTabState();
 }
 
-class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixin{
+class _SecondTabState extends State<SecondTab>
+    with AutomaticKeepAliveClientMixin {
   final PagingController<int, ProductItem> _pagingController =
-  PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -24,13 +25,12 @@ class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixi
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
-
   }
-
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final products = await Get.put(HttpService()).fetchProductsByPopularity(pageKey);
+      final products =
+          await Get.put(HttpService()).fetchProductsByPrice(pageKey);
 
       final isLastPage = products.length < 20;
 
@@ -39,34 +39,32 @@ class _SecondTabState extends State<SecondTab> with AutomaticKeepAliveClientMixi
       } else {
         final nextPageKey = pageKey + 1;
         _pagingController.appendPage(products, nextPageKey);
-
       }
     } on (Error,) catch (e) {
       _pagingController.error = e;
     }
   }
+
   @override
   Widget build(BuildContext context) => PagedGridView<int, ProductItem>(
-
-    shrinkWrap: true,
-    pagingController: _pagingController,
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      mainAxisExtent: 330,
-      childAspectRatio: 2 / 3,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      crossAxisCount: 2,
-    ),
-    physics: const BouncingScrollPhysics(),
-    padding: const EdgeInsets.all(10),
-    builderDelegate: PagedChildBuilderDelegate<ProductItem>(
-      itemBuilder: (context, item, index) =>
-
-          ProductCard(products: item,isDiscount: false,),
-
-
-    ),
-  );
+        shrinkWrap: true,
+        pagingController: _pagingController,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisExtent: 330,
+          childAspectRatio: 2 / 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+        ),
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(10),
+        builderDelegate: PagedChildBuilderDelegate<ProductItem>(
+          itemBuilder: (context, item, index) => ProductCard(
+            products: item,
+            isDiscount: false,
+          ),
+        ),
+      );
 
   @override
   void dispose() {

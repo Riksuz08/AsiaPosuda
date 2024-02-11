@@ -7,6 +7,7 @@ import 'package:sample_bloc_mobile/src/core/utils/utils.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/home/home_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/bloc/main/main_bloc.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/fade_indexed_stack/animated_fade_indexed_stack.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/site/site.dart';
 
 import 'favorites/bookmark_page.dart';
 import 'home/home_page.dart';
@@ -34,10 +35,11 @@ class MainPage extends StatelessWidget {
             body: FadeIndexedStack(
               index: bottomMenu.index,
               children: const [
-                 HomePage(),
-                 OrdersPage(),
-                 FavoritesPage(),
-                 ProfilePage()
+                HomePage(),
+                OrdersPage(),
+                FavoritesPage(),
+                Site(),
+                ProfilePage()
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
@@ -60,13 +62,17 @@ class MainPage extends StatelessWidget {
                     .add(MainEventChanged(BottomMenu.values[i]));
               },
               currentIndex: bottomMenu.index,
-              selectedItemColor: const Color(0xFF79B531), // Change the color of the selected item
-              unselectedItemColor: Colors.grey, // Change the color of unselected items
-              selectedLabelStyle: TextStyle(color: Color(0xFF79B531)),// Change the text color of the selected label
+              selectedItemColor: const Color(
+                  0xFF79B531), // Change the color of the selected item
+              unselectedItemColor:
+                  Colors.grey, // Change the color of unselected items
+              selectedLabelStyle: TextStyle(
+                  color: Color(
+                      0xFF79B531)), // Change the text color of the selected label
               unselectedLabelStyle: TextStyle(color: Colors.grey),
               items: [
                 _navigationBarItem(
-                  label:context.tr('main'),
+                  label: context.tr('main'),
                   icon: 'assets/png/asia.png',
                   activeIcon: 'assets/png/asia.png',
                 ),
@@ -77,11 +83,16 @@ class MainPage extends StatelessWidget {
                 ),
                 _navigationBarItem(
                   label: context.tr('cart'),
-                  icon:'assets/png/bag.png' ,
+                  icon: 'assets/png/bag.png',
                   activeIcon: 'assets/png/bag.png',
                 ),
                 _navigationBarItem(
-                  label:context.tr('profile'),
+                  label: context.tr('site'),
+                  icon: 'assets/png/site.png',
+                  activeIcon: 'assets/png/site.png',
+                ),
+                _navigationBarItem(
+                  label: context.tr('profile'),
                   icon: 'assets/png/user.png',
                   activeIcon: 'assets/png/user.png',
                 ),

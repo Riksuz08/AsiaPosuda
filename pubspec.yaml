@@ -16,6 +16,7 @@ dependencies:
   intl: ^0.18.0
   http: ^1.1.0
   lottie: ^3.0.0
+  webview_flutter: ^4.5.0
   image_picker: ^1.0.5
   fluttertoast: ^8.0.7
   url_launcher: ^6.2.2
@@ -90,6 +91,7 @@ flutter:
     - assets/locale/
     - assets/fonts/
     - assets/png/asia.png
+    - assets/png/site.png
     - assets/png/search.png
     - assets/png/bag.png
     - assets/png/user.png
@@ -99,6 +101,9 @@ flutter:
     - assets/png/asia_banner.png
     - assets/png/phone.png
     - assets/png/telegram.png
+    - assets/png/russia.png
+    - assets/png/uzbekistan.png
+
 
   fonts:
     - family: AppIcons

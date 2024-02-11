@@ -49,6 +49,9 @@ class HttpService {
     String? surnameSH,
     String? phoneNumberSH,
     String totalPrice,
+    String city,
+    String pay,
+    String delivery,
   ) async {
     final List<Map<String, dynamic>> lineItems = orderProducts.map((item) {
       return {'product_id': item.id, 'quantity': item.quantity};
@@ -57,15 +60,15 @@ class HttpService {
     final Map<String, dynamic> orderData = {
       'order': {
         'payment_details': {
-          'method_id': 'uzs',
-          'method_title': 'Наличными',
+          'method_id': pay,
+          'method_title': delivery,
           'paid': true
         },
         'billing_address': {
           'first_name': name,
           'last_name': surname,
           'address_1': '',
-          'city': 'Tashkent',
+          'city': city,
           'state': '',
           'postcode': '',
           'country': 'UZ',
@@ -77,7 +80,7 @@ class HttpService {
           'last_name': surnameSH,
           'address_1': addressSH,
           'phone': phoneNumberSH,
-          'city': '',
+          'city': city,
           'state': '',
           'postcode': '',
           'country': 'UZ'
@@ -100,29 +103,8 @@ class HttpService {
       body: jsonEncode(orderData),
     );
 
-    if (response.statusCode == 201) {
-      // Order created successfully
-      final Map<String, dynamic> responseData = jsonDecode(response.body);
-      final Map<String, dynamic> orderModelJson = responseData['order'];
-      final OrderModel orderModel = OrderModel(
-        id: orderModelJson['id'],
-        createdAt: orderModelJson['created_at'],
-        status: orderModelJson['status'],
-        totalPrice: orderModelJson['total'],
-        orderQuantity: orderModelJson['total_line_items_quantity'],
-        lineItems: LineItems.fromJsonList(orderModelJson['line_items']),
-      );
-
-      print('Order created successfully!');
-      print(orderModel);
-
-      return orderModel;
-    } else {
-      // Failed to create order
-      print('Failed to create order. Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      return null;
-    }
+    final List<OrderModel> orders = await getOrdersOfUser(Config.id);
+    return orders.first;
   }
 
   Future<List<OrderModel>> getOrdersOfUser(String id) async {
@@ -140,13 +122,19 @@ class HttpService {
       } else {
         final List<OrderModel> orders = [];
         for (final orderJson in responseData['orders']) {
+          // Convert 'line_items' to a list of LineItems
+          final List<dynamic> lineItemsJson = orderJson['line_items'];
+          final List<LineItems> lineItems = List<LineItems>.from(
+            lineItemsJson.map((item) => LineItems.fromJson(item)),
+          );
+
           final OrderModel orderModel = OrderModel(
             id: orderJson['id'],
             createdAt: orderJson['created_at'],
             status: orderJson['status'],
             totalPrice: orderJson['total'],
             orderQuantity: orderJson['total_line_items_quantity'],
-            lineItems: LineItems.fromJsonList(orderJson['line_items']),
+            lineItems: lineItems,
           );
           orders.add(orderModel);
         }
@@ -199,7 +187,7 @@ class HttpService {
   Future<List<ProductItem>> fetchAllProducts(int pageNo) async {
     try {
       final response = await http.get(Uri.parse(
-          '${Config.baseUrl}/products?filter[limit] =40&page=${pageNo}&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}'));
+          '${Config.baseUrl}/products?filter[limit] =20&page=${pageNo}&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}'));
 
       if (response.statusCode == 200) {
         final List<dynamic> body = jsonDecode(response.body)['products'];
@@ -210,6 +198,31 @@ class HttpService {
           },
         ).toList();
         return products;
+      } else {
+        throw Exception(
+            'Error ${response.statusCode}: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print('Error Type: ${e.runtimeType}');
+      print('Error Message: $e');
+      throw e; // Rethrow the caught exception
+    }
+  }
+
+  Future<ProductItem> fetchProductById(int id) async {
+    try {
+      final response = await http.get(Uri.parse(
+          '${Config.baseUrl}/products/$id?consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}'));
+
+      if (response.statusCode == 200) {
+        final dynamic body = jsonDecode(response.body)['product'];
+
+        if (body != null && body is Map<String, dynamic>) {
+          final ProductItem product = ProductItem.fromJson(body);
+          return product;
+        } else {
+          throw Exception('Invalid data format');
+        }
       } else {
         throw Exception(
             'Error ${response.statusCode}: ${response.reasonPhrase}');
@@ -241,6 +254,23 @@ class HttpService {
   Future<List<ProductItem>> fetchProductsByPopularity(int pageNo) async {
     final responce = await http.get(Uri.parse(
         '${Config.baseUrl}/products?filter[limit]=20&page=${pageNo}&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}&filter[order]=desc&filter[orderby]=meta_value_num&filter[orderby_meta_key]=total_sales'));
+    if (responce.statusCode == 200) {
+      final List<dynamic> body = jsonDecode(responce.body)['products'];
+
+      final List<ProductItem> products = body.map(
+        (product) {
+          return ProductItem.fromJson(product);
+        },
+      ).toList();
+      return products;
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
+  Future<List<ProductItem>> fetchProductsByPrice(int pageNo) async {
+    final responce = await http.get(Uri.parse(
+        '${Config.baseUrl}/products?filter[limit]=20&page=${pageNo}&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}&filter[order]=asc&filter[orderby]=meta_value_num&filter[orderby_meta_key]=_price'));
     if (responce.statusCode == 200) {
       final List<dynamic> body = jsonDecode(responce.body)['products'];
 
@@ -350,6 +380,7 @@ class HttpService {
       if (response.statusCode == 201) {
         // Request successful, you can handle the response here
         localSource.setHasProfile(value: true);
+
         print('User registered successfully');
         return true;
       } else {

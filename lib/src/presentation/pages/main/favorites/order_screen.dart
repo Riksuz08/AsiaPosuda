@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
@@ -29,6 +30,13 @@ class _OrderScreenState extends State<OrderScreen> {
   TextEditingController numberController = TextEditingController();
 
   static List<ProductItem> order = FavoritesPage.checkedProducts;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    numberController.text = '+998';
+  }
+
   int totalCheckedQuantity() {
     int checkedQ = 0;
     for (final item in order) {
@@ -37,16 +45,40 @@ class _OrderScreenState extends State<OrderScreen> {
     return checkedQ;
   }
 
+  String countryDropdown = 'Toshkent shahri';
   HttpService httpService = HttpService();
+  int selectedValue = -1;
+  int selectedValuePay = -1;
   String gettextDelivery() {
-    if (selectedValue) {
+    if (selectedValue == 0) {
       return 'Можете забрать сегодня!';
     } else {
       return 'Доставим в течении 24 - 48 часов';
     }
   }
 
-  bool selectedValue = false;
+  String getDelivery() {
+    if (selectedValue == 0) {
+      return 'Забрать с филиалов';
+    } else if (selectedValue == 1) {
+      return 'Экспресс доставка';
+    } else if (selectedValue == 2) {
+      return 'Бесплатная доставка(П и Ч)';
+    } else {
+      return 'Бесплатная доставка';
+    }
+  }
+
+  String getPay() {
+    if (selectedValuePay == 0) {
+      return 'Наличными';
+    } else if (selectedValuePay == 1) {
+      return 'Картой';
+    } else {
+      return 'Не выбрано';
+    }
+  }
+
   String formatNumber(int number) {
     final String reversed = number.toString().split('').reversed.join();
     String result = '';
@@ -80,197 +112,85 @@ class _OrderScreenState extends State<OrderScreen> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            'Оформление товара',
+            'Оформление заказа',
             style: TextStyle(fontSize: 16),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(30),
-            child: ColoredBox(
-              color: Colors.white,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 10),
-                  child: Text(
-                    message,
-                  ),
-                ),
-              ),
-            ),
           ),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              PreferredSize(
+                preferredSize: Size.fromHeight(100),
+                child: ColoredBox(
+                  color: Colors.white,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              message,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: widget.orderProducts.map((product) {
+                                  // Use product.images.first to get the first image URL for each product
+                                  final String imageUrl =
+                                      product.images.isNotEmpty
+                                          ? product.images.first
+                                          : '';
+
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Container(
+                                      width: 60,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade300,
+                                        // Set the background color to grey
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.grey, width: 0.5),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          imageUrl,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+              const SizedBox(
                 height: 10,
               ),
               Container(
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Способ получения',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w700),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Выберите способ доставки',
-                          style: TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedValue = true;
-                                  if (selectedValue) {
-                                    print('1');
-                                  }
-                                });
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Radio(
-                                      value: true,
-                                      groupValue: selectedValue,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          selectedValue = value!;
-                                          if (selectedValue) {
-                                            print('1');
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(width: 5),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Забрать с филиалов',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Можно забрать сегодня!',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedValue = false;
-                                  if (!selectedValue) {
-                                    print('2');
-                                  }
-                                });
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Radio(
-                                      value: true,
-                                      groupValue: !selectedValue,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          selectedValue = !value!;
-                                          if (!selectedValue) {
-                                            print('2');
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(width: 5),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Экспресс доставка',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Ознакомьтесь с правилами доставки!',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )),
-              SizedBox(
-                height: 12,
-              ),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
+                        const Text(
                           'Получатель заказа',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -281,15 +201,15 @@ class _OrderScreenState extends State<OrderScreen> {
                                   alignLabelWithHint: true,
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.auto,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 0),
                                   labelStyle: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey.shade700),
                                 ),
                               ),
-                              SizedBox(
-                                height: 4,
+                              const SizedBox(
+                                height: 0,
                               ),
                               TextField(
                                 controller: surnameController,
@@ -306,7 +226,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 4,
+                                height: 0,
                               ),
                               TextField(
                                 controller: addressController,
@@ -323,7 +243,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 4,
+                                height: 0,
                               ),
                               TextField(
                                 controller: numberController,
@@ -340,7 +260,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 4,
+                                height: 0,
                               ),
                               Text(
                                 'В формате +998__ _______',
@@ -362,6 +282,181 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                   )),
               SizedBox(
+                height: 12,
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Способ получения',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Город',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: DropdownButton<String>(
+                                value: countryDropdown,
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.grey,
+                                  size: 15,
+                                ),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    countryDropdown = newValue!;
+                                    print(countryDropdown);
+                                  });
+                                },
+                                items: const [
+                                  DropdownMenuItem<String>(
+                                    value: 'Andijon',
+                                    child: Text('Andijon'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Buxoro',
+                                    child: Text('Buxoro'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Farg\'ona',
+                                    child: Text('Farg\'ona'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Jizzax',
+                                    child: Text('Jizzax'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Xorazm',
+                                    child: Text('Xorazm'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Namangan',
+                                    child: Text('Namangan'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Navoiy',
+                                    child: Text('Navoiy'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Qashqadaryo',
+                                    child: Text('Qashqadaryo'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Qoraqalpog\'iston',
+                                    child: Text('Qoraqalpog\'iston'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Samarqand',
+                                    child: Text('Samarqand'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Sirdaryo',
+                                    child: Text('Sirdaryo'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Surxondaryo',
+                                    child: Text('Surxondaryo'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Toshkent shahri',
+                                    child: Text('Toshkent shahri'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Toshkent viloyati',
+                                    child: Text('Toshkent viloyati'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color: Colors.grey.shade200,
+                        ),
+                        SizedBox(height: 5),
+                        if (countryDropdown == 'Toshkent shahri' &&
+                            widget.totalPrice < 300000)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Выберите способ доставки',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                              _buildForShahar(),
+                            ],
+                          ),
+                        if (countryDropdown == 'Toshkent shahri' &&
+                            widget.totalPrice > 300000)
+                          _buildFreeDelivery(),
+                        if (countryDropdown != 'Toshkent shahri' &&
+                            widget.totalPrice < 700000)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Выберите способ доставки',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                              _buildForViloyat(),
+                            ],
+                          ),
+                        if (countryDropdown != 'Toshkent shahri' &&
+                            widget.totalPrice > 700000)
+                          _buildFreeDelivery()
+                      ],
+                    ),
+                  )),
+              SizedBox(
+                height: 12,
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                  child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Способ оплаты',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            _buildPay()
+                          ]))),
+              SizedBox(
                 height: 10,
               ),
               Container(
@@ -380,18 +475,18 @@ class _OrderScreenState extends State<OrderScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                                child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              child: Text(gettextDelivery()),
-                            )),
-                          ),
+                          // Container(
+                          //   width: MediaQuery.of(context).size.width,
+                          //   decoration: BoxDecoration(
+                          //     color: Colors.grey.shade200,
+                          //     borderRadius: BorderRadius.circular(10),
+                          //   ),
+                          //   child: Center(
+                          //       child: Padding(
+                          //     padding: EdgeInsets.symmetric(vertical: 10),
+                          //     child: Text(gettextDelivery()),
+                          //   )),
+                          // ),
                           SizedBox(
                             height: 15,
                           ),
@@ -419,41 +514,50 @@ class _OrderScreenState extends State<OrderScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () async {
-                                final OrderModel? orderModel =
-                                    await httpService.orderProducts(
-                                        widget.orderProducts,
-                                        Config.nameUser.toString(),
-                                        Config.nameUser.toString(),
-                                        Config.email,
-                                        Config.phoneUser.toString(),
-                                        int.parse(Config.id),
-                                        addressController.text.trim(),
-                                        nameController.text.trim(),
-                                        surnameController.text.trim(),
-                                        numberController.text.trim(),
-                                        widget.totalPrice.toString());
+                                if (selectedValue != -1 &&
+                                    selectedValuePay != -1) {
+                                  final OrderModel? orderModel =
+                                      await httpService.orderProducts(
+                                          widget.orderProducts,
+                                          Config.nameUser.toString(),
+                                          Config.nameUser.toString(),
+                                          Config.email,
+                                          Config.phoneUser.toString(),
+                                          int.parse(Config.id),
+                                          addressController.text.trim(),
+                                          nameController.text.trim(),
+                                          surnameController.text.trim(),
+                                          numberController.text.trim(),
+                                          widget.totalPrice.toString(),
+                                          countryDropdown,
+                                          getPay(),
+                                          getDelivery());
 
-                                if (orderModel != null) {
-                                  await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SuccessfullyOrdered(
-                                                orderModel: orderModel,
-                                              )));
-                                  Navigator.pop(context);
-                                  print(true);
-                                } else {
-                                  print(false);
-                                }
-                                for (final item
-                                    in FavoritesPage.checkedProducts) {
-                                  if (FavoritesPage.orderProducts
-                                      .contains(item)) {
-                                    FavoritesPage.orderProducts.remove(item);
+                                  if (orderModel != null) {
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SuccessfullyOrdered(
+                                                  orderModel: orderModel,
+                                                )));
+                                    Navigator.pop(context);
+                                    print(true);
+                                  } else {
+                                    print(false);
                                   }
+                                  for (final item
+                                      in FavoritesPage.checkedProducts) {
+                                    if (FavoritesPage.orderProducts
+                                        .contains(item)) {
+                                      FavoritesPage.orderProducts.remove(item);
+                                    }
+                                  }
+                                  FavoritesPage.checkedProducts.clear();
+                                } else {
+                                  showOptionSnackBar(context,
+                                      'Выберите способ доставки и оплаты');
                                 }
-                                FavoritesPage.checkedProducts.clear();
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Color(0xFF79B531),
@@ -475,5 +579,287 @@ class _OrderScreenState extends State<OrderScreen> {
             ],
           ),
         ));
+  }
+
+  Widget _buildForShahar() {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 0,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Забрать с филиалов',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Посмотреть где!',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 1,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Экспресс доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'От 30 000 сум',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 2,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Бесплатная доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Понядельник, Четверг',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildForViloyat() {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 0,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Доставка через фарго',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'От 25 000 сум',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 1,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Экспресс доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Оператов свяжтся с вами чтобы обсудить!',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFreeDelivery() {
+    selectedValue = 10;
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'У вас бесплатная доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+            child: Text(
+              'Бесплатная доставка от 300 000 сум!',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPay() {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 0,
+            groupValue: selectedValuePay,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValuePay = value!;
+                print(selectedValuePay);
+              });
+            },
+            title: Text(
+              'Наличными при получении',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Оплата в пункте выдачи или курьеру при получении заказа',
+              style: TextStyle(
+                fontSize: 10,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 1,
+            groupValue: selectedValuePay,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValuePay = value!;
+                print(selectedValuePay);
+              });
+            },
+            title: Text(
+              'Картой при получении',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Оплата в пункте выдачи или курьеру при получении заказа',
+              style: TextStyle(
+                fontSize: 10,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void showOptionSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: RichText(
+          text: TextSpan(
+            text: message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Color(0xFF79B531),
+      ),
+    );
   }
 }

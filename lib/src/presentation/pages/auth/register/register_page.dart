@@ -36,226 +36,235 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final HttpService httpService = HttpService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _phoneController.text = '+998';
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      centerTitle: true,
-      shadowColor: Colors.grey.shade50,
-      backgroundColor: Colors.white,
-      title: Text(
-        context.tr('register'),
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 18,
-          fontWeight: FontWeight.normal,
-        ),
-      ),
-    ),
-    body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 20),
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _surnameController,
-                decoration: InputDecoration(
-                  labelText: 'Surname',
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your surname';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                keyboardType: TextInputType.phone,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your phone number';
-                  } else if (!RegExp(r'^\+998\d{9}$').hasMatch(value)) {
-                    return 'Please enter a valid phone number with prefix +998';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  } else if (!RegExp(
-                      r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
-                      .hasMatch(value)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  ),
-                ),
-                obscureText: !_isPasswordVisible,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    print('Name: ${_nameController.text}');
-                    print('Surname: ${_surnameController.text}');
-                    print('Phone Number: ${_phoneController.text}');
-                    print('Email: ${_emailController.text}');
-                    print('Password: ${_passwordController.text}');
-                    try {
-                      final bool loginSuccess =
-                      await httpService.registerUser(
-                        _emailController,
-                        _nameController,
-                        _surnameController,
-                        _passwordController,
-                        _phoneController,
-                      );
-
-                      if (loginSuccess) {
-                        // Close the current page upon successful login
-                        navigateToHome();
-                        await _saveData();
-                        await httpService.getUser(_emailController.text);
-                      } else {
-                        // Handle unsuccessful login (show an error message, etc.)
-                        print(
-                            'Login failed. Please check your credentials.');
-                      }
-                    } catch (error) {
-                      // Handle network or other errors
-                      print('Error: $error');
-                    }
-
-                    print('Email: ${_emailController.text}');
-                    print('Password: ${_passwordController.text}');
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF79B531),
-                  // Set the background color here
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                child: Text(
-                  context.tr('register'),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Уже есть аккаунт?  '),
-                  GestureDetector(
-                      onTap: () {
-                        // Navigate to another screen when the text is clicked
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AuthPage()),
-                        );
-                      },
-                      child: Text(
-                        context.tr('login'),
-                        style: TextStyle(color: Color(0xFF79B531)),
-                      ))
-                ],
-              ),
-            ],
+        appBar: AppBar(
+          centerTitle: true,
+          shadowColor: Colors.grey.shade50,
+          backgroundColor: Colors.white,
+          title: Text(
+            context.tr('register'),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
-      ),
-    ),
-  );
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: context.tr('first_name'),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _surnameController,
+                    decoration: InputDecoration(
+                      labelText: context.tr('last_name'),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your surname';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _phoneController,
+                    decoration: InputDecoration(
+                      labelText: context.tr('phone_number'),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    keyboardType: TextInputType.phone,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your phone number';
+                      } else if (!RegExp(r'^\+998\d{9}$').hasMatch(value)) {
+                        return 'Please enter a valid phone number with prefix +998';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  // TextFormField(
+                  //   controller: _emailController,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Email',
+                  //     filled: true,
+                  //     fillColor: Colors.grey.shade100,
+                  //     border: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(10.0),
+                  //       borderSide: BorderSide.none,
+                  //     ),
+                  //   ),
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   validator: (value) {
+                  //     if (value == null || value.isEmpty) {
+                  //       return 'Please enter your email';
+                  //     } else if (!RegExp(
+                  //         r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                  //         .hasMatch(value)) {
+                  //       return 'Please enter a valid email';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(height: 16),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: context.tr('password'),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
+                    ),
+                    obscureText: !_isPasswordVisible,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _emailController.text =
+                            'email${_phoneController.text.replaceAll('+', '')}@gmail.com';
+                        print('Name: ${_nameController.text}');
+                        print('Surname: ${_surnameController.text}');
+                        print('Phone Number: ${_phoneController.text}');
+                        print('Email: ${_emailController.text}');
+                        print('Password: ${_passwordController.text}');
+
+                        try {
+                          final bool loginSuccess =
+                              await httpService.registerUser(
+                            _emailController,
+                            _nameController,
+                            _surnameController,
+                            _passwordController,
+                            _phoneController,
+                          );
+
+                          if (loginSuccess) {
+                            // Close the current page upon successful login
+                            navigateToHome();
+                            await _saveData();
+                            await httpService.getUser(_emailController.text);
+                          } else {
+                            // Handle unsuccessful login (show an error message, etc.)
+                            print(
+                                'Login failed. Please check your credentials.');
+                          }
+                        } catch (error) {
+                          // Handle network or other errors
+                          print('Error: $error');
+                        }
+
+                        print('Email: ${_emailController.text}');
+                        print('Password: ${_passwordController.text}');
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF79B531),
+                      // Set the background color here
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Text(
+                      context.tr('register'),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Уже есть аккаунт?  '),
+                      GestureDetector(
+                          onTap: () {
+                            // Navigate to another screen when the text is clicked
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AuthPage()),
+                            );
+                          },
+                          child: Text(
+                            context.tr('login'),
+                            style: TextStyle(color: Color(0xFF79B531)),
+                          ))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
 }
