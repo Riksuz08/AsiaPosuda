@@ -17,16 +17,13 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  //  final LineItems lineItems = LineItems(id: 5, total: '600', price: '200', quantity: 2, name: 'ssss', productId: 12);
-  // OrderModel orderModel = OrderModel(id: 5, createdAt: '12.05.2000', status: 'completed', totalPrice: '600', orderQuantity: 2, lineItems:lineItems );
-  // HttpService httpService = HttpService();
-  // List<OrderModel> orders = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     var orderProvider = Provider.of<OrderProvider>(context, listen: false);
     orderProvider.fetchOrders();
+    print(orderProvider.allOrders);
   }
 
   @override

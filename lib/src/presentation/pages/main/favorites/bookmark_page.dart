@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hive/hive.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/auth/register/register_page.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/router/app_routes.dart';
@@ -794,7 +795,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                       ),
                                     );
                                   } else {
-                                    showOptionSnackBar(
+                                    showCustomSnackBar(
                                         context, 'Создайте профиль');
                                   }
                                 },
@@ -821,6 +822,41 @@ class _FavoritesPageState extends State<FavoritesPage> {
           }
         }),
       );
+  void navigateToHome(BuildContext context) {
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    context.read<MainBloc>().add(const MainEventChanged(BottomMenu.profile));
+  }
+
+  void showCustomSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: RichText(
+          text: TextSpan(
+            text: message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Color(0xFF79B531),
+        action: SnackBarAction(
+          label: 'Перейти',
+          textColor: Colors.white, // Change the label as needed
+          onPressed: () {
+            // Add the action you want to perform when the button is clicked
+            // For example, you can navigate to a new screen.
+            // navigateToHome(context);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RegisterPage()));
+          },
+        ),
+      ),
+    );
+  }
+
   void showOptionSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

@@ -38,7 +38,7 @@ class MainPage extends StatelessWidget {
                 HomePage(),
                 OrdersPage(),
                 FavoritesPage(),
-                Site(),
+                OrdersPage(),
                 ProfilePage()
               ],
             ),
@@ -52,7 +52,7 @@ class MainPage extends StatelessWidget {
                   return;
                 }
 
-                if (i == 3 && !localSource.hasProfile) {
+                if (i == 4 && !localSource.hasProfile) {
                   Navigator.pushNamed(context, Routes.register);
                   return;
                 }
@@ -88,8 +88,8 @@ class MainPage extends StatelessWidget {
                 ),
                 _navigationBarItem(
                   label: context.tr('site'),
-                  icon: 'assets/png/site.png',
-                  activeIcon: 'assets/png/site.png',
+                  icon: 'assets/png/aksiya.png',
+                  activeIcon: 'assets/png/aksiya.png',
                 ),
                 _navigationBarItem(
                   label: context.tr('profile'),

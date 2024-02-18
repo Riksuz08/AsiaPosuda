@@ -57,6 +57,14 @@ class _OrderScreenState extends State<OrderScreen> {
     }
   }
 
+  String gettextFreeDeliveryText() {
+    if (countryDropdown == 'Toshkent shahri') {
+      return 'Бесплатная доставка от 300 000 сум!';
+    } else {
+      return 'Бесплатная доставка от 700 000 сум!';
+    }
+  }
+
   String getDelivery() {
     if (selectedValue == 0) {
       return 'Забрать с филиалов';
@@ -516,44 +524,53 @@ class _OrderScreenState extends State<OrderScreen> {
                               onPressed: () async {
                                 if (selectedValue != -1 &&
                                     selectedValuePay != -1) {
-                                  final OrderModel? orderModel =
-                                      await httpService.orderProducts(
-                                          widget.orderProducts,
-                                          Config.nameUser.toString(),
-                                          Config.nameUser.toString(),
-                                          Config.email,
-                                          Config.phoneUser.toString(),
-                                          int.parse(Config.id),
-                                          addressController.text.trim(),
-                                          nameController.text.trim(),
-                                          surnameController.text.trim(),
-                                          numberController.text.trim(),
-                                          widget.totalPrice.toString(),
-                                          countryDropdown,
-                                          getPay(),
-                                          getDelivery());
+                                  if (addressController.text != '') {
+                                    final OrderModel? orderModel =
+                                        await httpService.orderProducts(
+                                            widget.orderProducts,
+                                            Config.nameUser.toString(),
+                                            Config.nameUser.toString(),
+                                            Config.email,
+                                            Config.phoneUser.toString(),
+                                            int.parse(Config.id),
+                                            addressController.text.trim(),
+                                            nameController.text.trim(),
+                                            surnameController.text.trim(),
+                                            numberController.text.trim(),
+                                            widget.totalPrice.toString(),
+                                            countryDropdown,
+                                            getPay(),
+                                            getDelivery());
 
-                                  if (orderModel != null) {
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SuccessfullyOrdered(
-                                                  orderModel: orderModel,
-                                                )));
-                                    Navigator.pop(context);
-                                    print(true);
-                                  } else {
-                                    print(false);
-                                  }
-                                  for (final item
-                                      in FavoritesPage.checkedProducts) {
-                                    if (FavoritesPage.orderProducts
-                                        .contains(item)) {
-                                      FavoritesPage.orderProducts.remove(item);
+                                    if (orderModel != null) {
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SuccessfullyOrdered(
+                                                    orderModel: orderModel,
+                                                    address:
+                                                        addressController.text,
+                                                    methodPay: getPay(),
+                                                  )));
+                                      Navigator.pop(context);
+                                      print(true);
+                                    } else {
+                                      print(false);
                                     }
+                                    for (final item
+                                        in FavoritesPage.checkedProducts) {
+                                      if (FavoritesPage.orderProducts
+                                          .contains(item)) {
+                                        FavoritesPage.orderProducts
+                                            .remove(item);
+                                      }
+                                    }
+                                    FavoritesPage.checkedProducts.clear();
+                                  } else {
+                                    showOptionSnackBar(context,
+                                        'Поля адресс доставки пустой!');
                                   }
-                                  FavoritesPage.checkedProducts.clear();
                                 } else {
                                   showOptionSnackBar(context,
                                       'Выберите способ доставки и оплаты');
@@ -748,7 +765,7 @@ class _OrderScreenState extends State<OrderScreen> {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Color(0xFF79B531),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -767,7 +784,7 @@ class _OrderScreenState extends State<OrderScreen> {
           Padding(
             padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
             child: Text(
-              'Бесплатная доставка от 300 000 сум!',
+              gettextFreeDeliveryText(),
               style: TextStyle(
                 fontSize: 12,
               ),

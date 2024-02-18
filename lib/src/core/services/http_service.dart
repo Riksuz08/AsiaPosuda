@@ -12,10 +12,51 @@ import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart';
 
 import '../../config/config.dart';
 import '../../config/router/app_routes.dart';
+import '../../data/models/notification/notification_data.dart';
 import '../../data/models/orderData/order_model.dart';
 import '../../presentation/pages/main/favorites/order_provider.dart';
+import '../../presentation/pages/main/profile/order_provider.dart';
 
 class HttpService {
+  Future<List<NotificationModel>> getAllNotifications() async {
+    const String apiUrl = 'https://onesignal.com/api/v1/notifications';
+    const String appId = 'ad050e7d-16a8-433e-abc3-ef19a554c5eb';
+    const String authorizationHeader =
+        'Basic NWFkOGE4YjYtMGMyMC00YWJiLTk3YzAtODdjMmZlNjk0OGI1';
+
+    // Construct the URL with query parameters
+    final Uri url = Uri.parse('$apiUrl?app_id=$appId');
+
+    // Set up the HTTP request headers
+    final Map<String, String> headers = {
+      'Authorization': authorizationHeader,
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      final http.Response response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse =
+            json.decode(response.body)['notifications'];
+
+        // Ensure that jsonResponse is a List<dynamic> before casting
+        final List<NotificationModel> notifications = jsonResponse
+            .map((json) => NotificationModel.fromJson(json))
+            .toList();
+
+        return notifications;
+      } else {
+        print('Failed with status: ${response.statusCode}');
+        print('Body: ${response.body}');
+        return [];
+      }
+    } catch (error) {
+      print('Error: $error');
+      return [];
+    }
+  }
+
   Future<List<CategoryData>> fetchCategory() async {
     final responce =
         await http.get(Uri.parse('${Config.baseUrl}/products/categories'
@@ -54,7 +95,10 @@ class HttpService {
     String delivery,
   ) async {
     final List<Map<String, dynamic>> lineItems = orderProducts.map((item) {
-      return {'product_id': item.id, 'quantity': item.quantity};
+      return {
+        'product_id': item.id,
+        'quantity': item.quantity,
+      };
     }).toList();
 
     final Map<String, dynamic> orderData = {
@@ -135,6 +179,8 @@ class HttpService {
             totalPrice: orderJson['total'],
             orderQuantity: orderJson['total_line_items_quantity'],
             lineItems: lineItems,
+            city: orderJson['shipping_address']['city'],
+            address_1: orderJson['shipping_address']['address_1'],
           );
           orders.add(orderModel);
         }
@@ -274,11 +320,11 @@ class HttpService {
     if (responce.statusCode == 200) {
       final List<dynamic> body = jsonDecode(responce.body)['products'];
 
-      final List<ProductItem> products = body.map(
-        (product) {
-          return ProductItem.fromJson(product);
-        },
-      ).toList();
+      final List<ProductItem> products = body
+          .map(
+            (product) => ProductItem.fromJson(product),
+          )
+          .toList();
       return products;
     } else {
       throw Exception('Failed');

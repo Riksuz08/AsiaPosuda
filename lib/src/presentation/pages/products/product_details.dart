@@ -45,6 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       PagingController(firstPageKey: 1);
   bool isVisible = false;
   late List<Map<String, dynamic>> dropdownItems = [];
+  List<Map<String, dynamic>> filteredDropdownItems = [];
   late List<Map<String, dynamic>> variations = [];
   Map<String, dynamic> selectedDropdownValues = {};
 
@@ -64,7 +65,12 @@ class _ProductDetailsState extends State<ProductDetails> {
       };
       dropdownItems.add(dropdownItem);
     }
-
+    filteredDropdownItems = dropdownItems.where((dropdownItem) {
+      final name = dropdownItem['name'];
+      return name != 'Brendlar' &&
+          name != 'Ishlab chiqarilgan davlat' &&
+          name != 'Material';
+    }).toList();
     print(dropdownItems.toString());
   }
 
@@ -141,7 +147,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               .firstWhere((p) => p.id == variableProduct.id);
 
           setState(() {
-            showOptionSnackBar(context, 'Есть такой товар!');
+            showOptionSnackBar(context, 'Есть такой товар!', Color(0xFFFF8B12));
             showCustomSnackBar(context, 'Перейти на корзинку');
             // existingProduct.quantity = existingProduct.quantity + 1;
           });
@@ -154,7 +160,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             FavoritesPage.category = widget.product.categoriesName.last;
             showCustomSnackBar(context, 'Перейти на корзинку');
           } else {
-            showOptionSnackBar(context, 'Нельзя добавить этот товар!');
+            showOptionSnackBar(
+                context, 'Нельзя добавить этот товар!', Color(0xFFFF1212));
           }
         }
       });
@@ -166,7 +173,8 @@ class _ProductDetailsState extends State<ProductDetails> {
           FavoritesPage.checkedProducts.add(widget.product);
           showCustomSnackBar(context, 'Перейти на корзинку');
         } else {
-          showOptionSnackBar(context, 'Нельзя добавить этот товар!');
+          showOptionSnackBar(
+              context, 'Нельзя добавить этот товар!', Color(0xFFFF1212));
         }
       });
     }
@@ -466,8 +474,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                               Text(
                                 '${formatNumber(minprice)} сум',
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 26,
                                   color: Colors.black,
                                 ),
                               ),
@@ -499,7 +507,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               style: TextStyle(
                                   decoration: TextDecoration.lineThrough,
                                   color: Colors.grey,
-                                  fontSize: 14),
+                                  fontSize: 17),
                             ),
                           ),
                           SizedBox(
@@ -994,7 +1002,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (optionx.toString() != 'null' ||
-                            dropdownItems.isEmpty) {
+                            filteredDropdownItems.isEmpty) {
                           setState(() {
                             _isButtonVisible = false;
                             toggleOrder();
@@ -1007,7 +1015,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             });
                           });
                         } else {
-                          showOptionSnackBar(context, 'Выберите опцию');
+                          showOptionSnackBar(
+                              context, 'Выберите опцию', Color(0xFFFF8B12));
                           print('select option');
                         }
                       },
@@ -1078,7 +1087,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  void showOptionSnackBar(BuildContext context, String message) {
+  void showOptionSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: RichText(
@@ -1092,7 +1101,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
         ),
         duration: Duration(seconds: 2),
-        backgroundColor: Color(0xFF79B531),
+        backgroundColor: color,
       ),
     );
   }

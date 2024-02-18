@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -30,7 +32,12 @@ void main() async {
 
   /// global CERTIFICATE_VERIFY_FAILEd_KEY
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MainApp());
+  // runApp(
+  //   DevicePreview(
+  //     builder: (context) => MainApp(), // Wrap your app
+  //   ),
+  // );
+  runApp(MainApp());
   FlutterNativeSplash.remove();
 }
 
@@ -59,6 +66,14 @@ class MainApp extends StatelessWidget {
               builder: (ctx) {
                 final AppOptions options = AppOptions.of(ctx);
                 return MaterialApp(
+                  theme: ThemeData(
+                      colorScheme:
+                          ColorScheme.light(primary: Color(0xff79b531))),
+                  darkTheme: ThemeData(
+                      colorScheme:
+                          ColorScheme.dark(primary: Color(0xff79b531))),
+                  themeMode: ThemeMode.light,
+
                   /// title
                   debugShowCheckedModeBanner: false,
                   navigatorKey: rootNavigatorKey,

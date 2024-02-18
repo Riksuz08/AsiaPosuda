@@ -33,7 +33,12 @@ class _SecondTabState extends State<SecondTab>
           await Get.put(HttpService()).fetchProductsByPrice(pageKey);
 
       final isLastPage = products.length < 20;
-
+      // final List<ProductItem> products2 = [];
+      // for (final item in products) {
+      //   if (item.price != '' && item) {
+      //     products2.add(item);
+      //   }
+      // }
       if (isLastPage) {
         _pagingController.appendLastPage(products);
       } else {
@@ -59,11 +64,10 @@ class _SecondTabState extends State<SecondTab>
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(10),
         builderDelegate: PagedChildBuilderDelegate<ProductItem>(
-          itemBuilder: (context, item, index) => ProductCard(
-            products: item,
-            isDiscount: false,
-          ),
-        ),
+            itemBuilder: (context, item, index) => ProductCard(
+                  products: item,
+                  isDiscount: false,
+                )),
       );
 
   @override

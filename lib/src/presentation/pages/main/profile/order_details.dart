@@ -29,7 +29,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Order Details",
+            'Заказ',
             style: TextStyle(fontSize: 15),
           ),
         ),
@@ -51,14 +51,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         width: 4,
                       ),
                       Text(
-                        "Номер заказа: " +
-                            "#" +
+                        'Номер заказа: ' +
+                            '#' +
                             widget.orderModel.id.toString(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  _text(widget.orderModel.status),
+                  _text(widget.orderModel.status, context),
                 ],
               ),
               SizedBox(
@@ -78,7 +78,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               ),
               SizedBox(height: 10),
               Text(
-                "Купленные товары",
+                'Купленные товары',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               SizedBox(height: 10),
@@ -139,21 +139,26 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         ),
       );
 
-  Widget _text(String status) {
+  Widget _text(String status, BuildContext context) {
     Color color;
-    if (status == "pending" || status == "processing" || status == "on-hold") {
+    String statusRus;
+    if (status == 'pending' || status == 'processing' || status == 'on-hold') {
       color = Colors.orange;
-    } else if (status == "completed") {
+      statusRus = context.tr('processing2');
+    } else if (status == 'completed') {
       color = Colors.green;
-    } else if (status == "cancelled" ||
-        status == "refunded" ||
-        status == "failed") {
+      statusRus = context.tr('done2');
+    } else if (status == 'cancelled' ||
+        status == 'refunded' ||
+        status == 'failed') {
       color = Colors.redAccent;
+      statusRus = context.tr('notdone2');
     } else {
       color = Colors.redAccent;
+      statusRus = context.tr('notdone2');
     }
     return Text(
-      status.toUpperCase(),
+      statusRus.toUpperCase(),
       style: TextStyle(color: color),
     );
   }

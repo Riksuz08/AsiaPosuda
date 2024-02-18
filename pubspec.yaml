@@ -16,7 +16,7 @@ dependencies:
   intl: ^0.18.0
   http: ^1.1.0
   lottie: ^3.0.0
-  webview_flutter: ^4.5.0
+  webview_flutter: ^4.7.0
   image_picker: ^1.0.5
   fluttertoast: ^8.0.7
   url_launcher: ^6.2.2
@@ -64,12 +64,16 @@ dependencies:
   # native splash
   flutter_native_splash: ^2.3.1
   # share
-  share_plus: ^7.2.1
+  share_plus: ^7.2.2
   # local notification
   flutter_local_notifications: ^15.1.0+1
   retrofit: '>=4.0.0 <5.0.0'
   get: ^4.5.0
   carousel_slider: ^4.0.0
+  device_preview: ^1.1.0
+  onesignal_flutter: ^3.2.7
+  firebase_performance: ^0.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -90,19 +94,7 @@ flutter:
   assets:
     - assets/locale/
     - assets/fonts/
-    - assets/png/asia.png
-    - assets/png/site.png
-    - assets/png/search.png
-    - assets/png/bag.png
-    - assets/png/user.png
-    - assets/png/asia_noText.png
-    - assets/png/empty_cart.jpg
-    - assets/png/profilimage.png
-    - assets/png/asia_banner.png
-    - assets/png/phone.png
-    - assets/png/telegram.png
-    - assets/png/russia.png
-    - assets/png/uzbekistan.png
+    - assets/png/
 
 
   fonts:

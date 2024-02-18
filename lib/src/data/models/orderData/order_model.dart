@@ -2,6 +2,8 @@ class OrderModel {
   late int id;
   late String createdAt;
   late String status;
+  late String city;
+  late String address_1;
   late String totalPrice;
   late int orderQuantity;
   late List<LineItems> lineItems;
@@ -10,6 +12,8 @@ class OrderModel {
     required this.id,
     required this.createdAt,
     required this.status,
+    required this.city,
+    required this.address_1,
     required this.totalPrice,
     required this.orderQuantity,
     required this.lineItems,
@@ -19,6 +23,8 @@ class OrderModel {
         'id': id,
         'created_at': createdAt,
         'status': status,
+        'city': city,
+        'address_1': address_1,
         'total_price': totalPrice,
         'order_quantity': orderQuantity,
         'line_items': lineItems.map((item) => item.toJson()).toList(),
@@ -31,6 +37,8 @@ class OrderModel {
       createdAt: json['created_at'],
       status: json['status'],
       totalPrice: json['total'],
+      city: json['shipping_address']['city'],
+      address_1: json['shipping_address']['address_1'],
       orderQuantity: json['total_line_items_quantity'],
       lineItems: List<LineItems>.from(
         lineItemsJson.map((item) => LineItems.fromJson(item)),

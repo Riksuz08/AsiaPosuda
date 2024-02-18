@@ -8,6 +8,7 @@ import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SearchPage.d
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/SecondTab.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favoritePage/FavoriteProductsPage.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/home/ThirdTab.dart';
+
 import 'package:sample_bloc_mobile/src/presentation/pages/products/products_list.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/services/http_service.dart';
@@ -62,6 +63,7 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     final List<String> bannerImageUrls = [
@@ -76,6 +78,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       backgroundColor: Colors.white,
       body: NestedScrollView(
+        controller: _scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverPersistentHeader(
             delegate: _SearchBarDelegate(
@@ -86,6 +89,11 @@ class _HomePageState extends State<HomePage>
                   controller.searchResults.clear();
                   if (value.length > 2) {
                     controller.fetchSearchResults(value);
+                    _scrollController.animateTo(
+                      0.0,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
                   }
                 });
               },

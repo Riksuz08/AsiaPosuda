@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "565463368310",
-    "project_id": "sample-bloc-5b8b9",
-    "storage_bucket": "sample-bloc-5b8b9.appspot.com"
+    "project_number": "685517758943",
+    "project_id": "asia-posuda",
+    "storage_bucket": "asia-posuda.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565463368310:android:17cbcf4e6fa95f2df75557",
+        "mobilesdk_app_id": "1:685517758943:android:aa6d5d2257e3dd5e45a46a",
         "android_client_info": {
           "package_name": "com.example.sample_bloc_mobile"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "565463368310-g7rbu63pj2lf08rj5piej90bm58nfvn7.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZLwEw3MfQSgUOrpRRkxdYFPHOvbNUMJY"
+          "current_key": "AIzaSyDjPgqQ_fSmGJUc-IHQxp_sWMUWoBu5lcs"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "565463368310-g7rbu63pj2lf08rj5piej90bm58nfvn7.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

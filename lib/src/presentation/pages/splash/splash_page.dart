@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sample_bloc_mobile/src/config/router/app_routes.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/presentation/components/awesome/awesome_loader.dart';
@@ -26,6 +27,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     super.initState();
     context.read<SplashBloc>().add(const SplashEvent());
     getFirst();
+    WidgetsFlutterBinding.ensureInitialized();
+    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+    OneSignal.shared.setAppId('ad050e7d-16a8-433e-abc3-ef19a554c5eb');
+    OneSignal.shared.promptUserForPushNotificationPermission().then((value) {
+      print('Access: $value');
+    });
   }
 
   Future<void> getFirst() async {

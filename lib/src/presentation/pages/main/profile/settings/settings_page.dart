@@ -19,6 +19,7 @@ class SettingsPage extends StatelessWidget {
     final options = AppOptions.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         centerTitle: true,
         shadowColor: Colors.grey.shade50,
