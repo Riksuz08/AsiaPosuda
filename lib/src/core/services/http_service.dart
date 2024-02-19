@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_bloc_mobile/src/data/models/product_categoories/categories.dart';
 import 'package:sample_bloc_mobile/src/data/models/product_categoories/sub_categories.dart';
 import 'package:sample_bloc_mobile/src/data/models/products/products_data.dart';
+import 'package:sample_bloc_mobile/src/data/models/review/review_model.dart';
 
 import '../../config/config.dart';
 import '../../config/router/app_routes.dart';
@@ -151,6 +152,32 @@ class HttpService {
     return orders.first;
   }
 
+  Future<void> reviewProduct(
+    int productId,
+    String review,
+    String reviewer,
+    String email,
+    int rating,
+  ) async {
+    final Map<String, dynamic> reviewData = {
+      'product_id': productId,
+      'review': review,
+      'reviewer': reviewer,
+      'reviewer_email': email,
+      'rating': rating
+    };
+
+    final response = await http.post(
+      Uri.parse(
+        'https://asiaposuda.uz/wp-json/wc/v3/products/reviews?consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}',
+      ),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(reviewData),
+    );
+
+    print(response.body);
+  }
+
   Future<List<OrderModel>> getOrdersOfUser(String id) async {
     final response = await http.get(
       Uri.parse('${Config.baseUrl}/customers/$id/orders'
@@ -230,6 +257,24 @@ class HttpService {
     }
   }
 
+  Future<List<ProductReview>> getReviewOfProducts(int id) async {
+    final response = await http.get(Uri.parse(
+        '${Config.baseUrl}/products/$id/reviews?filter[limit]=100&page=1&consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> body = jsonDecode(response.body)['product_reviews'];
+
+      // Assuming each element in the 'body' list is a review
+      final List<ProductReview> reviews = body.map((json) {
+        return ProductReview.fromJson(json);
+      }).toList();
+
+      return reviews;
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
   Future<List<ProductItem>> fetchAllProducts(int pageNo) async {
     try {
       final response = await http.get(Uri.parse(
@@ -262,7 +307,6 @@ class HttpService {
 
       if (response.statusCode == 200) {
         final dynamic body = jsonDecode(response.body)['product'];
-
         if (body != null && body is Map<String, dynamic>) {
           final ProductItem product = ProductItem.fromJson(body);
           return product;

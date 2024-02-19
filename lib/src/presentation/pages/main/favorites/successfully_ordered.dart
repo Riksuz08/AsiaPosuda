@@ -129,24 +129,6 @@ class _SuccessfullyOrderedState extends State<SuccessfullyOrdered> {
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: 15,
-                          horizontal:
-                              10), // Adjust horizontal padding as needed
-                      height: 200.0,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            15), // Adjust radius as needed
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider(
-                            'https://asiaposuda.uz/wp-content/uploads/2023/10/1.png',
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ],

@@ -57,7 +57,13 @@ class _MyOrdersState extends State<MyOrders> {
           children: <Widget>[
             Consumer<OrderProvider>(builder: (context, orderModels, child) {
               print(orderModels.allOrders);
-              if (orderModels.allOrders.length > 0) {
+              final List<OrderModel> activeOrders = orderModels.allOrders
+                  .where((order) =>
+                      order.status == 'processing' ||
+                      order.status == 'on-hold' ||
+                      order.status == 'pending')
+                  .toList();
+              if (activeOrders.length > 0) {
                 return _activeOrders(context, orderModels.allOrders);
               } else {
                 return Center(

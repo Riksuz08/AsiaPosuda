@@ -38,7 +38,7 @@ class MainPage extends StatelessWidget {
                 HomePage(),
                 OrdersPage(),
                 FavoritesPage(),
-                OrdersPage(),
+                Site(),
                 ProfilePage()
               ],
             ),

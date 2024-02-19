@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/reviewed_item.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/widget_order_item.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/profile/widget_review_item.dart';
 
 import '../../../../data/models/orderData/order_model.dart';
 import 'order_provider.dart';
@@ -28,7 +30,7 @@ class _MyReviewsState extends State<MyReviews> {
       initialIndex: 1,
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           centerTitle: true,
           shadowColor: Colors.grey.shade50,
@@ -55,20 +57,20 @@ class _MyReviewsState extends State<MyReviews> {
             Consumer<OrderProvider>(builder: (context, orderModels, child) {
               print(orderModels.allOrders);
               if (orderModels.allOrders.length > 0) {
-                return _activeOrders(context, orderModels.allOrders);
+                return _completeOrders(context, orderModels.allOrders);
               } else {
                 return Center(
-                  child: Text('Нету активных заказов'),
+                  child: Text('Пусто'),
                 );
               }
             }),
             Consumer<OrderProvider>(builder: (context, orderModels, child) {
               print(orderModels.allOrders);
               if (orderModels.allOrders.length > 0) {
-                return _allOrders(context, orderModels.allOrders);
+                return _completeOrdersReviewed(context, orderModels.allOrders);
               } else {
                 return Center(
-                  child: Text('Нету заказов'),
+                  child: Text('Пусто'),
                 );
               }
             }),
@@ -76,51 +78,22 @@ class _MyReviewsState extends State<MyReviews> {
         ),
       ));
 
-  Widget _activeOrders(BuildContext context, List<OrderModel> orders) {
+  Widget _completeOrders(BuildContext context, List<OrderModel> orders) {
     final List<OrderModel> activeOrders =
         orders.where((order) => order.status == 'completed').toList();
 
-    return ListView(
-      children: [
-        ListView.builder(
-          itemCount: activeOrders.length,
-          physics: ScrollPhysics(),
-          padding: EdgeInsets.all(8),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: WidgetOrderItem(
-                orderModel: activeOrders[index],
-              ),
-            );
-          },
-        ),
-      ],
+    return ReviewItemList(
+      orderModels: activeOrders,
     );
   }
 
-  Widget _allOrders(BuildContext context, List<OrderModel> orders) => ListView(
-        children: [
-          ListView.builder(
-            itemCount: orders.length,
-            physics: ScrollPhysics(),
-            padding: EdgeInsets.all(8),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(16)),
-                child: WidgetOrderItem(
-                  orderModel: orders[index],
-                ),
-              );
-            },
-          )
-        ],
-      );
+  Widget _completeOrdersReviewed(
+      BuildContext context, List<OrderModel> orders) {
+    final List<OrderModel> activeOrders =
+        orders.where((order) => order.status == 'completed').toList();
+
+    return ReviewedItemList(
+      orderModels: activeOrders,
+    );
+  }
 }
