@@ -17,7 +17,7 @@ class SecondTab extends StatefulWidget {
 class _SecondTabState extends State<SecondTab>
     with AutomaticKeepAliveClientMixin {
   final PagingController<int, ProductItem> _pagingController =
-      PagingController(firstPageKey: 1);
+      PagingController(firstPageKey: 14);
 
   @override
   void initState() {

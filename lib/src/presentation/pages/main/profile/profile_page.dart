@@ -309,7 +309,8 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final isTransformed = shrinkOffset < 10; // Adjust the threshold as needed
+    final isTransformed = shrinkOffset < 10;
+    final isTransformed2 = shrinkOffset < 30; // Adjust the threshold as needed
     if (isFirst) {
       print('SSS' + isFirst.toString());
       Future.delayed(Duration(seconds: 2), () async {
@@ -330,6 +331,17 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (isTransformed2)
+            Text(
+              'Личный кабинет',
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600),
+            ),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             children: [
               const CircleAvatar(
@@ -426,10 +438,10 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 200;
+  double get maxExtent => 250;
 
   @override
-  double get minExtent => 100;
+  double get minExtent => 120;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>

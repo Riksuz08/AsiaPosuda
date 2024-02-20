@@ -37,6 +37,7 @@ class _OrderScreenState extends State<OrderScreen> {
     numberController.text = '+998';
   }
 
+  bool first = true;
   int totalCheckedQuantity() {
     int checkedQ = 0;
     for (final item in order) {
@@ -525,48 +526,54 @@ class _OrderScreenState extends State<OrderScreen> {
                                 if (selectedValue != -1 &&
                                     selectedValuePay != -1) {
                                   if (addressController.text != '') {
-                                    final OrderModel? orderModel =
-                                        await httpService.orderProducts(
-                                            widget.orderProducts,
-                                            Config.nameUser.toString(),
-                                            Config.nameUser.toString(),
-                                            Config.email,
-                                            Config.phoneUser.toString(),
-                                            int.parse(Config.id),
-                                            addressController.text.trim(),
-                                            nameController.text.trim(),
-                                            surnameController.text.trim(),
-                                            numberController.text.trim(),
-                                            widget.totalPrice.toString(),
-                                            countryDropdown,
-                                            getPay(),
-                                            getDelivery());
+                                    if (first) {
+                                      first = false;
+                                      Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                      final OrderModel? orderModel =
+                                          await httpService.orderProducts(
+                                              widget.orderProducts,
+                                              Config.nameUser.toString(),
+                                              Config.nameUser.toString(),
+                                              Config.email,
+                                              Config.phoneUser.toString(),
+                                              int.parse(Config.id),
+                                              addressController.text.trim(),
+                                              nameController.text.trim(),
+                                              surnameController.text.trim(),
+                                              numberController.text.trim(),
+                                              widget.totalPrice.toString(),
+                                              countryDropdown,
+                                              getPay(),
+                                              getDelivery());
 
-                                    if (orderModel != null) {
-                                      await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SuccessfullyOrdered(
-                                                    orderModel: orderModel,
-                                                    address:
-                                                        addressController.text,
-                                                    methodPay: getPay(),
-                                                  )));
-                                      Navigator.pop(context);
-                                      print(true);
-                                    } else {
-                                      print(false);
-                                    }
-                                    for (final item
-                                        in FavoritesPage.checkedProducts) {
-                                      if (FavoritesPage.orderProducts
-                                          .contains(item)) {
-                                        FavoritesPage.orderProducts
-                                            .remove(item);
+                                      if (orderModel != null) {
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SuccessfullyOrdered(
+                                                      orderModel: orderModel,
+                                                      address: addressController
+                                                          .text,
+                                                      methodPay: getPay(),
+                                                    )));
+                                        Navigator.pop(context);
+                                        print(true);
+                                      } else {
+                                        print(false);
                                       }
+                                      for (final item
+                                          in FavoritesPage.checkedProducts) {
+                                        if (FavoritesPage.orderProducts
+                                            .contains(item)) {
+                                          FavoritesPage.orderProducts
+                                              .remove(item);
+                                        }
+                                      }
+                                      FavoritesPage.checkedProducts.clear();
                                     }
-                                    FavoritesPage.checkedProducts.clear();
                                   } else {
                                     showOptionSnackBar(context,
                                         'Поля адресс доставки пустой!');

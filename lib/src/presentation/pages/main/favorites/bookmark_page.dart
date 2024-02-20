@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:hive/hive.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/auth/register/register_page.dart';
-import 'package:sample_bloc_mobile/src/presentation/pages/main/main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/router/app_routes.dart';
 import '../../../../config/slugs.dart';
@@ -18,7 +17,6 @@ import '../../../../data/models/products/products_data.dart';
 import '../../../bloc/main/main_bloc.dart';
 import '../../products/components/product_card.dart';
 import '../../products/product_details.dart';
-import 'order_provider.dart';
 import 'order_screen.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -514,12 +512,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  product.name,
-                                                  style: const TextStyle(
-                                                    fontSize: 11,
-                                                  ),
-                                                ),
+                                                Text(product.name,
+                                                    style: TextStyle(
+                                                        fontSize: 17)),
                                                 const SizedBox(height: 8),
                                                 Container(
                                                   height: 35,

@@ -69,7 +69,8 @@ class _ProductDetailsState extends State<ProductDetails> {
       final name = dropdownItem['name'];
       return name != 'Brendlar' &&
           name != 'Ishlab chiqarilgan davlat' &&
-          name != 'Material';
+          name != 'Material' &&
+          dropdownItem['name'] != 'Бренды';
     }).toList();
     print(dropdownItems.toString());
   }
@@ -143,6 +144,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
         print(isInCart);
         if (isInCart) {
+          print('Exist');
           final existingProduct = FavoritesPage.orderProducts
               .firstWhere((p) => p.id == variableProduct.id);
 
@@ -167,14 +169,32 @@ class _ProductDetailsState extends State<ProductDetails> {
       });
     } else {
       setState(() {
-        if (widget.product.price != '') {
-          widget.product.quantity = 1;
-          FavoritesPage.orderProducts.add(widget.product);
-          FavoritesPage.checkedProducts.add(widget.product);
-          showCustomSnackBar(context, 'Перейти на корзинку');
+        final isInCart = FavoritesPage.orderProducts
+            .any((product) => product.id == widget.product.id);
+
+        print(isInCart);
+        if (isInCart) {
+          print('Exist');
+          final existingProduct = FavoritesPage.orderProducts
+              .firstWhere((p) => p.id == widget.product.id);
+
+          setState(() {
+            showOptionSnackBar(context, 'Есть такой товар!', Color(0xFFFF8B12));
+            showCustomSnackBar(context, 'Перейти на корзинку');
+            // existingProduct.quantity = existingProduct.quantity + 1;
+          });
         } else {
-          showOptionSnackBar(
-              context, 'Нельзя добавить этот товар!', Color(0xFFFF1212));
+          print(widget.product.price);
+          if (widget.product.price != '') {
+            widget.product.quantity = 1;
+            FavoritesPage.orderProducts.add(widget.product);
+            FavoritesPage.checkedProducts.add(widget.product);
+            FavoritesPage.category = widget.product.categoriesName.last;
+            showCustomSnackBar(context, 'Перейти на корзинку');
+          } else {
+            showOptionSnackBar(
+                context, 'Нельзя добавить этот товар!', Color(0xFFFF1212));
+          }
         }
       });
     }
@@ -331,10 +351,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(10),
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    widget.product.name,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                  child: Html(
+                    data: widget.product.name,
+                    style: {
+                      'body': Style(
+                        fontSize: FontSize(17),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    },
                   ),
                 ),
                 Row(
@@ -367,7 +391,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     for (final dropdownItem in dropdownItems)
                       if (dropdownItem['name'] != 'Brendlar' &&
                           dropdownItem['name'] != 'Ishlab chiqarilgan davlat' &&
-                          dropdownItem['name'] != 'Material')
+                          dropdownItem['name'] != 'Material' &&
+                          dropdownItem['name'] != 'Бренды')
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -1001,23 +1026,28 @@ class _ProductDetailsState extends State<ProductDetails> {
                     visible: _isButtonVisible,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (optionx.toString() != 'null' ||
-                            filteredDropdownItems.isEmpty) {
-                          setState(() {
-                            _isButtonVisible = false;
-                            toggleOrder();
-                          });
-
-                          // Simulate animation duration
-                          Future.delayed(const Duration(seconds: 2), () {
+                        if (widget.product.stockstatus) {
+                          if (optionx.toString() != 'null' ||
+                              filteredDropdownItems.isEmpty) {
                             setState(() {
-                              _isButtonVisible = true;
+                              _isButtonVisible = false;
+                              toggleOrder();
                             });
-                          });
+
+                            // Simulate animation duration
+                            Future.delayed(const Duration(seconds: 2), () {
+                              setState(() {
+                                _isButtonVisible = true;
+                              });
+                            });
+                          } else {
+                            showOptionSnackBar(
+                                context, 'Выберите опцию', Color(0xFFFF8B12));
+                            print('select option');
+                          }
                         } else {
                           showOptionSnackBar(
-                              context, 'Выберите опцию', Color(0xFFFF8B12));
-                          print('select option');
+                              context, 'Нет в наличии!', Color(0xFFFF1212));
                         }
                       },
                       style: ElevatedButton.styleFrom(
