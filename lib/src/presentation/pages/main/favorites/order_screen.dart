@@ -614,6 +614,35 @@ class _OrderScreenState extends State<OrderScreen> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: RadioListTile<int>(
+            value: 2,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Бесплатная доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Понядельник, Четверг',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
             value: 0,
             groupValue: selectedValue,
             onChanged: (int? value) {
@@ -668,35 +697,6 @@ class _OrderScreenState extends State<OrderScreen> {
           ),
         ),
         SizedBox(height: 5),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: RadioListTile<int>(
-            value: 2,
-            groupValue: selectedValue,
-            onChanged: (int? value) {
-              setState(() {
-                selectedValue = value!;
-                print(selectedValue);
-              });
-            },
-            title: Text(
-              'Бесплатная доставка',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            subtitle: Text(
-              'Понядельник, Четверг',
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
