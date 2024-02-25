@@ -16,9 +16,35 @@ import '../../config/router/app_routes.dart';
 import '../../data/models/notification/notification_data.dart';
 import '../../data/models/orderData/order_model.dart';
 import '../../presentation/pages/main/favorites/order_provider.dart';
+import '../../presentation/pages/main/favorites/promo_model.dart';
 import '../../presentation/pages/main/profile/order_provider.dart';
 
 class HttpService {
+  Future<List<CouponModel>> fetchCoupons() async {
+    const String url =
+        '${Config.baseUrl}/coupons?consumer_key=${Config.consumerKey}&consumer_secret=${Config.consumerSecret}';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body)['coupons'];
+        final List<CouponModel> couponList =
+            data.map((item) => CouponModel.fromJson(item)).toList();
+
+        return couponList;
+      } else {
+        // Handle error
+        print('Failed to load coupons. Status code: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      // Handle network error
+      print('Error loading coupons: $e');
+      return [];
+    }
+  }
+
   Future<List<NotificationModel>> getAllNotifications() async {
     const String apiUrl = 'https://onesignal.com/api/v1/notifications';
     const String appId = 'ad050e7d-16a8-433e-abc3-ef19a554c5eb';
@@ -95,12 +121,12 @@ class HttpService {
     String pay,
     String delivery,
   ) async {
-    final List<Map<String, dynamic>> lineItems = orderProducts.map((item) {
-      return {
-        'product_id': item.id,
-        'quantity': item.quantity,
-      };
-    }).toList();
+    final List<Map<String, dynamic>> lineItems = orderProducts
+        .map((item) => {
+              'product_id': item.id,
+              'quantity': item.quantity,
+            })
+        .toList();
 
     final Map<String, dynamic> orderData = {
       'order': {
@@ -115,7 +141,7 @@ class HttpService {
           'address_1': '',
           'city': city,
           'state': '',
-          'postcode': '',
+          'postcode': totalPrice,
           'country': 'UZ',
           'email': email,
           'phone': phoneNumber
@@ -127,7 +153,7 @@ class HttpService {
           'phone': phoneNumberSH,
           'city': city,
           'state': '',
-          'postcode': '',
+          'postcode': 'TOTAL SUMMA  ' + totalPrice,
           'country': 'UZ'
         },
         'customer_id': id,

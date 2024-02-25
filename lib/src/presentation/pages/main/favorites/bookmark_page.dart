@@ -239,7 +239,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             .add(const MainEventChanged(BottomMenu.main));
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF79B531),
+                        backgroundColor: Color(0xFF79B531),
                       ),
                       child: Text(
                         context.tr('main_to'),
@@ -512,9 +512,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(product.name,
-                                                    style: TextStyle(
-                                                        fontSize: 17)),
+                                                Html(data: product.name),
                                                 const SizedBox(height: 8),
                                                 Container(
                                                   height: 35,
@@ -699,43 +697,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               ),
                             ),
                           ),
-                          SliverToBoxAdapter(
-                              child: Padding(
-                            padding: EdgeInsets.only(left: 10, top: 15),
-                            child: Text(
-                              'Рекомендуем',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ),
-                          )),
-                          SliverToBoxAdapter(
-                              child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 15),
-                            height: 365.0,
-                            child: productsCategory.isNotEmpty
-                                ? ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: productsCategory.length,
-                                    itemBuilder: (context, index) => Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 5, vertical: 5),
-                                          child: SizedBox(
-                                            height: 400,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.47,
-                                            child: ProductCard(
-                                              products: productsCategory[index],
-                                              isDiscount: false,
-                                            ),
-                                          ),
-                                        ))
-                                : Center(
-                                    // Display a message or loading indicator when productsCategory is empty
-                                    child: CircularProgressIndicator(),
-                                  ),
-                          )),
                         ],
                       )),
                   Positioned(
@@ -795,7 +756,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFF79B531),
+                                  backgroundColor: Color(0xFF79B531),
                                 ),
                                 child: Text(
                                   context.tr('order'),

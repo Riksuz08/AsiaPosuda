@@ -6,6 +6,7 @@ import 'package:sample_bloc_mobile/src/core/extension/extension.dart';
 import 'package:sample_bloc_mobile/src/core/services/http_service.dart';
 import 'package:sample_bloc_mobile/src/data/models/orderData/order_model.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favorites/bookmark_page.dart';
+import 'package:sample_bloc_mobile/src/presentation/pages/main/favorites/promo_model.dart';
 import 'package:sample_bloc_mobile/src/presentation/pages/main/favorites/successfully_ordered.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,13 +29,53 @@ class _OrderScreenState extends State<OrderScreen> {
   TextEditingController surnameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController numberController = TextEditingController();
-
+  TextEditingController promoController = TextEditingController();
   static List<ProductItem> order = FavoritesPage.checkedProducts;
+  List<CouponModel> coupons = [];
+  String amountPromo = '0';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    fetchPromocodes().then((value) {
+      setState(() {
+        coupons = value;
+      });
+    });
     numberController.text = '+998';
+  }
+
+  String removeAfterDot(String input) {
+    // Remove everything after the dot
+    int dotIndex = input.indexOf('.');
+    if (dotIndex != -1) {
+      return input.substring(0, dotIndex);
+    }
+    return input;
+  }
+
+  double getPromoSum() {
+    final double x = int.parse(removeAfterDot(widget.totalPrice.toString())) *
+        int.parse(removeAfterDot(amountPromo)) /
+        100;
+    return x;
+  }
+
+  double getTotal() {
+    final double x =
+        int.parse(removeAfterDot(widget.totalPrice.toString())) - getPromoSum();
+    return x;
+  }
+
+  Future<List<CouponModel>> fetchPromocodes() async {
+    // Assuming HttpService().fetchCoupons() returns a List<CouponModel>
+    return HttpService().fetchCoupons();
+  }
+
+  String? findAmountForPromoCode(String promoCodeName) {
+    final coupon = coupons.firstWhere((coupon) => coupon.code == promoCodeName,
+        orElse: () =>
+            CouponModel(amount: '0', id: -1, code: '', usageLimit: 0));
+    return coupon.amount;
   }
 
   bool first = true;
@@ -469,6 +510,73 @@ class _OrderScreenState extends State<OrderScreen> {
                 height: 10,
               ),
               Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            TextField(
+                              controller: promoController,
+                              decoration: InputDecoration(
+                                  hintText: context.tr('promocode'),
+                                  alignLabelWithHint: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.auto,
+                                  hintStyle: TextStyle(
+                                      color: Colors.grey, fontSize: 15),
+                                  errorText: amountPromo == '0' &&
+                                          promoController.text != ''
+                                      ? 'Несушествующий промокод'
+                                      : null,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 0),
+                                  labelStyle: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey.shade700),
+                                  suffix: amountPromo != '0'
+                                      ? Icon(
+                                          Icons.check,
+                                          size: 15,
+                                          color: Colors.lightGreen,
+                                        )
+                                      : null),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (promoController.text != '') {
+                            setState(() {
+                              amountPromo =
+                                  findAmountForPromoCode(promoController.text)!;
+                            });
+                            print(amountPromo);
+                          } else {
+                            print('no');
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF79B531),
+                        ),
+                        child: Text(
+                          context.tr('check'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Padding(
@@ -484,21 +592,25 @@ class _OrderScreenState extends State<OrderScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          // Container(
-                          //   width: MediaQuery.of(context).size.width,
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.grey.shade200,
-                          //     borderRadius: BorderRadius.circular(10),
-                          //   ),
-                          //   child: Center(
-                          //       child: Padding(
-                          //     padding: EdgeInsets.symmetric(vertical: 10),
-                          //     child: Text(gettextDelivery()),
-                          //   )),
-                          // ),
                           SizedBox(
                             height: 15,
                           ),
+                          if (amountPromo != '0')
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Промокод',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                Text(
+                                  '-${formatNumber(getPromoSum().round())} ${context.tr('uzs')}',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -507,8 +619,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                formatNumber(widget.totalPrice.round())
-                                        .toString() +
+                                formatNumber(getTotal().round()) +
                                     ' ' +
                                     context.tr('uzs'),
                                 style: TextStyle(
@@ -543,7 +654,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                               nameController.text.trim(),
                                               surnameController.text.trim(),
                                               numberController.text.trim(),
-                                              widget.totalPrice.toString(),
+                                              getTotal().toString(),
                                               countryDropdown,
                                               getPay(),
                                               getDelivery());
@@ -584,7 +695,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF79B531),
+                                backgroundColor: Color(0xFF79B531),
                               ),
                               child: Text(
                                 context.tr('order'),
@@ -608,35 +719,6 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget _buildForShahar() {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: RadioListTile<int>(
-            value: 2,
-            groupValue: selectedValue,
-            onChanged: (int? value) {
-              setState(() {
-                selectedValue = value!;
-                print(selectedValue);
-              });
-            },
-            title: Text(
-              'Бесплатная доставка',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            subtitle: Text(
-              'Понядельник, Четверг',
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ),
         Container(
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
@@ -697,6 +779,35 @@ class _OrderScreenState extends State<OrderScreen> {
           ),
         ),
         SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: RadioListTile<int>(
+            value: 2,
+            groupValue: selectedValue,
+            onChanged: (int? value) {
+              setState(() {
+                selectedValue = value!;
+                print(selectedValue);
+              });
+            },
+            title: Text(
+              'Бесплатная доставка',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Понядельник, Четверг',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
