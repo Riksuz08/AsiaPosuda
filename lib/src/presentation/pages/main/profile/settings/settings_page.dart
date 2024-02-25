@@ -25,48 +25,8 @@ class SettingsPage extends StatelessWidget {
         shadowColor: Colors.grey.shade50,
         backgroundColor: Colors.white,
         title: Text(
-          context.tr('settings'),
+          context.tr('spravka'),
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ClipRRect(
-          borderRadius: AppUtils.kBorderRadius16,
-          child: Material(
-            color: Theme.of(context).cardColor,
-            shape: const RoundedRectangleBorder(
-              borderRadius: AppUtils.kBorderRadius16,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  onTap: () {
-                    customModalBottomSheet<void>(
-                      context: context,
-                      builder: (_, controller) => LanguageBottomWidget(
-                        onChanged: (lang) async {
-                          showCustomSnackBar(
-                              context, 'Перезапустите приложение');
-                          AppOptions.update(
-                            context,
-                            options.copyWith(locale: Locale(lang)),
-                          );
-                          print(lang);
-                          Navigator.pop(context);
-                          await sl<LocalSource>().setLocale(lang);
-                        },
-                      ),
-                    );
-                  },
-                  title: Text(context.tr('language')),
-                  tileColor: Colors.white,
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );

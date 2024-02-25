@@ -43,6 +43,9 @@
   "ordertime": "Buyurtma vaqti",
   "details": "Ko'\rish",
   "promo": "Promokodlar",
+  "spravka": "Ma'lumotnoma",
+  "haspromo": "Promokod bormi?",
+  "promocode": "Promokod",
 
   "low_price": "Arzon narxlar",
   "my_orders": "Mening buyurtmalarim",

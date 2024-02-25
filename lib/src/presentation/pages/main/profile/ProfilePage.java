@@ -156,11 +156,14 @@ class _ProfilePageState extends State<ProfilePage>
                                 builder: (context) => PromoPage()));
                       },
                     ),
+
+
                   ],
                 ),
               ),
             ),
             SliverGap(12),
+
             SliverPadding(
               padding: AppUtils.kPaddingHorizontal16,
               sliver: SliverList(
@@ -190,44 +193,41 @@ class _ProfilePageState extends State<ProfilePage>
                         );
                       },
                     ),
+
+
+
                   ],
                 ),
               ),
             ),
             const SliverGap(12),
-            SliverPadding(
-              padding: AppUtils.kPaddingHorizontal16,
-              sliver: SliverList(
-                delegate: SliverChildListDelegate([
-                  ProfileItemWidget(
-                    icon: const Icon(Icons.mail),
-                    text: context.tr('contact_with_us'),
-                    isTop: true,
-                    onTap: () {
-                      shooModalBottomSheetCustom();
-                    },
-                  ),
-                  const Divider(
-                    height: 1,
-                    color: Color(0xffc7c7c7),
-                  ),
-                  ProfileItemWidget(
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 20,
-                    ),
-                    isBottom: true,
-                    text: context.tr('spravka'),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        Routes.settings,
-                      );
-                    },
-                  ),
-                ]),
-              ),
+            SliverPadding(padding: AppUtils.kPaddingHorizontal16,sliver: SliverList(delegate: SliverChildListDelegate([
+              ProfileItemWidget(
+              icon: const Icon(Icons.mail),
+              text: context.tr('contact_with_us'),
+              isTop: true,
+              onTap: () {
+                shooModalBottomSheetCustom();
+              },
             ),
+              const Divider(
+                height: 1,
+                color: Color(0xffc7c7c7),
+              ),
+              ProfileItemWidget(
+                icon: const Icon(
+                  Icons.settings,
+                  size: 20,
+                ),
+                isBottom: true,
+                text: context.tr('spravka'),
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.settings,
+                  );
+                },
+              ),]),),),
             SliverToBoxAdapter(
                 child: GestureDetector(
               onTap: () {
@@ -256,74 +256,56 @@ class _ProfilePageState extends State<ProfilePage>
       ),
     );
   }
-
-  void shooModalBottomSheetCustom() {
+  void shooModalBottomSheetCustom(){
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext context) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-              ),
-              height: MediaQuery.of(context).size.height * 0.32,
-              width: MediaQuery.of(context).size.width,
-              // color:Colors.white,
-              child: Column(
+        builder: (BuildContext context)=> Container(
+          decoration:  BoxDecoration(
+
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
+          ),
+          height: MediaQuery.of(context).size.height*0.32,
+          width: MediaQuery.of(context).size.width,
+          // color:Colors.white,
+          child: Column(
+
+            children: [
+              SizedBox(height: 20,),
+              Text('Связатся с нами',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Связатся с нами',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          Image.asset(
-                            'assets/png/telegram.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text('Telegram')
-                        ],
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(height: 5),
-                          Image.asset(
-                            'assets/png/phone.png',
-                            width: 40,
-                            height: 40,
-                          ),
-                          SizedBox(height: 5),
-                          Text('Телефон')
-                        ],
-                      )
+                      Image.asset('assets/png/telegram.png',width: 50,height: 50,),
+                      Text('Telegram')
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Отменить'),
+                  SizedBox(width: 40,),
+                  Column(
+                    children: [
+                      SizedBox(height: 5),
+                      Image.asset('assets/png/phone.png',width: 40,height: 40,),
+                      SizedBox(height: 5),
+                      Text('Телефон')
+                    ],
                   )
                 ],
               ),
-            ));
+              SizedBox(height: 20,),
+              GestureDetector(
+                onTap: (){Navigator.pop(context);},
+                child:  Text('Отменить'),
+              )
+
+            ],
+          ),
+        )
+    );
   }
 }
 
