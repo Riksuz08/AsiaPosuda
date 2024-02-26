@@ -588,8 +588,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             child: Text(
                               '${formatNumber(minprice)} сум',
                               style: const TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 26,
                                 color: Colors.black,
                               ),
                             ),

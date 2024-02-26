@@ -119,7 +119,7 @@ class _SuccessfullyOrderedState extends State<SuccessfullyOrdered> {
                             height: 10,
                           ),
                           Text(
-                            'Часы работы',
+                            'Часы доставки',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text(
