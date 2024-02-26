@@ -323,7 +323,7 @@ class _FirstTabState extends State<FirstTab>
                                         horizontal: 5, vertical: 5),
                                     child: SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory[index],
                                         isDiscount: false,
@@ -381,7 +381,7 @@ class _FirstTabState extends State<FirstTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategorySecond[index],
                                         isDiscount: false,
@@ -470,7 +470,7 @@ class _FirstTabState extends State<FirstTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory3[index],
                                         isDiscount: false,
@@ -528,7 +528,7 @@ class _FirstTabState extends State<FirstTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory4[index],
                                         isDiscount: false,
@@ -617,7 +617,7 @@ class _FirstTabState extends State<FirstTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory5[index],
                                         isDiscount: false,
@@ -675,7 +675,7 @@ class _FirstTabState extends State<FirstTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory6[index],
                                         isDiscount: false,

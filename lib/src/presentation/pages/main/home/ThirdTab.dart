@@ -289,12 +289,11 @@ class _ThirdTabState extends State<ThirdTab>
             mainAxisSpacing: 10,
           ),
           builderDelegate: PagedChildBuilderDelegate<ProductItem>(
-            itemBuilder: (context, item, index) =>
-                ProductCard(products: item, isDiscount: false),
+              itemBuilder: (context, item, index) =>
+                  ProductCard(products: item, isDiscount: false),
               noItemsFoundIndicatorBuilder: (_) => Center(
-                child: CircularProgressIndicator(),
-              )
-          ),
+                    child: CircularProgressIndicator(),
+                  )),
         ),
         SliverToBoxAdapter(child: Obx(() {
           return Container(
@@ -325,7 +324,7 @@ class _ThirdTabState extends State<ThirdTab>
                                         horizontal: 5, vertical: 5),
                                     child: SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory[index],
                                         isDiscount: false,
@@ -383,7 +382,7 @@ class _ThirdTabState extends State<ThirdTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategorySecond[index],
                                         isDiscount: false,
@@ -472,7 +471,7 @@ class _ThirdTabState extends State<ThirdTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory3[index],
                                         isDiscount: false,
@@ -530,7 +529,7 @@ class _ThirdTabState extends State<ThirdTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory4[index],
                                         isDiscount: false,
@@ -619,7 +618,7 @@ class _ThirdTabState extends State<ThirdTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory5[index],
                                         isDiscount: false,
@@ -677,7 +676,7 @@ class _ThirdTabState extends State<ThirdTab>
                                     child: SizedBox(
                                       height: 400,
                                       width: MediaQuery.of(context).size.width *
-                                          0.47,
+                                          0.4,
                                       child: ProductCard(
                                         products: productsCategory6[index],
                                         isDiscount: false,
